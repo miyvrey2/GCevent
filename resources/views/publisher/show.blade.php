@@ -1,0 +1,83 @@
+@extends('layouts.master')
+
+@section('seo')
+    @component("components.seo", ["title" => $publisher->title, "url" => url("publishers/" . $publisher->slug), "description" => $publisher->excerpt] )
+    @endcomponent
+@endsection
+
+@section('content')
+
+    <section id="featured_image_section">
+        <div class="featured_image pinkpurple" style="background-image:url('https://www.gamescomevent.com/gfx/slider_image_01_mini.jpg')"></div>
+    </section>
+
+    <div class="container publisher-show">
+        <div class="row">
+            <div class="col-md-12">
+
+                {{-- Title --}}
+                <h1>{{$publisher->title}}</h1>
+
+                {{--Breadcrumbs--}}
+                @component('components.breadcrumbs', ['breadcrumbs' => ['publishers' => __('breadcrumbs.publishers'), "publishers/" . $publisher->slug => $publisher->title]])
+                @endcomponent
+
+            </div>
+            <div class="col-md-9">
+                <p><strong>{!! $publisher->excerpt !!}</strong></p>
+                <br />
+                <p>
+                    {!! $publisher->body_html !!}
+                </p>
+            </div>
+
+            <div class="col-md-3">
+                <h2>Summary</h2>
+                <ul class="publisher-meta">
+                    <li><i class="fa fa-rocket"></i>Founded in <a href="#" title="{{$publisher->found->format('l jS \\of F Y')}}">{{$publisher->found->year}}</a></li>
+                    @if(count($publisher->games) > 0)
+                        @if(count($publisher->games) == 1)<li><i class="fa fa-gamepad"></i><a href="#">{{count($publisher->games)}} Game</a> listed</li>@endif
+                        @if(count($publisher->games) > 1)<li><i class="fa fa-gamepad"></i><a href="#">{{count($publisher->games)}} Games</a> listed</li>@endif
+                    @endif
+                    {{--halls--}}
+                    @if($publisher->halls[0] != "unknown")
+                    <li><i class="fa fa-map-marker"></i><a href="#">Hall
+                            @foreach($publisher->halls as $hall)
+                                {{$hall}}@endforeach</a>
+
+                        {{--stands--}}
+                        @if($publisher->stands[0]->stand != null)
+                                at stands:
+                            <div class="stand-box">
+                                @foreach($publisher->stands as $stand)
+                                    <span>{{$stand->stand}}</span>
+                                @endforeach
+                            </div>
+                        </li>
+                        @endif
+                    @endif
+
+                </ul>
+
+                <div class="horizontal-line"></div>
+
+                <h2>GC Lineup 2018</h2>
+                <ul>
+                @foreach($publisher->lineup as $lineup)
+                    <li><a href="{{ url("games/" . $lineup->slug) }}">{{ $lineup->title }}</a></li>
+                @endforeach
+                </ul>
+
+                <div class="horizontal-line"></div>
+
+                <h2>All games</h2>
+                <ul>
+                    @foreach($publisher->games as $game)
+                        <li><a href="{{ url("games/" . $game->slug) }}">{{ $game->title }}</a></li>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    </div>
+
+@endsection

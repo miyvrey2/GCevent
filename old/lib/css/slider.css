@@ -1,0 +1,63 @@
+.enzow_slider{
+    top: 60px;
+	position: relative;
+}
+
+.enzow_slide{
+	position: absolute;
+	overflow: hidden;
+}
+
+.enzow_slide img{
+	position: absolute;
+	width: 100%;
+	height: auto;
+}
+
+.enzow_slide h2{
+	position: absolute;
+	top: 50px;
+}
+
+.enzow_slide p{
+	position: absolute;
+	top: 100px;
+}
+
+.enzow_slide button{
+	position: absolute;
+	top: auto;
+	bottom: 50px;
+}
+
+.enzow_slide button:after{
+	content: ' >';
+}
+
+.exeptionContainer{
+	position: relative;
+	margin: 0px auto;
+	width: 100%;
+	height: 100%;
+	left: 50px;
+	display: block;
+}
+
+button{
+    margin-top: 70px;
+	background: white;
+	border: 0px;
+	padding: 10px 20px;
+	font-weight: bold;
+
+	font-family: 'Raleway', sans-serif;
+}
+
+figure{
+    margin: 0px;
+    padding: 0px;
+}
+
+body{
+    font-family: 'Raleway', sans-serif;
+}

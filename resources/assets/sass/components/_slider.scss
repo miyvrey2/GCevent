@@ -1,0 +1,242 @@
+// Banner on normal pages
+#featured_image_section {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    text-align: center;
+    overflow: hidden;
+
+    .featured_image {
+        position: absolute;
+        width: 100% !important;
+        background-position: center;
+        background-size: cover !important;
+        height: 320px !important;
+
+        &:before {
+            content: ' ';
+            width: 100%;
+            height: 300px;
+            position: absolute;
+            display: block;
+        }
+
+        &.pinkpurple:before {
+            background: linear-gradient(to bottom right, rgba(236, 64, 122, 0.7), rgba(171, 71, 188, 0.7), rgba(126, 87, 194, 0.7));
+        }
+
+        &.greenblue:before {
+            background: linear-gradient(to bottom right, rgba(56,142,60, 0.7), rgba(0,121,107,0.7), rgba(0,151,167,0.7), rgba(2,136,209,0.7));
+        }
+
+        &.yellowpink:before {
+            background: linear-gradient(to bottom right, rgba(253,216,53,0.7), rgba(255,87,34,0.7), rgba(236, 64, 122,0.7));
+        }
+    }
+}
+
+// Slider on home
+.enzow_slider {
+
+    position: relative;
+    background-color: #CCC;
+
+    &.slider-fullwidth {
+        width: 100%;
+    }
+
+    // Slide
+    .enzow_slide{
+        position: absolute;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        margin: 0;
+
+        &:before {
+            content: ' ';
+            width: 100%;
+            //background: -webkit-gradient(linear, left top, right bottom, from(rgba(236, 64, 122, 0.7)), color-stop(rgba(171, 71, 188, 0.7)), to(rgba(126, 87, 194, 0.7)));
+            background: linear-gradient(to bottom right, rgba(56,142,60, 0.7), rgba(0,121,107,0.7), rgba(0,151,167,0.7), rgba(2,136,209,0.7));
+            height: 400px;
+            position: absolute;
+            display: block;
+            overflow: hidden;
+            z-index: 7;
+        }
+
+        img {
+            position: absolute;
+            max-height: 100%;
+            max-width: 100%;
+            width: auto;
+            height: auto;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        }
+
+        video {
+            width: 100%;
+        }
+
+        .video_wrapper {
+
+            &:after {
+                content: ' ';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                display: block;
+                z-index: 2;
+                cursor: pointer;
+                background-color: rgba(0, 0, 0, 0.01);
+                -webkit-transition: all 0.3s ease;
+                -moz-transition: all 0.3s ease;
+                transition: all 0.3s ease;
+            }
+
+            .video_play_icon {
+                position: absolute;
+                top: 41%;
+                left: 44%;
+                width: 50px;
+                height: 50px;
+                opacity: 0;
+                -webkit-transition: all 0.5s ease;
+                -moz-transition: all 0.5s ease;
+                transition: all 0.5s ease;
+
+                &:after {
+                    content: '';
+                    display: inline-block;
+                    position: relative;
+                    border-style: solid;
+                    border-width: 20px 0 20px 40px;
+                    border-color: transparent transparent transparent white;
+                    z-index: 3;
+                }
+            }
+        }
+
+
+        figcaption {
+            position: absolute;
+            top: 100px;
+            left: 0;
+            width: 100%;
+            height: 75%;
+            color: white;
+            z-index: 8;
+
+            h2 {
+                position: relative;
+                top: 50px;
+                color: white;
+                font-size: 36px;
+            }
+
+            p {
+                position: relative;
+                top: 100px;
+            }
+
+            button,
+            a.button {
+                position: absolute;
+                top: auto;
+                right: 20px;
+                bottom: 20px;
+                background: white;
+                border: 0px;
+                padding: 10px 20px;
+                font-weight: bold;
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+            }
+        }
+    }
+
+    // Contain
+    &.contain {
+        .enzow_slide {
+            img {
+                min-height: 100%;
+                min-width: 100%;
+            }
+        }
+    }
+
+    // Cover
+    &.cover {
+        .enzow_slide {
+            img {
+                min-height: 100%;
+                min-width: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+
+    // Navigation buttons for slider
+    .enzow_slider_navigation {
+
+        position: absolute;
+        left: 20px;
+        bottom: 20px;
+
+
+        .enzow_previous,
+        .enzow_next {
+            position: relative;
+            width: 36px;
+            height: 36px;
+            display: block;
+            float: left;
+            margin-right: 10px;
+            background: white;
+            z-index: 9;
+            border: 0;
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+            outline: 0;
+            overflow: hidden;
+            text-indent: 0;
+            cursor: pointer;
+
+            &:hover {
+                background: #E1E1E1;
+            }
+        }
+
+        .enzow_previous:hover{
+            animation-name: textToLeft;
+            animation-duration: 0.5s;
+        }
+
+        .enzow_next:hover{
+            animation-name: textToRight;
+            animation-duration: 0.5s;
+        }
+    }
+}
+
+@keyframes textToLeft {
+    0%   {text-indent: 0;}
+    49%  {text-indent: -40px;}
+    50%  {text-indent: 90px;}
+    100% {text-indent: 0;}
+}
+
+@keyframes textToRight {
+    0%   {text-indent: 0;}
+    49%  {text-indent: 40px;}
+    50%  {text-indent: -90px;}
+    100% {text-indent: 0;}
+}

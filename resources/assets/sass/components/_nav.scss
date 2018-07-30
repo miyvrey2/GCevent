@@ -1,0 +1,59 @@
+nav{
+    position: absolute;
+    top: 0;
+    right: 20px;
+}
+
+nav ul{
+    position:relative;
+    list-style-type: none;
+    float: right;
+    margin-right: 10px;
+    margin-top: 0;
+
+    li{
+        position: relative;
+        float: left;
+
+        &:hover ul {
+            display: block;
+        }
+
+        a {
+            height: 60px;
+            display: inline-block;
+            padding: 0 10px;
+            line-height: 60px;
+        }
+
+        ul {
+            position: absolute;
+            top: calc(100% - 4px);
+            left: 0;
+            display: none;
+            min-width: 100%;
+            background-color: $primary-color;
+            color: white;
+            //box-shadow: 0 5px 20px #00000033;
+            box-shadow: 0 10px 10px #00000011;
+
+            li {
+                display: inline-block;
+                width: 100%;
+                line-height: 40px;
+
+                a {
+                    width: auto;
+                    height: 40px;
+                    line-height: 40px;
+                    color: white;
+                    display: block;
+                }
+            }
+        }
+    }
+}
+
+nav ul li.active a {
+    background-color: white;
+}

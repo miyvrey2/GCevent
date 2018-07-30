@@ -1,0 +1,17 @@
+@media screen and (max-width:320px) {
+    header {
+        height: auto;
+        position: relative;
+        padding-bottom: 10px;
+        float: left;
+    }
+
+    header h1 {
+        padding: 20px 0px 10px 10px;
+        height: 50px;
+        width: auto;
+        line-height: 24px;
+        text-align: center;
+        float: left;
+    }
+}

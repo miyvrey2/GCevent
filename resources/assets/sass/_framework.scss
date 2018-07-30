@@ -1,0 +1,66 @@
+.container {
+    position: relative;
+    width: auto;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: block;
+    z-index: 1;
+}
+
+.row {
+    margin: 0 -15px;
+
+    &:after {
+        visibility: hidden;
+        display: table;
+        content: ".";
+        clear: both;
+        height: 0;
+    }
+}
+
+.col-md-3 {
+    position: relative;
+    width: calc(25% - 30px);
+    min-height: 1px;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: block;
+    float: left;
+}
+
+.col-md-9 {
+    position: relative;
+    width: calc(75% - 30px);
+    min-height: 1px;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: block;
+    float: left;
+}
+
+.col-md-12 {
+    position: relative;
+    width: calc(100% - 30px);
+    min-height: 1px;
+    margin: 0 auto;
+    padding: 0 15px;
+    display: block;
+    float: left;
+}
+
+main {
+    padding-bottom: 50px;
+}
+
+@media screen and (min-width: 1024px) {
+    div.container {
+        width: 1024px;
+        padding: 0;
+    }
+
+    div.small-container {
+        width: 800px;
+        padding: 0;
+    }
+}
