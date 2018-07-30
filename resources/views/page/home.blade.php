@@ -42,12 +42,12 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h2>Game with friends!</h2>
+                            <h2>Show your cosplay!</h2>
                             <p>Take your handheld with you and play along with all the other gamers around</p>
                         </div>
                     </div>
                 </div>
-                <button>Warm up in the beloved past</button>
+                <button>Read more</button>
             </figcaption>
         </figure>
 

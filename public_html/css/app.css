@@ -126,20 +126,42 @@ header strong a {
 nav {
   position: absolute;
   top: 0;
-  right: 20px;
+  right: 0;
+}
+
+nav #navOpenButton {
+  margin: 0 25px;
+}
+
+nav #navCloseButton {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 25px;
+  color: white;
+  cursor: pointer;
 }
 
 nav ul {
-  position: relative;
+  position: absolute;
+  background: #4486cc;
+  top: 0;
+  right: -50vh;
+  width: 50vh;
   list-style-type: none;
-  float: right;
-  margin-right: 10px;
-  margin-top: 0;
+  height: 100vh;
+  -webkit-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  z-index: 2;
+  line-height: 1;
+  padding-top: 60px;
 }
 
 nav ul li {
-  position: relative;
-  float: left;
+  width: 90%;
+  height: auto;
+  display: inline-block;
+  padding: 10px;
 }
 
 nav ul li:hover ul {
@@ -147,10 +169,10 @@ nav ul li:hover ul {
 }
 
 nav ul li a {
-  height: 60px;
+  color: white;
+  height: auto;
   display: inline-block;
-  padding: 0 10px;
-  line-height: 60px;
+  line-height: 1;
 }
 
 nav ul li ul {
@@ -181,6 +203,72 @@ nav ul li ul li a {
 
 nav ul li.active a {
   background-color: white;
+}
+
+#navBackColor {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0);
+  z-index: -1;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+@media screen and (min-width: 768px) {
+  nav {
+    position: absolute;
+    top: 0;
+    right: 20px;
+  }
+
+  nav i.fa {
+    display: none;
+  }
+
+  nav #navOpenButton {
+    margin-right: 0;
+  }
+
+  nav ul {
+    position: relative;
+    top: auto;
+    right: auto !important;
+    width: auto;
+    display: block;
+    height: auto;
+    background-color: transparent;
+    list-style-type: none;
+    float: right;
+    margin-right: 10px;
+    margin-top: 0;
+    line-height: 60px;
+    padding-top: 0;
+  }
+
+  nav ul li {
+    position: relative;
+    float: left;
+    width: auto;
+    padding: 0 10px;
+  }
+
+  nav ul li:first-of-type {
+    padding-left: 0;
+  }
+
+  nav ul li a {
+    color: #3097D1;
+    height: 60px;
+    display: inline-block;
+    line-height: 60px;
+  }
+
+  #navBackColor {
+    background-color: transparent !important;
+  }
 }
 
 ul.breadcrumbs {

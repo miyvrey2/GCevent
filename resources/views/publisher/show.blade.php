@@ -8,7 +8,7 @@
 @section('content')
 
     <section id="featured_image_section">
-        <div class="featured_image pinkpurple" style="background-image:url('https://www.gamescomevent.com/gfx/slider_image_01_mini.jpg')"></div>
+        <div class="featured_image pinkpurple" style="background-image:url('https://www.gamescomevent.com/img/gamescom_17_010_010.jpg')"></div>
     </section>
 
     <div class="container publisher-show">
