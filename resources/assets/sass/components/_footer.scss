@@ -1,0 +1,37 @@
+.footer-alert {
+    position: relative;
+    width: auto;
+    padding: 20px 0;
+    background-color: $primary-color;
+    color: white;
+
+    a {
+        color: white;
+        text-decoration: underline;
+    }
+}
+
+footer{
+    position: relative;
+    width: 100%;
+    background-color: #333333;
+    color: white;
+
+    .col-md-4 {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    h3 {
+        padding-bottom: 10px;
+    }
+
+    ul {
+        padding-left: 25px;
+    }
+
+    a {
+        color: white;
+        text-decoration: underline;
+    }
+}

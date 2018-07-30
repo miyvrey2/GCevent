@@ -31,7 +31,7 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
     <!-- Javascripts -->
-    <script src="lib/js/slider.js"></script>
+    <script src="{{url('lib/js/slider.js')}}"></script>
 
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -50,10 +50,8 @@
         @yield('content')
     </main>
 
-
-    <footer>
-        this content belongs all to the original website gamescom.de
-    </footer>
+    @component("components.footer")
+    @endcomponent
 </body>
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

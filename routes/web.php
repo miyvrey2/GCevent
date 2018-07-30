@@ -15,6 +15,7 @@
 Route::get('/sitemap.xml', 'SitemapController@index');
 Route::get('/sitemap', 'SitemapController@index');
 Route::get('/sitemap/games', 'SitemapController@games');
+Route::get('/sitemap/pages', 'SitemapController@pages');
 
 Route::get('/', 'PageController@home');
 Route::get('/pages', 'PageController@index');

@@ -63,25 +63,28 @@
         window.addEventListener("load", initEnzowSlider(1, 4, 'cover', '400px'));
     </script>
     <!--</section>-->
-    <section class="content-text">
-        <div class="container home-container">
-            <h1>Gamescom {{env('GAMESCOM_YEAR')}} is coming!</h1>
-            <div class="collumns-of-1">
-                Thanks for ariving on this page on the website. This is a fanpage for all the happenings on Gamescom. If you are a first-timer, be sure to read the <a href="https://www.gamescomevent.com/about/">What is gamescom</a> page. If you are interested in all sorts of news and announcements made, please make your way to the "news" section.
+
+    <div class="container publisher-show">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Gamescom {{env('GAMESCOM_YEAR')}} is coming!</h1>
+                    Thanks for ariving on this page on the website. This is a fanpage for all the happenings on Gamescom. If you are a first-timer, be sure to read the <a href="{{url('gamescom-2018')}}">What is gamescom</a> page. If you are interested in all sorts of news and announcements made, please make your way to the "news" section.
+                <br>
+                <br>
+                <h3>What's there to find?</h3>
+                <p>
+                    <strong>No like, for real, whats happening there?</strong> <br>Well, if you are new to this concept, it is quite hard to understand what is going to happen, now isn't it?! Gamescom will offer you an amazing amount of games, hardware, software, information and whatsoever about everything you want to know of the latest stuff from the game industry. Enjoy the fullest of all the goods that you can see, feel, play and get in these days!<br><br>
+
+                    <strong>Got it, Enjoy the most of each day.. but where to start?</strong> <br>That's kind of a hard question yet. There has been anounced that big names as Nintendo, Microsoft, Ubisoft and EA and many others will be present again on these days. So which names suites you and do you play the most? When you explore their stands you will sure find your intersteing new title. If you are not sure about that, just keep a close eye on this site, and we will try to give a list of all the confirmed games so far! <br> <br>
+
+                    <strong>Undoubtly, I will "see" games, but to "play" them without hours waiting...</strong> <br>It's not like your gameroom at home, where you can play every single game that you obtain. But it is a great oppertunity to play the game you want most, or you doubt most, to see in real what it offers so far. So yeah, waiting is part of it, but playing the game you love the most makes it worth it. Try to entertain yourself with a Gameboy color (oldschool) or 3DS, tablet, mobile or other people around you that have to wait (like, why not). <br> <br>
+
+                    <strong>My mum said to me "don't talk to strangers"</strong> <br>And a wise mum she is! All though most of the men and women come here for the same goal, talking to the die-hard-fans as (maybe) a nooby can be a little tricky. You might get a better day if you take a friend or 2 with you to your favorite games (be sure you both like the games of course!) <br> <br>
+
+                    <strong>Well.. so much for convince me..</strong> <br>Complaining can be easy, but enjoying is where they aim for. Try to read more if you go along the site, maybe we still get you warm for it!
+                </p>
             </div>
         </div>
-    </section>
-    <section class="content-text">
-        <div class="container">
-            <h3>What's there to find?</h3>
-            <p>
-                <strong>No like, for real, whats happening there?</strong> - Well, if you are new to this concept, it is quite hard to understand what is going to happen, now isn't it?! Gamescom will offer you an amazing amount of games, hardware, software, information and whatsoever about everything you want to know of the latest stuff from the game industry. Enjoy the fullest of all the goods that you can see, feel, play and get in these days!<br><br><strong>got it, Enjoy the most of each day.. but where to start?</strong> - That's kind of a hard question yet. There has been anounced that big names as Nintendo, Microsoft, Ubisoft and EA and many others will be present again on these days. So
-
-                which names suites you and do you play the most? When you explore their stands you will sure find your intersteing new title. If you are not sure about that, just keep a close eye on this site, and we will try to give a list of all the confirmed games so far! <br> <br><strong>Undoubtly, I will "see" games, but to "play" them without hours waiting...</strong> - It's not like your gameroom at home, where you can play every single game that you obtain. But it is a great oppertunity to play the game you want most, or you doubt most, to see in real what it offers so far. So yeah, waiting is part of it, but playing the game you love the most makes it worth it. Try to entertain yourself with a Gameboy color (oldschool) or 3DS, tablet, mobile or
-
-                other people around you that have to wait (like, why not). <br> <br> <strong>My mum said to me "don't talk to strangers"</strong> - And a wise mum she is! All though most of the men and women come here for the same goal, talking to the die-hard-fans as (maybe) a nooby can be a little tricky. You might get a better day if you take a friend or 2 with you to your favorite games (be sure you both like the games of course!) <br> <br> <strong>Well.. so much for convince me..</strong><br> - Complaining can be easy, but enjoying is where they aim for. Try to read more if you go along the site, maybe we still get you warm for it!
-            </p>
-        </div>
-    </section>
+    </div>
 
 @endsection

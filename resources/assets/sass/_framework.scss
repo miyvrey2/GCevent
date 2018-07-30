@@ -13,35 +13,19 @@
     &:after {
         visibility: hidden;
         display: table;
-        content: ".";
+        content: " ";
         clear: both;
         height: 0;
     }
 }
 
-.col-md-3 {
+.col-md-3,
+.col-md-4,
+.col-md-9,
+.col-md-12
+{
     position: relative;
-    width: calc(25% - 30px);
-    min-height: 1px;
-    margin: 0 auto;
-    padding: 0 15px;
-    display: block;
-    float: left;
-}
-
-.col-md-9 {
-    position: relative;
-    width: calc(75% - 30px);
-    min-height: 1px;
-    margin: 0 auto;
-    padding: 0 15px;
-    display: block;
-    float: left;
-}
-
-.col-md-12 {
-    position: relative;
-    width: calc(100% - 30px);
+    width: auto;
     min-height: 1px;
     margin: 0 auto;
     padding: 0 15px;
@@ -53,10 +37,27 @@ main {
     padding-bottom: 50px;
 }
 
+@media screen and (min-width:786px) {
+    .col-md-3 {
+        width: calc(25% - 30px);
+    }
+
+    .col-md-4 {
+        width: calc(33.333% - 30px);
+    }
+
+    .col-md-9 {
+        width: calc(75% - 30px);
+    }
+
+    .col-md-12 {
+        width: calc(100% - 30px);
+    }
+}
+
 @media screen and (min-width: 1024px) {
     div.container {
-        width: 1024px;
-        padding: 0;
+        width: 992px;
     }
 
     div.small-container {

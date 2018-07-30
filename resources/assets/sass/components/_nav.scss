@@ -18,7 +18,7 @@ nav {
 
     ul {
         position: absolute;
-        background: #4486cc;
+        background: $primary-color;
         top: 0;
         right: -50vh;
         width: 50vh;
@@ -35,7 +35,7 @@ nav {
             width: 90%;
             height: auto;
             display: inline-block;
-            padding: 10px;
+            padding: 8px 16px;
 
             &:hover ul {
                 display: block;
@@ -49,15 +49,14 @@ nav {
             }
 
             ul {
-                position: absolute;
-                top: calc(100% - 4px);
-                left: 0;
-                display: none;
-                min-width: 100%;
-                background-color: $primary-color;
-                color: white;
-                //box-shadow: 0 5px 20px #00000033;
-                box-shadow: 0 10px 10px #00000011;
+                position: relative;
+                top: auto;
+                right: auto;
+                width: auto;
+                height: auto;
+                padding: 0;
+                margin: 0 -10px -20px 10px;
+                background-color: transparent;
 
                 li {
                     display: inline-block;
@@ -138,6 +137,18 @@ nav ul li.active a {
                     height: 60px;
                     display: inline-block;
                     line-height: 60px;
+                }
+
+                ul {
+                    position: absolute;
+                    top: calc(100% - 4px);
+                    left: 0;
+                    min-width: 100%;
+                    background-color: $primary-color;
+                    color: white;
+                    //box-shadow: 0 5px 20px #00000033;
+                    box-shadow: 0 10px 10px #00000011;
+                    display: none;
                 }
             }
         }
