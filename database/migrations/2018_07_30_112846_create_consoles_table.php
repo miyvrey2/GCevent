@@ -20,6 +20,7 @@ class CreateConsolesTable extends Migration
             $table->text('excerpt')->nullable();
             $table->text('body')->nullable();
             $table->string('image')->nullable();
+            $table->string('aliases')->nullable();
             $table->date('released_at')->nullable();
             $table->timestamps();
         });

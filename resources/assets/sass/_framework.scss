@@ -19,9 +19,17 @@
     }
 }
 
+.col-md-1,
+.col-md-2,
 .col-md-3,
 .col-md-4,
+.col-md-5,
+.col-md-6,
+.col-md-7,
+.col-md-8,
 .col-md-9,
+.col-md-10,
+.col-md-11,
 .col-md-12
 {
     position: relative;
@@ -44,6 +52,10 @@ main {
 
     .col-md-4 {
         width: calc(33.333% - 30px);
+    }
+
+    .col-md-8 {
+        width: calc(66.666% - 30px);
     }
 
     .col-md-9 {

@@ -31,7 +31,6 @@
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
 
     <!-- Javascripts -->
-    <script src="{{url('lib/js/slider.js')}}"></script>
 
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -53,6 +52,32 @@
     @component("components.footer")
     @endcomponent
 </body>
+<script>
+    // if page is taller than the viewport height, redo the footer
+    window.onload = function () {
+        setFooterPosition();
+    }
+
+    document.body.onresize = function () {
+        setFooterPosition();
+    }
+
+    function setFooterPosition() {
+        var body = document.body,
+            html = document.documentElement;
+
+        var pageHeight = Math.max( body.scrollHeight, body.offsetHeight,
+            html.clientHeight, html.scrollHeight, html.offsetHeight );
+
+        var vwHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+
+        console.log(pageHeight + " " + vwHeight);
+        if (pageHeight <= vwHeight) {
+            console.log(document.getElementsByTagName("footer"));
+            document.getElementsByTagName("footer")[0].style.bottom = "0";
+        }
+    }
+</script>
 <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
             (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),

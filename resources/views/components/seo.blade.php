@@ -6,6 +6,7 @@
     @if(!isset($title)) @php($title = "Gamescom 2018 - Games, tournaments, cosplay & much more") @endif
     @if(!isset($url)) @php($title = $standard_url) @endif
     @if(!isset($description)) @php($description = $standard_description) @endif
+    @if(!isset($image)) @php($image = "https://www.gamescomevent.com/gfx/gamescom_17_010_010.jpg") @endif
 
     @php($description = substr($description, 0, 220))
     @php($end = strrpos($description, " "))
@@ -13,7 +14,7 @@
 
     <title>{{ $title . $standard_title }}</title>
 
-    <meta name="keywords" content="gamescom, games, koln, convention, germany, august, event, 2017, line-up, hall 9, playable games, release" />
+    <meta name="keywords" content="gamescom, games, koln, convention, germany, august, event, 2018, line-up, playable games, release" />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="Ethan Bron" />
     <meta name="revisit-after" content="1 week" />
@@ -26,4 +27,4 @@
     <meta property="og:description" content="{{ $description }}" />
     <meta property="og:url" content="{{ $url }}" />
     <meta property="og:site_name" content="{{ $standard_url }}" />
-    <meta property="og:image" content="https://www.gamescomevent.com/gfx/slider_image_00_mini.jpg" />
+    <meta property="og:image" content="{{$image}}" />

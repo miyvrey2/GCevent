@@ -34,7 +34,9 @@
             <div class="col-md-3">
                 <h2>Summary</h2>
                 <ul class="publisher-meta">
+                    @if(isset($publisher->found))
                     <li><i class="fa fa-rocket"></i>Founded in <a href="#" title="{{$publisher->found->format('l jS \\of F Y')}}">{{$publisher->found->year}}</a></li>
+                    @endif
                     @if(count($publisher->games) > 0)
                         @if(count($publisher->games) == 1)<li><i class="fa fa-gamepad"></i><a href="#">{{count($publisher->games)}} Game</a> listed</li>@endif
                         @if(count($publisher->games) > 1)<li><i class="fa fa-gamepad"></i><a href="#">{{count($publisher->games)}} Games</a> listed</li>@endif

@@ -17,8 +17,9 @@ Route::get('/sitemap', 'SitemapController@index');
 Route::get('/sitemap/games', 'SitemapController@games');
 Route::get('/sitemap/pages', 'SitemapController@pages');
 
-Route::get('/', 'PageController@home');
-Route::get('/pages', 'PageController@index');
+// Articles
+Route::get('/news', 'ArticleController@index');
+Route::get('/article/{article}', 'ArticleController@show');
 
 // Publishers
 Route::get('/publishers', 'PublisherController@index');
@@ -31,5 +32,7 @@ Route::get('/crawler/gametitles', 'RSSCrawlerController@getGameTitles');
 
 Route::resource('/games', 'GameController');
 
+Route::get('/', 'PageController@home');
+Route::get('/pages', 'PageController@index');
 // Very last route for catching all pages
 Route::get('/{page}', 'PageController@show');

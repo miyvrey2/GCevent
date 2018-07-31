@@ -11,7 +11,7 @@
         <div class="featured_image yellowpink" style="background-image:url('https://www.gamescomevent.com/img/gamescom_17_010_010.jpg')"></div>
     </section>
 
-    <div class="container publisher-show">
+    <div class="container game-show">
         <div class="row">
             <div class="col-md-12">
 
@@ -33,10 +33,25 @@
 
             <div class="col-md-3">
                 <h2>Overview</h2>
-                <ul class="publisher-meta">
-                    <li><i class="fa fa-rocket"></i>Released at <a href="#" title="{{$game->released_at}}">{{$game->released_at}}</a></li>
-                    <li><i class="fa fa-gamepad"></i><a href="#">Consoles</a></li>
-                    <li><i class="fa fa-upload" title="{{__('breadcrumbs.publisher')}}"></i><a title="{{__('breadcrumbs.publisher')}}: {{$game->publisher->title}}" href="{{url('publishers/'.$game->publisher->slug)}}">{{$game->publisher->title}}</a></li>
+                <ul class="game-meta">
+                    @if($game->released < Carbon\Carbon::now())
+                        <li><i class="fa fa-calendar" title="Release date"></i>Planned for <a href="#" title="{{$game->released}}">{{$game->released}}</a></li>
+                    @else
+                        <li><i class="fa fa-calendar" title="Release date"></i>Released on <a href="#" title="{{$game->released}}">{{$game->released}}</a></li>
+                    @endif
+                    <li>
+                        <i class="fa fa-gamepad" title="Playable on"></i>Made for
+                        @php($i = 1)
+                        @foreach($game->consoles as $console)
+                            <a href="{{url('console/' . $console->slug)}}" title="Playable on {{$console->title}}">{{$console->title}}</a>@if($i < count($game->consoles)), @endif
+
+                            @php($i++)
+                        @endforeach
+
+                    </li>
+                    <li>
+                        <i class="fa fa-upload" title="{{__('breadcrumbs.publisher')}}"></i><a title="{{__('breadcrumbs.publishedBy')}} {{$game->publisher->title}}" href="{{url('publishers/'.$game->publisher->slug)}}">{{$game->publisher->title}}</a>
+                    </li>
                 </ul>
 
                 <div class="horizontal-line"></div>

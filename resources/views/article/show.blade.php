@@ -1,78 +1,99 @@
 @extends('layouts.master')
 
+@section('seo')
+    @component("components.seo", ["title" => $article->title, "url" => url("article/" . $article->slug), "description" => $article->excerpt] )
+    @endcomponent
+@endsection
+
 @section('content')
-    @if($page->image_url)
-        <section id="page_slider">
-            <div class="sliderimg page_image grayscale" style="background-image:url('{{asset($page->image_url)}}')"></div>
-        </section>
-    @endif
-    <section class="content-text">
-        <div class="container">
 
-            <!-- Breadcrumbs -->
-            <div class="breadcrumbs">
-                <a href="https://www.gamescomevent.com/" title="Home">Home</a> >
-                <a href="https://www.gamescomevent.com/about/" title="What is Gamescom?">What is Gamescom?</a>
-            </div>
-            <!-- Breadcrumbs JSON -->
-            <script type="application/ld+json">
-				{
-				  "@context": "http://schema.org",
-				  "@type": "BreadcrumbList",
-				  "itemListElement": [{
-				    "@type": "ListItem",
-				    "position": 1,
-				    "item": {
-				      "@id": "https://www.gamescomevent.com/",
-				      "name": "Home",
-				      "image": "https://www.gamescomevent.com/images/icon-home.png"
-				    }
-				  },{
-				    "@type": "ListItem",
-				    "position": 2,
-				    "item": {
-				      "@id": "https://www.gamescomevent.com/about/",
-				      "name": "What is Gamescom?",
-				      "image": "https://www.gamescomevent.com/images/icon-game.png"
-				    }
-				  }
-				</script>
-
-            <h1>{{$page->title}}</h1>
-            <div class="post-meta no-border">
-                <ul class="post-meta-group">
-                    <li><i class="fa fa-user"></i><a href="#"> {{$page->author->name}} </a></li>
-                    <li><i class="fa fa-clock-o"></i><time> {{$page->date}} </time></li>
-                    {{--<li><i class="fa fa-folder"></i><a href="#"> {{$page->category->title }}</a></li>--}}
-                    <li><i class="fa fa-comments"></i><a href="#">4 Comments</a></li>
-                </ul>
-            </div>
-            <div class="content-text">
-                {!! $page->body_html !!}
-            </div>
-            <div class="clear"></div>
-        </div>
+    <section id="featured_image_section">
+        <div class="featured_image deepblue" style="background-image:url('https://www.gamescomevent.com/img/gamescom_17_010_010.jpg')"></div>
     </section>
 
-    ###################
+    <div class="container article-show">
+        <div class="row">
+            <div class="col-md-12">
 
-    <article class="post-author padding-10">
-        <div class="media">
-            <div class="media-left">
-                <a href="#">
-                    <img alt="Author 1" src="{{asset('img/author.jpg')}}" class="media-object">
-                </a>
+                {{-- Title --}}
+                <h1>{{$article->title}}</h1>
+
+                {{--Breadcrumbs--}}
+                @component('components.breadcrumbs', ['breadcrumbs' => ['news' => __('breadcrumbs.news'), "article/" . $article->slug => $article->title]])
+                @endcomponent
+
             </div>
-            <div class="media-body">
-                <h4 class="media-heading"><a href="#"> {{$page->author->name}} </a></h4>
-                <div class="post-author-count">
-                    <a href="#">
-                        <i class="fa fa-clone"></i>
-                        90 posts
-                    </a>
+            <div class="col-md-9">
+                {{--<img src="{{$article->game->image}}" title="{{$article->game->title}}" />--}}
+                <em><i class="fa fa-clock-o"></i><time> Last updated: {{$article->date}}</em>
+                <p><strong>{!! $article->excerpt !!}</strong></p>
+                <br />
+                <p>
+                    {!! $article->body_html !!}
+                </p>
+                <em>Source: <a href="{{$article->source}}">{{$article->source}}</a></em>
+                <br>
+                <br>
+
+                <div class="">
+                    Written by: {{$article->author->name}}
                 </div>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nobis ad aut sunt cum, mollitia excepturi neque sint magnam minus aliquam, voluptatem, labore quis praesentium eum quae dolorum temporibus consequuntur! Non.</p>
+
+                {{--<div class="">--}}
+                    {{--<h3>1 Comment</h3>--}}
+                    {{--<div class="comment">--}}
+                        {{--<img src="http://placehold.it/100x100" />--}}
+                        {{--<strong>User said:</strong><br >--}}
+                        {{--<p>--}}
+                            {{--That's wonderfull! Cant wait to see it!--}}
+                        {{--</p>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+
+                <div class="horizontal-line"></div>
+
+                <div class="related-content">
+                    <h3>Related news</h3>
+                    @foreach($article->related as $related)
+                        {{$related->updated_at->format('Y m d (H:i)')}} <a href="{{url('article/' . $related->slug)}}" title="{{$related->title}}">{{$related->title}}</a><br>
+                    @endforeach
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <h2>{{$article->game->title}}</h2>
+                <ul class="game-meta">
+                    @if($article->game->released < Carbon\Carbon::now())
+                        <li><i class="fa fa-calendar" title="Release date"></i>Planned for <a href="#" title="{{$article->game->released}}">{{$article->game->released}}</a></li>
+                    @else
+                        <li><i class="fa fa-calendar" title="Release date"></i>Released on <a href="#" title="{{$article->game->released}}">{{$article->game->released}}</a></li>
+                    @endif
+                    <li>
+                        <i class="fa fa-gamepad" title="Playable on"></i>Made for
+                        @php($i = 1)
+                        @foreach($article->game->consoles as $console)
+                            <a href="{{url('console/' . $console->slug)}}" title="Playable on {{$console->title}}">{{$console->title}}</a>@if($i < count($article->game->consoles)), @endif
+
+                            @php($i++)
+                        @endforeach
+
+                    </li>
+                    <li>
+                        <i class="fa fa-upload" title="{{__('breadcrumbs.publisher')}}"></i><a title="{{__('breadcrumbs.publishedBy')}} {{$article->game->publisher->title}}" href="{{url('publishers/'.$article->game->publisher->slug)}}">{{$article->game->publisher->title}}</a>
+                    </li>
+                </ul>
+
+                <div class="horizontal-line"></div>
+
+                <h2>Summary</h2>
+                <ul class="article-meta">
+                    <li><i class="fa fa-comments"></i> 1 comment</li>
+                </ul>
+
+
+
             </div>
         </div>
-    </article>
+    </div>
+
 @endsection

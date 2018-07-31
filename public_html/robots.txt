@@ -1,2 +1,4 @@
+# robots.txt for http://www.gamescomevent.com/
+
 User-agent: *
-Disallow:
+Disallow: /lemonadeMe/

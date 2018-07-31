@@ -31,6 +31,7 @@ class GamesSeeder extends Seeder
             'slug'          => 'mario-odyssey',
             'image'         => NULL,
             'line_up_year'  => "2017",
+            'released_at'   => Carbon::create(2017,10,27),
             'created_at'    => $date,
             'updated_at'    => $date,
         ], [
@@ -41,6 +42,7 @@ class GamesSeeder extends Seeder
             'slug'          => 'legend-of-zelda-breath-of-the-wild',
             'image'         => NULL,
             'line_up_year'  => "2018",
+            'released_at'   => Carbon::create(2017,10,27),
             'created_at'    => $date,
             'updated_at'    => $date,
         ], [
@@ -51,6 +53,7 @@ class GamesSeeder extends Seeder
             'slug'          => 'forza-horizon-4',
             'image'         => NULL,
             'line_up_year'  => "2018",
+            'released_at'   => Carbon::create(2017,10,27),
             'created_at'    => $date,
             'updated_at'    => $date,
         ], [
@@ -61,6 +64,7 @@ class GamesSeeder extends Seeder
             'slug'          => 'ori-and-the-will-of-the-wisps',
             'image'         => NULL,
             'line_up_year'  => "2018",
+            'released_at'   => Carbon::create(2017,10,27),
             'created_at'    => $date,
             'updated_at'    => $date,
         ], [
@@ -71,6 +75,7 @@ class GamesSeeder extends Seeder
             'slug'          => 'state-of-decay-2',
             'image'         => NULL,
             'line_up_year'  => "2018",
+            'released_at'   => Carbon::create(2017,10,27),
             'created_at'    => $date,
             'updated_at'    => $date,
         ], [
@@ -81,6 +86,7 @@ class GamesSeeder extends Seeder
             'slug'          => 'playerunknowns-battelgrounds',
             'image'         => NULL,
             'line_up_year'  => "2018",
+            'released_at'   => Carbon::create(2017,10,27),
             'created_at'    => $date,
             'updated_at'    => $date,
         ], [
@@ -91,6 +97,7 @@ class GamesSeeder extends Seeder
             'slug'          => 'the-dungeon-of-naheulbeuk-the-amulet-of-chaos',
             'image'         => NULL,
             'line_up_year'  => "2018",
+            'released_at'   => Carbon::create(2017,10,27),
             'created_at'    => $date,
             'updated_at'    => $date,
         ], [
@@ -101,6 +108,7 @@ class GamesSeeder extends Seeder
             'slug'          => 'edge-of-eternity',
             'image'         => NULL,
             'line_up_year'  => "2018",
+            'released_at'   => Carbon::create(2017,10,27),
             'created_at'    => $date,
             'updated_at'    => $date,
         ], [
@@ -111,6 +119,7 @@ class GamesSeeder extends Seeder
             'slug'          => 'old-school-musical',
             'image'         => NULL,
             'line_up_year'  => "2018",
+            'released_at'   => Carbon::create(2017,10,27),
             'created_at'    => $date,
             'updated_at'    => $date,
         ], [
@@ -121,6 +130,7 @@ class GamesSeeder extends Seeder
             'slug'          => 'away-journey-to-the-unexpected',
             'image'         => NULL,
             'line_up_year'  => "2018",
+            'released_at'   => Carbon::create(2017,10,27),
             'created_at'    => $date,
             'updated_at'    => $date,
         ], [
@@ -131,6 +141,7 @@ class GamesSeeder extends Seeder
             'slug'          => 'hover',
             'image'         => NULL,
             'line_up_year'  => "2018",
+            'released_at'   => Carbon::create(2017,10,27),
             'created_at'    => $date,
             'updated_at'    => $date,
         ], [
@@ -141,6 +152,7 @@ class GamesSeeder extends Seeder
             'slug'          => 'chroniric',
             'image'         => NULL,
             'line_up_year'  => "2018",
+            'released_at'   => Carbon::create(2017,10,27),
             'created_at'    => $date,
             'updated_at'    => $date,
         ], [
@@ -151,6 +163,7 @@ class GamesSeeder extends Seeder
             'slug'          => 'spitkiss',
             'image'         => NULL,
             'line_up_year'  => "2018",
+            'released_at'   => Carbon::create(2017,10,27),
             'created_at'    => $date,
             'updated_at'    => $date,
         ], [
@@ -161,6 +174,7 @@ class GamesSeeder extends Seeder
             'slug'          => 'stay',
             'image'         => NULL,
             'line_up_year'  => "2018",
+            'released_at'   => Carbon::create(2017,10,27),
             'created_at'    => $date,
             'updated_at'    => $date,
         ], [
@@ -171,6 +185,7 @@ class GamesSeeder extends Seeder
             'slug'          => 'fifa-19',
             'image'         => NULL,
             'line_up_year'  => "",
+            'released_at'   => Carbon::create(2017,10,27),
             'created_at'    => $date,
             'updated_at'    => $date,
         ]];

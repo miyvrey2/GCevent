@@ -25,7 +25,8 @@ class RSSCrawlerController extends Controller
         // Fokzine
         ['gamed',           'http://www.gamed.nl/rss', false, "link", "D, d M Y H:i:s O", false],
 
-        ['gameliner',       'http://feeds.feedburner.com/gameliner/SuOy', true, "link", "D, d M Y H:i:s O", false],
+//        ['gameliner',       'http://feeds.feedburner.com/gameliner/SuOy', true, "link", "D, d M Y H:i:s O", false],
+        ['gameliner',       'http://feeds.feedburner.com/gameliner/SuOy', true, "link", "Y-m-d\TH:i:s O", false],
         ['gamequarter',     'http://www.gamequarter.be/rss/nieuws.xml', true, "link", "D, d M Y H:i:s O", false],
         ['gamereactor',     'https://www.gamereactor.nl/rss/rss.php?texttype=4', false, "link", "D, d M Y H:i:s O", false],
         ['gamesnetnl',      'http://feedproxy.google.com/gamersnet/KbfX', false, "guid", "D, d M Y H:i:s O", false],
@@ -106,7 +107,7 @@ class RSSCrawlerController extends Controller
             }
         }
 
-        dd('saved.');
+        return ['status' => 'saved.'];
     }
 
     public function index()

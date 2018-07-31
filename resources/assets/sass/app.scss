@@ -6,6 +6,8 @@
 @import "fonts";
 @import "framework";
 
+@import "components/global";
+
 // Components
 @import "components/header";
 @import "components/nav";
@@ -18,6 +20,8 @@
 
 // Types and such
 @import "components/publisher";
+@import "components/article";
+@import "components/game";
 
 // Bootstrap
 //@import "~bootstrap-sass/assets/stylesheets/bootstrap";

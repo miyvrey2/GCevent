@@ -4,16 +4,15 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Page extends Model
+class Article extends Model
 {
-    // Add published_at to the "date" type
-    public $dates = ['published_at'];
 
-    public function getRouteKeyName()
-    {
-        return 'slug';
-    }
+    use SoftDeletes;
+
+    // Set all dates to the carbon type of dates
+    public $dates = ['created_at', 'updated_at', 'published_at', 'deleted_at'];
 
     // Multiple pages belong to 1 user
     public function author()
@@ -40,5 +39,10 @@ class Page extends Model
     public function scopePublished($query)
     {
         return $query->where('published_at', '<=', Carbon::now());
+    }
+
+    public function game()
+    {
+        return $this->belongsTo(Game::class);
     }
 }

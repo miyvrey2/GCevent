@@ -1,5 +1,10 @@
 @extends('layouts.master')
 
+@section('seo')
+    @component("components.seo", ["title" => 'Gamescom 2018 is drawing near!', "url" => url(""), "description" => "the 10th annivesary of gamescom celebrates the annually convention for games and all gaming-related goods! Gamescom is being held at Cologne(K&ouml;hn). Last year there was around a 355,000 visitors to come and watch all the works that are being showed here by popular game-developers."] )
+    @endcomponent
+@endsection
+
 @section('content')
     <div class="enzow_slider slider-fullwidth" id="enzow_slider_1">
 
@@ -15,7 +20,7 @@
                         </div>
                     </div>
                 </div>
-                <button>Go to the Terminal</button>
+                <a class="button" target="_blank" href="https://tickets.koelnmesse.de/gamescom2018_0301_en">Get your tickets now!</a>
             </figcaption>
         </figure>
 
@@ -27,11 +32,11 @@
                     <div class="row">
                         <div class="col-md-12">
                             <h2>Upcoming events</h2>
-                            <p>velit dolor eget nunc. Mauris est sem, efficitur et libero at, tempus hendrerit ipsum. Suspendisse placerat velit quis dui venenatis posuere. Pellentesque sagittis ornare venenatis. Praesent tempus ligula eget orci laoreet, non tempus mauris elementum. Cras nec nulla vel ipsum cursus aliquet. Morbi commodo consequat massa, ut mattis ligula laoreet luctus. Quisque dictum accumsan fermentum. Curabitur nibh justo, imperdiet id felis at, efficitur scelerisque libero. Etiam velit purus, blandit quis justo non, malesuada maximus augue.</p>
+                            <p>During gamescom there is also a variety of events that take place! Devcom, the gamescom congress and even the city festival will be held this week!</p>
                         </div>
                     </div>
                 </div>
-                <button>Travel to the green oase</button>
+                <a class="button" target="_blank" href="{{url('events-2018')}}">Learn more about the events</a>
             </figcaption>
         </figure>
 
@@ -47,7 +52,7 @@
                         </div>
                     </div>
                 </div>
-                <button>Read more</button>
+                <a class="button" href="{{url('cosplay')}}">Read more</a>
             </figcaption>
         </figure>
 
@@ -81,7 +86,7 @@
 
                     <strong>My mum said to me "don't talk to strangers"</strong> <br>And a wise mum she is! All though most of the men and women come here for the same goal, talking to the die-hard-fans as (maybe) a nooby can be a little tricky. You might get a better day if you take a friend or 2 with you to your favorite games (be sure you both like the games of course!) <br> <br>
 
-                    <strong>Well.. so much for convince me..</strong> <br>Complaining can be easy, but enjoying is where they aim for. Try to read more if you go along the site, maybe we still get you warm for it!
+                    <strong>Well.. so much for trying to convince me..</strong> <br>Complaining can be easy, but enjoying is where they aim for. Try to read more if you go along the site, maybe we still get you warm for it!
                 </p>
             </div>
         </div>

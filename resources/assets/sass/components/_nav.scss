@@ -55,20 +55,13 @@ nav {
                 width: auto;
                 height: auto;
                 padding: 0;
-                margin: 0 -10px -20px 10px;
+                margin: 10px -10px 0 10px;
                 background-color: transparent;
 
                 li {
-                    display: inline-block;
-                    width: 100%;
-                    line-height: 40px;
 
                     a {
-                        width: auto;
-                        height: 40px;
-                        line-height: 40px;
-                        color: white;
-                        display: block;
+                        line-height: 1;
                     }
                 }
             }
@@ -128,10 +121,6 @@ nav ul li.active a {
                 width: auto;
                 padding: 0 10px;
 
-                &:first-of-type {
-                    padding-left: 0;
-                }
-
                 a {
                     color: $primary-color;
                     height: 60px;
@@ -145,10 +134,23 @@ nav ul li.active a {
                     left: 0;
                     min-width: 100%;
                     background-color: $primary-color;
+                    margin: 0;
                     color: white;
                     //box-shadow: 0 5px 20px #00000033;
                     box-shadow: 0 10px 10px #00000011;
                     display: none;
+                    line-height: 40px;
+
+                    li {
+                        width: 100%;
+                        line-height: 40px;
+
+                        a {
+                            height: 40px;
+                            line-height: 40px;
+                            color: white;
+                        }
+                    }
                 }
             }
         }
