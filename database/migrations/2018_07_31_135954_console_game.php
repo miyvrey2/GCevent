@@ -16,7 +16,10 @@ class ConsoleGame extends Migration
         //
         Schema::create('console_game', function (Blueprint $table) {
             $table->integer('console_id')->nullable()->unsigned();
+            $table->foreign('console_id')->references('id')->on('consoles')->onDelete('restrict');
             $table->integer('game_id')->nullable()->unsigned();
+            $table->foreign('game_id')->references('id')->on('games')->onDelete('restrict');
+            $table->primary(['console_id', 'game_id']);
         });
     }
 

@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Console;
 use App\Game;
 use App\Publisher;
 use App\RSSFeed;
+use App\ConsoleGame;
 use Carbon\Carbon;
 use DateTime;
+use Illuminate\Support\Facades\Storage;
 
 class RSSCrawlerController extends Controller
 {
@@ -15,6 +18,7 @@ class RSSCrawlerController extends Controller
     public $keywordWithNextWord = array();
     public $keywordWithTwoNextWord = array();
     public $keywordWithPrevNextWord = array();
+    public $expire_in_days = 10;
 
 
     // List of all RSS feeds we want to know the info from
@@ -51,7 +55,8 @@ class RSSCrawlerController extends Controller
         ini_set("default_charset", 'utf-8');
 
         // Setup for saving our crawlings
-        $date_of_expire = Carbon::now()->subDays(10);
+        $date_of_expire = Carbon::now()->subDays($this->expire_in_days);
+        $consoles = Console::all();
 
         foreach($this->rss_from_sites as $site) {
 
@@ -91,14 +96,33 @@ class RSSCrawlerController extends Controller
                 if($datetime > $date_of_expire) {
 
                     // Save the item to the CSV array
-                    RSSFeed::updateOrCreate([
-                        'site'  => $site[0],
-                        'title' => $title,
-                        'url'   => $url,
-                        'published_at' => $datetime,
-                        'categories' => $categories,
-                        'game_id' => $game_id
-                        ]);
+                    RSSFeed::updateOrCreate(
+                        [
+                            'title' => $title,
+                            'url'   => $url,
+                        ],
+                        [
+                            'site'  => $site[0],
+                            'published_at' => $datetime,
+                            'categories' => $categories,
+                            'game_id' => $game_id
+                        ]
+                    );
+
+                    // Add the consoles to the game if added
+                    if($game_id != null && $categories != "") {
+
+                        foreach($consoles as $console) {
+                            if(strpos(strtolower($categories), strtolower($console['title']))) {
+
+                                ConsoleGame::updateOrCreate([
+                                    'game_id' => $game_id,
+                                    'console_id' => $console['id']
+                                ]);
+                            }
+                        }
+                    }
+
                 } else {
 
                     // If we reach the expire date, kill the foreach so we prevent long loaders
@@ -107,8 +131,92 @@ class RSSCrawlerController extends Controller
             }
         }
 
-        return ['status' => 'saved.'];
+        $setGameTitlesToRRSFeed = $this->setGametitleToRSSFeed();
+        $removeDuplicates = $this->removeDuplicates();
+        $removeOldNews = $this->removeOldNews();
+
+        return [
+            'fetchFeedItems' => 'succeed',
+            'saveFeedItems' => 'succeed',
+            'setGameTitlesToRSSFeedItems' => $setGameTitlesToRRSFeed,
+            'removeDuplicates' => $removeDuplicates,
+            'removeOldNews' => $removeOldNews,
+        ];
     }
+
+    public function removeDuplicates()
+    {
+        $feed_items = RSSFeed::select('*')
+            ->selectRaw(' COUNT(`title`) as `occurences`')
+            ->from('rss_feeds')
+            ->where('title', '!=', '')
+            ->groupBy('title')
+            ->having('occurences', '>', '1')
+            ->get();
+
+        foreach($feed_items as $record) {
+            $record->delete();
+        }
+
+        return true;
+    }
+
+    public function removeOldNews() {
+
+        $file = 'data/' .Carbon::now()->format("Y-m") . '.json';
+
+        // Get all the old feed_items
+        $db_items = RSSFeed::where('published_at', '<', Carbon::now()->subDay($this->expire_in_days))->get();
+
+        if(Storage::disk('local')->exists($file)) {
+            // get the current feed_items in the json file
+            $file_items = json_decode(Storage::disk('local')->get($file));
+
+            // foreach item still in the DB
+            foreach($db_items as $db_item) {
+
+                $in_file = false;
+
+                // And foreach item in the JSON file
+                foreach($file_items as $file_item) {
+
+                    if($file_item->title == $db_item->title) {
+                        $in_file = true;
+                    }
+                }
+
+                // If there was no occurrence, we place t he item in the JSON file
+                if ($in_file == false) {
+
+                    // Delete in DTB
+                    $db_item->delete();
+
+                    // Now put it into the file
+                    unset($db_item['id']);
+                    $file_items[] = $db_item;
+                }
+            }
+        } else {
+
+            $file_items = array();
+
+            foreach($db_items as $db_item) {
+                // Delete in DTB
+                $db_item->delete();
+
+                // Now put it into the file
+                unset($db_item['id']);
+                $file_items[] = $db_item;
+            }
+        }
+
+        // Save the json_items
+        Storage::disk('local')->put($file, json_encode($file_items));
+
+        // Return if wanted
+        return true;
+    }
+
 
     public function index()
     {
@@ -288,9 +396,6 @@ class RSSCrawlerController extends Controller
             // forget camel casing
             $news_item['title'] = strtolower($news_item['title']);
             $keyword = strtolower($keyword);
-//            if($keyword == 'sonic') {
-//                dd($news_items);
-//            }
 
             // If the keyword is in the newsitem, continue
             if (strpos( $news_item['title'], $keyword) !== false) {
@@ -489,5 +594,6 @@ class RSSCrawlerController extends Controller
             $item->update(array('game_id' => $item['game_id']));
         }
 
+        return true;
     }
 }

@@ -26,8 +26,10 @@ Route::get('/publishers', 'PublisherController@index');
 Route::get('/publishers/{publisher}', 'PublisherController@show');
 
 // Crawler
-Route::get('/crawler/crawl', 'RSSCrawlerController@crawl');
 Route::get('/crawler', 'RSSCrawlerController@index');
+Route::get('/crawler/removeDuplicates', 'RSSCrawlerController@removeDuplicates');
+Route::get('/crawler/removeOldNews', 'RSSCrawlerController@removeOldNews');
+Route::get('/crawler/crawl', 'RSSCrawlerController@crawl');
 Route::get('/crawler/gametitles', 'RSSCrawlerController@getGameTitles');
 
 Route::resource('/games', 'GameController');
