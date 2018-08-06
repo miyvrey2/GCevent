@@ -2,9 +2,10 @@
 
 namespace App\Providers;
 
-use App\Article;
 use App\Game;
 use App\Page;
+use App\Article;
+use App\Console;
 use App\Publisher;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -32,6 +33,10 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::bind('article', function($slug) {
             return Article::published()->where('slug', $slug)->first();
+        });
+
+        Route::bind('console', function($slug) {
+            return Console::where('slug', $slug)->first();
         });
 
         Route::bind('game', function($slug) {

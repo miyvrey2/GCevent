@@ -20,7 +20,10 @@
     RewriteRule ^ index.php [L]
 </IfModule>
 
-## REedirects
-# lineup
-#about
-#program
+## Redirects
+Redirect 301 /about /gamescom-2018
+Redirect 301 /articles /news
+Redirect 301 /console/switch /consoles/switch
+Redirect 301 /console/playstation-4 /consoles/playstation-4
+Redirect 301 /console/xbox-one /consoles/xbox-one
+Redirect 301 /console/pc /consoles/pc

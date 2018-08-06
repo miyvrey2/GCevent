@@ -25,6 +25,9 @@ Route::get('/article/{article}', 'ArticleController@show');
 Route::get('/publishers', 'PublisherController@index');
 Route::get('/publishers/{publisher}', 'PublisherController@show');
 
+// Consoles
+Route::get('/consoles/{console}', 'ConsoleController@show');
+
 // Crawler
 Route::get('/crawler', 'RSSCrawlerController@index');
 Route::get('/crawler/removeDuplicates', 'RSSCrawlerController@removeDuplicates');

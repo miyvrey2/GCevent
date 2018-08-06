@@ -147,11 +147,11 @@ class RSSCrawlerController extends Controller
     public function removeDuplicates()
     {
         $feed_items = RSSFeed::select('*')
-            ->selectRaw(' COUNT(`title`) as `occurences`')
+            ->selectRaw(' COUNT(`title`) as `occurrences`')
             ->from('rss_feeds')
             ->where('title', '!=', '')
             ->groupBy('title')
-            ->having('occurences', '>', '1')
+            ->having('occurrences', '>', '1')
             ->get();
 
         foreach($feed_items as $record) {
@@ -291,22 +291,22 @@ class RSSCrawlerController extends Controller
             }
 
 
-            $probable_game_titles[] = $this->stripKeywordIfOneOccurence($keywordWithPrevWord);
-            $probable_game_titles[] = $this->stripKeywordIfOneOccurence($keywordWithTwoPrevWord);
-            $probable_game_titles[] = $this->stripKeywordIfOneOccurence($keywordWithNextWord);
-            $probable_game_titles[] = $this->stripKeywordIfOneOccurence($keywordWithTwoNextWord);
-            $probable_game_titles[] = $this->stripKeywordIfOneOccurence($keywordWithPrevNextWord);
+            $probable_game_titles[] = $this->stripKeywordIfOneOccurrence($keywordWithPrevWord);
+            $probable_game_titles[] = $this->stripKeywordIfOneOccurrence($keywordWithTwoPrevWord);
+            $probable_game_titles[] = $this->stripKeywordIfOneOccurrence($keywordWithNextWord);
+            $probable_game_titles[] = $this->stripKeywordIfOneOccurrence($keywordWithTwoNextWord);
+            $probable_game_titles[] = $this->stripKeywordIfOneOccurrence($keywordWithPrevNextWord);
         }
 
         $resetKeywords = [];
         foreach($keywords as $key => $value) {
             $resetKeywords[$key] = [
                 'snippet' => $key,
-                'occurences' => $value
+                'occurrences' => $value
             ];
         }
 
-        $probable_game_titles[] = $this->stripKeywordIfOneOccurence($resetKeywords);
+        $probable_game_titles[] = $this->stripKeywordIfOneOccurrence($resetKeywords);
 
         // Loop so we can undo depth-1 of array
         $game_titles = [];
@@ -316,7 +316,7 @@ class RSSCrawlerController extends Controller
             }
         }
 
-//        dd($game_titles);
+        dd($game_titles);
 
         return view('feed.gametitles', compact('game_titles'));
     }
@@ -332,20 +332,22 @@ class RSSCrawlerController extends Controller
 
             // forget camel casing
             $news_item['title'] = strtolower($news_item['title']);
+            $keyword = strtolower($keyword);
 
             // If the keyword is in the newsitem, continue
-            if (strpos( strtolower($news_item['title']), strtolower($keyword)) !== false) {
+            if (strpos( $news_item['title'], $keyword) !== false) {
 
+                // Split by keyword and space before
                 $titles_snippet_by_keyword = explode(' ' . $keyword, $news_item['title']);
 
-                // als de string aan het begin zit, skip
+                // If the explode returns the whole title, the keyword is at the beginning of the string
                 if($titles_snippet_by_keyword[0] == $news_item['title']) {// Maak een key
                     $tmp_key = str_replace(' ', '_', $keyword);
-                    $tmp_key = strtolower( $tmp_key);
 
                     $tmp[$tmp_key] = [
                         'snippet' => $keyword,
-                        'occurences' => 99];
+                        'occurrences' => 99,
+                    ];
                 }
 
                 $i = 0;
@@ -360,18 +362,18 @@ class RSSCrawlerController extends Controller
                         $word_before = explode(' ', $title_snippet);
                         $word_before = $word_before[ count($word_before) - 1 ];
 
-                        // Maak een key
-                        $tmp_key = str_replace(' ', '_', $keyword);
-                        $tmp_key = strtolower($word_before . '_' . $tmp_key);
+                        // Make snippet and key
+                        $snippet = $word_before . ' ' . $keyword;
+                        $key = str_replace(' ', '_', $snippet);
 
-                        if ( ! in_array($word_before . ' ' . $keyword, array_column($tmp, 'snippet'))) { // search value in the array
-                            $tmp[$tmp_key] = [
-                                'snippet' => $word_before . ' ' . $keyword,
-                                'occurences' => 1
+                        if ( ! in_array($snippet, array_column($tmp, 'snippet'))) { // search value in the array
+                            $tmp[$key] = [
+                                'snippet' => $snippet,
+                                'occurrences' => 1,
                             ];
                         }
                         else {
-                            $tmp[$tmp_key]['occurences'] += 1;
+                            $tmp[$key]['occurrences'] += 1;
                         }
                     }
                     $i++;
@@ -385,7 +387,6 @@ class RSSCrawlerController extends Controller
 
     function getNextWord($keyword, $news_items) {
         $tmp = [];
-
 
         foreach($news_items as $news_item) {
 
@@ -407,34 +408,29 @@ class RSSCrawlerController extends Controller
                 // omdat er meerdere keren een keyword in 1 titel kan voorkomen, doen we een foreach erop
                 foreach ($titles_snippet_by_keyword as $title_snippet) {
 
-                    // vind het laatste woord in de snippet, zodat we "thelast word" hebben
-                    $word_before = explode(' ', $title_snippet);
-                    $word_before = $word_before[0];
+                    // Vind het eerste woord na de explode op een spatie
+                    // Keyword is buitengesloten van de explode dus is op positie 0 het woord dat volgt op t keyword
+                    $word_after = explode(' ', $title_snippet)[0];
 
-                    // Maak een key
-                    $tmp_key = str_replace(' ', '_', $keyword);
-                    $tmp_key = $tmp_key . '_' . $word_before;
+                    // Make snippet and key
+                    $snippet = $keyword . ' ' . $word_after;
+                    $key = str_replace(' ', '_', $snippet);
 
-                    if ( ! in_array($keyword . ' ' . $word_before, array_column($tmp, 'snippet'))) { // search value in the array
-                        $tmp[$tmp_key] = [
-                            'snippet' => $keyword . ' ' . $word_before,
-                            'occurences' => 1
-                        ];
-                    }
-                    else {
-                        $tmp[$tmp_key]['occurences'] += 1;
-                    }
+                    // Add or count up to array
+                    $tmp[$key] = [
+                        'snippet' => $snippet,
+                        'occurrences' => (isset($tmp[$key]['occurrences'])) ? $tmp[$key]['occurrences'] + 1 : 1,
+                    ];
                 }
             }
-
         }
 
         return $tmp;
     }
 
-    function stripKeywordIfOneOccurence($array) {
+    function stripKeywordIfOneOccurrence($array) {
         foreach($array as $key => $item) {
-            if ($item['occurences'] == 1 or $item['occurences'] == 99) {
+            if ($item['occurrences'] == 1 or $item['occurrences'] == 99) {
                 unset($array[$key]);
             }
         }

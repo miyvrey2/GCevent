@@ -6,6 +6,7 @@ return [
     'article' => 'Article',
     'articles' => 'Articles',
     'news' => 'News',
+    'consoles' => 'Consoles',
     'publisher' => 'Publisher',
     'publishers' => 'Publishers',
     'publishedBy' => 'Published by',

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('seo')
-    @component("components.seo", ["title" => __('breadcrumbs.articles'), "url" => url("articles"), "description" => ''] )
+    @component("components.seo", ["title" => __('breadcrumbs.news'), "url" => url("news"), "description" => ''] )
     @endcomponent
 @endsection
 
@@ -16,10 +16,10 @@
             <div class="col-md-12">
 
                 {{-- Title --}}
-                <h1>{{__('breadcrumbs.articles')}}</h1>
+                <h1>{{__('breadcrumbs.news')}}</h1>
 
                 {{-- Breadcrumbs --}}
-                @component('components.breadcrumbs', ['breadcrumbs' => ['articles' => __('breadcrumbs.articles')]])
+                @component('components.breadcrumbs', ['breadcrumbs' => ['news' => __('breadcrumbs.news')]])
                 @endcomponent
 
                 @foreach($articles as $article)

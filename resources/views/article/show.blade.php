@@ -72,7 +72,7 @@
                         <i class="fa fa-gamepad" title="Playable on"></i>Made for
                         @php($i = 1)
                         @foreach($article->game->consoles as $console)
-                            <a href="{{url('console/' . $console->slug)}}" title="Playable on {{$console->title}}">{{$console->title}}</a>@if($i < count($article->game->consoles)), @endif
+                            <a href="{{url('consoles/' . $console->slug)}}" title="Playable on {{$console->title}}">{{$console->title}}</a>@if($i < count($article->game->consoles)), @endif
 
                             @php($i++)
                         @endforeach
