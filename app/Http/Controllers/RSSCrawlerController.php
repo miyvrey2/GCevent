@@ -316,7 +316,7 @@ class RSSCrawlerController extends Controller
             }
         }
 
-        dd($game_titles);
+//        dd($game_titles);
 
         return view('feed.gametitles', compact('game_titles'));
     }
