@@ -19,7 +19,7 @@ class ConsoleGame extends Migration
             $table->foreign('console_id')->references('id')->on('consoles')->onDelete('restrict');
             $table->integer('game_id')->nullable()->unsigned();
             $table->foreign('game_id')->references('id')->on('games')->onDelete('restrict');
-            $table->primary(['console_id', 'game_id']);
+            $table->unique(['console_id', 'game_id']);
         });
     }
 

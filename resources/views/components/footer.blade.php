@@ -22,6 +22,9 @@
             </div>
             <div class="col-md-4">
                 <h3>Recently added news</h3>
+                @foreach($recent_articles as $article)
+                    {{$article['title']}} <br>
+                @endforeach
             </div>
             <div class="col-md-4">
                 <h3>Open at</h3>

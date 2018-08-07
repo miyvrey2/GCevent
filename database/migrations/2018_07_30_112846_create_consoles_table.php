@@ -33,6 +33,10 @@ class CreateConsolesTable extends Migration
      */
     public function down()
     {
+//        Schema::table('console_game', function (Blueprint $table) {
+//            $table->dropForeign('console_game_console_id_foreign');
+//            $table->dropForeign('console_game_game_id_foreign');
+//        });
         Schema::dropIfExists('consoles');
     }
 }
