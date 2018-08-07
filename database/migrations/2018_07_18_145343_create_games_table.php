@@ -20,6 +20,7 @@ class CreateGamesTable extends Migration
             $table->integer('exhibitor_id')->nullable()->unsigned();
             $table->foreign('exhibitor_id')->references('id')->on('publishers')->onDelete('restrict');
             $table->string('title');
+            $table->string('aliases')->nullable();
             $table->string('slug')->unique();
             $table->text('excerpt')->nullable();
             $table->text('body')->nullable();

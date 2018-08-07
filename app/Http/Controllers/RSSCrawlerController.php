@@ -560,18 +560,21 @@ class RSSCrawlerController extends Controller
 
             if (strpos(strtolower($newstitle), strtolower($game['title'])) !== false) {
                 return $game['id'];
-                break;
             }
 
-            // TODO: aliases for games
-//            if(isset($value['aliases'])) {
-//                foreach($value['aliases'] as $alias) {
-//                    if (strpos(strtolower($newstitle), strtolower($alias)) !== false) {
-//                        return $value['title'];
-//                        break;
-//                    }
-//                }
-//            }
+            // Aliases for games
+            if(isset($game['aliases']) && $game['aliases'] != null) {
+
+                $aliases = rtrim($game['aliases'], ',');
+                $aliases = explode(',', $aliases);
+
+                foreach($aliases as $alias) {
+
+                    if (strpos(strtolower($newstitle), strtolower($alias)) !== false) {
+                        return $game['id'];
+                    }
+                }
+            }
         }
 
         return null;
