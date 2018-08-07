@@ -58,9 +58,9 @@
 
                 <h2>Recent news</h2>
                 <ul>
-                    @foreach($game->rssFeeds as $rssfeed)
-                        <li><a target="_blank" href="{{ $rssfeed->url }}">{{ $rssfeed->title }}</a></li>
-                    @endforeach
+                    {{--@foreach($game->rssFeeds as $rssfeed)--}}
+                        {{--<li><a target="_blank" href="{{ $rssfeed->url }}">{{ $rssfeed->title }}</a></li>--}}
+                    {{--@endforeach--}}
                 </ul>
             </div>
         </div>

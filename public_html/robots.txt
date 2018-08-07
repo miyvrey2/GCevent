@@ -2,3 +2,5 @@
 
 User-agent: *
 Disallow: /lemonadeMe/
+
+Sitemap: http://www.google.com/ping?sitemap=https://gamescomevent.com/sitemap.xml

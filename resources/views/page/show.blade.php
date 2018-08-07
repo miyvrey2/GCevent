@@ -4,7 +4,7 @@
     @component("components.seo", ["title" => $page->title, "url" => url("publishers/" . $page->slug), "description" => $page->excerpt] )
     @endcomponent
 @endsection
-
+{{--https://www.xgn.nl/overzicht-gamescom-2018-games/--}}
 @section('content')
 
     <section id="featured_image_section">
