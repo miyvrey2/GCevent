@@ -26,11 +26,13 @@
             <div class="col-md-9">
                 <p>
                     @foreach($exhibitors as $exhibitor)
-                        <strong>{{$exhibitor->title}}</strong><br>
-                        @foreach($exhibitor['exhibitor_games'] as $game)
-                            <a href="{{url('games/' . $game->slug)}}">{{$game->title}}</a><br>
-                        @endforeach
-                        <br>
+                        @if(count($exhibitor['exhibitor_games']) != 0)
+                            <strong>{{$exhibitor->title}}</strong><br>
+                            @foreach($exhibitor['exhibitor_games'] as $game)
+                                <a href="{{url('games/' . $game->slug)}}">{{$game->title}}</a><br>
+                            @endforeach
+                            <br>
+                        @endif
                     @endforeach
                 </p>
             </div>
