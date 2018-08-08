@@ -48,4 +48,10 @@ class Publisher extends Model
     {
         return $this->hasMany(Stand::class);
     }
+
+    public function exhibitor_games()
+    {
+        return $this->hasMany(Game::class, 'exhibitor_id', 'id');
+
+    }
 }

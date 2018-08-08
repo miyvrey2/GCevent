@@ -35,6 +35,7 @@ Route::get('/crawler/removeOldNews', 'RSSCrawlerController@removeOldNews');
 Route::get('/crawler/crawl', 'RSSCrawlerController@crawl');
 Route::get('/crawler/gametitles', 'RSSCrawlerController@getGameTitles');
 
+Route::get('/games/list', 'GameController@listed');
 Route::resource('/games', 'GameController');
 
 Route::get('/', 'PageController@home');

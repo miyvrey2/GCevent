@@ -23,6 +23,12 @@ class Game extends Model
         return $this->belongsTo(Publisher::class);
     }
 
+    // Multiple games belong to one exhibitor at gamescom
+    public function exhibitor()
+    {
+        return $this->belongsTo(Publisher::class, 'exhibitor_id', 'id');
+    }
+
     public function getReleasedAttribute()
     {
         if(!is_null($this->released_at)) {

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Game;
+use App\Publisher;
 use App\RSSFeed;
 use Illuminate\Http\Request;
 
@@ -16,6 +17,20 @@ class GameController extends Controller
     public function index()
     {
         //
+    }
+
+    // Show all listed games for 2018
+    public function listed()
+    {
+        $exhibitors = Publisher::with(['exhibitor_games' => function ($query) {
+            $query->where([
+                ['line_up_year', '=', '2018'],
+                ['title', '!=', '---'],
+            ]);
+            $query->orderBy('title', 'ASC');
+        }])->where('id', '!=', 1)->orderBy('title', 'ASC')->get();
+
+        return view('game.listed', compact('exhibitors'));
     }
 
     /**

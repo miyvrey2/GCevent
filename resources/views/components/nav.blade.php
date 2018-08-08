@@ -9,6 +9,7 @@
             <li itemprop="name"><a itemprop="url" href="{{url('/tickets')}}">Tickets</a></li>
             <li itemprop="name"><a itemprop="url" href="{{url('events-2018')}}">Events</a></li>
             <li itemprop="name"><a itemprop="url" href="{{url('/cosplay')}}">Cosplay</a></li>
+            <li itemprop="name"><a itemprop="url" href="{{url('/games/list')}}">Games</a></li>
         </ul></li>
         <li itemprop="name"><a itemprop="url" href="{{url('/publishers')}}">Publishers</a></li>
         <li itemprop="name"><a itemprop="url" href="{{url('/news')}}">News</a></li>
