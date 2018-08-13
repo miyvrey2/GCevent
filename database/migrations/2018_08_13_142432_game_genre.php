@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateGameGenresTable extends Migration
+class GameGenre extends Migration
 {
     /**
      * Run the migrations.
@@ -13,6 +13,7 @@ class CreateGameGenresTable extends Migration
      */
     public function up()
     {
+        //
         Schema::create('game_genre', function (Blueprint $table) {
             $table->integer('game_id')->nullable()->unsigned();
             $table->foreign('game_id')->references('id')->on('games')->onDelete('restrict');
@@ -29,6 +30,7 @@ class CreateGameGenresTable extends Migration
      */
     public function down()
     {
+        //
         Schema::dropIfExists('game_genre');
     }
 }
