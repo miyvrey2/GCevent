@@ -48,6 +48,7 @@
 
     @component("components.footer")
     @endcomponent
+
 </body>
 <script>
     // if page is taller than the viewport height, redo the footer
@@ -73,6 +74,7 @@
         }
     }
 </script>
+@if((App::environment('production')))
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-27613789-6"></script>
 <script>
     window.dataLayer = window.dataLayer || [];
@@ -81,4 +83,5 @@
 
     gtag('config', 'UA-27613789-6');
 </script>
+@endif
 </html>
