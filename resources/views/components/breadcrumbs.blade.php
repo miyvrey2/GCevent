@@ -1,9 +1,9 @@
 <!-- Breadcrumbs -->
 <ul class="breadcrumbs">
     <li><a href="{{ url("") }}" title="{{__('breadcrumbs.home')}}">{{__('breadcrumbs.home')}}</a></li>
-    @foreach($breadcrumbs as $key => $value)
-        <li><a href="{{ url($key) }}" title="{{$value}}">{{$value}}</a></li>
-    @endforeach
+@foreach($breadcrumbs as $key => $value)
+    <li><a href="{{ url($key) }}" title="{{$value}}">{{$value}}</a></li>
+@endforeach
 </ul>
 <!-- Breadcrumbs JSON -->
 <script type="application/ld+json">

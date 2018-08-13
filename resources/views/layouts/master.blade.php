@@ -39,15 +39,12 @@
 <body>
     <header>
         <strong>
-            <a href="{{url('/')}}">Gamescomevent.com</a>
+            <a href="{{url('/')}}">{{config('app.name')}}</a>
         </strong>
         @component("components.nav")
         @endcomponent
     </header>
-
-    <main>
-        @yield('content')
-    </main>
+    <main> @yield('content') </main>
 
     @component("components.footer")
     @endcomponent
@@ -71,9 +68,7 @@
 
         var vwHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
 
-        console.log(pageHeight + " " + vwHeight);
         if (pageHeight <= vwHeight) {
-            console.log(document.getElementsByTagName("footer"));
             document.getElementsByTagName("footer")[0].style.bottom = "0";
         }
     }

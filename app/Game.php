@@ -23,10 +23,21 @@ class Game extends Model
         return $this->belongsTo(Publisher::class);
     }
 
+    // Multiple games belong to one publisher
+    public function developer()
+    {
+        return $this->belongsTo(Developer::class);
+    }
+
     // Multiple games belong to one exhibitor at gamescom
     public function exhibitor()
     {
         return $this->belongsTo(Publisher::class, 'exhibitor_id', 'id');
+    }
+
+    // results in a "problem", se examples below
+    public function available_publisher() {
+        return $this->publisher()->where('id','>', 1);
     }
 
     public function getReleasedAttribute()
@@ -44,6 +55,10 @@ class Game extends Model
 
     public function RSSFeeds() {
         return $this->hasMany(RSSFeed::class);
+    }
+
+    public function articles() {
+        return $this->hasMany(Article::class);
     }
 
     // Many to many (to connect pivot table in DB)

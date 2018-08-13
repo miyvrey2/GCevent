@@ -10,6 +10,9 @@ return [
     'publisher' => 'Publisher',
     'publishers' => 'Publishers',
     'publishedBy' => 'Published by',
+    'developer' => 'Developer',
+    'developers' => 'Developers',
+    'developedBy' => 'Developed by',
     'games' => 'Games',
 
 ];

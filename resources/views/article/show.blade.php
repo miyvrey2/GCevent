@@ -36,7 +36,7 @@
                 <br>
 
                 <div class="">
-                    Written by: {{$article->author->name}}
+                    Written by: {{$article->author->username}}
                 </div>
 
                 {{--<div class="">--}}
@@ -89,10 +89,40 @@
                 <ul class="article-meta">
                     <li><i class="fa fa-comments"></i> 1 comment</li>
                 </ul>
-
-
-
             </div>
+
+            <script type="application/ld+json">
+              {
+                "@context": "http://schema.org",
+                "@type": "NewsArticle",
+                "headline": "{{$article->title}}",
+                "datePublished": "{{$article->published_at}}",
+                "dateModified": "{{$article->updated_at}}",
+                "author": {
+                    "@type": "Person",
+                    "name": "{{$article->author->username}}"
+                },
+                "publisher": {
+                    "@context": "http://schema.org",
+                        "@type": "Organization",
+                        "name": "gamescomevent",
+                        "url": "https://www.gamescomevent.com",
+                    "logo": {
+                        "@type": "ImageObject",
+                        "name": "{{config('app.name')}} logo",
+                        "url": "http://my-organization.org/my-logo.png"
+                    }
+                },
+                "image": [
+                  "https://www.ishetalvakantie.nl/images/summer.jpg"
+                ],
+                "mainEntityOfPage": {
+                  "@type": "WebPage",
+                  "@id": "{{url("article/" . $article->slug)}}"
+                }
+              }
+            </script>
+
         </div>
     </div>
 

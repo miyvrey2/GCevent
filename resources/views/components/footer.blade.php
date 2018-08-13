@@ -18,12 +18,27 @@
                     <li><a href="{{url('gamescom-2018')}}">About gamescom 2018</a></li>
                     <li><a href="{{url('tickets')}}">Tickets</a></li>
                     <li><a href="{{url('sitemap')}}">Sitemap</a></li>
+                    @if(Auth::check())
+                    <li>
+                        <a href="{{ route('logout') }}"
+                           onclick="event.preventDefault();
+                                                         document.getElementById('logout-footer-form').submit();">
+                            Logout
+                        </a>
+
+                        <form id="logout-footer-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+                    @else
+                    <li><a href="{{url('login')}}">Login</a></li>
+                    @endif
                 </ul>
             </div>
             <div class="col-md-4">
                 <h3>Recently added news</h3>
                 @foreach($recent_articles as $article)
-                    {{$article['title']}} <br>
+                    <a href="{{ url( "article/" . $article['slug']) }}">{{$article['title']}}</a> <br>
                 @endforeach
             </div>
             <div class="col-md-4">

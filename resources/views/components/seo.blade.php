@@ -1,6 +1,6 @@
     {{--Meta Tags for SEO--}}
 
-    @php($standard_title = " | Gamescomevent.com")
+    @php($standard_title = " | " . config('app.name', 'Laravel'))
     @php($standard_url = url(""))
     @php($standard_description = "Gamescom events shows the Gamescom species. Gamescom is a convention that is being held at Cologne(K&ouml;hn). Last year there was around a 340,000 visitors to come and watch all the works that are being showed here by popular game-developers.")
     @if(!isset($title)) @php($title = "Gamescom 2018 - Games, tournaments, cosplay & much more") @endif

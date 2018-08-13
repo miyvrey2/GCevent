@@ -39,6 +39,8 @@
                     @else
                         <li><i class="fa fa-calendar" title="Release date"></i>Released on <a href="#" title="{{$game->released}}">{{$game->released}}</a></li>
                     @endif
+
+                    @if(!$game->consoles->isEmpty())
                     <li>
                         <i class="fa fa-gamepad" title="Playable on"></i>Made for
                         @php($i = 1)
@@ -47,22 +49,90 @@
 
                             @php($i++)
                         @endforeach
+                    </li>
+                    @endif
 
-                    </li>
-                    <li>
-                        <i class="fa fa-upload" title="{{__('breadcrumbs.publisher')}}"></i><a title="{{__('breadcrumbs.publishedBy')}} {{$game->publisher->title}}" href="{{url('publishers/'.$game->publisher->slug)}}">{{$game->publisher->title}}</a>
-                    </li>
+                    @if($game->developer != null)
+                        <li>
+                            <i class="fa fa-gear" title="{{__('breadcrumbs.developer')}}"></i><a title="{{__('breadcrumbs.developedBy')}} {{$game->developer->title}}" href="{{url('developers/'.$game->developer->slug)}}">{{$game->developer->title}}</a>
+                        </li>
+                    @endif
+
+                    @if($game->available_publisher != null)
+                        <li>
+                            <i class="fa fa-upload" title="{{__('breadcrumbs.publisher')}}"></i><a title="{{__('breadcrumbs.publishedBy')}} {{$game->available_publisher->title}}" href="{{url('publishers/'.$game->available_publisher->slug)}}">{{$game->available_publisher->title}}</a>
+                        </li>
+                    @endif
                 </ul>
 
                 <div class="horizontal-line"></div>
 
                 <h2>Recent news</h2>
                 <ul>
-                    {{--@foreach($game->rssFeeds as $rssfeed)--}}
-                        {{--<li><a target="_blank" href="{{ $rssfeed->url }}">{{ $rssfeed->title }}</a></li>--}}
-                    {{--@endforeach--}}
+                    @foreach($game->articles as $article)
+                        <li><a target="_blank" href="{{ $article->url }}">{{ $article->title }}</a></li>
+                    @endforeach
                 </ul>
+
+                @if(Auth::check())
+                <h2>Recent RSS feeds</h2>
+                <ul>
+                    @foreach($game->rssFeeds as $rssfeed)
+                        <li><a target="_blank" href="{{ $rssfeed->url }}">{{ $rssfeed->title }}</a></li>
+                    @endforeach
+                </ul>
+                @endif
             </div>
+
+            <script type="application/ld+json">
+              {
+                "@context": "http://schema.org",
+                "@type": "VideoGame",
+                "applicationCategory":"Game",
+                "name": "{{ $game->title }}",
+                "url": "{{ url("games/" . $game->slug) }}",
+                {{--"image": "{{ url($game->image) }}",--}}
+                "description": "{!! $game->excerpt !!}",
+                "inLanguage":["English"],
+                @if($game->available_publisher != null)
+
+                "publisher":{
+                    "@type": "Organization",
+                    "name": "{{ $game->available_publisher->title }}",
+                    "url": "{{ url("publishers/" . $game->available_publisher->slug) }}",
+                    "logo": {
+                        "@type": "ImageObject",
+                        "name": "{{ $game->available_publisher->title }} logo",
+                        "url": "{{ $game->available_publisher->image }}"
+                    }
+                },
+                @endif
+
+                "genre":["Action (Shooter / Robot)","3D","1st Person"],
+                @if(!$game->consoles->isEmpty())
+
+                "gamePlatform":[@foreach($game->consoles as $console)"{{$console->title}}"@endforeach],
+                @endif
+                {{--"operatingSystem":["Sonic", "Duo"],--}}
+                {{--"processorRequirements":"4 GHz",--}}
+                {{--"memoryRequirements":"8 Gb",--}}
+                {{--"storageRequirements":"64 Gb",--}}
+                "aggregateRating":{
+                    "@type":"AggregateRating",
+                    "ratingValue":"5",
+                    "ratingCount":"1"
+                }
+                @if($game->developer != null)
+
+                ,"author":{
+                    "@type":"Organization",
+                    "name":"{{ $game->developer->title }}",
+                    "url":"{{ $game->developer->url }}"
+                }
+                @endif
+
+              }
+            </script>
         </div>
     </div>
 
