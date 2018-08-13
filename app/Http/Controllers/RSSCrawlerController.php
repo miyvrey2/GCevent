@@ -456,10 +456,12 @@ class RSSCrawlerController extends Controller
         $wordlist = [];
         $removeWords1 = array_map('strtolower', Publisher::pluck('title')->toArray() );
         $removeWords2 = array_map('strtolower', Game::pluck('title')->toArray() );
-        $removeWords3 = ['de', 'het', 'een', 'van', 'naar', 'voor', 'achter', 'op', 'onder', 'in', 'uit', 'met', 'zonder', 'nu', 'later', 'is', 'en', 'of', '-'];
-        $removeWords4 = ['trailer', 'nieuwe', 'nieuw', 'jaar', 'maand', 'week'];
+        $removeWords3 = array_map('strtolower', Console::pluck('title')->toArray() );
+        $removeWords4 = ['de', 'het', 'een', 'van', 'naar', 'voor', 'achter', 'op', 'onder', 'in', 'uit', 'met', 'zonder', 'nu', 'later', 'is', 'en', 'of', '-'];
+        $removeWords5 = ['trailer', 'nieuwe', 'nieuw', 'jaar', 'maand', 'week'];
+        $removeWords6 = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];
 
-        $removeWordsRaw = array_merge($removeWords1, $removeWords2, $removeWords3, $removeWords4);
+        $removeWordsRaw = array_merge($removeWords1, $removeWords2, $removeWords3, $removeWords4, $removeWords5, $removeWords6);
 
         foreach($removeWordsRaw as $removable) {
 
