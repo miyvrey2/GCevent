@@ -18,7 +18,14 @@ class RedirectIfAuthenticated
     public function handle($request, Closure $next, $guard = null)
     {
         if (Auth::guard($guard)->check()) {
-            return redirect('/home');
+
+            // if the account is activated, return the login
+            if(Auth::user()->active === 1) {
+                return redirect('/admin/dashboard');
+            }
+
+            // Return the account needs to be activated
+            return redirect('/validate');
         }
 
         return $next($request);
