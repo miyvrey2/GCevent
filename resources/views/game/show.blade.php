@@ -34,7 +34,7 @@
             <div class="col-md-3">
                 <h2>Overview</h2>
                 <ul class="game-meta">
-                    @if(Carbon\Carbon::now()->gt(Carbon\Carbon::parse($game->released)))
+                    @if(Carbon\Carbon::now()->lt(Carbon\Carbon::parse($game->released)))
                         <li><i class="fa fa-calendar" title="Release date"></i>Planned for <a href="#" title="{{$game->released}}">{{$game->released}}</a></li>
                     @else
                         <li><i class="fa fa-calendar" title="Release date"></i>Released on <a href="#" title="{{$game->released}}">{{$game->released}}</a></li>
