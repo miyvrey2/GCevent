@@ -17,6 +17,8 @@ class CreateGamesTable extends Migration
             $table->increments('id');
             $table->integer('publisher_id')->unsigned();
             $table->foreign('publisher_id')->references('id')->on('publishers')->onDelete('restrict');
+            $table->integer('developer_id')->nullable()->unsigned();
+            $table->foreign('developer_id')->references('id')->on('developers')->onDelete('restrict');
             $table->integer('exhibitor_id')->nullable()->unsigned();
             $table->foreign('exhibitor_id')->references('id')->on('publishers')->onDelete('restrict');
             $table->string('title');
