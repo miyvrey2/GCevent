@@ -65,4 +65,9 @@ class Game extends Model
     public function consoles() {
         return $this->belongsToMany(Console::class);
     }
+
+    // Many to many (to connect pivot table in DB)
+    public function genres() {
+        return $this->belongsToMany(Genre::class);
+    }
 }

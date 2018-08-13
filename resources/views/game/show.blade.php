@@ -52,9 +52,21 @@
                     </li>
                     @endif
 
+                    @if(!$game->genres->isEmpty())
+                        <li>
+                            <i class="fa fa-book" title="Genres"></i>Genre:
+                            @php($i = 1)
+                            @foreach($game->genres as $genre)
+                                <a href="#" title="{{$genre->title}}">{{$genre->title}}</a>@if($i < count($game->genres)), @endif
+
+                                @php($i++)
+                            @endforeach
+                        </li>
+                    @endif
+
                     @if($game->developer != null)
                         <li>
-                            <i class="fa fa-gear" title="{{__('breadcrumbs.developer')}}"></i><a title="{{__('breadcrumbs.developedBy')}} {{$game->developer->title}}" href="{{url('developers/'.$game->developer->slug)}}">{{$game->developer->title}}</a>
+                            <i class="fa fa-flask" title="{{__('breadcrumbs.developer')}}"></i><a title="{{__('breadcrumbs.developedBy')}} {{$game->developer->title}}" href="{{url('developers/'.$game->developer->slug)}}">{{$game->developer->title}}</a>
                         </li>
                     @endif
 
@@ -108,7 +120,10 @@
                 },
                 @endif
 
-                "genre":["Action (Shooter / Robot)","3D","1st Person"],
+                @if(!$game->genres->isEmpty())
+                "genre":[@foreach($game->genres as $genre)"{{$genre->title}}"@endforeach],
+                @endif
+
                 @if(!$game->consoles->isEmpty())
 
                 "gamePlatform":[@foreach($game->consoles as $console)"{{$console->title}}"@endforeach],
