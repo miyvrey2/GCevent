@@ -11,7 +11,7 @@
                     <news:name>{{$article->title}}</news:name>
                     <news:language>en</news:language>
                 </news:publication>
-                <news:genres>Gaming</news:genres>
+                <news:genres>Blog</news:genres>
                 <news:publication_date>{{ $article->updated_at->tz('UTC')->toAtomString() }}</news:publication_date>
                 <news:title>{{$article->title}}</news:title>
             </news:news>
