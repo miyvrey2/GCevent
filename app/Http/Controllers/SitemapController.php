@@ -29,7 +29,7 @@ class SitemapController extends Controller
     {
         $articles = Article::orderBy('published_at', 'desc')->get();
 
-        return response()->view('sitemap.articles', [
+        return response()->view('sitemap.googlenews', [
             'articles' => $articles,
         ])->header('Content-Type', 'text/xml');
     }

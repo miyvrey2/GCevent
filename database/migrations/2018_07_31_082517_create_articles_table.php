@@ -26,6 +26,7 @@ class CreateArticlesTable extends Migration
             $table->string('source')->nullable();
             $table->string('sidebar_title')->nullable();
             $table->text('sidebar_body')->nullable();
+            $table->text('keywords')->nullable();
             $table->string('image')->nullable();
             $table->timestamp('published_at')->nullable();
             $table->timestamps();
