@@ -132,7 +132,7 @@ class RSSCrawlerController extends Controller
         }
 
         $setGameTitlesToRRSFeed = $this->setGametitleToRSSFeed();
-        $removeDuplicates = $this->removeDuplicates();
+        $removeDuplicates = $this->removeDuplicates(false);
         $removeOldNews = $this->removeOldNews();
 
         return [
@@ -144,20 +144,25 @@ class RSSCrawlerController extends Controller
         ];
     }
 
-    public function removeDuplicates()
+    public function removeDuplicates($view = true)
     {
         $feed_items = RSSFeed::select('*')
             ->selectRaw(' COUNT(`title`) as `occurrences`')
             ->from('rss_feeds')
-            ->where('title', '!=', '')
+            ->where([
+                ['title', '!=', ''],
+            ])
             ->groupBy('title')
             ->having('occurrences', '>', '1')
             ->get();
 
         foreach($feed_items as $record) {
-            $record->delete();
+            $record->forceDelete();
         }
 
+        if($view) {
+            return "removed the duplicaties";
+        }
         return true;
     }
 
@@ -225,6 +230,13 @@ class RSSCrawlerController extends Controller
         $feed_items = RSSFeed::orderBy('published_at','desc')->get();
 
         return view('feed.index', compact('feed_items'));
+    }
+
+    public function remove_from_index($id)
+    {
+
+        // Delete
+        RSSFeed::find($id)->delete();
     }
 
     public function getGameTitles() {

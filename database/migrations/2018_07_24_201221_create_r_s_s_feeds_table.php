@@ -22,6 +22,7 @@ class CreateRSSFeedsTable extends Migration
             $table->integer('game_id')->nullable()->unsigned();
             $table->foreign('game_id')->references('id')->on('games')->onDelete('restrict');
             $table->datetime('published_at');
+            $table->softDeletes();
         });
     }
 

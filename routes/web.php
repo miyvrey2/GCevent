@@ -43,6 +43,7 @@ Route::get('/crawler/removeDuplicates', 'RSSCrawlerController@removeDuplicates')
 Route::get('/crawler/removeOldNews', 'RSSCrawlerController@removeOldNews');
 Route::get('/crawler/crawl', 'RSSCrawlerController@crawl');
 Route::get('/crawler/gametitles', 'RSSCrawlerController@getGameTitles');
+Route::post('crawler/delete/{id}', 'RSSCrawlerController@remove_from_index');
 
 // Games
 Route::get('/games/list', 'GameController@listed');

@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class RSSFeed extends Model
 {
+    // Use softdeletes
+    use SoftDeletes;
 
     // Table name
     protected $table = 'rss_feeds';

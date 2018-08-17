@@ -7,6 +7,19 @@
         font-size: 50px;
     }
 
+    form.game-show-delete {
+        display: inline-block;
+
+        button {
+            background-color: transparent;
+            border: 0;
+            outline: 0;
+            font-size: 16px;
+            font-weight: normal;
+            cursor: pointer;
+        }
+    }
+
     // side
     .col-md-3 {
         ul {
