@@ -8,7 +8,7 @@
     @if(!isset($url)) @php($url = $standard_url) @endif
     @if(!isset($author)) @php($author = $standard_author) @endif
     @if(!isset($description) || $description == "") @php($description = 'Learn more about ' . $title ) @endif
-    @if(!isset($image)) @php($image = "https://www.gamescomevent.com/gfx/gamescom_17_010_010.jpg") @endif
+    @if(!isset($image)) @php($image = "https://www.gamescomevent.com/img/gamescom_17_010_010.jpg") @endif
 
     @php($description = substr($description, 0, 154))
     @if(strlen($description) >= 154)
