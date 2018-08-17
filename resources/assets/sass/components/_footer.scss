@@ -45,4 +45,21 @@ footer{
         display: inline-block;
         text-align: right;
     }
+
+    .social-footer {
+
+        margin: 15px 13px 0 0;
+        float: right;
+
+        i {
+            position: relative;
+            width: 24px;
+            height: 24px;
+            display: inline-block;
+            margin: 0 2px;
+            line-height: 24px;
+            text-align: center;
+            border: 1px solid white;
+        }
+    }
 }

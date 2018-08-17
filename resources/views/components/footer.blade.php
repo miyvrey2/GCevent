@@ -47,6 +47,14 @@
                 <strong>Thu. 23 August: </strong><span>10:00 - 20:00</span><br>
                 <strong>Fri. 24 August: </strong><span>09:00 - 20:00</span><br>
                 <strong>Sat. 25 August: </strong><span>09:00 - 20:00</span><br>
+
+                <div class="social-footer">
+                    <a href="#"><i class="fa fa-facebook"></i></a>
+                    <a target="_blank" href="https://twitter.com/GCEredaction"><i class="fa fa-twitter"></i></a>
+                    <a target="_blank" href="https://www.instagram.com/GCERedaction/"><i class="fa fa-instagram"></i></a>
+                    <a href="#"><i class="fa fa-linkedin"></i></a>
+                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                </div>
             </div>
         </div>
     </div>

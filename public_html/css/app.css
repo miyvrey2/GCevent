@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@import url(https://fonts.googleapis.com/css?family=Exo+2:200,400,600);@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,600);body {
+@import url(https://fonts.googleapis.com/css?family=Exo+2:600);@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);body {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   color: #333333;
@@ -11,6 +11,7 @@ h4,
 h5,
 h6 {
   font-family: "Exo 2", sans-serif;
+  font-weight: bold;
   line-height: 1;
 }
 
@@ -34,6 +35,16 @@ a {
 
 a:hover {
   text-decoration: underline;
+}
+
+.fa-red,
+a .fa-red {
+  color: #fa3232;
+}
+
+.fa-red:hover,
+a .fa-red:hover {
+  color: #c83232;
 }
 
 .container {
@@ -119,6 +130,11 @@ main {
   }
 }
 
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   position: absolute;
   width: 100%;
@@ -130,6 +146,31 @@ body {
   height: 1px;
   margin: 20px 0 20px 0;
   background-color: #CCCCCC;
+}
+
+.button {
+  position: relative;
+  border: 0;
+  padding: 10px 20px;
+  font-weight: bold;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.button.button-primary {
+  background-color: #3097D1;
+  color: white;
+}
+
+.button.button-primary-alt {
+  border: 4px solid #3097D1;
+  color: #3097D1;
+  background-color: transparent;
+}
+
+.button.button-secundary {
+  background-color: white;
+  color: black;
 }
 
 header {
@@ -722,6 +763,22 @@ footer span {
   text-align: right;
 }
 
+footer .social-footer {
+  margin: 15px 13px 0 0;
+  float: right;
+}
+
+footer .social-footer i {
+  position: relative;
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  margin: 0 2px;
+  line-height: 24px;
+  text-align: center;
+  border: 1px solid white;
+}
+
 .form-group label {
   position: relative;
   display: inline-block;
@@ -898,6 +955,19 @@ footer span {
 .game-show h1 {
   margin: 10px 0 10px 0;
   font-size: 50px;
+}
+
+.game-show form.game-show-delete {
+  display: inline-block;
+}
+
+.game-show form.game-show-delete button {
+  background-color: transparent;
+  border: 0;
+  outline: 0;
+  font-size: 16px;
+  font-weight: normal;
+  cursor: pointer;
 }
 
 .game-show .col-md-3 ul {

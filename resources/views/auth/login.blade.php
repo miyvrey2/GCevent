@@ -1,5 +1,10 @@
 @extends('layouts.master')
 
+@section('seo')
+    @component("components.seo", ["title" => 'Login', "url" => url("/login" . 'login'), "description" => 'Admin panel: user login'] )
+    @endcomponent
+@endsection
+
 @section('content')
 
     <section id="featured_line_section">

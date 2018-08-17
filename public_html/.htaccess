@@ -46,7 +46,7 @@ Redirect 301 /program /gamescom-2018
 	AddOutputFilterByType DEFLATE application/rss+xml
 	AddOutputFilterByType DEFLATE application/javascript
 	AddOutputFilterByType DEFLATE application/x-javascript
-	#SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
+	SetEnvIfNoCase Request_URI \.(?:gif|jpe?g|png)$ no-gzip dont-vary
 	#SetEnvIfNoCase Request_URI \.(?:t?gz|zip|bz2|rar)$ no-gzip dont-vary
   	#SetEnvIfNoCase Request_URI \.(?:pdf|doc)$ no-gzip dont-vary
   	#SetEnvIfNoCase Request_URI \.(?:mov|mp3|mp4|rm)$ no-gzip dont-vary
@@ -71,3 +71,10 @@ Redirect 301 /program /gamescom-2018
 	ExpiresByType application/x-shockwave-flash "access plus 216000 seconds"
     ExpiresDefault "access 1 month"
 </ifModule>
+
+# https://varvy.com/pagespeed/cache-control.html
+# One month for most static assets
+# css|jpg|jpeg|png|gif|js|ico
+<filesMatch ".(js|ico)$">
+    Header set Cache-Control "max-age=2592000, public"
+</filesMatch>
