@@ -1,9 +1,14 @@
+RewriteEngine On
+
+# Enforce SSL and WWW
+RewriteCond %{HTTPS} off [OR]
+RewriteCond %{HTTP_HOST} !^www\.
+RewriteRule ^ https://www.gamescomevent.com%{REQUEST_URI} [NE,L,R]
+
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>
         Options -MultiViews -Indexes
     </IfModule>
-
-    RewriteEngine On
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .
@@ -27,3 +32,5 @@ Redirect 301 /console/switch /consoles/switch
 Redirect 301 /console/playstation-4 /consoles/playstation-4
 Redirect 301 /console/xbox-one /consoles/xbox-one
 Redirect 301 /console/pc /consoles/pc
+Redirect 301 /lineup /gamescom-2018
+Redirect 301 /program /gamescom-2018
