@@ -60,9 +60,8 @@
                     }
                 </style>
 
-                <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.12.3.min.js">
-                </script>
-                <script type="text/javascript" language="javascript" src="http://ns.enzow.org/jquery.dataTables.js"></script>
+                <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.12.3.min.js"></script>
+                <script type="text/javascript" language="javascript" src="{{asset('js/dataTables.js')}}"></script>
                 <script type="text/javascript" language="javascript" class="init">
                     $(document).ready(function() {
                         $('#example').DataTable({
@@ -70,7 +69,7 @@
                             "paging":   false,
                             "ordering": true,
                             "info":     false,
-                            "searching":   false
+                            "searching":   true
 
                         });
                     } );
