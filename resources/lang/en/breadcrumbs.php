@@ -2,6 +2,7 @@
 
 return [
     'breadcrumbs' => 'breadcrumbs',
+    'dashboard' => 'Dashboard',
     'home' => 'Home',
     'article' => 'Article',
     'articles' => 'Articles',

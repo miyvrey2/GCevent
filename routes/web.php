@@ -15,6 +15,9 @@
 Route::group(['prefix' => 'admin'], function() {
     Route::get('/dashboard', 'Backend\DashboardController@index')->name('home');
 
+    Route::get('/news', 'Backend\ArticleController@index');
+    Route::get('/games', 'Backend\GameController@index');
+
 });
 
 // Sitemap

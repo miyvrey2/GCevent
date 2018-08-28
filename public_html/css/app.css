@@ -148,6 +148,19 @@ body {
   background-color: #CCCCCC;
 }
 
+.align-center {
+  text-align: center;
+}
+
+.align-center-center {
+  vertical-align: middle !important;
+  text-align: center;
+}
+
+.align-right {
+  text-align: right;
+}
+
 .button {
   position: relative;
   border: 0;
@@ -459,11 +472,11 @@ ul.breadcrumbs li:not(:last-child):after {
 }
 
 #featured_line_section {
-  height: 65px !important;
+  height: 62px !important;
 }
 
 #featured_line_section .featured_line {
-  height: 65px !important;
+  height: 62px !important;
 }
 
 .enzow_slider {
@@ -839,6 +852,15 @@ footer .social-footer i {
     text-align: center;
     float: left;
   }
+}
+
+.backend-main {
+  padding-top: 50px;
+}
+
+.backend-main h1 {
+  margin: 10px 0 10px 0;
+  font-size: 50px;
 }
 
 .article-show {

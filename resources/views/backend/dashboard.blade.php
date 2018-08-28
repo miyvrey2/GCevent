@@ -6,7 +6,7 @@
         <div class="featured_line greenblue"></div>
     </section>
 
-    <div class="container publisher-show">
+    <div class="container backend-main">
         <div class="row">
             <div class="col-md-12">
 
@@ -14,7 +14,7 @@
                 <h1>Dashboard</h1>
 
                 {{--Breadcrumbs--}}
-                @component('components.breadcrumbs', ['breadcrumbs' => ['admin/dashboard' => 'Dashboard']])
+                @component('backend.components.breadcrumbs', ['breadcrumbs' => []])
                 @endcomponent
 
             </div>

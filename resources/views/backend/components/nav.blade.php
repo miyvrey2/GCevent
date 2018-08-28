@@ -3,16 +3,21 @@
     <span id="navBackColor"></span>
     <ul itemscope itemtype="http://www.schema.org/SiteNavigationElement" id="navigation_menu">
         <i id="navCloseButton" class="fa fa-times" aria-hidden="true"></i>
-        <li itemprop="name"><a itemprop="url" href="{{url('/admin/dashboard')}}">dashboard</a></li>
-        <li itemprop="name"><a itemprop="url" href="{{url('/articles')}}">News</a></li>
+        <li itemprop="name"><a itemprop="url" href="{{url('/admin/dashboard')}}">Dashboard</a></li>
+        <li itemprop="name"><a itemprop="url" href="{{url('/admin/news')}}">News</a></li>
+        <li itemprop="name"><a itemprop="url" href="{{url('/admin/games')}}">Games</a></li>
         @guest
         @else
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>
+                    <i class="fa fa-user"></i>
                     {{ Auth::user()->username }} <span class="caret"></span>
                 </a>
 
                 <ul class="dropdown-menu">
+                    <li>
+                        <a href="{{url('')}}">Website</a>
+                    </li>
                     <li>
                         <a href="{{ route('logout') }}"
                            onclick="event.preventDefault();

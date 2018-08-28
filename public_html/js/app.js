@@ -60,27 +60,26 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 9);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
-/******/ ({
-
-/***/ 10:
+/******/ ([
+/* 0 */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(47);
-__webpack_require__(48);
+__webpack_require__(1);
+module.exports = __webpack_require__(4);
+
 
 /***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
 
-/***/ 42:
-/***/ (function(module, exports) {
-
-// removed by extract-text-webpack-plugin
+__webpack_require__(2);
+__webpack_require__(3);
 
 /***/ }),
-
-/***/ 47:
+/* 2 */
 /***/ (function(module, exports) {
 
 global_interval_speed = 4000;
@@ -409,8 +408,7 @@ function ready(fn) {
 }
 
 /***/ }),
-
-/***/ 48:
+/* 3 */
 /***/ (function(module, exports) {
 
 // if page is taller than the viewport height, redo the footer
@@ -436,14 +434,10 @@ function setFooterPosition() {
 }
 
 /***/ }),
+/* 4 */
+/***/ (function(module, exports) {
 
-/***/ 9:
-/***/ (function(module, exports, __webpack_require__) {
-
-__webpack_require__(10);
-module.exports = __webpack_require__(42);
-
+// removed by extract-text-webpack-plugin
 
 /***/ })
-
-/******/ });
+/******/ ]);

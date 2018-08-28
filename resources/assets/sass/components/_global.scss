@@ -16,6 +16,19 @@ body {
     background-color: #CCCCCC;
 }
 
+.align-center {
+    text-align: center;
+}
+
+.align-center-center {
+    vertical-align: middle !important;
+    text-align: center;
+}
+
+.align-right {
+    text-align: right;
+}
+
 .button {
         position: relative;
         border: 0;
