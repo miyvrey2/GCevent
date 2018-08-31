@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('seo')
-    @component("components.seo", ["title" => $console->title, "url" => url("console/" . $console->slug), "description" => $console->excerpt] )
+    @component("components.seo", ["title" => $console->title, "url" => url("consoles/" . $console->slug), "description" => $console->excerpt] )
     @endcomponent
 @endsection
 
@@ -19,7 +19,7 @@
                 <h1>{{$console->title}}</h1>
 
                 {{--Breadcrumbs--}}
-                @component('components.breadcrumbs', ['breadcrumbs' => ['consoles' => __('breadcrumbs.consoles'), $console->slug => $console->title]])
+                @component('components.breadcrumbs', ['breadcrumbs' => ['consoles' => __('breadcrumbs.consoles'), url("consoles/" . $console->slug) => $console->title]])
                 @endcomponent
 
             </div>

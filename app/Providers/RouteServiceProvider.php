@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Developer;
 use App\Game;
 use App\Page;
 use App\Article;
@@ -49,6 +50,10 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::bind('publisher', function($slug) {
             return Publisher::where('slug', $slug)->first();
+        });
+
+        Route::bind('developer', function($slug) {
+            return Developer::where('slug', $slug)->first();
         });
     }
 

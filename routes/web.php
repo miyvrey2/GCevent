@@ -36,6 +36,10 @@ Route::get('/article/{article}', 'ArticleController@show');
 Route::get('/publishers', 'PublisherController@index');
 Route::get('/publishers/{publisher}', 'PublisherController@show');
 
+// Developers
+Route::get('/developers', 'DeveloperController@index');
+Route::get('/developers/{developer}', 'DeveloperController@show');
+
 // Consoles
 Route::get('/consoles', 'ConsoleController@index');
 Route::get('/consoles/{console}', 'ConsoleController@show');
