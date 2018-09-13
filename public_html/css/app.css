@@ -1076,3 +1076,48 @@ footer .social-footer i {
   border-radius: 13px;
 }
 
+.developer-show {
+  padding-top: 50px;
+}
+
+.developer-show h1 {
+  margin: 10px 0 10px 0;
+  font-size: 50px;
+}
+
+.developer-show .col-md-3 ul {
+  padding: 5px 0 0 25px;
+}
+
+.developer-show .col-md-3 ul.developer-meta {
+  list-style-type: none;
+}
+
+.developer-show .col-md-3 ul.developer-meta li {
+  display: inline-block;
+  padding-right: 50px;
+}
+
+.developer-show .col-md-3 ul.developer-meta li i {
+  width: 25px;
+  color: #3097D1;
+  display: inline-block;
+  margin-left: -25px;
+}
+
+.developer-show .col-md-3 ul.developer-meta li a {
+  color: #333333;
+}
+
+.developer-show .col-md-3 ul.developer-meta li span {
+  position: relative;
+  height: 13px;
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 12px;
+  line-height: 12px;
+  background-color: #3097D1;
+  color: white;
+  border-radius: 13px;
+}
+
