@@ -15,12 +15,12 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h2>Only {{\Carbon\Carbon::parse("2018-08-22")->diffInDays()}} days left!</h2>
-                            <p>On the 22th of August will Gamescom open it's doors for the 10th anniversary</p>
+                            <h2>Only {{\Carbon\Carbon::parse("2019-08-21")->diffInDays()}} days left!</h2>
+                            <p>On the 21th of August will Gamescom open it's doors!</p>
                         </div>
                     </div>
                 </div>
-                <a class="button" target="_blank" href="https://tickets.koelnmesse.de/gamescom2018_0301_en">Get your tickets now!</a>
+                {{--<a class="button" target="_blank" href="https://tickets.koelnmesse.de/gamescom2018_0301_en">Get your tickets now!</a>--}}
             </figcaption>
         </figure>
 
