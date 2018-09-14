@@ -62,8 +62,7 @@
         </div>
     </div>
 
-    {{--<link rel='stylesheet' id='enzow_css-css'  href='https://enzow.org/tomocon/wp-content/plugins/enzow-slider/css/slider.css' type='text/css' media='all' />--}}
-    <script type='text/javascript' src='https://enzow.org/tomocon/wp-content/plugins/enzow-slider/js/slider.js'></script>
+    <script type='text/javascript' src='{{asset('js/slider.js')}}'></script>
     <script>
         window.addEventListener('load', initEnzowSlider(1, 4, 'cover', '400px'));
     </script>
