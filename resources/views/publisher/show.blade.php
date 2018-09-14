@@ -63,12 +63,23 @@
 
                 <div class="horizontal-line"></div>
 
+                @if(!$publisher->lineup2019->isEmpty())
+                <h2>GC Lineup 2019</h2>
+                <ul>
+                    @foreach($publisher->lineup2019 as $lineup)
+                        <li><a href="{{ url("games/" . $lineup->slug) }}">{{ $lineup->title }}</a></li>
+                    @endforeach
+                </ul>
+                @endif
+
+                @if(!$publisher->lineup2018->isEmpty())
                 <h2>GC Lineup 2018</h2>
                 <ul>
-                @foreach($publisher->lineup as $lineup)
+                @foreach($publisher->lineup2018 as $lineup)
                     <li><a href="{{ url("games/" . $lineup->slug) }}">{{ $lineup->title }}</a></li>
                 @endforeach
                 </ul>
+                @endif
 
                 <div class="horizontal-line"></div>
 

@@ -57,7 +57,8 @@ class PublisherController extends Controller
     {
         // Get additional info
         $publisher->stands = $publisher->stands()->get();
-        $publisher->lineup = $publisher->games()->linedUp(2018)->orderBy('title')->get();
+        $publisher->lineup2018 = $publisher->games()->linedUp(2018)->orderBy('title')->get();
+        $publisher->lineup2019 = $publisher->games()->linedUp(2019)->orderBy('title')->get();
         $publisher->games = $publisher->games()->orderBy('title')->get();
 
         // Fetch all the halls

@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('seo')
-    @component("components.seo", ["title" => 'Gamescom 2018 is drawing near!', "url" => url(""), "description" => "the 10th annivesary of gamescom celebrates the annually convention for games and all gaming-related goods! Gamescom is being held at Cologne(K&ouml;hn). Last year there was around a 355,000 visitors to come and watch all the works that are being showed here by popular game-developers."] )
+    @component("components.seo", ["title" => 'Gamescom 2019 is drawing near!', "url" => url(""), "description" => "the 10th annivesary of gamescom celebrates the annually convention for games and all gaming-related goods! Gamescom is being held at Cologne(K&ouml;hn). Last year there was around a 355,000 visitors to come and watch all the works that are being showed here by popular game-developers."] )
     @endcomponent
 @endsection
 
@@ -36,7 +36,7 @@
                         </div>
                     </div>
                 </div>
-                <a class="button" target="_blank" href="{{url('events-2018')}}">Learn more about the events</a>
+                <a class="button" target="_blank" href="{{url('events-2019')}}">Learn more about the events</a>
             </figcaption>
         </figure>
 
@@ -72,7 +72,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h1>Gamescom {{env('GAMESCOM_YEAR')}} is coming!</h1>
-                    Thanks for ariving on this page on the website. This is a fanpage for all the happenings on Gamescom. If you are a first-timer, be sure to read the <a href="{{url('gamescom-2018')}}">What is gamescom</a> page. If you are interested in all sorts of news and announcements made, please make your way to the "news" section.
+                    Thanks for ariving on this page on the website. This is a fanpage for all the happenings on Gamescom. If you are a first-timer, be sure to read the <a href="{{url('gamescom-2019')}}">What is gamescom</a> page. If you are interested in all sorts of news and announcements made, please make your way to the "news" section.
                 <br>
                 <br>
                 <h3>What's there to find?</h3>
