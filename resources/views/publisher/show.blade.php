@@ -61,7 +61,9 @@
 
                 </ul>
 
+                @if(!$publisher->lineup2018->isEmpty() || !$publisher->lineup2019->isEmpty())
                 <div class="horizontal-line"></div>
+                @endif
 
                 @if(!$publisher->lineup2019->isEmpty())
                 <h2>GC Lineup 2019</h2>
