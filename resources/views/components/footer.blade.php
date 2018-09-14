@@ -15,7 +15,7 @@
             <div class="col-md-4">
                 <h3>Quick links</h3>
                 <ul>
-                    <li><a href="{{url('gamescom-2018')}}">About gamescom 2018</a></li>
+                    <li><a href="{{url('gamescom-2019')}}">About gamescom 2018</a></li>
                     <li><a href="{{url('tickets')}}">Tickets</a></li>
                     <li><a href="{{url('sitemap')}}">Sitemap</a></li>
                     @if(Auth::check())
@@ -43,10 +43,10 @@
             </div>
             <div class="col-md-4">
                 <h3>Open at</h3>
-                <strong>Wed. 22 August: </strong><span>10:00 - 20:00</span><br>
-                <strong>Thu. 23 August: </strong><span>10:00 - 20:00</span><br>
-                <strong>Fri. 24 August: </strong><span>09:00 - 20:00</span><br>
-                <strong>Sat. 25 August: </strong><span>09:00 - 20:00</span><br>
+                <strong>Wed. 21 August: </strong><span>10:00 - 20:00</span><br>
+                <strong>Thu. 22 August: </strong><span>10:00 - 20:00</span><br>
+                <strong>Fri. 23 August: </strong><span>09:00 - 20:00</span><br>
+                <strong>Sat. 24 August: </strong><span>09:00 - 20:00</span><br>
 
                 <div class="social-footer">
                     <a href="#"><i class="fa fa-facebook"></i></a>
