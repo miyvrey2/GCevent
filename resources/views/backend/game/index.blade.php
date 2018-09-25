@@ -124,8 +124,11 @@
                             <td class="align-right">{{$game->released}}</td>
                             <td class="align-right">
                                 <a href="{{url('/games/' . $game->slug)}}"><i class="fa fa-window-maximize"></i></a> &nbsp;
-                                <a href="{{url('admin/games/' . $game->slug . '/edit')}}"><i class="fa fa-pencil"></i></a> &nbsp;
-                                <a href="{{url('admin/games/' . $game->slug . '/delete')}}"><i class="fa fa-trash"></i></a>
+                                <a href="{{url('/admin/games/' . $game->slug . '/edit')}}"><i class="fa fa-pencil"></i></a> &nbsp;
+                                {{ Form::open(array('url' => url('/admin/games/' . $game->slug), "class" => 'delete-row' )) }}
+                                {{ Form::hidden('_method', 'DELETE') }}
+                                <button type='submit' value="delete"><i class="fa fa-trash"></i></button>
+                                {{ Form::close() }}
                             </td>
                         </tr>
                     @endforeach

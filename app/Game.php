@@ -15,7 +15,7 @@ class Game extends Model
     }
 
     // Rows we may fill
-    protected $fillable = ['publisher_id', 'title', 'slug'];
+    protected $fillable = ['title', 'slug', 'excerpt', 'body', 'released_at', 'publisher_id', 'developer_id'];
 
 
     // Multiple games belong to one publisher

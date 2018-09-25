@@ -90,3 +90,16 @@
         line-height: 1;
     }
 }
+
+.delete-row {
+    display: inline;
+
+    button {
+        background-color: transparent;
+        border: 0;
+        outline: 0;
+        color: #3097D1;
+        display: inline-block;
+        font: normal normal normal 16px FontAwesome;
+    }
+}

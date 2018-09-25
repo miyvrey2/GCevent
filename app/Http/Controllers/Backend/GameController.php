@@ -8,6 +8,7 @@ use App\Game;
 use App\Publisher;
 use App\RSSFeed;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 
 class GameController extends Controller
 {
@@ -107,27 +108,29 @@ class GameController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Game  $game
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Game $game)
     {
-        //
-        echo "Whoops, we didn't save your request because I was a dipshit and not wrote a update function";
-        dd($game);
+        // Save the updates
+        $game->update($request->all());
+
+        return Redirect::to('/admin/games');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Game  $game
      * @return \Illuminate\Http\Response
      */
     public function destroy(Game $game)
     {
-        //
-        //
-        echo "Whoops, we didn't save your request because I was a dipshit and not wrote a destry function";
-        dd($game);
+        // Delete the game
+        $game->delete();
+
+        return Redirect::to('/admin/games');
+
     }
 }
