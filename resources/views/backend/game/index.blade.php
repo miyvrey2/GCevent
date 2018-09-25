@@ -17,6 +17,8 @@
                 @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/games' => 'Games']])
                 @endcomponent
 
+                <a class="button button-primary" href="{{ url('admin/games/create')}}">Create new game</a><br><br>
+
                 <style>
 
                     .dataTables_length {
@@ -110,6 +112,7 @@
                         <th class="align-center-center"><input type="checkbox" title="selectAll"></th>
                         <th>Title</th>
                         <th class="align-right">Release date</th>
+                        <th class="align-right">Tools</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -119,14 +122,16 @@
                             <td class="align-center-center"><input type="checkbox" ></td>
                             <td><a href="{{url('games/' . $game->slug)}}">{{$game->title}}</a><br><span class="tags"></span></td>
                             <td class="align-right">{{$game->released}}</td>
+                            <td class="align-right">
+                                <a href="{{url('/games/' . $game->slug)}}"><i class="fa fa-window-maximize"></i></a> &nbsp;
+                                <a href="{{url('admin/games/' . $game->slug . '/edit')}}"><i class="fa fa-pencil"></i></a> &nbsp;
+                                <a href="{{url('admin/games/' . $game->slug . '/delete')}}"><i class="fa fa-trash"></i></a>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
-
-
             </div>
-
         </div>
     </div>
 @endsection

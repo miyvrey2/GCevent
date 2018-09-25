@@ -7,8 +7,21 @@
     }
 
     input[type='text'],
+    input[type='date'],
     input[type='email'],
-    input[type='password']{
+    input[type='number'],
+    input[type='password'] {
+        position: relative;
+        width: calc(100% - 20px);
+        display: inline-block;
+        margin: 0 0 20px 0;
+        padding: 10px 0 10px 20px;
+        border: 1px solid #CCCCCC;
+        outline: 0;
+        font-size: 16px;
+    }
+
+    select {
         position: relative;
         width: 100%;
         display: inline-block;
@@ -16,6 +29,7 @@
         padding: 10px 0 10px 20px;
         border: 1px solid #CCCCCC;
         outline: 0;
+        font-size: 16px;
     }
 
     input[type='checkbox'] {
@@ -47,5 +61,32 @@
         &:hover {
             background-color: $primary-color-dark;
         }
+
+        &.button-full {
+            width: 100%;
+        }
+    }
+
+    textarea {
+        position: relative;
+        overflow: auto;
+        min-height: 150px;
+        width: calc(100% - 40px);
+        display: inline-block;
+        margin: 0 0 20px 0;
+        padding: 10px 20px;
+        border: 1px solid #CCCCCC;
+        outline: 0;
+        font-size: 12px;
+
+    }
+    #excerpt {
+        min-height: 100px;
+    }
+
+    .note {
+        font-style: italic;
+        font-size: 12px;
+        line-height: 1;
     }
 }

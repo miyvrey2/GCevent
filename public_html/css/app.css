@@ -1,4 +1,7 @@
-@import url(https://fonts.googleapis.com/css?family=Exo+2:600);@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);body {
+@import url(https://fonts.googleapis.com/css?family=Exo+2:600);@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600);body,
+input,
+textarea,
+select {
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   color: #333333;
@@ -799,8 +802,21 @@ footer .social-footer i {
 }
 
 .form-group input[type='text'],
+.form-group input[type='date'],
 .form-group input[type='email'],
+.form-group input[type='number'],
 .form-group input[type='password'] {
+  position: relative;
+  width: calc(100% - 20px);
+  display: inline-block;
+  margin: 0 0 20px 0;
+  padding: 10px 0 10px 20px;
+  border: 1px solid #CCCCCC;
+  outline: 0;
+  font-size: 16px;
+}
+
+.form-group select {
   position: relative;
   width: 100%;
   display: inline-block;
@@ -808,6 +824,7 @@ footer .social-footer i {
   padding: 10px 0 10px 20px;
   border: 1px solid #CCCCCC;
   outline: 0;
+  font-size: 16px;
 }
 
 .form-group input[type='checkbox'] {
@@ -834,6 +851,33 @@ footer .social-footer i {
 
 .form-group button[type='submit']:hover {
   background-color: #2579a9;
+}
+
+.form-group button[type='submit'].button-full {
+  width: 100%;
+}
+
+.form-group textarea {
+  position: relative;
+  overflow: auto;
+  min-height: 150px;
+  width: calc(100% - 40px);
+  display: inline-block;
+  margin: 0 0 20px 0;
+  padding: 10px 20px;
+  border: 1px solid #CCCCCC;
+  outline: 0;
+  font-size: 12px;
+}
+
+.form-group #excerpt {
+  min-height: 100px;
+}
+
+.form-group .note {
+  font-style: italic;
+  font-size: 12px;
+  line-height: 1;
 }
 
 @media screen and (max-width: 320px) {

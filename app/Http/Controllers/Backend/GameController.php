@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Developer;
 use App\Http\Controllers\Controller;
 use App\Game;
 use App\Publisher;
@@ -31,7 +32,15 @@ class GameController extends Controller
      */
     public function create()
     {
-        //
+
+        // Get the developers, games and publishers
+        $developers = Developer::all();
+        $games = Game::all();
+        $publishers = Publisher::all();
+        $game = new Game();
+        $game->released_at = date("Y") . "-00-00";
+
+        return view('backend.game.create', compact('developers', 'games','publishers', 'game'));
     }
 
     /**
@@ -53,10 +62,14 @@ class GameController extends Controller
         $data['slug'] = str_replace(" ", "-", $data['slug']);
         $data['slug'] = preg_replace("/[^a-zA-Z0-9-]+/", "", $data['slug']);
 
+        // Save into another databse
+//        DB::purge('mysql');
+//        Config::set('database.connections.mysql.database', 'db_test');
+
         // save
         Game::create($data);
 
-        return redirect('/crawler/gametitles');
+        return redirect('/admin/games');
     }
 
     /**
@@ -80,9 +93,14 @@ class GameController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Game $game)
     {
-        //
+        // Get the developers, games and publishers
+        $developers = Developer::all();
+        $games = Game::all();
+        $publishers = Publisher::all();
+
+        return view('backend.game.edit', compact('developers', 'games','publishers', 'game'));
     }
 
     /**
@@ -92,9 +110,11 @@ class GameController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Game $game)
     {
         //
+        echo "Whoops, we didn't save your request because I was a dipshit and not wrote a update function";
+        dd($game);
     }
 
     /**
@@ -103,8 +123,11 @@ class GameController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Game $game)
     {
         //
+        //
+        echo "Whoops, we didn't save your request because I was a dipshit and not wrote a destry function";
+        dd($game);
     }
 }
