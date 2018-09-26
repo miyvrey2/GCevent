@@ -57,8 +57,21 @@
 
     <div class="form-group">
         <label for="released_at">Release date</label><br>
-        <span class="note"><strong>Note</strong>: if "2018-00-00" it notes as "released in 2018"</span>
+        <span class="note"><strong>note:</strong> "2018-00-00" notes as "in 2018"</span>
         <input type="text" class="form-control" id="released_at" name="released_at" autocomplete="off" value="{{$game->released_at}}">
+    </div>
+
+    <div class="form-group">
+        <label for="consoles[]">Consoles</label><br>
+        <select class="form-control js-example-basic-multiple form-control" id="consoles[]" name="consoles[]" multiple="multiple">
+            @foreach($game->consoles as $console)
+        <option value="{{$console->id}}" selected>{{$console->title}}</option>
+            @endforeach
+
+            @foreach($consoles as $console)
+        <option value="{{$console->id}}">{{$console->title}}</option>
+            @endforeach
+        </select>
     </div>
 
     <div class="form-group">
@@ -67,7 +80,21 @@
 
 </div>
 
+{{--jQuery--}}
 <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.12.3.min.js"></script>
+
+{{--Select 2--}}
+<script>
+$(document).ready(function() {
+    $('.js-example-basic-multiple').select2({
+        tags: true
+    });
+});
+</script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
+{{--jQuery ui--}}
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 

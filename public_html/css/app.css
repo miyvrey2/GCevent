@@ -893,6 +893,10 @@ footer .social-footer i {
   font: normal normal normal 16px FontAwesome;
 }
 
+.select2-container {
+  margin-bottom: 20px !important;
+}
+
 @media screen and (max-width: 320px) {
   header {
     height: auto;

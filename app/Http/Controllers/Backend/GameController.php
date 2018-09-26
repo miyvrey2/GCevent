@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Console;
 use App\Developer;
 use App\Http\Controllers\Controller;
 use App\Game;
@@ -35,13 +36,24 @@ class GameController extends Controller
     {
 
         // Get the developers, games and publishers
-        $developers = Developer::all();
+        $developers = Developer::orderBy('title')->get();
         $games = Game::all();
-        $publishers = Publisher::all();
+        $publishers = Publisher::orderBy('title')->get();
         $game = new Game();
         $game->released_at = date("Y") . "-00-00";
 
-        return view('backend.game.create', compact('developers', 'games','publishers', 'game'));
+        // get consoles that are not listed
+        $consoles = Console::all();
+
+        foreach($game->consoles as $consoleItem) {
+            foreach($consoles as $key => $value) {
+                if($consoleItem->id == $value->id) {
+                    $consoles->forget($key);
+                }
+            }
+        }
+
+        return view('backend.game.create', compact('developers', 'games','publishers', 'game', 'consoles'));
     }
 
     /**
@@ -97,11 +109,22 @@ class GameController extends Controller
     public function edit(Game $game)
     {
         // Get the developers, games and publishers
-        $developers = Developer::all();
+        $developers = Developer::orderBy('title')->get();
         $games = Game::all();
-        $publishers = Publisher::all();
+        $publishers = Publisher::orderBy('title')->get();
 
-        return view('backend.game.edit', compact('developers', 'games','publishers', 'game'));
+        // get consoles that are not listed
+        $consoles = Console::all();
+
+        foreach($game->consoles as $consoleItem) {
+            foreach($consoles as $key => $value) {
+                if($consoleItem->id == $value->id) {
+                    $consoles->forget($key);
+                }
+            }
+        }
+
+        return view('backend.game.edit', compact('developers', 'games', 'publishers', 'game', 'consoles'));
     }
 
     /**
