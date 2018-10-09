@@ -17,7 +17,7 @@
                 @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/games' => 'Games']])
                 @endcomponent
 
-                <a class="button button-primary" href="{{ url('admin/games/create')}}">Create new game</a><br><br>
+                <a class="button button-primary" href="{{ url('admin/games/create')}}">Create a game</a><br><br>
 
                 <style>
 
@@ -123,10 +123,10 @@
                             <td><a href="{{url('games/' . $game->slug)}}">{{$game->title}}</a><br><span class="tags"></span></td>
                             <td class="align-right game-attributes">
                                 <a @if($game->released != "") class="filled-attribute" @endif title="{{$game->released}}"><i class="fa fa-calendar"></i></a>&nbsp;
-                                <a @if(!$game->genres->isEmpty()) class="filled-attribute" @endif title="{{$game->genres}}"><i class="fa fa-book"></i></a>&nbsp;
-                                <a @if(!$game->consoles->isEmpty()) class="filled-attribute" @endif title="{{$game->consoles}}"><i class="fa fa-gamepad"></i></a>&nbsp;
-                                <a @if(isset($game->available_developer)) class="filled-attribute" title="{{$game->available_developer->title}}" @endif><i class="fa fa-flask"></i></a>
-                                <a @if(isset($game->available_publisher)) class="filled-attribute" title="{{$game->available_publisher->title}}" @endif><i class="fa fa-upload"></i></a>
+                                <a @if(!$game->genres->isEmpty()) class="filled-attribute" @endif title="Genres: @foreach($game->genres as $genreA) {{$genreA->title}}, @endforeach"><i class="fa fa-book"></i></a>&nbsp;
+                                <a @if(!$game->consoles->isEmpty()) class="filled-attribute" @endif title="Consoles: @foreach($game->consoles as $consoleA) {{$consoleA->title}}, @endforeach"><i class="fa fa-microchip"></i></a>&nbsp;
+                                <a @if(isset($game->available_developer)) class="filled-attribute" title="Developed by: {{$game->available_developer->title}}" @endif><i class="fa fa-flask"></i></a>
+                                <a @if(isset($game->available_publisher)) class="filled-attribute" title="Published by: {{$game->available_publisher->title}}" @endif><i class="fa fa-upload"></i></a>
                             </td>
                             <td class="align-right">
                                 <a href="{{url('/games/' . $game->slug)}}"><i class="fa fa-window-maximize"></i></a> &nbsp;
