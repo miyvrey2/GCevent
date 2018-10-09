@@ -17,6 +17,8 @@
                 @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/news' => 'News']])
                 @endcomponent
 
+                <a class="button button-primary" href="{{ url('admin/articles/create')}}">Create an article</a><br><br>
+
                 <style>
                     #example_filter input[type="search"] {
                         height: 30px;
@@ -78,9 +80,10 @@
                 <table id="example" class="display" cellspacing="0" width="100%">
                     <thead>
                     <tr>
-                        <th class="align-center"><input type="checkbox" title="selectAll"></th>
-                        <th>Title</th>
-                        <th class="align-right">Date</th>
+                        <th class="align-center-center"><input type="checkbox" title="selectAll"></th>
+                        <th>Article titles</th>
+                        <th class="align-right"></th>
+                        <th class="align-right">Tools</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -88,8 +91,26 @@
                         @foreach($articles as $article)
                         <tr>
                             <td class="align-center-center"><input type="checkbox" ></td>
-                            <td><a href="{{url('article/' . $article->slug)}}">{{$article->title}}</a><br><span class="tags"><i class="fa fa-gamepad"></i> {{$article->game->title}}, <i class="fa fa-user"></i> {{$article->author->username}}</span></td>
-                            <td class="align-right">{{$article->published_at}}<br><span class="status">{{$article->status}}</span></td>
+                            <td><a href="{{url('article/' . $article->slug)}}">{{$article->title}}</a></td>
+                            <td class="align-right article-attributes">
+                                <span class="status">{{$article->status}}</span>
+                                <a @if($article->published_at != "") class="filled-attribute" @endif title="{{$article->published_at}}"><i class="fa fa-calendar"></i></a>&nbsp;
+                                <a @if($article->game_id != "") class="filled-attribute" title="{{$article->game->title}}"@endif><i class="fa fa-gamepad"></i></a>&nbsp;
+                                <a @if($article->keywords != "") class="filled-attribute" @endif title="{{$article->keywords}}"><i class="fa fa-tags"></i></a>&nbsp;
+                                <a @if($article->author_id != "") class="filled-attribute" title="{{$article->author->username}}"@endif><i class="fa fa-user"></i></a>&nbsp;
+                                {{--<a @if(!$game->genres->isEmpty()) class="filled-attribute" @endif title="Genres: @foreach($game->genres as $genreA) {{$genreA->title}}, @endforeach"><i class="fa fa-book"></i></a>&nbsp;--}}
+                                {{--<a @if(!$game->consoles->isEmpty()) class="filled-attribute" @endif title="Consoles: @foreach($game->consoles as $consoleA) {{$consoleA->title}}, @endforeach"><i class="fa fa-microchip"></i></a>&nbsp;--}}
+                                {{--<a @if(isset($game->available_developer)) class="filled-attribute" title="Developed by: {{$game->available_developer->title}}" @endif><i class="fa fa-flask"></i></a>--}}
+                                {{--<a @if(isset($game->available_publisher)) class="filled-attribute" title="Published by: {{$game->available_publisher->title}}" @endif><i class="fa fa-upload"></i></a>--}}
+                            </td>
+                            <td class="align-right">
+                                <a href="{{url('/article/' . $article->slug)}}"><i class="fa fa-window-maximize"></i></a> &nbsp;
+                                <a href="{{url('/admin/articles/' . $article->slug . '/edit')}}"><i class="fa fa-pencil"></i></a> &nbsp;
+                                {{ Form::open(array('url' => url('/admin/articles/' . $article->slug), "class" => 'delete-row' )) }}
+                                {{ Form::hidden('_method', 'DELETE') }}
+                                <button type='submit' value="delete"><i class="fa fa-trash"></i></button>
+                                {{ Form::close() }}
+                            </td>
                         </tr>
                         @endforeach
                     </tbody>

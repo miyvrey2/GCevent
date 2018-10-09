@@ -8,22 +8,22 @@
 
     <div class="form-group">
         <label for="title">Title *</label><br>
-        <input type="text" class="form-control" id="title" name="title" required autocomplete="off" value="{{$game->title}}">
+        <input type="text" class="form-control" id="title" name="title" required autocomplete="off" value="{{$article->title}}">
     </div>
 
     <div class="form-group">
         <label for="slug">Slug *</label><br>
-        <input type="text" class="form-control" id="slug" name="slug" required  autocomplete="off" value="{{$game->slug}}">
+        <input type="text" class="form-control" id="slug" name="slug" required  autocomplete="off" value="{{$article->slug}}">
     </div>
 
     <div class="form-group">
         <label for="excerpt">Exerpt</label><br>
-        <textarea type="text" class="form-control" id="excerpt" name="excerpt" autocomplete="off">{{$game->excerpt}}</textarea>
+        <textarea type="text" class="form-control" id="excerpt" name="excerpt" autocomplete="off">{{$article->excerpt}}</textarea>
     </div>
 
     <div class="form-group">
         <label for="body">Body</label><br>
-        <textarea type="text" class="form-control" id="body" name="body" autocomplete="off">{{$game->body}}</textarea>
+        <textarea type="text" class="form-control" id="body" name="body" autocomplete="off">{{$article->body}}</textarea>
     </div>
 
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
@@ -39,46 +39,29 @@
 
 <div class="col-md-3">
     <div class="form-group">
-        <label for="publisher_id">Publisher *</label><br>
-        <select id="publisher_id" name="publisher_id" required>
-            @foreach($publishers as $publisher)
-                @if($publisher->id == $game->publisher_id)
-                    <option value="{{$publisher->id}}" selected>{{$publisher->title}}</option>
+        <label for="game_id">Game</label><br>
+        <select id="game_id" name="game_id">
+            @foreach($games as $game)
+                @if($game->id == $article->game_id)
+                    <option value="{{$game->id}}" selected>{{$game->title}}</option>
                 @else
-                    <option value="{{$publisher->id}}">{{$publisher->title}}</option>
+                    <option value="{{$game->id}}">{{$game->title}}</option>
                 @endif
             @endforeach
         </select>
     </div>
 
     <div class="form-group">
-        <label for="developer_id">Developer</label><br>
-        <select id="developer_id" name="developer_id">
-            @foreach($developers as $developer)
-                @if($developer->id == $game->developer_id)
-                    <option value="{{$developer->id}}" selected>{{$developer->title}}</option>
-                @else
-                    <option value="{{$developer->id}}">{{$developer->title}}</option>
-                @endif
-            @endforeach
-        </select>
+        <label for="published_at">publish date</label><br>
+        <span class="note"><strong>note:</strong> any date before now is an concept</span>
+        <input type="datetime-local" class="form-control" id="published_at" name="published_at" autocomplete="off" value="@if($article->published_at){{$article->published_at->format('Y-m-d\TH:i')}}@endif">
     </div>
 
     <div class="form-group">
-        <label for="released_at">Release date</label><br>
-        <span class="note"><strong>note:</strong> "2018-00-00" notes as "in 2018"</span>
-        <input type="text" class="form-control" id="released_at" name="released_at" autocomplete="off" value="{{$game->released_at}}">
-    </div>
-
-    <div class="form-group">
-        <label for="consoles[]">Consoles</label><br>
+        <label for="tags[]">Tags</label><br>
         <select class="form-control js-example-basic-multiple form-control" id="consoles[]" name="consoles[]" multiple="multiple">
-            @foreach($game->consoles as $console)
-        <option value="{{$console->id}}" selected>{{$console->title}}</option>
-            @endforeach
-
-            @foreach($consoles as $console)
-        <option value="{{$console->id}}">{{$console->title}}</option>
+            @foreach($games as $console)
+                <option value="{{$console->id}}">{{$console->title}}</option>
             @endforeach
         </select>
     </div>
@@ -94,11 +77,11 @@
 
 {{--Select 2--}}
 <script>
-$(document).ready(function() {
-    $('.js-example-basic-multiple').select2({
-        tags: true
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2({
+            tags: true
+        });
     });
-});
 </script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
@@ -110,16 +93,16 @@ $(document).ready(function() {
 <script>
     $( function() {
 
-        var games = [
-            @foreach($games as $game)
-                "{{$game->title}}",
-            @endforeach
-        ];
+        {{--var games = [--}}
+            {{--@foreach($games as $game)--}}
+                {{--"{{$game->title}}",--}}
+            {{--@endforeach--}}
+        {{--];--}}
 
-        // Help by autocomplete to prevent doubles
-        $('#title').autocomplete({
-            source: games
-        });
+        {{--// Help by autocomplete to prevent doubles--}}
+        {{--$('#title').autocomplete({--}}
+            {{--source: games--}}
+        {{--});--}}
 
         // Set slug
         $('#title').change( function() {

@@ -111,7 +111,7 @@
                     <tr>
                         <th class="align-center-center"><input type="checkbox" title="selectAll"></th>
                         <th>Title</th>
-                        <th class="align-right">Release date</th>
+                        <th class="align-right"></th>
                         <th class="align-right">Tools</th>
                     </tr>
                     </thead>
@@ -121,7 +121,13 @@
                         <tr>
                             <td class="align-center-center"><input type="checkbox" ></td>
                             <td><a href="{{url('games/' . $game->slug)}}">{{$game->title}}</a><br><span class="tags"></span></td>
-                            <td class="align-right">{{$game->released}}</td>
+                            <td class="align-right game-attributes">
+                                <a @if($game->released != "") class="filled-attribute" @endif title="{{$game->released}}"><i class="fa fa-calendar"></i></a>&nbsp;
+                                <a @if(!$game->genres->isEmpty()) class="filled-attribute" @endif title="{{$game->genres}}"><i class="fa fa-book"></i></a>&nbsp;
+                                <a @if(!$game->consoles->isEmpty()) class="filled-attribute" @endif title="{{$game->consoles}}"><i class="fa fa-gamepad"></i></a>&nbsp;
+                                <a @if(isset($game->available_developer)) class="filled-attribute" title="{{$game->available_developer->title}}" @endif><i class="fa fa-flask"></i></a>
+                                <a @if(isset($game->available_publisher)) class="filled-attribute" title="{{$game->available_publisher->title}}" @endif><i class="fa fa-upload"></i></a>
+                            </td>
                             <td class="align-right">
                                 <a href="{{url('/games/' . $game->slug)}}"><i class="fa fa-window-maximize"></i></a> &nbsp;
                                 <a href="{{url('/admin/games/' . $game->slug . '/edit')}}"><i class="fa fa-pencil"></i></a> &nbsp;

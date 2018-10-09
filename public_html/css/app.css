@@ -805,7 +805,8 @@ footer .social-footer i {
 .form-group input[type='date'],
 .form-group input[type='email'],
 .form-group input[type='number'],
-.form-group input[type='password'] {
+.form-group input[type='password'],
+.form-group input[type='datetime-local'] {
   position: relative;
   width: calc(100% - 20px);
   display: inline-block;
@@ -897,6 +898,14 @@ footer .social-footer i {
   margin-bottom: 20px !important;
 }
 
+.mce-notification-warning {
+  display: none;
+}
+
+.mce-tinymce {
+  margin-bottom: 20px !important;
+}
+
 @media screen and (max-width: 320px) {
   header {
     height: auto;
@@ -922,6 +931,37 @@ footer .social-footer i {
 .backend-main h1 {
   margin: 10px 0 10px 0;
   font-size: 50px;
+}
+
+.article-attributes a,
+.game-attributes a {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  display: inline-block;
+  background-color: #CCC;
+}
+
+.article-attributes a i,
+.game-attributes a i {
+  font-size: 12px;
+  padding: 0;
+  margin: 0;
+  line-height: 19px;
+  text-align: center;
+  display: block;
+  color: #333;
+}
+
+.article-attributes a.filled-attribute,
+.game-attributes a.filled-attribute {
+  background-color: #3097D1;
+}
+
+.article-attributes a.filled-attribute i,
+.game-attributes a.filled-attribute i {
+  color: white;
 }
 
 .article-show {

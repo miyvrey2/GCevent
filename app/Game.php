@@ -41,6 +41,11 @@ class Game extends Model
         return $this->publisher()->where('id','>', 1);
     }
 
+    // results in a "problem", se examples below
+    public function available_developer() {
+        return $this->developer()->where('id','>', 1);
+    }
+
     public function getReleasedAttribute()
     {
         if(!is_null($this->released_at)) {
@@ -82,5 +87,15 @@ class Game extends Model
     // Many to many (to connect pivot table in DB)
     public function genres() {
         return $this->belongsToMany(Genre::class);
+    }
+
+    public function getBodyHtmlAttribute()
+    {
+        return $this->body;
+    }
+
+    public function getExcerptHtmlAttribute()
+    {
+        return e($this->excerpt);
     }
 }

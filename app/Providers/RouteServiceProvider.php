@@ -33,7 +33,8 @@ class RouteServiceProvider extends ServiceProvider
         parent::boot();
 
         Route::bind('article', function($slug) {
-            return Article::published()->where('slug', $slug)->first();
+//            return Article::published()->where('slug', $slug)->first();
+            return Article::where('slug', $slug)->first();
         });
 
         Route::bind('console', function($slug) {

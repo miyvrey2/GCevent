@@ -14,6 +14,9 @@ class Article extends Model
     // Set all dates to the carbon type of dates
     public $dates = ['created_at', 'updated_at', 'published_at', 'deleted_at'];
 
+    // Rows we may fill
+    protected $fillable = ['title', 'slug', 'excerpt', 'body', 'published_at', 'game_id', 'author_id', 'keywords'];
+
     // Multiple pages belong to 1 user
     public function author()
     {
