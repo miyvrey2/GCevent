@@ -31,6 +31,7 @@
         tinymce.init({
             selector:'textarea',
             menubar: false,
+            plugins: "link",
             statusbar: false
         });
     </script>
@@ -74,12 +75,28 @@
         <label for="consoles[]">Consoles</label><br>
         <select class="form-control js-example-basic-multiple form-control" id="consoles[]" name="consoles[]" multiple="multiple">
             @foreach($game->consoles as $console)
-        <option value="{{$console->id}}" selected>{{$console->title}}</option>
+                <option value="{{$console->id}}" selected>{{$console->title}}</option>
             @endforeach
 
             @foreach($consoles as $console)
-        <option value="{{$console->id}}">{{$console->title}}</option>
+                <option value="{{$console->id}}">{{$console->title}}</option>
             @endforeach
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label for="aliases[]">Aliases</label><br>
+        <select class="form-control js-example-basic-multiple form-control" id="aliases[]" name="aliases[]" multiple="multiple">
+
+            @if($game->aliases != null)
+                @foreach($game->aliases as $alias)
+                    <option value="{{$alias}}" selected>{{$alias}}</option>
+                @endforeach
+            @endif
+
+            {{--@foreach($game->aliases as $alias)--}}
+            {{--<option value="{{$alias}}">{{$alias}}</option>--}}
+            {{--@endforeach--}}
         </select>
     </div>
 
@@ -94,11 +111,11 @@
 
 {{--Select 2--}}
 <script>
-$(document).ready(function() {
-    $('.js-example-basic-multiple').select2({
-        tags: true
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2({
+            tags: true
+        });
     });
-});
 </script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>

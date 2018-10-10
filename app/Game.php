@@ -9,14 +9,15 @@ use Illuminate\Database\Eloquent\Model;
 class Game extends Model
 {
 
+    protected $table = 'games';
+
     public function getDates()
     {
         return ['created_at', 'updated_at'];
     }
 
     // Rows we may fill
-    protected $fillable = ['title', 'slug', 'excerpt', 'body', 'released_at', 'publisher_id', 'developer_id'];
-
+    protected $fillable = ['title', 'slug', 'excerpt', 'body', 'released_at', 'publisher_id', 'developer_id', 'aliases'];
 
     // Multiple games belong to one publisher
     public function publisher()
@@ -51,8 +52,8 @@ class Game extends Model
         if(!is_null($this->released_at)) {
 
             $date = $this->released_at;
-            $sepparator = '-';
-            $d = explode($sepparator, $date);
+            $separator = '-';
+            $d = explode($separator, $date);
 
             // If month (and day as well) are unkown, show only the year
             if($d[1] == "00") {
@@ -63,7 +64,7 @@ class Game extends Model
 
             return Carbon::CreateFromFormat("Y-m-d", $this->released_at)->format('j F Y');
         }
-        return 'TBA';
+        return 'T.B.A.';
     }
 
     public function scopeLinedUp($query, $year)

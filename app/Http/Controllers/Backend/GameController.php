@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Console;
+use App\ConsoleGame;
 use App\Developer;
 use App\Http\Controllers\Controller;
 use App\Game;
@@ -46,6 +47,7 @@ class GameController extends Controller
         $publishers = Publisher::orderBy('title')->get();
         $game = new Game();
         $game->released_at = date("Y") . "-00-00";
+        $game->aliases = null;
 
         // get consoles that are not listed
         $consoles = Console::all();
@@ -80,9 +82,16 @@ class GameController extends Controller
         $data['slug'] = str_replace(" ", "-", $data['slug']);
         $data['slug'] = preg_replace("/[^a-zA-Z0-9-]+/", "", $data['slug']);
 
+        // Make from multiple aliases 1
+        if($request['aliases'] != null) {
+            $request['aliases'] = implode(",", $request['aliases']);
+        } else {
+            $request['aliases'] = '';
+        }
+
         // Save into another databse
-//        DB::purge('mysql');
-//        Config::set('database.connections.mysql.database', 'db_test');
+        //        DB::purge('mysql');
+        //        Config::set('database.connections.mysql.database', 'db_test');
 
         // save
         Game::create($data);
@@ -94,7 +103,6 @@ class GameController extends Controller
      * Display the specified resource.
      *
      * @param Game $game
-     *
      * @return \Illuminate\Http\Response
      */
     public function show(Game $game)
@@ -108,7 +116,7 @@ class GameController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Game  $game
      * @return \Illuminate\Http\Response
      */
     public function edit(Game $game)
@@ -121,6 +129,12 @@ class GameController extends Controller
         // get consoles that are not listed
         $consoles = Console::all();
 
+        if($game['aliases'] != "") {
+            $game['aliases'] = explode(',', $game['aliases']);
+        } else {
+            $game->keywords = null;
+        }
+
         foreach($game->consoles as $consoleItem) {
             foreach($consoles as $key => $value) {
                 if($consoleItem->id == $value->id) {
@@ -129,7 +143,7 @@ class GameController extends Controller
             }
         }
 
-        return view('backend.game.edit', compact('developers', 'games', 'publishers', 'game', 'consoles'));
+        return view('backend.game.edit', compact('developers', 'games','publishers', 'game', 'consoles'));
     }
 
     /**
@@ -141,8 +155,27 @@ class GameController extends Controller
      */
     public function update(Request $request, Game $game)
     {
+        // Make from multiple aliases 1
+        if($request['aliases'] != null) {
+            $request['aliases'] = implode(",", $request['aliases']);
+        } else {
+            $request['aliases'] = '';
+        }
+
         // Save the updates
         $game->update($request->all());
+
+        // Save the connection between the game and it's consoles
+        ConsoleGame::where('game_id', '=', $game->id)->delete();
+
+        foreach($request['consoles'] as $console) {
+
+            // save a Console
+            $consoleGame = new ConsoleGame();
+            $consoleGame['game_id'] = $game->id;
+            $consoleGame['console_id'] = $console;
+            $consoleGame->save();
+        }
 
         return Redirect::to('/admin/games');
     }

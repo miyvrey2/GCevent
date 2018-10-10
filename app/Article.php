@@ -15,7 +15,7 @@ class Article extends Model
     public $dates = ['created_at', 'updated_at', 'published_at', 'deleted_at'];
 
     // Rows we may fill
-    protected $fillable = ['title', 'slug', 'excerpt', 'body', 'published_at', 'game_id', 'author_id', 'keywords'];
+    protected $fillable = ['title', 'slug', 'excerpt', 'body', 'published_at', 'game_id', 'author_id', 'keywords', 'source'];
 
     // Multiple pages belong to 1 user
     public function author()

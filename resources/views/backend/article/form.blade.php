@@ -31,9 +31,15 @@
         tinymce.init({
             selector:'textarea',
             menubar: false,
+            plugins: "link",
             statusbar: false
         });
     </script>
+
+    <div class="form-group">
+        <label for="source">Source URL</label><br>
+        <input type="text" class="form-control" id="source" name="source" autocomplete="off" value="{{$article->source}}">
+    </div>
 
 </div>
 
@@ -58,11 +64,13 @@
     </div>
 
     <div class="form-group">
-        <label for="tags[]">Tags</label><br>
-        <select class="form-control js-example-basic-multiple form-control" id="consoles[]" name="consoles[]" multiple="multiple">
-            @foreach($games as $console)
-                <option value="{{$console->id}}">{{$console->title}}</option>
-            @endforeach
+        <label for="keywords[]">Tags</label><br>
+        <select class="form-control js-example-basic-multiple form-control" id="keywords[]" name="keywords[]" multiple="multiple">
+            @if($article->keywords != null)
+                @foreach($article->keywords as $keyword)
+                    <option value="{{$keyword}}" selected>{{$keyword}}</option>
+                @endforeach
+            @endif
         </select>
     </div>
 
@@ -94,14 +102,14 @@
     $( function() {
 
         {{--var games = [--}}
-            {{--@foreach($games as $game)--}}
-                {{--"{{$game->title}}",--}}
-            {{--@endforeach--}}
+        {{--@foreach($games as $game)--}}
+        {{--"{{$game->title}}",--}}
+        {{--@endforeach--}}
         {{--];--}}
 
         {{--// Help by autocomplete to prevent doubles--}}
         {{--$('#title').autocomplete({--}}
-            {{--source: games--}}
+        {{--source: games--}}
         {{--});--}}
 
         // Set slug

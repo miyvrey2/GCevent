@@ -25,65 +25,81 @@
             </div>
             <div class="col-md-9">
                 {{--<img src="{{$article->game->image}}" title="{{$article->game->title}}" />--}}
-                <em><i class="fa fa-clock-o"></i><time> Last updated: {{$article->date}}</em>
+                <em><i class="fa fa-clock-o"></i> Last updated: {{$article->date}}</em> @if($article->source)&nbsp;&nbsp; <em><i class="fa fa-sign-out"></i><a target="_blank" href="{{$article->source}}">Source</a></em> @endif &nbsp;&nbsp; @if($article->author_id)<em><i class="fa fa-user"></i> By: <a target="_blank" href="{{$article->author_id}}">{{$article->author->username}}</a></em> @endif
+
                 <p><strong>{!! $article->excerpt !!}</strong></p>
                 <br />
                 <p>
                     {!! $article->body_html !!}
                 </p>
-                <em>Source: <a href="{{$article->source}}">{{$article->source}}</a></em>
                 <br>
-                <br>
-
-                <div class="">
-                    Written by: {{$article->author->username}}
-                </div>
 
                 {{--<div class="">--}}
-                    {{--<h3>1 Comment</h3>--}}
-                    {{--<div class="comment">--}}
-                        {{--<img src="http://placehold.it/100x100" />--}}
-                        {{--<strong>User said:</strong><br >--}}
-                        {{--<p>--}}
-                            {{--That's wonderfull! Cant wait to see it!--}}
-                        {{--</p>--}}
-                    {{--</div>--}}
+                {{--<h3>1 Comment</h3>--}}
+                {{--<div class="comment">--}}
+                {{--<img src="http://placehold.it/100x100" />--}}
+                {{--<strong>User said:</strong><br >--}}
+                {{--<p>--}}
+                {{--That's wonderfull! Cant wait to see it!--}}
+                {{--</p>--}}
                 {{--</div>--}}
-
-                <div class="horizontal-line"></div>
-
-                <div class="related-content">
-                    <h3>Related news</h3>
-                    @foreach($article->related as $related)
-                        {{$related->updated_at->format('Y m d (H:i)')}} <a href="{{url('article/' . $related->slug)}}" title="{{$related->title}}">{{$related->title}}</a><br>
-                    @endforeach
-                </div>
+                {{--</div>--}}
             </div>
 
             <div class="col-md-3">
-                <h2>{{$article->game->title}}</h2>
-                <ul class="game-meta">
-                    @if($article->game->released < Carbon\Carbon::now())
-                        <li><i class="fa fa-calendar" title="Release date"></i>Planned for <a href="#" title="{{$article->game->released}}">{{$article->game->released}}</a></li>
-                    @else
-                        <li><i class="fa fa-calendar" title="Release date"></i>Released on <a href="#" title="{{$article->game->released}}">{{$article->game->released}}</a></li>
-                    @endif
-                    <li>
-                        <i class="fa fa-gamepad" title="Playable on"></i>Made for
-                        @php($i = 1)
-                        @foreach($article->game->consoles as $console)
-                            <a href="{{url('consoles/' . $console->slug)}}" title="Playable on {{$console->title}}">{{$console->title}}</a>@if($i < count($article->game->consoles)), @endif
+                @if($article->game_id)
+                    <h2>Game: <a href="{{ url('games/' . $article->game->slug) }}">{{$article->game->title}}</a></h2>
+                    <ul class="game-meta">
 
-                            @php($i++)
-                        @endforeach
+                        @if($article->game->released == "T.B.A.")
+                            <li><i class="fa fa-calendar" title="Release date"></i>Planned for <a href="#" title="{{$article->game->released}}">{{$article->game->released}}</a></li>
+                        @else
+                            @if(Carbon\Carbon::now()->lt(Carbon\Carbon::parse($article->game->released)))
+                                <li><i class="fa fa-calendar" title="Release date"></i>Planned for <a href="#" title="{{$article->game->released}}">{{$article->game->released}}</a></li>
+                            @else
+                                <li><i class="fa fa-calendar" title="Release date"></i>Released on <a href="#" title="{{$article->game->released}}">{{$article->game->released}}</a></li>
+                            @endif
+                        @endif
 
-                    </li>
-                    <li>
-                        <i class="fa fa-upload" title="{{__('breadcrumbs.publisher')}}"></i><a title="{{__('breadcrumbs.publishedBy')}} {{$article->game->publisher->title}}" href="{{url('publishers/'.$article->game->publisher->slug)}}">{{$article->game->publisher->title}}</a>
-                    </li>
-                </ul>
+                        @if(!$article->game->consoles->isEmpty())
+                            <li>
+                                <i class="fa fa-microchip" title="Playable on"></i>Made for
+                                @php($i = 1)
+                                @foreach($article->game->consoles as $console)
+                                    <a href="{{url('consoles/' . $console->slug)}}" title="Playable on {{$console->title}}">{{$console->title}}</a>@if($i < count($article->game->consoles)), @endif
 
-                <div class="horizontal-line"></div>
+                                    @php($i++)
+                                @endforeach
+                            </li>
+                        @endif
+
+                        @if(!$article->game->genres->isEmpty())
+                            <li>
+                                <i class="fa fa-book" title="Genres"></i>Genre:
+                                @php($i = 1)
+                                @foreach($article->game->genres as $genre)
+                                    <a href="#" title="{{$genre->title}}">{{$genre->title}}</a>@if($i < count($article->game->genres)), @endif
+
+                                    @php($i++)
+                                @endforeach
+                            </li>
+                        @endif
+
+                        @if($article->game->aviable_developer != null)
+                            <li>
+                                <i class="fa fa-flask" title="{{__('breadcrumbs.developer')}}"></i><a title="{{__('breadcrumbs.developedBy')}} {{$article->game->aviable_developer->title}}" href="{{url('developers/'.$article->game->aviable_developer->slug)}}">{{$article->game->aviable_developer->title}}</a>
+                            </li>
+                        @endif
+
+                        @if($article->game->available_publisher != null)
+                            <li>
+                                <i class="fa fa-upload" title="{{__('breadcrumbs.publisher')}}"></i><a title="{{__('breadcrumbs.publishedBy')}} {{$article->game->available_publisher->title}}" href="{{url('publishers/'.$article->game->available_publisher->slug)}}">{{$article->game->available_publisher->title}}</a>
+                            </li>
+                        @endif
+                    </ul>
+
+                    <div class="horizontal-line"></div>
+                @endif
 
                 <h2>Summary</h2>
                 <ul class="article-meta">
@@ -105,8 +121,8 @@
                 "publisher": {
                     "@context": "http://schema.org",
                         "@type": "Organization",
-                        "name": "gamescomevent",
-                        "url": "https://www.gamescomevent.com",
+                        "name": "Enzow",
+                        "url": "https://www.enzow.org",
                     "logo": {
                         "@type": "ImageObject",
                         "name": "{{config('app.name')}} logo",
@@ -122,6 +138,17 @@
                 }
               }
             </script>
+
+            <div class="col-md-12">
+                {{--<div class="horizontal-line"></div>--}}
+
+                <div class="related-content">
+                    <h3>Related news</h3>
+                    @foreach($article->related as $related)
+                        {{$related->updated_at->format('Y m d (H:i)')}} <a href="{{url('article/' . $related->slug)}}" title="{{$related->title}}">{{$related->title}}</a><br>
+                    @endforeach
+                </div>
+            </div>
 
         </div>
     </div>

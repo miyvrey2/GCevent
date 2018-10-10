@@ -51,6 +51,7 @@ class ArticleController extends Controller
         // Create a new article
         $article = new Article();
         $article->published_at = null;
+        $article->keywords = null;
 
         // Empty game when not having one
         $games = Game::orderBy('title')->get();
@@ -79,6 +80,13 @@ class ArticleController extends Controller
         // Written by
         $request['author_id'] = Auth::user()->id;
 
+        // Make from multiple keywords 1
+        if($request['keywords'] != null) {
+            $request['keywords'] = implode(",", $request['keywords']);
+        } else {
+            $request['keywords'] = '';
+        }
+
         // Validate
         $data = $this->validate($request, [
             'title'         => 'required',
@@ -88,6 +96,7 @@ class ArticleController extends Controller
             'published_at'  => 'nullable|date_format:"Y-m-d H:i:s"',
             'game_id'       => 'nullable|integer',
             'keywords'      => 'nullable|string',
+            'source'        => 'nullable|string',
         ]);
 
         // Save into another databse
@@ -123,6 +132,12 @@ class ArticleController extends Controller
         $games = Game::orderBy('title')->get();
         $games[] = new Game();
 
+        if($article['keywords'] != "") {
+            $article['keywords'] = explode(',', $article['keywords']);
+        } else {
+            $article->keywords = null;
+        }
+
         return view('backend.article.edit', compact('article', 'games'));
     }
 
@@ -144,6 +159,13 @@ class ArticleController extends Controller
         $request['slug'] = str_replace(" ", "-", $request['slug']);
         $request['slug'] = preg_replace("/[^a-zA-Z0-9-]+/", "", $request['slug']);
 
+        // Make from multiple keywors 1
+        if($request['keywords'] != null) {
+            $request['keywords'] = implode(",", $request['keywords']);
+        } else {
+            $request['keywords'] = '';
+        }
+
         // Validate
         $this->validate($request, [
             'title'         => 'required',
@@ -153,6 +175,7 @@ class ArticleController extends Controller
             'published_at'  => 'nullable|date_format:"Y-m-d H:i:s"',
             'game_id'       => 'nullable|integer',
             'keywords'      => 'nullable|string',
+            'source'        => 'nullable|string',
         ]);
 
         // Save the updates
