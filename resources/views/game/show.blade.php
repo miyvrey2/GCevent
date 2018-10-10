@@ -86,7 +86,7 @@
                 <h2>Recent news</h2>
                 <ul>
                     @foreach($game->articles as $article)
-                        <li><a target="_blank" href="{{ $article->url }}">{{ $article->title }}</a></li>
+                        <li><a target="_blank" href="{{ url('article/' . $article->slug) }}">{{ $article->title }}</a></li>
                     @endforeach
                 </ul>
 
