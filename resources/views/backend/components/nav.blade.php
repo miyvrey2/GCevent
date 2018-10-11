@@ -4,7 +4,12 @@
     <ul itemscope itemtype="http://www.schema.org/SiteNavigationElement" id="navigation_menu">
         <i id="navCloseButton" class="fa fa-times" aria-hidden="true"></i>
         <li itemprop="name"><a itemprop="url" href="{{url('/admin/dashboard')}}">Dashboard</a></li>
-        <li itemprop="name"><a itemprop="url" href="{{url('/admin/news')}}">News</a></li>
+        <li itemprop="name"><a itemprop="url" href="{{url('/admin/news')}}">News</a>
+            <ul>
+                <li itemprop="name"><a itemprop="url" href="{{url('/admin/news/incoming')}}">Crawled news</a></li>
+                <li itemprop="name"><a itemprop="url" href="{{url('/admin/news')}}">News articles</a></li>
+            </ul>
+        </li>
         <li itemprop="name"><a itemprop="url" href="{{url('/admin/games')}}">Games</a></li>
         @guest
         @else
