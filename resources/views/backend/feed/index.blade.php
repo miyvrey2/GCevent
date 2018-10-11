@@ -22,7 +22,7 @@
                 @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/news/incoming' => 'Crawled news']])
                 @endcomponent
 
-                <a class="button button-primary" href="{{ url('admin/articles/create')}}">Create an article based on crawled news</a>&nbsp;
+                <a class="button button-primary" href="{{ url('admin/articles/create')}}">Create an article</a>&nbsp;
                 <a class="button button-primary" href="{{ url('crawler/crawl')}}" target="_blank"><i class="fa fa-refresh"></i></a><br><br>
 
                 <style>
