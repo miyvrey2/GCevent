@@ -93,10 +93,22 @@
                     <option value="{{$alias}}" selected>{{$alias}}</option>
                 @endforeach
             @endif
+        </select>
+    </div>
 
-            {{--@foreach($game->aliases as $alias)--}}
-            {{--<option value="{{$alias}}">{{$alias}}</option>--}}
-            {{--@endforeach--}}
+    <div class="form-group">
+        <label for="genres[]">Genres</label><br>
+        <select class="form-control js-example-basic-multiple form-control" id="genres[]" name="genres[]" multiple="multiple">
+
+            @if($game->genres != null)
+                @foreach($game->genres as $genre)
+                    <option value="{{$genre->id}}" selected>{{$genre->title}}</option>
+                @endforeach
+            @endif
+
+            @foreach($genres as $genre)
+                <option value="{{$genre->id}}">{{$genre->title}}</option>
+            @endforeach
         </select>
     </div>
 
