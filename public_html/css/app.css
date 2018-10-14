@@ -84,7 +84,7 @@ a .fa-red:hover {
 .col-md-11,
 .col-md-12 {
   position: relative;
-  width: auto;
+  width: calc(100% - 30px);
   min-height: 1px;
   margin: 0 auto;
   padding: 0 15px;
@@ -96,7 +96,7 @@ main {
   padding-bottom: 50px;
 }
 
-@media screen and (min-width: 786px) {
+@media screen and (min-width: 768px) {
   .col-md-3 {
     width: calc(25% - 30px);
   }
@@ -1023,6 +1023,16 @@ footer .social-footer i {
 .article-attributes a.filled-attribute i,
 .game-attributes a.filled-attribute i {
   color: white;
+}
+
+.not-on-mobile {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .not-on-mobile {
+    display: table-cell;
+  }
 }
 
 .article-show {

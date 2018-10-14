@@ -87,7 +87,7 @@
                     <tr>
                         <th class="align-center-center"><input type="checkbox" title="selectAll"></th>
                         <th>Article titles</th>
-                        <th class="align-right"></th>
+                        <th class="align-right not-on-mobile"></th>
                         <th class="align-right">Tools</th>
                     </tr>
                     </thead>
@@ -97,7 +97,7 @@
                         <tr>
                             <td class="align-center-center"><input type="checkbox" ></td>
                             <td><a href="{{url('article/' . $article->slug)}}">{{$article->title}}</a></td>
-                            <td class="align-right article-attributes">
+                            <td class="align-right article-attributes not-on-mobile">
                                 <span class="status">{{$article->status}}</span>
                                 <a @if($article->published_at != "") class="filled-attribute" @endif title="{{$article->published_at}}"><i class="fa fa-calendar"></i></a>&nbsp;
                                 <a @if($article->game_id != "") class="filled-attribute" title="{{$article->game->title}}"@endif><i class="fa fa-gamepad"></i></a>&nbsp;

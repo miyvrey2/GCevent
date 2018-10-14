@@ -33,7 +33,7 @@
 .col-md-12
 {
     position: relative;
-    width: auto;
+    width: calc(100% - 30px);
     min-height: 1px;
     margin: 0 auto;
     padding: 0 15px;
@@ -45,7 +45,7 @@ main {
     padding-bottom: 50px;
 }
 
-@media screen and (min-width:786px) {
+@media screen and (min-width:768px) {
     .col-md-3 {
         width: calc(25% - 30px);
     }

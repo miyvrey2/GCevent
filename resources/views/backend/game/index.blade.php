@@ -116,7 +116,7 @@
                     <tr>
                         <th class="align-center-center"><input type="checkbox" title="selectAll"></th>
                         <th>Title</th>
-                        <th class="align-right"></th>
+                        <th class="align-right not-on-mobile"></th>
                         <th class="align-right">Tools</th>
                     </tr>
                     </thead>
@@ -126,7 +126,7 @@
                         <tr>
                             <td class="align-center-center"><input type="checkbox" ></td>
                             <td><a href="{{url('games/' . $game->slug)}}">{{$game->title}}</a><br><span class="tags"></span></td>
-                            <td class="align-right game-attributes">
+                            <td class="align-right game-attributes not-on-mobile">
                                 <a @if($game->released != "") class="filled-attribute" @endif title="{{$game->released}}"><i class="fa fa-calendar"></i></a>&nbsp;
                                 <a @if(!$game->genres->isEmpty()) class="filled-attribute" @endif title="Genres: @foreach($game->genres as $genreA) {{$genreA->title}}, @endforeach"><i class="fa fa-book"></i></a>&nbsp;
                                 <a @if(!$game->consoles->isEmpty()) class="filled-attribute" @endif title="Consoles: @foreach($game->consoles as $consoleA) {{$consoleA->title}}, @endforeach"><i class="fa fa-microchip"></i></a>&nbsp;
