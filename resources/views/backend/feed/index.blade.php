@@ -99,10 +99,12 @@
                 <table id="example" class="display" cellspacing="0" width="100%">
                     <thead>
                     <tr>
-                        <th class="align-center-center">&nbsp;<input type="checkbox" title="selectAll" id="selectAll">&nbsp;</th>
+                        <th class="align-center-center">
+                            &nbsp;<input type="checkbox" title="selectAll" id="selectAll">&nbsp;
+                        </th>
                         <th>Crawled news items</th>
-                        <th class="align-right">Bron</th>
-                        <th class="align-right"></th>
+                        <th class="align-right not-on-mobile">Bron</th>
+                        <th class="align-right not-on-mobile"></th>
                         <th class="align-right">Tools</th>
                     </tr>
                     </thead>
@@ -111,15 +113,15 @@
                         @foreach($feed_items as $article)
                         <tr>
                             <td class="align-center-center">
-                                &nbsp;<input type="checkbox" value="{{$article->id}}"/>&nbsp;
+                                &nbsp;&nbsp;<input type="checkbox" title="id" value="{{$article->id}}"/>&nbsp;
                             </td>
                             <td>
                                 <a href="{{$article->url}}" title="{{$article->title}}" target="_blank">{{substr($article->title, 0, 80)}}@if(strlen($article->title) >= 80)...@endif</a>
                             </td>
-                            <td class="align-right article-attributes">
+                            <td class="align-right article-attributes not-on-mobile">
                                 <span class="status">{{$article->site}}</span>
                             </td>
-                            <td class="align-right article-attributes">
+                            <td class="align-right article-attributes not-on-mobile">
                                 &nbsp;<a @if($article->game_id != "") class="filled-attribute" title="{{$article->game->title}}"@endif><i class="fa fa-gamepad"></i></a>&nbsp;
                             </td>
                             <td class="align-right">

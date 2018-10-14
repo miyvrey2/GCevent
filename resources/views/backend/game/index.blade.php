@@ -114,7 +114,9 @@
                 <table id="example" class="display" cellspacing="0" width="100%">
                     <thead>
                     <tr>
-                        <th class="align-center-center"><input type="checkbox" title="selectAll"></th>
+                        <th class="align-center-center">
+                            &nbsp;<input type="checkbox" title="selectAll">&nbsp;
+                        </th>
                         <th>Title</th>
                         <th class="align-right not-on-mobile"></th>
                         <th class="align-right">Tools</th>
@@ -124,7 +126,9 @@
 
                     @foreach($games as $game)
                         <tr>
-                            <td class="align-center-center"><input type="checkbox" ></td>
+                            <td class="align-center-center">
+                                &nbsp;<input type="checkbox" title="id" value="{{$game->id}}"/>
+                                &nbsp;</td>
                             <td><a href="{{url('games/' . $game->slug)}}">{{$game->title}}</a><br><span class="tags"></span></td>
                             <td class="align-right game-attributes not-on-mobile">
                                 <a @if($game->released != "") class="filled-attribute" @endif title="{{$game->released}}"><i class="fa fa-calendar"></i></a>&nbsp;
