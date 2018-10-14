@@ -12,6 +12,8 @@ Redirect 301 /console/switch /consoles/switch
 Redirect 301 /console/playstation-4 /consoles/playstation-4
 Redirect 301 /console/xbox-one /consoles/xbox-one
 Redirect 301 /console/pc /consoles/pc
+Redirect 301 /android /consoles/android
+Redirect 301 /ios /consoles/ios
 Redirect 301 /lineup /gamescom-2018
 Redirect 301 /program /gamescom-2018
 
