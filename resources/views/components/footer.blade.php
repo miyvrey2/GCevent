@@ -18,6 +18,7 @@
                     <li><a href="{{url('gamescom-2019')}}">About gamescom 2018</a></li>
                     <li><a href="{{url('tickets')}}">Tickets</a></li>
                     <li><a href="{{url('sitemap')}}">Sitemap</a></li>
+                    <li><a href="{{url('rss')}}">RSS feed</a></li>
                     @if(Auth::check())
                     <li>
                         <a href="{{ route('logout') }}"
@@ -49,11 +50,11 @@
                 <strong>Sat. 24 August: </strong><span>09:00 - 20:00</span><br>
 
                 <div class="social-footer">
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a target="_blank" href="https://twitter.com/GCEredaction"><i class="fa fa-twitter"></i></a>
-                    <a target="_blank" href="https://www.instagram.com/GCERedaction/"><i class="fa fa-instagram"></i></a>
-                    <a href="#"><i class="fa fa-linkedin"></i></a>
-                    <a href="#"><i class="fa fa-google-plus"></i></a>
+                    {{--<a href="#"><i class="fa fa-facebook" title="Find gamescomevent.com on Facebook!"></i></a>--}}
+                    <a target="_blank" href="https://twitter.com/GCEredaction" title="Find gamescomevent.com on Twitter!"><i class="fa fa-twitter"></i></a>
+                    <a target="_blank" href="https://www.instagram.com/GCERedaction/" title="Find gamescomevent.com on Instagram!"><i class="fa fa-instagram"></i></a>
+                    {{--<a href="#"><i class="fa fa-linkedin" title="Find gamescomevent.com on Linkedin!"></i></a>--}}
+                    {{--<a href="#"><i class="fa fa-google-plus" title="Find gamescomevent.com on Google Plus!"></i></a>--}}
                 </div>
             </div>
         </div>

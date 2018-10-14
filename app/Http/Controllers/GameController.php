@@ -17,6 +17,14 @@ class GameController extends Controller
     public function index()
     {
         //
+        $games = Game::orderBy('title', 'asc')->get();
+        foreach($games as $key => $game) {
+            if ($game['title'] === '---') {
+                unset($games[$key]);
+            }
+        }
+
+        return view('game.index', compact('games'));
     }
 
     // Show all listed games for 2018
