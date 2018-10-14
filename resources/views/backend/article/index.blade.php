@@ -86,7 +86,7 @@
                     <thead>
                     <tr>
                         <th class="align-center-center">
-                            &nbsp;<input type="checkbox" title="selectAll">&nbsp;
+                            <input type="checkbox" title="selectAll">
                         </th>
                         <th>Article titles</th>
                         <th class="align-right not-on-mobile"></th>
@@ -98,7 +98,7 @@
                         @foreach($articles as $article)
                         <tr>
                             <td class="align-center-center">
-                                &nbsp;<input type="checkbox" title="id" value="{{$article->id}}"/>&nbsp;
+                                <input type="checkbox" title="id" value="{{$article->id}}"/>
                             </td>
                             <td><a href="{{url('article/' . $article->slug)}}">{{$article->title}}</a></td>
                             <td class="align-right article-attributes not-on-mobile">

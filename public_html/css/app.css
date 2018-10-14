@@ -1029,9 +1029,19 @@ footer .social-footer i {
   display: none;
 }
 
+#example tr td:first-child,
+#example thead th:first-child {
+  padding: 6px 3px;
+}
+
 @media screen and (min-width: 768px) {
   .not-on-mobile {
     display: table-cell;
+  }
+
+  #example tr td:last-child,
+  #example thead th:last-child {
+    width: auto;
   }
 }
 

@@ -40,7 +40,7 @@
                     #example thead th,
                     #example tr td {
                         padding: 6px 0;
-                        vertical-align: top;
+                        vertical-align: middle;
                         border-bottom: 1px solid #CCCCCC;
                         height: 20px;
                         overflow:hidden;
@@ -100,7 +100,7 @@
                     <thead>
                     <tr>
                         <th class="align-center-center">
-                            &nbsp;<input type="checkbox" title="selectAll" id="selectAll">&nbsp;
+                            <input type="checkbox" title="selectAll" id="selectAll">
                         </th>
                         <th>Crawled news items</th>
                         <th class="align-right not-on-mobile">Bron</th>
@@ -112,9 +112,7 @@
 
                         @foreach($feed_items as $article)
                         <tr>
-                            <td class="align-center-center">
-                                &nbsp;&nbsp;<input type="checkbox" title="id" value="{{$article->id}}"/>&nbsp;
-                            </td>
+                            <td class="align-center-center"><input type="checkbox" title="id" value="{{$article->id}}"/></td>
                             <td>
                                 <a href="{{$article->url}}" title="{{$article->title}}" target="_blank">{{substr($article->title, 0, 80)}}@if(strlen($article->title) >= 80)...@endif</a>
                             </td>
