@@ -29,6 +29,7 @@ Route::get('/sitemap/articles', 'SitemapController@articles');
 Route::get('/sitemap/consoles', 'SitemapController@consoles');
 Route::get('/sitemap/games', 'SitemapController@games');
 Route::get('/sitemap/pages', 'SitemapController@pages');
+Route::get('/rss', 'SitemapController@rss');
 
 // Articles
 Route::get('/news', 'ArticleController@index');

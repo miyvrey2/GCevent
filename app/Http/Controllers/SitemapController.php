@@ -60,4 +60,13 @@ class SitemapController extends Controller
             'pages' => $pages,
         ])->header('Content-Type', 'text/xml');
     }
+
+    public function rss()
+    {
+        $articles = Article::orderBy('published_at', 'desc')->get();
+
+        return response()->view('sitemap.rss', [
+            'articles' => $articles,
+        ])->header('Content-Type', 'text/xml');
+    }
 }
