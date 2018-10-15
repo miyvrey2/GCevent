@@ -54,5 +54,5 @@
     gtag('config', 'UA-27613789-6');
 </script>
 @endif
-<script src="{{mix('js/app.js')}}"></script>
+<script async src="{{mix('js/app.js')}}"></script>
 </html>
