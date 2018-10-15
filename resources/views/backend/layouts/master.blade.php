@@ -24,7 +24,7 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="#309dd8">
 
     <!-- Stylesheets -->
-    <link rel="stylesheet" href="{{asset('css/app.css')}}">
+    <link rel="stylesheet" href="{{mix('css/app.css')}}">
 
     <!-- Font awesome -->
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
@@ -51,5 +51,5 @@
 @component("backend.components.footer")
 @endcomponent
 </body>
-<script src="{{asset('js/app.js')}}"></script>
+<script src="{{mix('js/app.js')}}"></script>
 </html>
