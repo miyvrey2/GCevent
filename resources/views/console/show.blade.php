@@ -11,7 +11,7 @@
         <div class="featured_image greenblue" style="background-image:url('https://www.gamescomevent.com/img/gamescom_17_010_010.jpg')"></div>
     </section>
 
-    <div class="container publisher-show">
+    <div class="container console-show">
         <div class="row">
             <div class="col-md-12">
 
@@ -32,14 +32,37 @@
             </div>
 
             <div class="col-md-3">
-                {{--@if($page->sidebar_title != null)--}}
-                {{--<h2>{!! $page->sidebar_title !!}</h2>--}}
-                {{--<p>--}}
-                    {{--{!! $page->sidebar_body !!}--}}
-                {{--</p>--}}
-                {{--<div class="horizontal-line"></div>--}}
-                {{--@endif--}}
-                {{--<h2>Advertisement</h2>--}}
+                <h2>Overview</h2>
+                <ul class="console-meta">
+                    @if($console->released == "T.B.A.")
+                        <li><i class="fa fa-calendar" title="Release date"></i>Planned for <a href="#" title="{{$console->released}}">{{$console->released}}</a></li>
+                    @else
+                        @if(Carbon\Carbon::now()->lt(Carbon\Carbon::parse($console->released)))
+                            <li><i class="fa fa-calendar" title="Release date"></i>Planned for <a href="#" title="{{$console->released}}">{{$console->released}}</a></li>
+                        @else
+                            <li><i class="fa fa-calendar" title="Release date"></i>Released on <a href="#" title="{{$console->released}}">{{$console->released}}</a></li>
+                        @endif
+                    @endif
+                </ul>
+                @if(!$console->games->isEmpty())
+
+                <div class="horizontal-line"></div>
+
+                <h2>All playable games</h2>
+                <ul>
+                    @foreach($console->games as $game)
+                        <li><a href="{{ url("games/" . $game->slug) }}">{{ $game->title }}</a></li>
+                    @endforeach
+                </ul>
+                @endif
+
+
+                {{--<h2>Recent news</h2>--}}
+                {{--<ul>--}}
+                    {{--@foreach($console->articles as $article)--}}
+                        {{--<li><a target="_blank" href="{{ url('article/' . $article->slug) }}">{{ $article->title }}</a></li>--}}
+                    {{--@endforeach--}}
+                {{--</ul>--}}
             </div>
         </div>
     </div>

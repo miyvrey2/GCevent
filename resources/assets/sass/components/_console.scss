@@ -14,10 +14,12 @@
         }
 
         ul.console-meta {
+            padding: 5px 0 0 025px;
             list-style-type: none;
 
             li {
 
+                width: 100%;
                 display: inline-block;
                 padding-right: 50px;
 
@@ -36,7 +38,9 @@
                     position: relative;
                     height: 13px;
                     display: inline-block;
+                    margin: 2px;
                     padding: 3px 5px;
+
                     font-size: 12px;
                     line-height: 12px;
                     background-color: $primary-color;
@@ -44,6 +48,7 @@
                     -webkit-border-radius: 13px;
                     -moz-border-radius: 13px;
                     border-radius: 13px;
+
                 }
             }
         }
