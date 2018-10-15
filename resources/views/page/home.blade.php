@@ -62,10 +62,7 @@
         </div>
     </div>
 
-    <script type='text/javascript' src='{{asset('js/slider.js')}}'></script>
-    <script>
-        window.addEventListener('load', initEnzowSlider(1, 4, 'cover', '400px'));
-    </script>
+{{--    <script type='text/javascript' src='{{asset('js/slider.js')}}'></script>--}}
     <!--</section>-->
 
     <div class="container publisher-show">

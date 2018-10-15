@@ -1,3 +1,7 @@
+if(document.getElementsByClassName("enzow_slider")[0]) {
+    window.addEventListener('load', initEnzowSlider(1, 4, 'cover', '400px'));
+}
+
 global_interval_speed = 4000;
 tid = "";
 

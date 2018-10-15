@@ -11,5 +11,6 @@ let mix = require('laravel-mix');
  |
  */
 mix.setPublicPath('public_html/');
-mix.js('resources/assets/js/app.js', 'js/')
-   .sass('resources/assets/sass/app.scss', 'css/');
+mix.js('resources/assets/js/app.js', 'js/app.js').version();
+//mix.js('resources/assets/js/slider.js', 'js/slider.js');
+mix.sass('resources/assets/sass/app.scss', 'css/').version();
