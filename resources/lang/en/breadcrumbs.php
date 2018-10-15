@@ -15,5 +15,6 @@ return [
     'developers' => 'Developers',
     'developedBy' => 'Developed by',
     'games' => 'Games',
+    'games.upcoming' => 'Upcoming games',
 
 ];

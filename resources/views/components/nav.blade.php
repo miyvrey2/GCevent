@@ -5,13 +5,14 @@
                 <i id="navCloseButton" class="fa fa-times" aria-hidden="true"></i>
                 <li itemprop="name"><a itemprop="url" href="{{url('/')}}">Home</a></li>
                 <li itemprop="name"><a itemprop="url" href="{{url('/gamescom-2019')}}">Gamescom 2019</a>
-                <ul>
-                    <li itemprop="name"><a itemprop="url" href="{{url('/tickets')}}">Tickets</a></li>
-                    <li itemprop="name"><a itemprop="url" href="{{url('events-2019')}}">Events</a></li>
-                    <li itemprop="name"><a itemprop="url" href="{{url('/cosplay')}}">Cosplay</a></li>
-                    <li itemprop="name"><a itemprop="url" href="{{url('/games/list')}}">Games</a></li>
-                </ul></li>
-                <li itemprop="name"><a itemprop="url" href="{{url('/publishers')}}">Publishers</a></li>
+                    <ul>
+                        <li itemprop="name"><a itemprop="url" href="{{url('/games/list')}}">Games</a></li>
+                        <li itemprop="name"><a itemprop="url" href="{{url('/publishers')}}">Exhibitors</a></li>
+                        <li itemprop="name"><a itemprop="url" href="{{url('events-2019')}}">Events</a></li>
+                        <li itemprop="name"><a itemprop="url" href="{{url('/cosplay')}}">Cosplay</a></li>
+                    </ul>
+                </li>
+                <li itemprop="name"><a itemprop="url" href="{{url('/tickets')}}">Tickets</a></li>
                 <li itemprop="name"><a itemprop="url" href="{{url('/news')}}">News</a></li>
                 @guest
                 @else

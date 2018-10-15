@@ -130,7 +130,8 @@ class ArticleController extends Controller
     {
         // Get the developers, games and publishers
         $games = Game::orderBy('title')->get();
-        $games[] = new Game();
+        $games->push(new Game());
+        $games = $games->sortBy("title");
 
         if($article['keywords'] != "") {
             $article['keywords'] = explode(',', $article['keywords']);

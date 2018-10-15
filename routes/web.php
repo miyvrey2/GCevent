@@ -57,6 +57,7 @@ Route::post('crawler/delete/{id}', 'RSSCrawlerController@remove_from_index');
 
 // Games
 Route::get('/games/list', 'GameController@listed');
+Route::get('/games/upcoming', 'GameController@upcoming');
 Route::resource('/games', 'GameController');
 
 // Authentication

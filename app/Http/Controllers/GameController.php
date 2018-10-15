@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Game;
 use App\Publisher;
 use App\RSSFeed;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class GameController extends Controller
 {
@@ -39,6 +41,18 @@ class GameController extends Controller
         }])->where('id', '!=', 1)->orderBy('title', 'ASC')->get();
 
         return view('game.listed', compact('exhibitors'));
+    }
+
+    // Show all listed games for 2018
+    public function upcoming()
+    {
+        $games = Game::orderBy('title', 'asc')
+                     ->where([
+                         ['released_at', '<=', Carbon::now()->addMonth() ],
+                         ['released_at', '>=', Carbon::now() ],
+                         ])
+                     ->get();
+        return view('game.upcoming', compact('games'));
     }
 
     /**

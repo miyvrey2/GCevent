@@ -67,6 +67,24 @@ class Game extends Model
         return 'T.B.A.';
     }
 
+    public function getReleasedAtDayAttribute()
+    {
+        if(!is_null($this->released_at)) {
+
+            return Carbon::CreateFromFormat("Y-m-d", $this->released_at)->format('j');
+        }
+        return '00';
+    }
+
+    public function getReleasedAtMonthAttribute()
+    {
+        if(!is_null($this->released_at)) {
+
+            return Carbon::CreateFromFormat("Y-m-d", $this->released_at)->format('M');
+        }
+        return '00';
+    }
+
     public function scopeLinedUp($query, $year)
     {
         return $query->where('line_up_year', $year);
