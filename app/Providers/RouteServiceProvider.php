@@ -8,6 +8,7 @@ use App\Page;
 use App\Article;
 use App\Console;
 use App\Publisher;
+use App\RSSFeed;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
@@ -55,6 +56,10 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::bind('developer', function($slug) {
             return Developer::where('slug', $slug)->first();
+        });
+
+        Route::bind('rssfeed', function($id) {
+            return RSSFeed::where('id', $id)->first();
         });
     }
 

@@ -16,10 +16,10 @@
             <div class="col-md-12">
 
                 {{-- Title --}}
-                <h1>Crawled news</h1>
+                <h1>Crawled feeds</h1>
 
                 {{--Breadcrumbs--}}
-                @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/news/incoming' => 'Crawled news']])
+                @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/news/incoming' => 'Crawled feeds']])
                 @endcomponent
 
                 <a class="button button-primary" href="{{ url('admin/articles/create')}}">Create an article</a>&nbsp;
@@ -110,23 +110,23 @@
                     </thead>
                     <tbody>
 
-                        @foreach($feed_items as $article)
+                        @foreach($feed_items as $feed_item)
                         <tr>
-                            <td class="align-center-center"><input type="checkbox" title="id" value="{{$article->id}}"/></td>
+                            <td class="align-center-center"><input type="checkbox" title="id" value="{{$feed_item->id}}"/></td>
                             <td>
-                                <a href="{{$article->url}}" title="{{$article->title}}" target="_blank">{{substr($article->title, 0, 80)}}@if(strlen($article->title) >= 80)...@endif</a>
+                                <a href="{{$feed_item->url}}" title="{{$feed_item->title}}" target="_blank">{{substr($feed_item->title, 0, 80)}}@if(strlen($feed_item->title) >= 80)...@endif</a>
                             </td>
                             <td class="align-right article-attributes not-on-mobile">
-                                <span class="status">{{$article->site}}</span>
+                                <span class="status">{{$feed_item->site}}</span>
                             </td>
                             <td class="align-right article-attributes not-on-mobile">
-                                &nbsp;<a @if($article->game_id != "") class="filled-attribute" title="{{$article->game->title}}"@endif><i class="fa fa-gamepad"></i></a>&nbsp;
+                                &nbsp;<a @if($feed_item->game_id != "") class="filled-attribute" title="{{$feed_item->game->title}}"@endif><i class="fa fa-gamepad"></i></a>&nbsp;
                             </td>
                             <td class="align-right">
                                 <a href="{{url('/admin/articles/create')}}"><i class="fa fa-newspaper-o"></i></a> &nbsp;
-                                <a href="{{$article->url}}"><i class="fa fa-window-maximize"></i></a> &nbsp;
-                                <a href="{{url('feed/'.$article->id . 'slug')}}"><i class="fa fa-pencil"></i></a> &nbsp;
-                                {{ Form::open(array('url' => url('/admin/articles/' . $article->slug), "class" => 'delete-row' )) }}
+                                <a href="{{$feed_item->url}}"><i class="fa fa-window-maximize"></i></a> &nbsp;
+                                <a href="{{url('/admin/feed/'.$feed_item->id . '/edit')}}"><i class="fa fa-pencil"></i></a> &nbsp;
+                                {{ Form::open(array('url' => url('/admin/feed/' . $feed_item->id), "class" => 'delete-row' )) }}
                                 {{ Form::hidden('_method', 'DELETE') }}
                                 <button type='submit' value="delete"><i class="fa fa-trash"></i></button>
                                 {{ Form::close() }}

@@ -11,20 +11,20 @@
             <div class="col-md-12">
 
                 {{-- Title --}}
-                <h1>Edit "{{$game->title}}"</h1>
+                <h1>Edit "{{$feed->title}}"</h1>
 
                 {{--Breadcrumbs--}}
-                @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/games' => 'Games', 'admin/games/' . $game->slug . '/edit' => 'Edit "' . $game->title . '"']])
+                @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/news/incoming' => 'Crawled feeds', 'admin/feed/' . $feed->id. '/edit' => 'Edit "' . $feed->title . '"']])
                 @endcomponent
             </div>
 
-            <form method="POST" action="{{url('/admin/games/' . $game->slug)}}">
+            <form method="POST" action="{{url('/admin/feed/' . $feed->id)}}">
 
                 {{--Set the post method to patch--}}
                 {{ method_field('PATCH') }}
 
                 {{--Load the form--}}
-                @component('backend.game.form', compact('developers', 'games','publishers', 'game', 'consoles', 'genres'))
+                @component('backend.feed.form', compact('feed', 'games'))
                 @endcomponent
 
             </form>

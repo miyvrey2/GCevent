@@ -16,9 +16,14 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('/dashboard', 'Backend\DashboardController@index')->name('home');
 
     Route::get('/news', 'Backend\ArticleController@index');
-    Route::get('/news/incoming', 'Backend\RSSCrawlerController@index');
     Route::resource('/articles', 'Backend\ArticleController');
     Route::resource('/games', 'Backend\GameController');
+
+    // Crawled news
+    Route::get('/news/incoming', 'Backend\RSSCrawlerController@index');
+    Route::get('/feed/{rssfeed}/edit', 'Backend\RSSCrawlerController@edit');
+    Route::patch('/feed/{rssfeed}', 'Backend\RSSCrawlerController@update');
+    Route::delete('/feed/{rssfeed}', 'Backend\RSSCrawlerController@destroy');
 
 });
 

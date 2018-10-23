@@ -6,7 +6,7 @@
         <li itemprop="name"><a itemprop="url" href="{{url('/admin/dashboard')}}">Dashboard</a></li>
         <li itemprop="name"><a itemprop="url" href="{{url('/admin/news')}}">News</a>
             <ul>
-                <li itemprop="name"><a itemprop="url" href="{{url('/admin/news/incoming')}}">Crawled news</a></li>
+                <li itemprop="name"><a itemprop="url" href="{{url('/admin/news/incoming')}}">Crawled feeds</a></li>
                 <li itemprop="name"><a itemprop="url" href="{{url('/admin/news')}}">News articles</a></li>
             </ul>
         </li>
