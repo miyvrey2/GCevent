@@ -10,7 +10,11 @@
                 <li itemprop="name"><a itemprop="url" href="{{url('/admin/news')}}">News articles</a></li>
             </ul>
         </li>
-        <li itemprop="name"><a itemprop="url" href="{{url('/admin/games')}}">Games</a></li>
+        <li itemprop="name"><a itemprop="url" href="{{url('/admin/games')}}">Games</a>
+            <ul>
+                <li itemprop="name"><a itemprop="url" href="{{url('/admin/games')}}">Games</a></li>
+                <li itemprop="name"><a itemprop="url" href="{{url('/admin/consoles')}}">Consoles</a></li>
+            </ul></li>
         @guest
         @else
             <li class="dropdown">

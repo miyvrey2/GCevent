@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Console extends Model
 {
+    protected $fillable = ['title', 'slug', 'excerpt', 'body', 'image', 'aliases', 'released_at'];
+
     //
     public function getReleasedAttribute()
     {

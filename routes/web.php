@@ -13,11 +13,15 @@
 
 // Backend
 Route::group(['prefix' => 'admin'], function() {
+
+    $exceptShow = ['except' => [ 'show' ] ];
+
     Route::get('/dashboard', 'Backend\DashboardController@index')->name('home');
 
     Route::get('/news', 'Backend\ArticleController@index');
     Route::resource('/articles', 'Backend\ArticleController');
-    Route::resource('/games', 'Backend\GameController');
+    Route::resource('/games', 'Backend\GameController', $exceptShow);
+    Route::resource('/consoles', 'Backend\ConsoleController', $exceptShow);
 
     // Crawled news
     Route::get('/news/incoming', 'Backend\RSSCrawlerController@index');
@@ -53,7 +57,7 @@ Route::get('/consoles', 'ConsoleController@index');
 Route::get('/consoles/{console}', 'ConsoleController@show');
 
 // Crawler
-Route::get('/crawler', 'RSSCrawlerController@index');
+//Route::get('/crawler', 'RSSCrawlerController@index');
 Route::get('/crawler/removeDuplicates', 'RSSCrawlerController@removeDuplicates');
 Route::get('/crawler/removeOldNews', 'RSSCrawlerController@removeOldNews');
 Route::get('/crawler/crawl', 'RSSCrawlerController@crawl');

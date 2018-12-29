@@ -49,8 +49,8 @@ class Article extends Model
         return $this->belongsTo(Game::class);
     }
 
-    public static function recentArticles()
+    public static function recentArticles($limit = 5)
     {
-        return Article::published()->orderBy('published_at', 'DESC')->limit(5)->get();
+        return Article::published()->orderBy('published_at', 'DESC')->limit($limit)->get();
     }
 }

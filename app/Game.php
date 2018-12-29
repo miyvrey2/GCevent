@@ -47,6 +47,21 @@ class Game extends Model
         return $this->developer()->where('id','>', 1);
     }
 
+    // Show only published Scope in where clause
+
+    public function scopePublished($query)
+    {
+        return $query->where('published_at', '<=', Carbon::now());
+    }
+
+    public static function recentGames($limit = 5)
+    {
+        return Game::published()
+                   ->orderBy('published_at', 'DESC')
+                   ->limit($limit)
+                   ->get();
+    }
+
     public function getReleasedAttribute()
     {
         if(!is_null($this->released_at)) {
