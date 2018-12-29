@@ -69,7 +69,6 @@ class GameController extends Controller
     {
         // Validate
         $data = $this->validate($request, [
-            'publisher_id'  => 'required|integer',
             'title'         => 'required|string',
             'slug'          => 'required|string',
             'excerpt'       => 'nullable|string',
@@ -97,11 +96,14 @@ class GameController extends Controller
         // Save
         $game = Game::create($data);
 
-        // Remove and save the connection between the game and it's platforms
-        $this->remove_and_save_platforms_to_GamePlatform_with_game_id($game->id, $request['platforms']);
+        // Sync the game and it's platforms
+        $game->platforms()->sync($request['platforms']);
 
-        // Remove and save the connection between the game and it's genres
-        $this->remove_and_save_genres_to_GameGenre_with_game_id($game->id, $request['genres']);
+        // Sync the game and it's genres
+        $game->genres()->sync($request['genres']);
+
+        // Sync the game and it's publishers
+        $game->publishers()->sync($request['publishers']);
 
         return redirect('/admin/games');
     }
@@ -144,6 +146,7 @@ class GameController extends Controller
         // Get the platforms and genres that are not already listed
         $platforms = $this->unset_arrayitem_from_array_all_if_already_used($game->platforms, $platforms);
         $genres = $this->unset_arrayitem_from_array_all_if_already_used($game->genres, $genres);
+        $publishers = $this->unset_arrayitem_from_array_all_if_already_used($game->publishers, $publishers);
 
         return view('backend.game.edit', compact('developers', 'games','publishers', 'game', 'platforms', 'genres'));
     }
@@ -167,11 +170,14 @@ class GameController extends Controller
         // Save the updates
         $game->update($request->all());
 
-        // Remove and save the connection between the game and it's platforms
-        $this->remove_and_save_platforms_to_GamePlatform_with_game_id($game->id, $request['platforms']);
+        // Sync the game and it's platforms
+        $game->platforms()->sync($request['platforms']);
 
-        // Remove and save the connection between the game and it's genres
-        $this->remove_and_save_genres_to_GameGenre_with_game_id($game->id, $request['genres']);
+        // Sync the game and it's genres
+        $game->genres()->sync($request['genres']);
+
+        // Sync the game and it's publishers
+        $game->publishers()->sync($request['publishers']);
 
         return Redirect::to('/admin/games');
     }
@@ -202,11 +208,10 @@ class GameController extends Controller
         $games = Game::all();
 
         foreach($games as $game) {
-
-            GamePublisher::updateOrCreate([
-                ['game_id', '=', $game->id],
-                ['publisher_id', '=', $game->publisher->id]
-            ]);
+            GamePublisher::updateOrCreate(
+                ['game_id' => $game->id],
+                ['publisher_id' => $game->publisher_id]
+            );
         }
     }
 

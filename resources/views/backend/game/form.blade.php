@@ -40,14 +40,14 @@
 
 <div class="col-md-3">
     <div class="form-group">
-        <label for="publisher_id">Publisher *</label><br>
-        <select id="publisher_id" name="publisher_id" required>
+        <label for="publishers[]">Publisher</label><br>
+        <select class="form-control js-example-basic-multiple form-control" id="publishers[]" name="publishers[]" multiple="multiple">
+            @foreach($game->publishers as $publisher)
+                <option value="{{$publisher->id}}" selected>{{$publisher->title}}</option>
+            @endforeach
+
             @foreach($publishers as $publisher)
-                @if($publisher->id == $game->publisher_id)
-                    <option value="{{$publisher->id}}" selected>{{$publisher->title}}</option>
-                @else
-                    <option value="{{$publisher->id}}">{{$publisher->title}}</option>
-                @endif
+                <option value="{{$publisher->id}}">{{$publisher->title}}</option>
             @endforeach
         </select>
     </div>
