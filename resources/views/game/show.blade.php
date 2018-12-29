@@ -44,12 +44,12 @@
                         @endif
                     @endif
 
-                    @if(!$game->consoles->isEmpty())
+                    @if(!$game->platforms->isEmpty())
                     <li>
                         <i class="fa fa-gamepad" title="Playable on"></i>Made for
                         @php($i = 1)
-                        @foreach($game->consoles as $console)
-                            <a href="{{url('consoles/' . $console->slug)}}" title="Playable on {{$console->title}}">{{$console->title}}</a>@if($i < count($game->consoles)), @endif
+                        @foreach($game->platforms as $platform)
+                            <a href="{{url('platforms/' . $platform->slug)}}" title="Playable on {{$platform->title}}">{{$platform->title}}</a>@if($i < count($game->platforms)), @endif
 
                             @php($i++)
                         @endforeach
@@ -128,9 +128,9 @@
                 "genre":[@foreach($game->genres as $genre)"{{$genre->title}}"@endforeach],
                 @endif
 
-                @if(!$game->consoles->isEmpty())
+                @if(!$game->platforms->isEmpty())
 
-                "gamePlatform":[@foreach($game->consoles as $console)"{{$console->title}}"@endforeach],
+                "gamePlatform":[@foreach($game->platforms as $platform)"{{$platform->title}}"@endforeach],
                 @endif
                 {{--"operatingSystem":["Sonic", "Duo"],--}}
                 {{--"processorRequirements":"4 GHz",--}}

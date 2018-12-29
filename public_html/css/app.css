@@ -1136,42 +1136,42 @@ footer .social-footer i {
   border-radius: 13px;
 }
 
-.console-show {
+.platform-show {
   padding-top: 50px;
 }
 
-.console-show h1 {
+.platform-show h1 {
   margin: 10px 0 10px 0;
   font-size: 50px;
 }
 
-.console-show .col-md-3 ul {
+.platform-show .col-md-3 ul {
   padding: 5px 0 0 25px;
 }
 
-.console-show .col-md-3 ul.console-meta {
+.platform-show .col-md-3 ul.platform-meta {
   padding: 5px 0 0 025px;
   list-style-type: none;
 }
 
-.console-show .col-md-3 ul.console-meta li {
+.platform-show .col-md-3 ul.platform-meta li {
   width: 100%;
   display: inline-block;
   padding-right: 50px;
 }
 
-.console-show .col-md-3 ul.console-meta li i {
+.platform-show .col-md-3 ul.platform-meta li i {
   width: 25px;
   color: #3097D1;
   display: inline-block;
   margin-left: -25px;
 }
 
-.console-show .col-md-3 ul.console-meta li a {
+.platform-show .col-md-3 ul.platform-meta li a {
   color: #333333;
 }
 
-.console-show .col-md-3 ul.console-meta li span {
+.platform-show .col-md-3 ul.platform-meta li span {
   position: relative;
   height: 13px;
   display: inline-block;

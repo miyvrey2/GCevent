@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Console;
+use App\Platform;
 use App\Game;
 use App\Publisher;
 use App\RSSFeed;
-use App\ConsoleGame;
+use App\GamePlatform;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Facades\Storage;
@@ -56,7 +56,7 @@ class RSSCrawlerController extends Controller
 
         // Setup for saving our crawlings
         $date_of_expire = Carbon::now()->subDays($this->expire_in_days);
-        $consoles = Console::all();
+        $consoles = Platform::all();
 
         foreach($this->rss_from_sites as $site) {
 
@@ -115,7 +115,7 @@ class RSSCrawlerController extends Controller
                         foreach($consoles as $console) {
                             if(strpos(strtolower($categories), strtolower($console['title']))) {
 
-                                ConsoleGame::updateOrCreate([
+                                GamePlatform::updateOrCreate([
                                     'game_id' => $game_id,
                                     'console_id' => $console['id']
                                 ]);
@@ -468,7 +468,7 @@ class RSSCrawlerController extends Controller
         $wordlist = [];
         $removeWords1 = array_map('strtolower', Publisher::pluck('title')->toArray() );
         $removeWords2 = array_map('strtolower', Game::pluck('title')->toArray() );
-        $removeWords3 = array_map('strtolower', Console::pluck('title')->toArray() );
+        $removeWords3 = array_map('strtolower', Platform::pluck('title')->toArray() );
         $removeWords4 = ['de', 'het', 'een', 'van', 'naar', 'voor', 'achter', 'op', 'onder', 'in', 'uit', 'met', 'zonder', 'nu', 'later', 'is', 'en', 'of', '-'];
         $removeWords5 = ['trailer', 'nieuwe', 'nieuw', 'jaar', 'maand', 'week'];
         $removeWords6 = ['januari', 'februari', 'maart', 'april', 'mei', 'juni', 'juli', 'augustus', 'september', 'oktober', 'november', 'december'];

@@ -8,22 +8,22 @@
 
     <div class="form-group">
         <label for="title">Title *</label><br>
-        <input type="text" class="form-control" id="title" name="title" required autocomplete="off" value="{{$console->title}}">
+        <input type="text" class="form-control" id="title" name="title" required autocomplete="off" value="{{$platform->title}}">
     </div>
 
     <div class="form-group">
         <label for="slug">Slug *</label><br>
-        <input type="text" class="form-control" id="slug" name="slug" required  autocomplete="off" value="{{$console->slug}}">
+        <input type="text" class="form-control" id="slug" name="slug" required  autocomplete="off" value="{{$platform->slug}}">
     </div>
 
     <div class="form-group">
         <label for="excerpt">Exerpt</label><br>
-        <textarea type="text" class="form-control" id="excerpt" name="excerpt" autocomplete="off">{{$console->excerpt}}</textarea>
+        <textarea type="text" class="form-control" id="excerpt" name="excerpt" autocomplete="off">{{$platform->excerpt}}</textarea>
     </div>
 
     <div class="form-group">
         <label for="body">Body</label><br>
-        <textarea type="text" class="form-control" id="body" name="body" autocomplete="off">{{$console->body}}</textarea>
+        <textarea type="text" class="form-control" id="body" name="body" autocomplete="off">{{$platform->body}}</textarea>
     </div>
 
     <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
@@ -43,21 +43,21 @@
     <div class="form-group">
         <label for="image">Image</label><br>
         <span class="note"><strong>note:</strong> Only one URL possible</span>
-        <input type="text" class="form-control" id="image" name="image" autocomplete="off" value="{{$console->image}}">
+        <input type="text" class="form-control" id="image" name="image" autocomplete="off" value="{{$platform->image}}">
     </div>
 
     <div class="form-group">
         <label for="released_at">Release date</label><br>
         <span class="note"><strong>note:</strong> "2018-00-00" notes as "in 2018"</span>
-        <input type="text" class="form-control" id="released_at" name="released_at" autocomplete="off" value="{{$console->released_at}}">
+        <input type="text" class="form-control" id="released_at" name="released_at" autocomplete="off" value="{{$platform->released_at}}">
     </div>
 
     <div class="form-group">
         <label for="aliases[]">Aliases</label><br>
         <select class="form-control js-example-basic-multiple form-control" id="aliases[]" name="aliases[]" multiple="multiple">
 
-            @if($console->aliases != null)
-                @foreach($console->aliases as $alias)
+            @if($platform->aliases != null)
+                @foreach($platform->aliases as $alias)
                     <option value="{{$alias}}" selected>{{$alias}}</option>
                 @endforeach
             @endif

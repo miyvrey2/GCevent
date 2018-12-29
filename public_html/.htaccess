@@ -3,7 +3,7 @@ RewriteEngine On
 # Enforce SSL and WWW
 RewriteCond %{HTTPS} off [OR]
 RewriteCond %{HTTP_HOST} !^www\.
-RewriteRule ^ https://www.gamescomevent.com%{REQUEST_URI} [NE,L,R]
+#RewriteRule ^ https://www.gamescomevent.com%{REQUEST_URI} [NE,L,R]
 
 ## Redirects
 Redirect 301 /about /gamescom-2018
@@ -16,6 +16,8 @@ Redirect 301 /android /consoles/android
 Redirect 301 /ios /consoles/ios
 Redirect 301 /lineup /gamescom-2018
 Redirect 301 /program /gamescom-2018
+
+RewriteRule ^consoles/(.*)$ /platforms/$1 [R=301,NC,L]
 
 <IfModule mod_rewrite.c>
     <IfModule mod_negotiation.c>

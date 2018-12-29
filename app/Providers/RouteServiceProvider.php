@@ -6,7 +6,7 @@ use App\Developer;
 use App\Game;
 use App\Page;
 use App\Article;
-use App\Console;
+use App\Platform;
 use App\Publisher;
 use App\RSSFeed;
 use Illuminate\Support\Facades\Route;
@@ -38,8 +38,8 @@ class RouteServiceProvider extends ServiceProvider
             return Article::where('slug', $slug)->first();
         });
 
-        Route::bind('console', function($slug) {
-            return Console::where('slug', $slug)->first();
+        Route::bind('platform', function($slug) {
+            return Platform::where('slug', $slug)->first();
         });
 
         Route::bind('game', function($slug) {

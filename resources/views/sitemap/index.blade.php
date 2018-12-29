@@ -6,8 +6,8 @@
         <lastmod>{{ $article->published_at->tz('UTC')->toAtomString() }}</lastmod>
     </sitemap>
     <sitemap>
-        <loc>{{url("sitemap/consoles")}}</loc>
-        <lastmod>{{ $console->created_at->tz('UTC')->toAtomString() }}</lastmod>
+        <loc>{{url("sitemap/platforms")}}</loc>
+        <lastmod>{{ $platform->created_at->tz('UTC')->toAtomString() }}</lastmod>
     </sitemap>
     <sitemap>
         <loc>{{url("sitemap/pages")}}</loc>

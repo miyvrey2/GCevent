@@ -13,7 +13,7 @@
         <li itemprop="name"><a itemprop="url" href="{{url('/admin/games')}}">Games</a>
             <ul>
                 <li itemprop="name"><a itemprop="url" href="{{url('/admin/games')}}">Games</a></li>
-                <li itemprop="name"><a itemprop="url" href="{{url('/admin/consoles')}}">Consoles</a></li>
+                <li itemprop="name"><a itemprop="url" href="{{url('/admin/platforms')}}">Platforms</a></li>
             </ul></li>
         @guest
         @else

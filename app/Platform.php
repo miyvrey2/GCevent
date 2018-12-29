@@ -5,7 +5,7 @@ namespace App;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
-class Console extends Model
+class Platform extends Model
 {
     protected $fillable = ['title', 'slug', 'excerpt', 'body', 'image', 'aliases', 'released_at'];
 

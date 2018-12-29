@@ -11,18 +11,18 @@
             <div class="col-md-12">
 
                 {{-- Title --}}
-                <h1>Add a console</h1>
+                <h1>Add a platform</h1>
 
                 {{--Breadcrumbs--}}
-                @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/consoles' => 'Consoles', 'admin/consoles/create' => 'Add a console']])
+                @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/platforms' => 'platforms', 'admin/platforms/create' => 'Add a platform']])
                 @endcomponent
 
             </div>
 
-            <form method="POST" action="{{url('/admin/consoles')}}">
+            <form method="POST" action="{{url('/admin/platforms')}}">
 
                 {{--Load the form--}}
-                @component('backend.console.form', compact('console'))
+                @component('backend.platform.form', compact('platform'))
                 @endcomponent
 
             </form>

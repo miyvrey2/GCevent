@@ -1,9 +1,9 @@
 <?php echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    @foreach ($consoles as $console)
+    @foreach ($platforms as $platform)
         <url>
-            <loc>{{ url("consoles/" . $console->slug) }}</loc>
-            <lastmod>{{ $console->created_at->tz('UTC')->toAtomString() }}</lastmod>
+            <loc>{{ url("platforms/" . $platform->slug) }}</loc>
+            <lastmod>{{ $platform->created_at->tz('UTC')->toAtomString() }}</lastmod>
             <changefreq>weekly</changefreq>
             <priority>0.6</priority>
         </url>

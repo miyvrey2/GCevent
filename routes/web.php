@@ -21,7 +21,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('/news', 'Backend\ArticleController@index');
     Route::resource('/articles', 'Backend\ArticleController');
     Route::resource('/games', 'Backend\GameController', $exceptShow);
-    Route::resource('/consoles', 'Backend\ConsoleController', $exceptShow);
+    Route::resource('/platforms', 'Backend\PlatformController', $exceptShow);
 
     // Crawled news
     Route::get('/news/incoming', 'Backend\RSSCrawlerController@index');
@@ -35,7 +35,7 @@ Route::group(['prefix' => 'admin'], function() {
 Route::get('/sitemap.xml', 'SitemapController@index');
 Route::get('/sitemap', 'SitemapController@index');
 Route::get('/sitemap/articles', 'SitemapController@articles');
-Route::get('/sitemap/consoles', 'SitemapController@consoles');
+Route::get('/sitemap/platforms', 'SitemapController@platforms');
 Route::get('/sitemap/games', 'SitemapController@games');
 Route::get('/sitemap/pages', 'SitemapController@pages');
 Route::get('/rss', 'SitemapController@rss');
@@ -53,8 +53,8 @@ Route::get('/developers', 'DeveloperController@index');
 Route::get('/developers/{developer}', 'DeveloperController@show');
 
 // Consoles
-Route::get('/consoles', 'ConsoleController@index');
-Route::get('/consoles/{console}', 'ConsoleController@show');
+Route::get('/platforms', 'PlatformController@index');
+Route::get('/platforms/{platform}', 'PlatformController@show');
 
 // Crawler
 //Route::get('/crawler', 'RSSCrawlerController@index');

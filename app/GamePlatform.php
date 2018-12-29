@@ -4,13 +4,13 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class ConsoleGame extends Model
+class GamePlatform extends Model
 {
     // Table name
-    protected $table = 'console_game';
+    protected $table = 'game_platform';
 
     // Rows we may fill
-    protected $fillable = ['console_id', 'game_id'];
+    protected $fillable = ['platform_id', 'game_id'];
 
     // No created_at and updated_at
     public $timestamps = false;

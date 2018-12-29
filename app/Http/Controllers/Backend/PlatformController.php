@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Console;
+use App\Platform;
 use App\Http\Controllers\Controller;
 use App\Game;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
-class ConsoleController extends Controller
+class PlatformController extends Controller
 {
     public function __construct()
     {
@@ -22,15 +22,15 @@ class ConsoleController extends Controller
      */
     public function index()
     {
-        // Get all consoles except the empty one
-        $consoles = Console::orderBy('title', 'asc')->get();
-        foreach($consoles as $key => $console) {
-            if ($console['title'] === '---') {
-                unset($consoles[$key]);
+        // Get all platforms except the empty one
+        $platforms = Platform::orderBy('title', 'asc')->get();
+        foreach($platforms as $key => $platform) {
+            if ($platform['title'] === '---') {
+                unset($platforms[$key]);
             }
         }
 
-        return view('backend.console.index', compact('consoles'));
+        return view('backend.platform.index', compact('platforms'));
     }
 
     /**
@@ -41,12 +41,12 @@ class ConsoleController extends Controller
     public function create()
     {
 
-        // Initiate a new console with some defined values
-        $console = new Console();
-        $console->released_at = date("Y") . "-00-00";
-        $console->aliases = null;
+        // Initiate a new platform with some defined values
+        $platform = new Platform();
+        $platform->released_at = date("Y") . "-00-00";
+        $platform->aliases = null;
 
-        return view('backend.console.create', compact('console'));
+        return view('backend.platform.create', compact('platform'));
     }
 
     /**
@@ -84,46 +84,49 @@ class ConsoleController extends Controller
         //        Config::set('database.connections.mysql.database', 'db_test');
 
         // Save
-        $console = Console::create($data);
+        $platform = Platform::create($data);
 
-        return redirect('/admin/consoles');
+        return redirect('/admin/platforms');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param Console $console
+     * @param Platform $platform
+     *
      * @return \Illuminate\Http\Response
      */
-    public function show(Console $console)
+    public function show(Platform $platform)
     {
-        return view('backend.console.show', compact('console'));
+        return view('backend.platform.show', compact('platform'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Console $console
+     * @param  Platform $platform
+     *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Console $console)
+    public function edit(Platform $platform)
     {
-        if($console['aliases'] != "") {
-            $console['aliases'] = explode(',', $console['aliases']);
+        if($platform['aliases'] != "") {
+            $platform['aliases'] = explode(',', $platform['aliases']);
         } else {
-            $console->keywords = null;
+            $platform->keywords = null;
         }
-        return view('backend.console.edit', compact('console'));
+        return view('backend.platform.edit', compact('platform'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  Console $console
+     * @param  Platform $platform
+     *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Console $console)
+    public function update(Request $request, Platform $platform)
     {
         // make that slug readable
         $request['slug'] = str_replace(" ", "-", $request['slug']);
@@ -137,25 +140,25 @@ class ConsoleController extends Controller
         }
 
         // Save the updates
-        $console->update($request->all());
+        $platform->update($request->all());
 
-        return Redirect::to('/admin/consoles');
+        return Redirect::to('/admin/platforms');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Console $console
+     * @param  Platform $platform
      *
      * @return \Illuminate\Http\Response
      * @throws \Exception
      */
-    public function destroy(Console $console)
+    public function destroy(Platform $platform)
     {
         // Delete the game
-        $console->delete();
+        $platform->delete();
 
-        return Redirect::to('/admin/consoles');
+        return Redirect::to('/admin/platforms');
 
     }
 }

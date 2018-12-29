@@ -61,12 +61,12 @@
                             @endif
                         @endif
 
-                        @if(!$article->game->consoles->isEmpty())
+                        @if(!$article->game->platforms->isEmpty())
                             <li>
                                 <i class="fa fa-microchip" title="Playable on"></i>Made for
                                 @php($i = 1)
-                                @foreach($article->game->consoles as $console)
-                                    <a href="{{url('consoles/' . $console->slug)}}" title="Playable on {{$console->title}}">{{$console->title}}</a>@if($i < count($article->game->consoles)), @endif
+                                @foreach($article->game->platforms as $platform)
+                                    <a href="{{url('platforms/' . $platform->slug)}}" title="Playable on {{$platform->title}}">{{$platform->title}}</a>@if($i < count($article->game->platforms)), @endif
 
                                     @php($i++)
                                 @endforeach

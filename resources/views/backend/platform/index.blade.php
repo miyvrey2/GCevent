@@ -1,7 +1,7 @@
 @extends('backend.layouts.master')
 
 @section('seo')
-    @component("components.seo", ["title" => "Consoles overview", "url" => url('admin/consoles'), "description" => "Overview of all the consoles on Enzow.org"] )
+    @component("components.seo", ["title" => "platforms overview", "url" => url('admin/platforms'), "description" => "Overview of all the platforms on Enzow.org"] )
     @endcomponent
 @endsection
 
@@ -16,13 +16,13 @@
             <div class="col-md-12">
 
                 {{-- Title --}}
-                <h1>Consoles</h1>
+                <h1>platforms</h1>
 
                 {{--Breadcrumbs--}}
-                @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/consoles' => 'Consoles']])
+                @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/platforms' => 'platforms']])
                 @endcomponent
 
-                <a class="button button-primary" href="{{ url('admin/consoles/create')}}">Add a console</a><br><br>
+                <a class="button button-primary" href="{{ url('admin/platforms/create')}}">Add a platform</a><br><br>
 
                 <style>
 
@@ -124,23 +124,23 @@
                     </thead>
                     <tbody>
 
-                    @foreach($consoles as $console)
+                    @foreach($platforms as $platform)
                         <tr>
                             <td class="align-center-center">
-                                <input type="checkbox" title="id" value="{{$console->id}}"/>
+                                <input type="checkbox" title="id" value="{{$platform->id}}"/>
                             </td>
-                            <td><a href="{{url('consoles/' . $console->slug)}}">{{$console->title}}</a><br><span class="tags"></span></td>
-                            <td class="align-right console-attributes not-on-mobile">
-                                <a @if($console->released != "") class="filled-attribute" @endif title="{{$console->released}}"><i class="fa fa-calendar"></i></a>&nbsp;
-                                {{--<a @if(!$console->genres->isEmpty()) class="filled-attribute" @endif title="Genres: @foreach($console->genres as $genreA) {{$genreA->title}}, @endforeach"><i class="fa fa-book"></i></a>&nbsp;--}}
-                                <a @if(!$console->games->isEmpty()) class="filled-attribute" @endif title="Games: {{count($console->games)}}"><i class="fa fa-gamepad"></i></a>&nbsp;
-                                {{--<a @if(isset($console->available_developer)) class="filled-attribute" title="Developed by: {{$console->available_developer->title}}" @endif><i class="fa fa-flask"></i></a>--}}
-                                {{--<a @if(isset($console->available_publisher)) class="filled-attribute" title="Published by: {{$console->available_publisher->title}}" @endif><i class="fa fa-upload"></i></a>--}}
+                            <td><a href="{{url('platforms/' . $platform->slug)}}">{{$platform->title}}</a><br><span class="tags"></span></td>
+                            <td class="align-right platform-attributes not-on-mobile">
+                                <a @if($platform->released != "") class="filled-attribute" @endif title="{{$platform->released}}"><i class="fa fa-calendar"></i></a>&nbsp;
+                                {{--<a @if(!$platform->genres->isEmpty()) class="filled-attribute" @endif title="Genres: @foreach($platform->genres as $genreA) {{$genreA->title}}, @endforeach"><i class="fa fa-book"></i></a>&nbsp;--}}
+                                <a @if(!$platform->games->isEmpty()) class="filled-attribute" @endif title="Games: {{count($platform->games)}}"><i class="fa fa-gamepad"></i></a>&nbsp;
+                                {{--<a @if(isset($platform->available_developer)) class="filled-attribute" title="Developed by: {{$platform->available_developer->title}}" @endif><i class="fa fa-flask"></i></a>--}}
+                                {{--<a @if(isset($platform->available_publisher)) class="filled-attribute" title="Published by: {{$platform->available_publisher->title}}" @endif><i class="fa fa-upload"></i></a>--}}
                             </td>
                             <td class="align-right">
-                                <a href="{{url('/consoles/' . $console->slug)}}"><i class="fa fa-window-maximize"></i></a> &nbsp;
-                                <a href="{{url('/admin/consoles/' . $console->slug . '/edit')}}"><i class="fa fa-pencil"></i></a> &nbsp;
-                                {{ Form::open(array('url' => url('/admin/consoles/' . $console->slug), "class" => 'delete-row' )) }}
+                                <a href="{{url('/platforms/' . $platform->slug)}}"><i class="fa fa-window-maximize"></i></a> &nbsp;
+                                <a href="{{url('/admin/platforms/' . $platform->slug . '/edit')}}"><i class="fa fa-pencil"></i></a> &nbsp;
+                                {{ Form::open(array('url' => url('/admin/platforms/' . $platform->slug), "class" => 'delete-row' )) }}
                                 {{ Form::hidden('_method', 'DELETE') }}
                                 <button type='submit' value="delete"><i class="fa fa-trash"></i></button>
                                 {{ Form::close() }}

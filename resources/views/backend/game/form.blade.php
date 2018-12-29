@@ -72,14 +72,14 @@
     </div>
 
     <div class="form-group">
-        <label for="consoles[]">Consoles</label><br>
-        <select class="form-control js-example-basic-multiple form-control" id="consoles[]" name="consoles[]" multiple="multiple">
-            @foreach($game->consoles as $console)
-                <option value="{{$console->id}}" selected>{{$console->title}}</option>
+        <label for="platforms[]">Platforms</label><br>
+        <select class="form-control js-example-basic-multiple form-control" id="platforms[]" name="platforms[]" multiple="multiple">
+            @foreach($game->platforms as $platform)
+                <option value="{{$platform->id}}" selected>{{$platform->title}}</option>
             @endforeach
 
-            @foreach($consoles as $console)
-                <option value="{{$console->id}}">{{$console->title}}</option>
+            @foreach($platforms as $platform)
+                <option value="{{$platform->id}}">{{$platform->title}}</option>
             @endforeach
         </select>
     </div>

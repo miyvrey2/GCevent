@@ -11,20 +11,20 @@
             <div class="col-md-12">
 
                 {{-- Title --}}
-                <h1>Edit "{{$console->title}}"</h1>
+                <h1>Edit "{{$platform->title}}"</h1>
 
                 {{--Breadcrumbs--}}
-                @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/consoles' => 'Consoles', 'admin/consoles/' . $console->slug . '/edit' => 'Edit "' . $console->title . '"']])
+                @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/platforms' => 'platforms', 'admin/platforms/' . $platform->slug . '/edit' => 'Edit "' . $platform->title . '"']])
                 @endcomponent
             </div>
 
-            <form method="POST" action="{{url('/admin/consoles/' . $console->slug)}}">
+            <form method="POST" action="{{url('/admin/platforms/' . $platform->slug)}}">
 
                 {{--Set the post method to patch--}}
                 {{ method_field('PATCH') }}
 
                 {{--Load the form--}}
-                @component('backend.console.form', compact('developers', 'console'))
+                @component('backend.platform.form', compact('developers', 'platform'))
                 @endcomponent
 
             </form>

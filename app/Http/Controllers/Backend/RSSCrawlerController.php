@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Console;
-use App\ConsoleGame;
+use App\Platform;
+use App\GamePlatform;
 use App\Developer;
 use App\Http\Controllers\Controller;
 use App\Game;

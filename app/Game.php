@@ -114,8 +114,8 @@ class Game extends Model
     }
 
     // Many to many (to connect pivot table in DB)
-    public function consoles() {
-        return $this->belongsToMany(Console::class);
+    public function platforms() {
+        return $this->belongsToMany(Platform::class);
     }
 
     // Many to many (to connect pivot table in DB)

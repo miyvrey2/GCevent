@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Console;
-use App\ConsoleGame;
+use App\Platform;
+use App\GamePlatform;
 use App\Developer;
 use App\GameGenre;
 use App\Genre;
@@ -43,10 +43,10 @@ class GameController extends Controller
     public function create()
     {
 
-        // Get the developers, games, publishers, consoles and genres
+        // Get the developers, games, publishers, platforms and genres
         $developers = Developer::orderBy('title')->get();
         $publishers = Publisher::orderBy('title')->get();
-        $consoles = Console::orderBy('released_at')->get();
+        $platforms = Platform::orderBy('released_at')->get();
         $genres = Genre::orderBy('title')->get();
         $games = Game::all(); // Doesn't have to be ordered since it is for auto-completion
 
@@ -55,7 +55,7 @@ class GameController extends Controller
         $game->released_at = date("Y") . "-00-00";
         $game->aliases = null;
 
-        return view('backend.game.create', compact('developers', 'games','publishers', 'game', 'consoles', 'genres'));
+        return view('backend.game.create', compact('developers', 'games','publishers', 'game', 'platforms', 'genres'));
     }
 
     /**
@@ -96,8 +96,8 @@ class GameController extends Controller
         // Save
         $game = Game::create($data);
 
-        // Remove and save the connection between the game and it's consoles
-        $this->remove_and_save_consoles_to_ConsoleGame_with_game_id($game->id, $request['consoles']);
+        // Remove and save the connection between the game and it's platforms
+        $this->remove_and_save_platforms_to_GamePlatform_with_game_id($game->id, $request['platforms']);
 
         // Remove and save the connection between the game and it's genres
         $this->remove_and_save_genres_to_GameGenre_with_game_id($game->id, $request['genres']);
@@ -127,10 +127,10 @@ class GameController extends Controller
      */
     public function edit(Game $game)
     {
-        // Get the developers, games, publishers, consoles and genres
+        // Get the developers, games, publishers, platforms and genres
         $developers = Developer::orderBy('title')->get();
         $publishers = Publisher::orderBy('title')->get();
-        $consoles = Console::orderBy('released_at')->get();
+        $platforms = Platform::orderBy('released_at')->get();
         $genres = Genre::orderBy('title')->get();
         $games = Game::all(); // Doesn't have to be ordered since it is for auto-completion
 
@@ -140,11 +140,11 @@ class GameController extends Controller
             $game->keywords = null;
         }
 
-        // Get the consoles and genres that are not already listed
-        $consoles = $this->unset_arrayitem_from_array_all_if_already_used($game->consoles, $consoles);
+        // Get the platforms and genres that are not already listed
+        $platforms = $this->unset_arrayitem_from_array_all_if_already_used($game->platforms, $platforms);
         $genres = $this->unset_arrayitem_from_array_all_if_already_used($game->genres, $genres);
 
-        return view('backend.game.edit', compact('developers', 'games','publishers', 'game', 'consoles', 'genres'));
+        return view('backend.game.edit', compact('developers', 'games','publishers', 'game', 'platforms', 'genres'));
     }
 
     /**
@@ -166,8 +166,8 @@ class GameController extends Controller
         // Save the updates
         $game->update($request->all());
 
-        // Remove and save the connection between the game and it's consoles
-        $this->remove_and_save_consoles_to_ConsoleGame_with_game_id($game->id, $request['consoles']);
+        // Remove and save the connection between the game and it's platforms
+        $this->remove_and_save_platforms_to_GamePlatform_with_game_id($game->id, $request['platforms']);
 
         // Remove and save the connection between the game and it's genres
         $this->remove_and_save_genres_to_GameGenre_with_game_id($game->id, $request['genres']);
@@ -183,8 +183,8 @@ class GameController extends Controller
      */
     public function destroy(Game $game)
     {
-        // Remove and save the connection between the game and it's consoles
-        $this->remove_and_save_consoles_to_ConsoleGame_with_game_id($game->id, array());
+        // Remove and save the connection between the game and it's platforms
+        $this->remove_and_save_platforms_to_GamePlatform_with_game_id($game->id, array());
 
         // Remove and save the connection between the game and it's genres
         $this->remove_and_save_genres_to_GameGenre_with_game_id($game->id, array());
@@ -217,24 +217,24 @@ class GameController extends Controller
     }
 
     /**
-     * Save the Game and it's consoles it belongs to in the ConsoleGame table
+     * Save the Game and it's platforms it belongs to in the GamePlatform table
      *
      * @param $game_id
-     * @param $consoles
+     * @param $platforms
      */
-    private function remove_and_save_consoles_to_ConsoleGame_with_game_id($game_id, $consoles) {
+    private function remove_and_save_platforms_to_GamePlatform_with_game_id($game_id, $platforms) {
 
         // Remove the old connections
-        ConsoleGame::where('game_id', '=', $game_id)->delete();
+        GamePlatform::where('game_id', '=', $game_id)->delete();
 
-        // foreach console, create a new connection
-        foreach($consoles as $console) {
+        // foreach platform, create a new connection
+        foreach($platforms as $platform) {
 
-            // save a Console and Game combination
-            $consoleGame = new ConsoleGame();
-            $consoleGame['game_id'] = $game_id;
-            $consoleGame['console_id'] = $console;
-            $consoleGame->save();
+            // save a platform and Game combination
+            $gamePlatform = new GamePlatform();
+            $gamePlatform['game_id'] = $game_id;
+            $gamePlatform['platform_id'] = $platform;
+            $gamePlatform->save();
         }
     }
 
@@ -242,7 +242,7 @@ class GameController extends Controller
      * Save the Game and it's genres it belongs to in the GameGenre table
      *
      * @param $game_id
-     * @param $consoles
+     * @param $platforms
      */
     private function remove_and_save_genres_to_GameGenre_with_game_id($game_id, $genres) {
 
