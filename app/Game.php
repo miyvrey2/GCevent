@@ -20,9 +20,10 @@ class Game extends Model
     protected $fillable = ['title', 'slug', 'excerpt', 'body', 'released_at', 'publisher_id', 'developer_id', 'aliases'];
 
     // Multiple games belong to one publisher
-    public function publisher()
+    // Many to many (to connect pivot table in DB)
+    public function publishers()
     {
-        return $this->belongsTo(Publisher::class);
+        return $this->belongsToMany(Publisher::class);
     }
 
     // Multiple games belong to one publisher

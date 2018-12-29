@@ -40,7 +40,7 @@ class Publisher extends Model
     // A publisher has many games
     public function games()
     {
-        return $this->hasMany(Game::class);
+        return $this->belongsToMany(Game::class);
     }
 
     // A publisher has many stands

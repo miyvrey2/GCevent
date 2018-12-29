@@ -15,7 +15,8 @@
                 <li itemprop="name"><a itemprop="url" href="{{url('/admin/games')}}">Games</a></li>
                 <li itemprop="name"><a itemprop="url" href="{{url('/admin/platforms')}}">Platforms</a></li>
             </ul></li>
-        @guest
+        <li itemprop="name"><a itemprop="url" href="{{url('/admin/exhibitions')}}">Exhibitions</a></li>
+    @guest
         @else
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" v-pre>

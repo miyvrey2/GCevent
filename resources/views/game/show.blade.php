@@ -74,9 +74,14 @@
                         </li>
                     @endif
 
-                    @if($game->available_publisher != null)
+                    @if(!$game->publishers->isEmpty())
                         <li>
-                            <i class="fa fa-upload" title="{{__('breadcrumbs.publisher')}}"></i><a title="{{__('breadcrumbs.publishedBy')}} {{$game->available_publisher->title}}" href="{{url('publishers/'.$game->available_publisher->slug)}}">{{$game->available_publisher->title}}</a>
+                            <i class="fa fa-upload" title="{{__('breadcrumbs.publisher')}}"></i>
+                            @php($i = 1)
+                            @foreach($game->publishers as $publisher)
+                                <a title="{{__('breadcrumbs.publishedBy')}} {{$publisher->title}}" href="{{url('publishers/'.$publisher->slug)}}">{{$publisher->title}}</a>@if(count($game->publishers) == 2 && $i == 1) & @elseif($i + 1 < count($game->publishers)), @endif
+                                @php($i++)
+                            @endforeach
                         </li>
                     @endif
                 </ul>
@@ -110,18 +115,22 @@
                 {{--"image": "{{ url($game->image) }}",--}}
                 "description": "{!! $game->excerpt !!}",
                 "inLanguage":["English"],
-                @if($game->available_publisher != null)
 
-                "publisher":{
+                @if(!$game->publishers->isEmpty())
+                "publisher":[
+                @foreach($game->publishers as $publisher)
+                {
                     "@type": "Organization",
-                    "name": "{{ $game->available_publisher->title }}",
-                    "url": "{{ url("publishers/" . $game->available_publisher->slug) }}",
+                    "name": "{{ $publisher->title }}",
+                    "url": "{{ url("publishers/" . $publisher->slug) }}",
                     "logo": {
                         "@type": "ImageObject",
-                        "name": "{{ $game->available_publisher->title }} logo",
-                        "url": "{{ $game->available_publisher->image }}"
+                        "name": "{{ $publisher->title }} logo",
+                        "url": "{{ $publisher->image }}"
                     }
                 },
+                @endforeach
+                ]
                 @endif
 
                 @if(!$game->genres->isEmpty())

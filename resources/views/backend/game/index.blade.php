@@ -135,7 +135,7 @@
                                 <a @if(!$game->genres->isEmpty()) class="filled-attribute" @endif title="Genres: @foreach($game->genres as $genreA) {{$genreA->title}}, @endforeach"><i class="fa fa-book"></i></a>&nbsp;
                                 <a @if(!$game->platforms->isEmpty()) class="filled-attribute" @endif title="Platforms: @foreach($game->platforms as $platformA) {{$platformA->title}}, @endforeach"><i class="fa fa-microchip"></i></a>&nbsp;
                                 <a @if(isset($game->available_developer)) class="filled-attribute" title="Developed by: {{$game->available_developer->title}}" @endif><i class="fa fa-flask"></i></a>
-                                <a @if(isset($game->available_publisher)) class="filled-attribute" title="Published by: {{$game->available_publisher->title}}" @endif><i class="fa fa-upload"></i></a>
+                                <a @if(!$game->publishers->isEmpty()) class="filled-attribute" @endif title="Published by: @foreach($game->publishers as $publisherA) {{$publisherA->title}}, @endforeach"><i class="fa fa-upload"></i></a>
                             </td>
                             <td class="align-right">
                                 <a href="{{url('/games/' . $game->slug)}}"><i class="fa fa-window-maximize"></i></a> &nbsp;

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\GamePublisher;
 use App\Platform;
 use App\GamePlatform;
 use App\Developer;
@@ -194,6 +195,19 @@ class GameController extends Controller
 
         return Redirect::to('/admin/games');
 
+    }
+
+    public function reconnect() {
+
+        $games = Game::all();
+
+        foreach($games as $game) {
+
+            GamePublisher::updateOrCreate([
+                ['game_id', '=', $game->id],
+                ['publisher_id', '=', $game->publisher->id]
+            ]);
+        }
     }
 
     /**
