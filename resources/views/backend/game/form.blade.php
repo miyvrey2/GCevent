@@ -40,7 +40,7 @@
 
 <div class="col-md-3">
     <div class="form-group">
-        <label for="publishers[]">Publisher</label><br>
+        <label for="publishers[]">Publishers</label><br>
         <select class="form-control js-example-basic-multiple form-control" id="publishers[]" name="publishers[]" multiple="multiple">
             @foreach($game->publishers as $publisher)
                 <option value="{{$publisher->id}}" selected>{{$publisher->title}}</option>
@@ -53,7 +53,7 @@
     </div>
 
     <div class="form-group">
-        <label for="developer_id">Developer</label><br>
+        <label for="developer_id">Developers</label><br>
         <select id="developer_id" name="developer_id">
             @foreach($developers as $developer)
                 @if($developer->id == $game->developer_id)

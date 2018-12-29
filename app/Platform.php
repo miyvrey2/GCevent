@@ -34,4 +34,14 @@ class Platform extends Model
     public function games() {
         return $this->belongsToMany(Game::class)->orderBy("title");
     }
+
+    public function getBodyHtmlAttribute()
+    {
+        return $this->body;
+    }
+
+    public function getExcerptHtmlAttribute()
+    {
+        return e($this->excerpt);
+    }
 }
