@@ -44,7 +44,7 @@
                         @if(Carbon\Carbon::now()->lt(Carbon\Carbon::parse($platform->released)))
                             <li><i class="fa fa-calendar" title="Release date"></i>Planned for <a href="#" title="{{$platform->released}}">{{$platform->released}}</a></li>
                         @else
-                            <li><i class="fa fa-calendar" title="Release date"></i>Released on <a href="#" title="{{$platform->released}}">{{$platform->released}}</a></li>
+                            <li><i class="fa fa-calendar" title="Release date"></i>First released on <a href="#" title="{{$platform->released}}">{{$platform->released}}</a></li>
                         @endif
                     @endif
                 </ul>
