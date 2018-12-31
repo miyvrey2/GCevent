@@ -68,18 +68,15 @@
                         </li>
                     @endif
 
-                    @if($game->developer != null)
-                        <li>
-                            <i class="fa fa-flask" title="{{__('breadcrumbs.developer')}}"></i><a title="{{__('breadcrumbs.developedBy')}} {{$game->developer->title}}" href="{{url('developers/'.$game->developer->slug)}}">{{$game->developer->title}}</a>
-                        </li>
-                    @endif
+                        @if(!$game->developers->isEmpty())
+                            <li><i class="fa fa-flask" title="{{__('breadcrumbs.developer')}}"></i>@php($i = 1)@foreach($game->developers as $developer)<a title="{{__('breadcrumbs.developedBy')}}{{$developer->title}}" href="{{url('developers/'.$developer->slug)}}">{{$developer->title}}</a>@if(count($game->developers) - 1 == $i) & @elseif($i + 1 < count($game->developers)), @endif
+                                    @php($i++)
+                                @endforeach
+                            </li>
+                        @endif
 
                     @if(!$game->publishers->isEmpty())
-                        <li>
-                            <i class="fa fa-upload" title="{{__('breadcrumbs.publisher')}}"></i>
-                            @php($i = 1)
-                            @foreach($game->publishers as $publisher)
-                                <a title="{{__('breadcrumbs.publishedBy')}} {{$publisher->title}}" href="{{url('publishers/'.$publisher->slug)}}">{{$publisher->title}}</a>@if(count($game->publishers) == 2 && $i == 1) & @elseif($i + 1 < count($game->publishers)), @endif
+                        <li><i class="fa fa-upload" title="{{__('breadcrumbs.publisher')}}"></i>@php($i = 1)@foreach($game->publishers as $publisher)<a title="{{__('breadcrumbs.publishedBy')}} {{$publisher->title}}" href="{{url('publishers/'.$publisher->slug)}}">{{$publisher->title}}</a>@if(count($game->publishers) - 1 == $i) & @elseif($i + 1 < count($game->publishers)), @endif
                                 @php($i++)
                             @endforeach
                         </li>

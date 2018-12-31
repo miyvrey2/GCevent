@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\DeveloperGame;
 use App\GamePublisher;
 use App\Platform;
 use App\GamePlatform;
@@ -74,7 +75,6 @@ class GameController extends Controller
             'excerpt'       => 'nullable|string',
             'body'          => 'nullable|string',
             'aliases'       => 'nullable|string',
-            'developer_id'  => 'nullable|integer',
             'released_at'   => 'nullable|string',
         ]);
 
@@ -104,6 +104,9 @@ class GameController extends Controller
 
         // Sync the game and it's publishers
         $game->publishers()->sync($request['publishers']);
+
+        // Sync the game and it's publishers
+        $game->developers()->sync($request['developers']);
 
         return redirect('/admin/games');
     }
@@ -147,6 +150,7 @@ class GameController extends Controller
         $platforms = $this->unset_arrayitem_from_array_all_if_already_used($game->platforms, $platforms);
         $genres = $this->unset_arrayitem_from_array_all_if_already_used($game->genres, $genres);
         $publishers = $this->unset_arrayitem_from_array_all_if_already_used($game->publishers, $publishers);
+        $developers = $this->unset_arrayitem_from_array_all_if_already_used($game->developers, $developers);
 
         return view('backend.game.edit', compact('developers', 'games','publishers', 'game', 'platforms', 'genres'));
     }
@@ -179,6 +183,9 @@ class GameController extends Controller
         // Sync the game and it's publishers
         $game->publishers()->sync($request['publishers']);
 
+        // Sync the game and it's publishers
+        $game->developers()->sync($request['developers']);
+
         return Redirect::to('/admin/games');
     }
 
@@ -190,12 +197,6 @@ class GameController extends Controller
      */
     public function destroy(Game $game)
     {
-        // Remove and save the connection between the game and it's platforms
-        $this->remove_and_save_platforms_to_GamePlatform_with_game_id($game->id, array());
-
-        // Remove and save the connection between the game and it's genres
-        $this->remove_and_save_genres_to_GameGenre_with_game_id($game->id, array());
-
         // Delete the game
         $game->delete();
 
@@ -208,10 +209,20 @@ class GameController extends Controller
         $games = Game::all();
 
         foreach($games as $game) {
-            GamePublisher::updateOrCreate(
-                ['game_id' => $game->id],
-                ['publisher_id' => $game->publisher_id]
-            );
+            if($game->publisher_id != null) {
+                GamePublisher::updateOrCreate(
+                    ['game_id' => $game->id],
+                    ['publisher_id' => $game->publisher_id]
+                );
+            }
+
+            if($game->developer_id !== null) {
+
+                DeveloperGame::updateOrCreate(
+                    ['game_id' => $game->id],
+                    ['developer_id' => $game->developer_id]
+                );
+            }
         }
     }
 
@@ -233,51 +244,5 @@ class GameController extends Controller
         }
 
         return $full_array;
-    }
-
-    /**
-     * Save the Game and it's platforms it belongs to in the GamePlatform table
-     *
-     * @param $game_id
-     * @param $platforms
-     */
-    private function remove_and_save_platforms_to_GamePlatform_with_game_id($game_id, $platforms) {
-
-        // Remove the old connections
-        GamePlatform::where('game_id', '=', $game_id)->delete();
-
-        // foreach platform, create a new connection
-        foreach($platforms as $platform) {
-
-            // save a platform and Game combination
-            $gamePlatform = new GamePlatform();
-            $gamePlatform['game_id'] = $game_id;
-            $gamePlatform['platform_id'] = $platform;
-            $gamePlatform->save();
-        }
-    }
-
-    /**
-     * Save the Game and it's genres it belongs to in the GameGenre table
-     *
-     * @param $game_id
-     * @param $platforms
-     */
-    private function remove_and_save_genres_to_GameGenre_with_game_id($game_id, $genres) {
-
-        GameGenre::where('game_id', '=', $game_id)->delete();
-
-        if($genres != null) {
-            // foreach genre, create a new connection
-            foreach($genres as $genre) {
-
-                // save a Game and Genre combination
-                $GameGenre = new GameGenre();
-                $GameGenre['game_id'] = $game_id;
-                $GameGenre['genre_id'] = $genre;
-                $GameGenre->save();
-            }
-        }
-
     }
 }

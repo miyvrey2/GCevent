@@ -54,13 +54,13 @@
 
     <div class="form-group">
         <label for="developer_id">Developers</label><br>
-        <select id="developer_id" name="developer_id">
+        <select class="form-control js-example-basic-multiple form-control" id="developers[]" name="developers[]" multiple="multiple">
+            @foreach($game->developers as $developer)
+                <option value="{{$developer->id}}" selected>{{$developer->title}}</option>
+            @endforeach
+
             @foreach($developers as $developer)
-                @if($developer->id == $game->developer_id)
-                    <option value="{{$developer->id}}" selected>{{$developer->title}}</option>
-                @else
-                    <option value="{{$developer->id}}">{{$developer->title}}</option>
-                @endif
+                <option value="{{$developer->id}}">{{$developer->title}}</option>
             @endforeach
         </select>
     </div>

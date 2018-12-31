@@ -39,8 +39,9 @@ class Developer extends Model
     }
 
     // A publisher has many games
+    // Many to many (to connect pivot table in DB)
     public function games()
     {
-        return $this->hasMany(Game::class);
+        return $this->belongsToMany(Game::class);
     }
 }
