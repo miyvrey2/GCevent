@@ -33,6 +33,7 @@ class Publisher extends Model
             $date = $this->found;
             $separator = '-';
             $d = explode($separator, $date);
+            $d[2] = explode(' ', $d[2])[0];
 
             // If month (and day as well) are unkown, show only the year
             if($d[1] == "00") {
@@ -41,7 +42,7 @@ class Publisher extends Model
                 return Carbon::CreateFromFormat("Y-m-d", $d[0] . '-' . $d[1] . '-01')->format('F Y');
             }
 
-            $dateText = Carbon::CreateFromFormat("Y-m-d", $this->found)->format('l jS \\of F Y');
+            $dateText = Carbon::parse($this->found)->format('l jS \\of F Y');
             return "<a href='#' title='" . $dateText . "'>$d[0]</a>";
         }
         return 'Unkown.';
