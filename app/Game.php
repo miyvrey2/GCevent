@@ -8,15 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Game extends Model
 {
-
+    // Tell which tabel we use
     protected $table = 'games';
+
 
     public function getDates()
     {
         return ['created_at', 'updated_at'];
     }
 
-    // Rows we may fill
+    // Which items are fill-able in the database
     protected $fillable = ['title', 'slug', 'excerpt', 'body', 'released_at', 'publisher_id', 'developer_id', 'aliases'];
 
     // Multiple games belong to multiple publishers
@@ -37,16 +38,6 @@ class Game extends Model
     public function exhibitor()
     {
         return $this->belongsTo(Publisher::class, 'exhibitor_id', 'id');
-    }
-
-    // results in a "problem", se examples below
-    public function available_publisher() {
-        return $this->publisher()->where('id','>', 1);
-    }
-
-    // results in a "problem", se examples below
-    public function available_developer() {
-        return $this->developer()->where('id','>', 1);
     }
 
     // Show only published Scope in where clause

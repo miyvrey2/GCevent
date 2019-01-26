@@ -19,8 +19,8 @@ class CreatePagesTable extends Migration
             $table->foreign('author_id')->references('id')->on('users')->onDelete('restrict');
             $table->string('title');
             $table->string('slug')->unique();
-            $table->text('excerpt');
-            $table->text('body');
+            $table->text('excerpt')->nullable();
+            $table->text('body')->nullable();
             $table->string('sidebar_title')->nullable();
             $table->text('sidebar_body')->nullable();
             $table->string('image')->nullable();

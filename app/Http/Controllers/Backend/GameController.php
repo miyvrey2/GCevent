@@ -204,28 +204,6 @@ class GameController extends Controller
 
     }
 
-    public function reconnect() {
-
-        $games = Game::all();
-
-        foreach($games as $game) {
-            if($game->publisher_id != null) {
-                GamePublisher::updateOrCreate(
-                    ['game_id' => $game->id],
-                    ['publisher_id' => $game->publisher_id]
-                );
-            }
-
-            if($game->developer_id !== null) {
-
-                DeveloperGame::updateOrCreate(
-                    ['game_id' => $game->id],
-                    ['developer_id' => $game->developer_id]
-                );
-            }
-        }
-    }
-
     /**
      * Remove arrayitem from the "all"-array out of the database if the arrayitem is already selected for this game
      *

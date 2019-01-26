@@ -91,9 +91,15 @@
                             </li>
                         @endif
 
-                        @if($article->game->available_publisher != null)
+                        @if(!$article->game->publishers->isEmpty())
                             <li>
-                                <i class="fa fa-upload" title="{{__('breadcrumbs.publisher')}}"></i><a title="{{__('breadcrumbs.publishedBy')}} {{$article->game->available_publisher->title}}" href="{{url('publishers/'.$article->game->available_publisher->slug)}}">{{$article->game->available_publisher->title}}</a>
+                                <i class="fa fa-upload" title="{{__('breadcrumbs.publisher')}}"></i>
+                                @php($i = 1)
+                                    @foreach($article->game->publishers as $publisher)
+                                    <a title="{{__('breadcrumbs.publishedBy')}} {{$publisher->title}}" href="{{url('publishers/'.$publisher->slug)}}">{{$publisher->title}}</a>
+
+                                    @php($i++)
+                                @endforeach
                             </li>
                         @endif
                     </ul>

@@ -21,8 +21,8 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('/news', 'Backend\ArticleController@index');
     Route::resource('/articles', 'Backend\ArticleController');
     Route::resource('/games', 'Backend\GameController', $exceptShow);
-    Route::get('/games/reconnect', 'Backend\GameController@reconnect');
     Route::resource('/platforms', 'Backend\PlatformController', $exceptShow);
+    Route::resource('/publishers', 'Backend\PublisherController', $exceptShow);
 
     // Crawled news
     Route::get('/news/incoming', 'Backend\RSSCrawlerController@index');
@@ -53,7 +53,7 @@ Route::get('/publishers/{publisher}', 'PublisherController@show');
 Route::get('/developers', 'DeveloperController@index');
 Route::get('/developers/{developer}', 'DeveloperController@show');
 
-// Consoles
+// Platforms
 Route::get('/platforms', 'PlatformController@index');
 Route::get('/platforms/{platform}', 'PlatformController@show');
 

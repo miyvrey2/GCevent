@@ -134,8 +134,6 @@
                                 <a @if($platform->released != "") class="filled-attribute" @endif title="{{$platform->released}}"><i class="fa fa-calendar"></i></a>&nbsp;
                                 {{--<a @if(!$platform->genres->isEmpty()) class="filled-attribute" @endif title="Genres: @foreach($platform->genres as $genreA) {{$genreA->title}}, @endforeach"><i class="fa fa-book"></i></a>&nbsp;--}}
                                 <a @if(!$platform->games->isEmpty()) class="filled-attribute" @endif title="Games: {{count($platform->games)}}"><i class="fa fa-gamepad"></i></a>&nbsp;
-                                {{--<a @if(isset($platform->available_developer)) class="filled-attribute" title="Developed by: {{$platform->available_developer->title}}" @endif><i class="fa fa-flask"></i></a>--}}
-                                {{--<a @if(isset($platform->available_publisher)) class="filled-attribute" title="Published by: {{$platform->available_publisher->title}}" @endif><i class="fa fa-upload"></i></a>--}}
                             </td>
                             <td class="align-right">
                                 <a href="{{url('/platforms/' . $platform->slug)}}"><i class="fa fa-window-maximize"></i></a> &nbsp;

@@ -1,7 +1,7 @@
 @extends('backend.layouts.master')
 
 @section('seo')
-    @component("components.seo", ["title" => "News", "url" => url('admin/news'), "description" => "Overview of all the article items on Enzow.org"] )
+    @component("components.seo", ["title" => "publishers overview", "url" => url('admin/publishers'), "description" => "Overview of all the publishers on Enzow.org"] )
     @endcomponent
 @endsection
 
@@ -16,15 +16,42 @@
             <div class="col-md-12">
 
                 {{-- Title --}}
-                <h1>News</h1>
+                <h1>Publishers</h1>
 
                 {{--Breadcrumbs--}}
-                @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/news' => 'News']])
+                @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/publishers' => 'publishers']])
                 @endcomponent
 
-                <a class="button button-primary" href="{{ url('admin/articles/create')}}">Create an article</a><br><br>
+                <a class="button button-primary" href="{{ url('admin/publishers/create')}}">Add a publisher</a><br><br>
 
                 <style>
+
+                    .dataTables_length {
+                        display: none;
+                    }
+
+                    .paging_numbers a {
+                        width: 25px;
+                        height: 25px;
+                        line-height: 25px;
+                        display: inline-block;
+                        background-color: #DDDDDD;
+                        color: white;
+                        text-align: center;
+                        margin: 8px 8px 0 0;
+                        text-decoration: none;
+                    }
+
+                    .paging_numbers a.current {
+                        background-color: #BBBBBB;
+                    }
+
+                    .paging_numbers a:hover {
+                        background-color: #BBBBBB;
+                        text-decoration: none;
+                        cursor: pointer;
+                    }
+
                     #example_filter input[type="search"] {
                         height: 30px;
                         width: 100%;
@@ -73,10 +100,12 @@
                     $(document).ready(function() {
                         $('#example').DataTable({
 
-                            "paging":   false,
-                            "ordering": true,
-                            "info":     false,
-                            "searching":   true
+                            "paging":       true,
+                            "pagingType":   "numbers",
+                            "lengthMenu":   [[100, 250, -1], [100, 250, "All"]],
+                            "ordering":     true,
+                            "info":         false,
+                            "searching":    true
 
                         });
                     } );
@@ -88,44 +117,37 @@
                         <th class="align-center-center">
                             <input type="checkbox" title="selectAll">
                         </th>
-                        <th>Article titles</th>
+                        <th>Title</th>
                         <th class="align-right not-on-mobile"></th>
                         <th class="align-right">Tools</th>
                     </tr>
                     </thead>
                     <tbody>
 
-                        @foreach($articles as $article)
+                    @foreach($publishers as $publisher)
                         <tr>
                             <td class="align-center-center">
-                                <input type="checkbox" title="id" value="{{$article->id}}"/>
+                                <input type="checkbox" title="id" value="{{$publisher->id}}"/>
                             </td>
-                            <td><a href="{{url('article/' . $article->slug)}}">{{$article->title}}</a></td>
-                            <td class="align-right article-attributes not-on-mobile">
-                                <span class="status">{{$article->status}}</span>
-                                <a @if($article->published_at != "") class="filled-attribute" @endif title="{{$article->published_at}}"><i class="fa fa-calendar"></i></a>&nbsp;
-                                <a @if($article->game_id != "") class="filled-attribute" title="{{$article->game->title}}"@endif><i class="fa fa-gamepad"></i></a>&nbsp;
-                                <a @if($article->keywords != "") class="filled-attribute" @endif title="{{$article->keywords}}"><i class="fa fa-tags"></i></a>&nbsp;
-                                <a @if($article->author_id != "") class="filled-attribute" title="{{$article->author->username}}"@endif><i class="fa fa-user"></i></a>&nbsp;
-                                {{--<a @if(!$game->genres->isEmpty()) class="filled-attribute" @endif title="Genres: @foreach($game->genres as $genreA) {{$genreA->title}}, @endforeach"><i class="fa fa-book"></i></a>&nbsp;--}}
-                                {{--<a @if(!$game->consoles->isEmpty()) class="filled-attribute" @endif title="Consoles: @foreach($game->consoles as $consoleA) {{$consoleA->title}}, @endforeach"><i class="fa fa-microchip"></i></a>&nbsp;--}}
+                            <td><a href="{{url('publishers/' . $publisher->slug)}}">{{$publisher->title}}</a><br><span class="tags"></span></td>
+                            <td class="align-right publisher-attributes not-on-mobile">
+                                <a @if($publisher->released != "") class="filled-attribute" @endif title="{{$publisher->released}}"><i class="fa fa-calendar"></i></a>&nbsp;
+                                {{--<a @if(!$publisher->genres->isEmpty()) class="filled-attribute" @endif title="Genres: @foreach($publisher->genres as $genreA) {{$genreA->title}}, @endforeach"><i class="fa fa-book"></i></a>&nbsp;--}}
+                                <a @if(!$publisher->games->isEmpty()) class="filled-attribute" @endif title="Games: {{count($publisher->games)}}"><i class="fa fa-gamepad"></i></a>&nbsp;
                             </td>
                             <td class="align-right">
-                                <a href="{{url('/article/' . $article->slug)}}"><i class="fa fa-window-maximize"></i></a> &nbsp;
-                                <a href="{{url('/admin/articles/' . $article->slug . '/edit')}}"><i class="fa fa-pencil"></i></a> &nbsp;
-                                {{ Form::open(array('url' => url('/admin/articles/' . $article->slug), "class" => 'delete-row' )) }}
+                                <a href="{{url('/publishers/' . $publisher->slug)}}"><i class="fa fa-window-maximize"></i></a> &nbsp;
+                                <a href="{{url('/admin/publishers/' . $publisher->slug . '/edit')}}"><i class="fa fa-pencil"></i></a> &nbsp;
+                                {{ Form::open(array('url' => url('/admin/publishers/' . $publisher->slug), "class" => 'delete-row' )) }}
                                 {{ Form::hidden('_method', 'DELETE') }}
                                 <button type='submit' value="delete"><i class="fa fa-trash"></i></button>
                                 {{ Form::close() }}
                             </td>
                         </tr>
-                        @endforeach
+                    @endforeach
                     </tbody>
                 </table>
-
-
             </div>
-
         </div>
     </div>
 @endsection
