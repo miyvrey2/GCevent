@@ -17,6 +17,11 @@ RewriteEngine On
 #RewriteCond %{HTTP_HOST} ^www\.
 #RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
 
+# Enforce SSL and subdomains
+RewriteCond %{SERVER_PORT} !443
+RewriteCond %{HTTP_HOST} ^(.+\.)?gamescomevent\.com$
+RewriteRule ^(.*)$ https://%1gamescomevent.com/$1 [R=301,L]
+
 ## Redirects
 Redirect 301 /about /gamescom-2018
 Redirect 301 /articles /news
