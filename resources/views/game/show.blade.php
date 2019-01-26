@@ -49,7 +49,7 @@
                         <i class="fa fa-gamepad" title="Playable on"></i>Made for
                         @php($i = 1)
                         @foreach($game->platforms as $platform)
-                            <a href="{{url('platforms/' . $platform->slug)}}" title="Playable on {{$platform->title}}">{{$platform->title}}</a>@if($i < count($game->platforms)), @endif
+                            <a href="{{url('platforms/' . $platform->slug)}}" title="Playable on {{$platform->title}}">{{$platform->title}}</a>@if(count($game->platforms) - 1 == $i) & @elseif($i < count($game->platforms)), @endif
 
                             @php($i++)
                         @endforeach

@@ -7,9 +7,25 @@ use Illuminate\Database\Eloquent\Model;
 
 class Platform extends Model
 {
+    // Which items are fill-able in the database
     protected $fillable = ['title', 'slug', 'excerpt', 'body', 'image', 'aliases', 'released_at'];
 
-    //
+    // Select which columns from the database contain dates (and can be used by Carbon)
+    public function getDates()
+    {
+        return ['created_at', 'updated_at'];
+    }
+
+    public function getExcerptHtmlAttribute()
+    {
+        return e($this->excerpt);
+    }
+
+    public function getBodyHtmlAttribute()
+    {
+        return $this->body;
+    }
+
     public function getReleasedAttribute()
     {
         if(!is_null($this->released_at)) {
@@ -33,15 +49,5 @@ class Platform extends Model
     // Many to many (to connect pivot table in DB)
     public function games() {
         return $this->belongsToMany(Game::class)->orderBy("title");
-    }
-
-    public function getBodyHtmlAttribute()
-    {
-        return $this->body;
-    }
-
-    public function getExcerptHtmlAttribute()
-    {
-        return e($this->excerpt);
     }
 }

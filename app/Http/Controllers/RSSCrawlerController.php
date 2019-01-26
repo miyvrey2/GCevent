@@ -56,7 +56,7 @@ class RSSCrawlerController extends Controller
 
         // Setup for saving our crawlings
         $date_of_expire = Carbon::now()->subDays($this->expire_in_days);
-        $consoles = Platform::all();
+        $platforms = Platform::all();
 
         foreach($this->rss_from_sites as $site) {
 
@@ -109,15 +109,15 @@ class RSSCrawlerController extends Controller
                         ]
                     );
 
-                    // Add the consoles to the game if added
+                    // Add the platforms to the game if added
                     if($game_id != null && $categories != "") {
 
-                        foreach($consoles as $console) {
-                            if(strpos(strtolower($categories), strtolower($console['title']))) {
+                        foreach($platforms as $platform) {
+                            if(strpos(strtolower($categories), strtolower($platform['title']))) {
 
                                 GamePlatform::updateOrCreate([
                                     'game_id' => $game_id,
-                                    'console_id' => $console['id']
+                                    'platform_id' => $platform['id']
                                 ]);
                             }
                         }
