@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Game extends Model
 {
-    // Tell which tabel we use
+    // Tell which table we use
     protected $table = 'games';
 
 

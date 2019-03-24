@@ -61,6 +61,11 @@ class RouteServiceProvider extends ServiceProvider
         Route::bind('rssfeed', function($id) {
             return RSSFeed::where('id', $id)->first();
         });
+
+        // Admin
+        Route::bind('admin_pages', function($id) {
+            return Page::where('id', $id)->first();
+        });
     }
 
     /**

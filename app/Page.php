@@ -7,6 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Page extends Model
 {
+    // Which items are fill-able in the database
+    protected $fillable = ['author_id', 'title', 'subtitle', 'slug', 'excerpt', 'body', 'sidebar_title', 'sidebar_body', 'image', 'published_at'];
+
     // Add published_at to the "date" type
     public $dates = ['published_at'];
 

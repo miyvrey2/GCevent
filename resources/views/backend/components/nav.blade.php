@@ -17,6 +17,8 @@
                 <li itemprop="name"><a itemprop="url" href="{{url('/admin/publishers')}}">Publishers</a></li>
             </ul></li>
         <li itemprop="name"><a itemprop="url" href="{{url('/admin/exhibitions')}}">Exhibitions</a></li>
+        <li itemprop="name"><a itemprop="url" href="{{url('/admin/pages')}}">Pages</a></li>
+        <li itemprop="name"><a itemprop="url" href="{{url('/admin/users')}}">Users</a></li>
     @guest
         @else
             <li class="dropdown">

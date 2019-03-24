@@ -23,7 +23,10 @@ Route::group(['prefix' => 'admin'], function() {
     Route::resource('/games', 'Backend\GameController', $exceptShow);
     Route::resource('/platforms', 'Backend\PlatformController', $exceptShow);
     Route::resource('/publishers', 'Backend\PublisherController', $exceptShow);
-
+    Route::resource('/users', 'Backend\UserController');
+    Route::resource('/pages', 'Backend\PageController')->parameters([
+        'pages' => 'admin_pages'
+    ]);
     // Crawled news
     Route::get('/news/incoming', 'Backend\RSSCrawlerController@index');
     Route::get('/feed/{rssfeed}/edit', 'Backend\RSSCrawlerController@edit');

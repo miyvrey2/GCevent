@@ -73,7 +73,7 @@ class GameController extends Controller
             'title'         => 'required|string',
             'slug'          => 'required|string',
             'excerpt'       => 'nullable|string',
-            'body'          => 'nullable|string',
+            'body'          => 'required|string',
             'aliases'       => 'nullable|string',
             'released_at'   => 'nullable|string',
         ]);
