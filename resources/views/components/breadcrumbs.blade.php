@@ -17,17 +17,17 @@
       "@id": "{{url("")}}",
       "name": "{{__('breadcrumbs.home')}}"
     }
-  }
   @php($listitem = 2)
   @foreach($breadcrumbs as $key => $value)
-   ,{
-    "@type": "ListItem",
-    "position": {{$listitem}},
+   },{
+   "@type": "ListItem",
+   "position": {{$listitem}},
     "item": {
       "@id": "{{url($key)}}",
       "name": "{{$value}}"
     }
-    @php($listitem++)
-    @endforeach
-  }
+  @php($listitem++)
+  @endforeach
+  }]
+}
 </script>
