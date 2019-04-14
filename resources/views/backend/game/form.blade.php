@@ -106,11 +106,9 @@
                 @endforeach
             @endif
 
-            @if(isset($genres) && $genres != null)
             @foreach($genres as $genre)
                 <option value="{{$genre->id}}">{{$genre->title}}</option>
             @endforeach
-            @endif
         </select>
     </div>
 
