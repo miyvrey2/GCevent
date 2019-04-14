@@ -14,6 +14,7 @@
             <ul>
                 <li itemprop="name"><a itemprop="url" href="{{url('/admin/games')}}">Games</a></li>
                 <li itemprop="name"><a itemprop="url" href="{{url('/admin/platforms')}}">Platforms</a></li>
+                <li itemprop="name"><a itemprop="url" href="{{url('/admin/developers')}}">Developers</a></li>
                 <li itemprop="name"><a itemprop="url" href="{{url('/admin/publishers')}}">Publishers</a></li>
             </ul></li>
         <li itemprop="name"><a itemprop="url" href="{{url('/admin/exhibitions')}}">Exhibitions</a></li>

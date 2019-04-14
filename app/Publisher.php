@@ -59,6 +59,7 @@ class Publisher extends Model
     }
 
     // A publisher has many games
+    // Many to many (to connect pivot table in DB)
     public function games()
     {
         return $this->belongsToMany(Game::class);

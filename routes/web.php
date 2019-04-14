@@ -20,6 +20,7 @@ Route::group(['prefix' => 'admin'], function() {
 
     Route::get('/news', 'Backend\ArticleController@index');
     Route::resource('/articles', 'Backend\ArticleController');
+    Route::resource('/developers', 'Backend\DeveloperController');
     Route::resource('/games', 'Backend\GameController', $exceptShow);
     Route::resource('/platforms', 'Backend\PlatformController', $exceptShow);
     Route::resource('/publishers', 'Backend\PublisherController', $exceptShow);
