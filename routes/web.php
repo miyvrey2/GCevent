@@ -20,8 +20,9 @@ Route::group(['prefix' => 'admin'], function() {
 
     Route::get('/news', 'Backend\ArticleController@index');
     Route::resource('/articles', 'Backend\ArticleController');
-    Route::resource('/developers', 'Backend\DeveloperController');
+    Route::resource('/developers', 'Backend\DeveloperController', $exceptShow);
     Route::resource('/games', 'Backend\GameController', $exceptShow);
+    Route::resource('/genres', 'Backend\GenreController', $exceptShow);
     Route::resource('/platforms', 'Backend\PlatformController', $exceptShow);
     Route::resource('/publishers', 'Backend\PublisherController', $exceptShow);
     Route::resource('/users', 'Backend\UserController');
