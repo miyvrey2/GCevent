@@ -12,17 +12,17 @@ class ConsoleGameTableSeeder extends Seeder
     public function run()
     {
         // Resets the User table
-        DB::table('console_game')->truncate();
+        DB::table('game_platform')->truncate();
 
         // Generate 10 Dummy posts data
         $articles = [];
 
         // About page
         $articles[] = [
-            'console_id'    => 3,
+            'platform_id'   => 3,
             'game_id'       => 1,
         ];
 
-        DB::table('console_game')->insert($articles);
+        DB::table('game_platform')->insert($articles);
     }
 }

@@ -12,14 +12,13 @@ class ConsolesTableSeeder extends Seeder
      */
     public function run()
     {
-        // Resets the User table
-        DB::table('consoles')->truncate();
+        // Resets the Platforms table
+        DB::table('platforms')->truncate();
 
-        // Generate newest consoles
-        $consoles = [];
+        // Generate newest platforms
         $date = Carbon::now();
 
-        $consoles = [
+        $platforms = [
             [
                 'title'         => 'PlayStation 4',
                 'slug'          => 'playstation-4',
@@ -55,6 +54,6 @@ class ConsolesTableSeeder extends Seeder
             ]
         ];
 
-        DB::table('consoles')->insert($consoles);
+        DB::table('platforms')->insert($platforms);
     }
 }
