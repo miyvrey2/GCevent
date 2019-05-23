@@ -117,7 +117,7 @@
                                 <a href="{{$feed_item->url}}" title="{{$feed_item->title}}" target="_blank">{{substr($feed_item->title, 0, 80)}}@if(strlen($feed_item->title) >= 80)...@endif</a>
                             </td>
                             <td class="align-right article-attributes not-on-mobile">
-                                <span class="status">{{$feed_item->website->title}}</span>
+                                <span class="status">@if(isset($feed_item->website->title)){{$feed_item->website->title}} @endif</span>
                             </td>
                             <td class="align-right article-attributes not-on-mobile">
                                 &nbsp;<a @if($feed_item->game_id != "") class="filled-attribute" title="{{$feed_item->game->title}}"@endif><i class="fa fa-gamepad"></i></a>&nbsp;
