@@ -13,6 +13,9 @@ class RSSWebsite extends Model
     // Table name
     protected $table = 'rss_websites';
 
+    // Rows we may fill
+    protected $fillable = ['title', 'url', 'rss_url', 'article_format', 'date_format', 'decode_utf8_title', 'date_reformat', 'active'];
+
     public function RSSFeeds() {
         return $this->hasMany(RSSFeed::class);
     }

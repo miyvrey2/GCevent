@@ -25,6 +25,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::resource('/genres', 'Backend\GenreController', $exceptShow);
     Route::resource('/platforms', 'Backend\PlatformController', $exceptShow);
     Route::resource('/publishers', 'Backend\PublisherController', $exceptShow);
+    Route::resource('/rsswebsites', 'Backend\RSSWebsiteController', $exceptShow);
     Route::resource('/users', 'Backend\UserController');
     Route::resource('/pages', 'Backend\PageController')->parameters([
         'pages' => 'admin_pages'
