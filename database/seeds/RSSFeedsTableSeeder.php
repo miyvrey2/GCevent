@@ -1,8 +1,8 @@
 <?php
 
 use Carbon\Carbon;
-use Faker\Factory;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class RSSFeedsTableSeeder extends Seeder
 {
@@ -17,8 +17,6 @@ class RSSFeedsTableSeeder extends Seeder
         DB::table('rss_feeds')->truncate();
 
         // Generate 10 Dummy posts data
-        $RSS_feeds = [];
-        $faker = Factory::create();
         $date = Carbon::now();
 
         // About page

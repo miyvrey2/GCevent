@@ -7,8 +7,8 @@ use App\Game;
 use App\Publisher;
 use App\RSSFeed;
 use App\GamePlatform;
+use App\RSSWebsite;
 use Carbon\Carbon;
-use DateTime;
 use Illuminate\Support\Facades\Storage;
 
 class RSSCrawlerController extends Controller
@@ -21,63 +21,41 @@ class RSSCrawlerController extends Controller
     public $expire_in_days = 10;
 
 
-    // List of all RSS feeds we want to know the info from
-    private $rss_from_sites = [
-        ['4gamers',         'http://www.4gamers.be/rss', false, "link", "D, d M Y H:i:s O", false],
-        ['dailynintendo',   'https://www.dailynintendo.nl/feed/', false, "link", "D, d M Y H:i:s O", true], // +2 uur rekenen
-        ['evilgamerz',      'http://www.evilgamerz.com/nieuws/evilgamerz.xml', false, "link", "D, d M Y H:i:s O", false],
-        // Fokzine
-        ['gamed',           'http://www.gamed.nl/rss', false, "link", "D, d M Y H:i:s O", false],
 
-        ['gameliner',       'http://feeds.feedburner.com/gameliner/SuOy', true, "link", "D, d M Y H:i:s O", false],
-//        ['gameliner',       'http://feeds.feedburner.com/gameliner/SuOy', true, "link", "Y-m-d\TH:i:s O", false],
-        ['gamequarter',     'http://www.gamequarter.be/rss/nieuws.xml', true, "link", "D, d M Y H:i:s O", false],
-        ['gamereactor',     'https://www.gamereactor.nl/rss/rss.php?texttype=4', false, "link", "D, d M Y H:i:s O", false],
-        ['gamesnetnl',      'http://feedproxy.google.com/gamersnet/KbfX', false, "guid", "D, d M Y H:i:s O", false],
-        ['gamingnation',    'http://www.gamingnation.nl/feed/', false, "guid", "D, d M Y H:i:s O", true],
-
-        ['igamernl',        'http://feeds.feedburner.com/insidegamer/content?format=xml', false, "link", "Y-m-d\TH:i:sZ", false], //x
-        ['ignnl',           'http://nl.ign.com/feed.xml', false, "link", "D, d M Y H:i:s O", false],
-        ['powerunlimited',  'https://www.pu.nl/feeds/all/', false, "link", "D, d M Y H:i:s O", false],
-        ['telegraaf',       'https://www.telegraaf.nl/tech/games/rss', false, "link", "D, d M Y H:i:s O", false],
-
-        ['thatsgaming',     'http://thatsgaming.nl/feed/', false, "link", "D, d M Y H:i:s O", false],
-//        ['tweakers',        'http://feeds.feedburner.com/tweakers/mixed', false, "link", "D, d M Y H:i:s O", false],
-        ['xboxworldnl',     'http://www.xboxworld.nl/artikelen/rss/', false, "link", "D, d M Y H:i:s O", false],
-        ['xgn',             'https://www.xgn.nl/rss', false, "link", "Y-m-d\TH:i:s O", false],
-
-        ['gameparty',       'http://www.gameparty.net/feed/', false, "link", "D, d M Y H:i:s O", false],
-    ];
     //
     public function crawl()
     {
 
         ini_set("default_charset", 'utf-8');
+        ini_set('max_execution_time', 300); //300 seconds = 5 minutes
+
 
         // Setup for saving our crawlings
         $date_of_expire = Carbon::now()->subDays($this->expire_in_days);
         $platforms = Platform::all();
 
-        foreach($this->rss_from_sites as $site) {
+        $rss_websites = RSSWebsite::all();
+
+        foreach($rss_websites as $site) {
 
             // Setup which site to crawl
-            $url = $site[1];
+            $url = $site->rss_url;
             $xml = simplexml_load_string($this->getHTMLPage($url));
 
             // Process the crawled XML data to CSV
             foreach($xml->channel->item as $item) {
 
-                $title 		= htmlspecialchars($this->decodeXML($item->title->__toString(), $site[2]));
-                if($site[3] == "guid") {
+                $title 		= htmlspecialchars($this->decodeXML($item->title->__toString(), $site->title));
+                if($site->article_format == "guid") {
                     $url 	= htmlspecialchars(utf8_decode($item->guid->__toString()));
                 } else {
                     $url 	= htmlspecialchars(utf8_decode($item->link->__toString()));
                 }
                 $datetime	= $item->pubDate->__toString();
 
-                // reformat Date
-                $datetime = Carbon::createFromFormat($site[4], $datetime);
-                if(isset($site[5]) && $site[5] == true) {
+                // reformat date
+                $datetime = Carbon::createFromFormat($site->date_format, $datetime);
+                if(isset($site->date_reformat) && $site->date_reformat == true) {
                     $datetime->addHours(2);
                 }
                 $datetime = $datetime->format("Y-m-d H:i:s");
@@ -102,7 +80,8 @@ class RSSCrawlerController extends Controller
                             'url'   => $url,
                         ],
                         [
-                            'site'  => $site[0],
+                            'site'  => $site->title,
+                            'rss_website_id'  => $site->id,
                             'published_at' => $datetime,
                             'categories' => $categories,
                             'game_id' => $game_id

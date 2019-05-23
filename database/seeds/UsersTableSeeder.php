@@ -20,19 +20,19 @@ class UsersTableSeeder extends Seeder
         // Generate 3 users/authors
         DB::table('users')->insert([
             [
-                'username' => 'gamescomevent redaction',
-                'email' => 'redaction@gamescomevent.com',
-                'password' => bcrypt('secret'),
+                'username'  => 'gamescomevent redaction',
+                'email'     => 'redaction@gamescomevent.com',
+                'password'  => bcrypt('secret'),
             ],
             [
-                'username' => 'Jane Doe',
-                'email' => 'janedoe@test.com',
-                'password' => bcrypt('secret'),
+                'username'  => 'Jane Doe',
+                'email'     => 'janedoe@test.com',
+                'password'  => bcrypt('secret'),
             ],
             [
-                'username' => 'Jeffrey Sloof',
-                'email' => 'jeffrey_wii@hotmail.com',
-                'password' => bcrypt('secret'),
+                'username'  => 'Jeffrey Sloof',
+                'email'     => 'jeffrey_wii@hotmail.com',
+                'password'  => bcrypt('secret'),
             ],
         ]);
     }

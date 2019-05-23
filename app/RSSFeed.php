@@ -7,14 +7,14 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class RSSFeed extends Model
 {
-    // Use softdeletes
+    // Use soft deletes
     use SoftDeletes;
 
     // Table name
     protected $table = 'rss_feeds';
 
     // Rows we may fill
-    protected $fillable = ['site', 'title', 'url', 'categories', 'game_id', 'published_at'];
+    protected $fillable = ['site', 'title', 'url', 'categories', 'game_id', 'published_at', 'rss_website_id'];
 
     // No created_at and updated_at
     public $timestamps = false;
@@ -27,5 +27,9 @@ class RSSFeed extends Model
 
     public function game() {
         return $this->belongsTo(Game::class);
+    }
+
+    public function website() {
+        return $this->belongsTo(RSSWebsite::class, 'rss_website_id');
     }
 }
