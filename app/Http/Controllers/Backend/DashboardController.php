@@ -29,7 +29,6 @@ class DashboardController extends Controller
         $rss_websites = DB::table('rss_websites')
                  ->join('rss_feeds', 'rss_websites.id', '=', 'rss_feeds.rss_website_id')
                  ->select('rss_websites.title as title', DB::raw("count(rss_feeds.id) as count"))
-                 ->where('published_at', '>=', Carbon::yesterday())
                  ->groupBy('rss_feeds.rss_website_id')
                  ->orderBy('count', 'DESC')
                  ->limit(5)
@@ -38,13 +37,13 @@ class DashboardController extends Controller
         // Get count of all rss_articles with a game_id
         $count_rss_articles_with_game_id = DB::table('rss_feeds')
                  ->select(DB::raw("count(*) as count"))
-                 ->where('game_id', '!=', null)
+                 ->where([['game_id', '!=', null],['published_at', '>=', Carbon::yesterday()]])
                  ->get();
 
         // Get count of all rss_articles without a game_id
         $count_rss_articles_without_game_id = DB::table('rss_feeds')
                  ->select(DB::raw("count(rss_feeds.id) as count"))
-                 ->where('game_id', '=', null)
+                 ->where([['game_id', '=', null],['published_at', '>=', Carbon::yesterday()]])
                  ->get();
 
         // Get top 5 games in news
