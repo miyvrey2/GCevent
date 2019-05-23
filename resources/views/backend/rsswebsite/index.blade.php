@@ -103,12 +103,7 @@
                             <td><a href="{{url('rsswebsite/' . $rss_website->id)}}">{{$rss_website->title}}</a></td>
                             <td class="align-right rsswebsite-attributes not-on-mobile">
                                 <span class="status">{{$rss_website->status}}</span>
-                                <a @if($rss_website->published_at != "") class="filled-attribute" @endif title="{{$rss_website->published_at}}"><i class="fa fa-calendar"></i></a>&nbsp;
-                                <a @if($rss_website->game_id != "") class="filled-attribute" title="{{$rss_website->game->title}}"@endif><i class="fa fa-gamepad"></i></a>&nbsp;
-                                <a @if($rss_website->keywords != "") class="filled-attribute" @endif title="{{$rss_website->keywords}}"><i class="fa fa-tags"></i></a>&nbsp;
-                                <a @if($rss_website->author_id != "") class="filled-attribute" title="{{$rss_website->author->username}}"@endif><i class="fa fa-user"></i></a>&nbsp;
-                                {{--<a @if(!$game->genres->isEmpty()) class="filled-attribute" @endif title="Genres: @foreach($game->genres as $genreA) {{$genreA->title}}, @endforeach"><i class="fa fa-book"></i></a>&nbsp;--}}
-                                {{--<a @if(!$game->consoles->isEmpty()) class="filled-attribute" @endif title="Consoles: @foreach($game->consoles as $consoleA) {{$consoleA->title}}, @endforeach"><i class="fa fa-microchip"></i></a>&nbsp;--}}
+                                <a title="Amount of articles last 2 days">{{count($rss_website->RSSFeeds)}} <i class="fa fa-newspaper-o"></i></a>&nbsp;
                             </td>
                             <td class="align-right">
                                 <a href="{{url('/admin/rsswebsites/' . $rss_website->id . '/edit')}}"><i class="fa fa-pencil"></i></a> &nbsp;

@@ -112,7 +112,7 @@ class RSSWebsitesSeeder extends Seeder
                 'url'               => 'https://www.insidegamer.nl',
                 'rss_url'           => 'https://api.reshift.nl/feeds/16/RSS/',
                 'article_format'    => 'link',
-                'date_format'       => 'Y-m-d\TH:i:sZ',
+                'date_format'       => 'D, d M Y H:i:s O',
                 'date_reformat'     => 0,
                 'decode_utf8_title' => 0,
                 'active'            => 1
