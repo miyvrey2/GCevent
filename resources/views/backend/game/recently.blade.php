@@ -89,11 +89,12 @@
                     #example tr td:last-of-type,
                     #example tr th:last-of-type {
                         padding-right: 10px;
+                        width: 90px;
                     }
 
-                    span.article-list {
+                    ul.article-list {
                         display: block;
-                        padding-left: 15px;
+                        padding-left: 20px;
                     }
                 </style>
 
@@ -135,11 +136,11 @@
                             </td>
                             <td>
                                 <a href="{{url('games/' . $game->slug)}}">{{$game->title}}</a><br>
-                                <span class="article-list">
+                                <ul class="article-list">
                                     @foreach($game->RSSFeeds as $item)
-                                        {{ $item->title }}<br>
+                                        <li>{{ $item->title }}</li>
                                     @endforeach
-                                </span>
+                                </ul>
 
                             </td>
                             <td class="align-right game-attributes not-on-mobile">

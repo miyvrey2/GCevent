@@ -210,7 +210,10 @@ class GameController extends Controller
         $games = Game::with(['RSSFeeds' => function($query) {
                          $query->where([['published_at', '>=', Carbon::yesterday()], ['game_id', '!=', null]]);
                      }])
-                     ->get();
+                     ->get()
+                     ->sortByDesc(function($games) {
+                        return $games->RSSFeeds->count();
+                     });
 
         return view('backend.game.recently', compact('games'));
     }
