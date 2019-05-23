@@ -1,5 +1,10 @@
 @extends('backend.layouts.master')
 
+@section('seo')
+    @component("components.seo", ["title" => "Games overview", "url" => url('admin/games'), "description" => "Overview of all the games on Enzow.org"] )
+    @endcomponent
+@endsection
+
 @section('content')
 
     <section id="featured_line_section">

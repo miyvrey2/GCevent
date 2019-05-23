@@ -13,7 +13,9 @@ use App\Http\Controllers\Controller;
 use App\Game;
 use App\Publisher;
 use App\RSSFeed;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class GameController extends Controller
@@ -201,7 +203,16 @@ class GameController extends Controller
         $game->delete();
 
         return Redirect::to('/admin/games');
+    }
 
+    public function recentlyInRSS()
+    {
+        $games = Game::with(['RSSFeeds' => function($query) {
+                         $query->where([['published_at', '>=', Carbon::yesterday()], ['game_id', '!=', null]]);
+                     }])
+                     ->get();
+
+        return view('backend.game.recently', compact('games'));
     }
 
     /**

@@ -1018,6 +1018,11 @@ footer .social-footer i {
   font-size: 50px;
 }
 
+.backend-main h1 a {
+  margin-left: 10px;
+  font-size: 35px;
+}
+
 .article-attributes a,
 .game-attributes a {
   position: relative;
@@ -1070,6 +1075,7 @@ footer .social-footer i {
 }
 
 .dashboard-card {
+  margin: 0 0 15px 0;
   border-radius: 5px;
   -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
           box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -1101,16 +1107,29 @@ footer .social-footer i {
   padding: 3px 0;
 }
 
+.dashboard-card .content span.line {
+  width: 78%;
+  display: inline-block;
+  vertical-align: top;
+}
+
 .dashboard-card .content span.detail {
   float: right;
   display: inline-block;
   padding: 0 3px;
+  vertical-align: top;
 }
 
 .dashboard-card .content .read-more {
   display: block;
   padding: 5px 0 0;
   text-align: right;
+}
+
+@media screen and (min-width: 768px) {
+  .dashboard-card {
+    margin: 0 0 30px 0;
+  }
 }
 
 .article-show {

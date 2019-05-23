@@ -26,7 +26,7 @@
                     <div class="content">
                         <ul>
                             @foreach($rss_websites as $rss_website)
-                                <li>{{ $rss_website->title }} <span class="detail">{{ $rss_website->count }} <i class="fa fa-newspaper-o"></i></span></li>
+                                <li><span class="line">{{ $rss_website->title }}</span> <span class="detail">{{ $rss_website->count }} <i class="fa fa-newspaper-o"></i></span></li>
                             @endforeach
                         </ul>
                         <a href="{{ url('admin/rsswebsites') }}" class="read-more">See all RSS websites</a>
@@ -55,7 +55,7 @@
                     <div class="content">
                         <ul>
                             @foreach($rss_top_5_games as $rss_top_5_game)
-                                <li>{{ $rss_top_5_game->title }} <span class="detail">{{ $rss_top_5_game->count }} <i class="fa fa-gamepad"></i></span></li>
+                                <li><span class="line">{{ $rss_top_5_game->title }}</span> <span class="detail">{{ $rss_top_5_game->count }} <i class="fa fa-gamepad"></i></span></li>
                             @endforeach
                         </ul>
                         <a href="{{ url('admin/games') }}" class="read-more">See all games</a>

@@ -1,10 +1,5 @@
 @extends('backend.layouts.master')
 
-@section('seo')
-    @component("components.seo", ["title" => "RSS websites", "url" => url('admin/rsswebsites'), "description" => "Overview of all the rss websites on gamescomevent.com"] )
-    @endcomponent
-@endsection
-
 @section('content')
 
     <section id="featured_line_section">
@@ -16,13 +11,22 @@
             <div class="col-md-12">
 
                 {{-- Title --}}
-                <h1>RSS Websites</h1>
+                <h1>{{ $rss_website->title }} <a href="{{ url('/admin/rsswebsites/' . $rss_website->id . '/edit') }}"> <i class="fa fa-pencil"></i></a></h1>
 
                 {{--Breadcrumbs--}}
-                @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/rsswebsites' => 'RSS Websites']])
+                @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/rsswebsites' => 'RSS Websites', 'admin/rsswebsites/' . $rss_website->id => $rss_website->title]])
                 @endcomponent
 
-                <a class="button button-primary" href="{{ url('admin/rsswebsites/create')}}">Create an RSS website</a><br><br>
+                <h2>Info</h2>
+                Title: {{ $rss_website->title }} <br>
+                Website URL: <a href="{{ $rss_website->url }}" title="{{ $rss_website->title }}">{{ $rss_website->url }}</a> <br>
+                RSS URL: <a href="{{ $rss_website->rss_url }}" title="{{ $rss_website->title }} rss feed">{{ $rss_website->rss_url }}</a> <br>
+                <br>
+            </div>
+
+            <div class="col-md-12">
+
+                <h2>Articles</h2>
 
                 <style>
                     #example_filter input[type="search"] {
@@ -88,32 +92,31 @@
                         <th class="align-center-center">
                             <input type="checkbox" title="selectAll">
                         </th>
-                        <th>RSS website names</th>
-                        <th class="align-right not-on-mobile"></th>
+                        <th>Crawled news items</th>
                         <th class="align-right">Tools</th>
                     </tr>
                     </thead>
                     <tbody>
 
-                        @foreach($rss_websites as $rss_website)
+                    @foreach($rss_articles as $rss_article)
                         <tr>
                             <td class="align-center-center">
-                                <input type="checkbox" title="id" value="{{$rss_website->id}}"/>
+                                <input type="checkbox" title="id" value="{{$rss_article->id}}"/>
                             </td>
-                            <td><a href="{{url('/admin/rsswebsites/' . $rss_website->id)}}">{{$rss_website->title}}</a></td>
-                            <td class="align-right rsswebsite-attributes not-on-mobile">
-                                <span class="status">{{$rss_website->status}}</span>
-                                <a title="Amount of articles last 2 days">{{count($rss_website->RSSFeeds)}} <i class="fa fa-newspaper-o"></i></a>&nbsp;
+                            <td>
+                                <a href="{{$rss_article->url}}" title="{{$rss_article->title}}" target="_blank">{{substr($rss_article->title, 0, 80)}}@if(strlen($rss_article->title) >= 80)...@endif</a>
                             </td>
-                            <td class="align-right">
-                                <a href="{{url('/admin/rsswebsites/' . $rss_website->id . '/edit')}}"><i class="fa fa-pencil"></i></a> &nbsp;
-                                {{ Form::open(array('url' => url('/admin/rsswebsites/' . $rss_website->id), "class" => 'delete-row' )) }}
+
+                            <td class="align-right">&nbsp;
+                                <a href="{{$rss_article->url}}"><i class="fa fa-window-maximize"></i></a> &nbsp;
+                                <a href="{{url('/admin/feed/'.$rss_article->id . '/edit')}}"><i class="fa fa-pencil"></i></a> &nbsp;
+                                {{ Form::open(array('url' => url('/admin/feed/' . $rss_article->id), "class" => 'delete-row' )) }}
                                 {{ Form::hidden('_method', 'DELETE') }}
                                 <button type='submit' value="delete"><i class="fa fa-trash"></i></button>
                                 {{ Form::close() }}
                             </td>
                         </tr>
-                        @endforeach
+                    @endforeach
                     </tbody>
                 </table>
 

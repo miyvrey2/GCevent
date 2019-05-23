@@ -72,6 +72,19 @@ class RSSWebsiteController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     *
+     * @param RSSWebsite $rss_website
+     * @return \Illuminate\Http\Response
+     */
+    public function show(RSSWebsite $rss_website)
+    {
+        $rss_articles = RSSFeed::where('rss_website_id', '=', $rss_website->id)->get();
+
+        return view('backend.rsswebsite.show', compact('rss_website', 'rss_articles'));
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  RSSWebsite $rss_website

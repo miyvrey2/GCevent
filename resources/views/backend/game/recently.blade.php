@@ -16,14 +16,11 @@
             <div class="col-md-12">
 
                 {{-- Title --}}
-                <h1>Games</h1>
+                <h1>Recently in RSS</h1>
 
                 {{--Breadcrumbs--}}
-                @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/games' => 'Games']])
+                @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/games' => 'Games', 'admin/games/recently' => 'Recently in RSS']])
                 @endcomponent
-
-                <a class="button button-primary" href="{{ url('admin/games/create')}}">Add a game</a>
-                <a class="button button-primary" href="{{ url('admin/games/recently-in-rss')}}">Recently in RSS</a><br><br>
 
                 <style>
 
@@ -93,6 +90,11 @@
                     #example tr th:last-of-type {
                         padding-right: 10px;
                     }
+
+                    span.article-list {
+                        display: block;
+                        padding-left: 15px;
+                    }
                 </style>
 
                 <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.12.3.min.js"></script>
@@ -126,11 +128,20 @@
                     <tbody>
 
                     @foreach($games as $game)
+                        @if(!$game->RSSFeeds->isEmpty())
                         <tr>
                             <td class="align-center-center">
                                 <input type="checkbox" title="id" value="{{$game->id}}"/>
                             </td>
-                            <td><a href="{{url('games/' . $game->slug)}}">{{$game->title}}</a><br><span class="tags"></span></td>
+                            <td>
+                                <a href="{{url('games/' . $game->slug)}}">{{$game->title}}</a><br>
+                                <span class="article-list">
+                                    @foreach($game->RSSFeeds as $item)
+                                        {{ $item->title }}<br>
+                                    @endforeach
+                                </span>
+
+                            </td>
                             <td class="align-right game-attributes not-on-mobile">
                                 <a @if($game->released != "") class="filled-attribute" @endif title="{{$game->released}}"><i class="fa fa-calendar"></i></a>&nbsp;
                                 <a @if(!$game->genres->isEmpty()) class="filled-attribute" @endif title="Genres: @foreach($game->genres as $genreA) {{$genreA->title}}, @endforeach"><i class="fa fa-book"></i></a>&nbsp;
@@ -147,6 +158,7 @@
                                 {{ Form::close() }}
                             </td>
                         </tr>
+                        @endif
                     @endforeach
                     </tbody>
                 </table>

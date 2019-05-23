@@ -25,11 +25,12 @@ Route::group(['prefix' => 'admin'], function() {
     Route::resource('/genres', 'Backend\GenreController', $exceptShow);
     Route::resource('/platforms', 'Backend\PlatformController', $exceptShow);
     Route::resource('/publishers', 'Backend\PublisherController', $exceptShow);
-    Route::resource('/rsswebsites', 'Backend\RSSWebsiteController', $exceptShow);
+    Route::resource('/rsswebsites', 'Backend\RSSWebsiteController');
     Route::resource('/users', 'Backend\UserController');
     Route::resource('/pages', 'Backend\PageController')->parameters([
         'pages' => 'admin_pages'
     ]);
+    Route::get('games/recently-in-rss', 'Backend\GameController@recentlyInRSS');
     // Crawled news
     Route::get('/news/incoming', 'Backend\RSSCrawlerController@index');
     Route::get('/feed/{rssfeed}/edit', 'Backend\RSSCrawlerController@edit');
