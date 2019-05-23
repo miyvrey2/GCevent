@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\RSSFeed;
 use App\RSSWebsite;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -28,6 +29,7 @@ class DashboardController extends Controller
         $rss_websites = DB::table('rss_websites')
                  ->join('rss_feeds', 'rss_websites.id', '=', 'rss_feeds.rss_website_id')
                  ->select('rss_websites.title as title', DB::raw("count(rss_feeds.id) as count"))
+                 ->where('published_at', '>=', Carbon::yesterday())
                  ->groupBy('rss_feeds.rss_website_id')
                  ->orderBy('count', 'DESC')
                  ->limit(5)
@@ -49,6 +51,7 @@ class DashboardController extends Controller
         $rss_top_5_games = DB::table('rss_feeds')
                   ->join('games', 'rss_feeds.game_id', '=', 'games.id')
                   ->select('games.title as title', DB::raw("count(rss_feeds.game_id) as count"))
+                  ->where('published_at', '>=', Carbon::yesterday())
                   ->groupBy('rss_feeds.game_id')
                   ->orderBy('count', 'DESC')
                   ->limit(5)
