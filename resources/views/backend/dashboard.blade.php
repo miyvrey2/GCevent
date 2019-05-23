@@ -58,7 +58,7 @@
                                 <li><span class="line">{{ $rss_top_5_game->title }}</span> <span class="detail">{{ $rss_top_5_game->count }} <i class="fa fa-gamepad"></i></span></li>
                             @endforeach
                         </ul>
-                        <a href="{{ url('admin/games') }}" class="read-more">See all games</a>
+                        <a href="{{ url('admin/games/recently-in-rss') }}" class="read-more">See all recently games</a>
                     </div>
                 </div>
             </div>
