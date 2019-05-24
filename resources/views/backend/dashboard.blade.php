@@ -54,8 +54,10 @@
                     </div>
                     <div class="content">
                         <ul>
-                            @foreach($rss_top_5_games as $rss_top_5_game)
-                                <li><span class="line">{{ $rss_top_5_game->title }}</span> <span class="detail">{{ $rss_top_5_game->count }} <i class="fa fa-gamepad"></i></span></li>
+                            @foreach($rss_top_5_games as $key => $rss_top_5_game)
+                                @if($key < 5)
+                                    <li><span class="line">{{ $rss_top_5_game->title }}</span> <span class="detail">{{ $rss_top_5_game->RSSFeeds->count() }} <i class="fa fa-gamepad"></i></span></li>
+                                @endif
                             @endforeach
                         </ul>
                         <a href="{{ url('admin/games/recently-in-rss') }}" class="read-more">See all recently games</a>

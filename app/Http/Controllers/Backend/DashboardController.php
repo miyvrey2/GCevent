@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Game;
 use App\RSSFeed;
 use App\RSSWebsite;
 use Carbon\Carbon;
@@ -55,6 +56,18 @@ class DashboardController extends Controller
                   ->orderBy('count', 'DESC')
                   ->limit(5)
                   ->get();
+
+        $rss_top_5_games = Game::with(['RSSFeeds' => function($query) {
+                        $query->where([['published_at', '>=', Carbon::yesterday()], ['game_id', '!=', null]]);
+                     }])
+                     ->get()
+                     ->sortByDesc(function($games) {
+                         return $games->RSSFeeds->count();
+                     });
+
+        // Reset keys for array
+        $rss_top_5_games = $rss_top_5_games->values();
+
 
         return view('backend.dashboard', compact('rss_websites', 'count_rss_articles_with_game_id', 'count_rss_articles_without_game_id', 'rss_top_5_games'));
     }
