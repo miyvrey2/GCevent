@@ -50,7 +50,7 @@ class DashboardController extends Controller
         $count_rss_articles_with_film_in_title = DB::table('rss_feeds')
                 ->select(DB::raw("count(rss_feeds.id) as count"))
                 ->whereRaw('lower(rss_feeds.title) like (?)',["%film%"])
-                ->where('published_at', '>=', Carbon::yesterday())
+                ->where([['game_id', '=', null],['published_at', '>=', Carbon::yesterday()]])
                 ->get();
 
         $rss_top_5_games = Game::with(['RSSFeeds' => function($query) {
