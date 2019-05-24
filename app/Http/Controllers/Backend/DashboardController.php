@@ -47,15 +47,11 @@ class DashboardController extends Controller
                  ->where([['game_id', '=', null],['published_at', '>=', Carbon::yesterday()]])
                  ->get();
 
-        // Get top 5 games in news
-        $rss_top_5_games = DB::table('rss_feeds')
-                  ->join('games', 'rss_feeds.game_id', '=', 'games.id')
-                  ->select('games.title as title', DB::raw("count(rss_feeds.game_id) as count"))
-                  ->where('published_at', '>=', Carbon::yesterday())
-                  ->groupBy('rss_feeds.game_id')
-                  ->orderBy('count', 'DESC')
-                  ->limit(5)
-                  ->get();
+        $count_rss_articles_with_film_in_title = DB::table('rss_feeds')
+                ->select(DB::raw("count(rss_feeds.id) as count"))
+                ->whereRaw('lower(rss_feeds.title) like (?)',["%film%"])
+                ->where('published_at', '>=', Carbon::yesterday())
+                ->get();
 
         $rss_top_5_games = Game::with(['RSSFeeds' => function($query) {
                         $query->where([['published_at', '>=', Carbon::yesterday()], ['game_id', '!=', null]]);
@@ -69,6 +65,6 @@ class DashboardController extends Controller
         $rss_top_5_games = $rss_top_5_games->values();
 
 
-        return view('backend.dashboard', compact('rss_websites', 'count_rss_articles_with_game_id', 'count_rss_articles_without_game_id', 'rss_top_5_games'));
+        return view('backend.dashboard', compact('rss_websites', 'count_rss_articles_with_game_id', 'count_rss_articles_without_game_id', 'rss_top_5_games', 'count_rss_articles_with_film_in_title'));
     }
 }

@@ -218,6 +218,77 @@ class GameController extends Controller
         return view('backend.game.recently', compact('games'));
     }
 
+    public function recentlyInRSSCoupling()
+    {
+        $games = Game::with(['RSSFeeds' => function($query) {
+            $query->where([['published_at', '>=', Carbon::yesterday()], ['game_id', '!=', null]]);
+        }])
+                     ->get()
+                     ->sortByDesc(function($games) {
+                         return $games->RSSFeeds->count();
+                     });
+
+        $rss_feeds_titles = [];
+
+        foreach($games as $game) {
+
+            // remove the gametitle or gamealias from the feedtitle
+            if(count($game->RSSFeeds) > 1) {
+                foreach($game->RSSFeeds as $feed) {
+                    $feedTitle = $feed->title;
+                    $feedTitle = str_replace($game->title, '', $feedTitle);
+
+                    foreach(explode(',', $game->aliases) as $alias) {
+                        $feedTitle = str_replace($alias, '', $feedTitle);
+                    }
+
+                    // Clean feed title
+                    $feedTitle = $this->clean($feedTitle);
+
+                    $rss_feeds_titles[$game->id][$feed->id] = $feedTitle;
+                }
+            }
+
+        }
+
+        $article_word_suggestion = [];
+
+        // Loop trough the rss titles
+        foreach ($rss_feeds_titles as $key => $game) {
+
+            $article_word_suggestion[$key] = [];
+
+            foreach($game as $feed_title) {
+
+                // get each word out of the title
+                $title_as_array = explode(' ', $feed_title);
+
+                // loop trough each word and count
+                foreach ($title_as_array as $word) {
+                    if($word === "") {
+                        continue;
+                    }
+
+                    $word = strtolower($word);
+                    if (!array_key_exists($word, $article_word_suggestion[$key])) {
+                        $article_word_suggestion[$key][$word] = 1;
+                    } else {
+                        $article_word_suggestion[$key][$word] += 1;
+                    }
+                }
+            }
+
+//            $article_word_suggestion[$key] = $this->unset_if_one($article_word_suggestion[$key]);
+
+            // Sort on value amount
+            arsort($article_word_suggestion[$key]);
+        }
+
+        dd($article_word_suggestion);
+
+        return view('backend.game.recently', compact('games'));
+    }
+
     /**
      * Remove arrayitem from the "all"-array out of the database if the arrayitem is already selected for this game
      *
@@ -236,5 +307,21 @@ class GameController extends Controller
         }
 
         return $full_array;
+    }
+
+    private function clean($string) {
+        return preg_replace('/[^A-Za-z0-9\- ]/', '', $string); // Removes special chars.
+    }
+
+    private function unset_if_one($array) {
+
+        foreach($array as $key => $value){
+
+            if ($value === 1) {
+                unset($array[$key]);
+            }
+        }
+
+        return $array;
     }
 }
