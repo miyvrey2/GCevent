@@ -2,15 +2,9 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Platform;
-use App\GamePlatform;
-use App\Developer;
 use App\Http\Controllers\Controller;
-use App\Game;
-use App\Publisher;
 use App\RSSFeed;
 use App\RSSWebsite;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 
