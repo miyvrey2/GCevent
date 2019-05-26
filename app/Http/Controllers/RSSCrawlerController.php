@@ -218,7 +218,8 @@ class RSSCrawlerController extends Controller
         RSSFeed::find($id)->delete();
     }
 
-    public function getGameTitles() {
+    public function getGameTitles()
+    {
 
         // First, be sure we have all the games (we saved) added to the RSS_Feed newsitems
         $this->setGametitleToRSSFeed();
@@ -312,7 +313,8 @@ class RSSCrawlerController extends Controller
         return view('feed.gametitles', compact('game_titles'));
     }
 
-    function getPreviousWord($keyword, $news_items) {
+    function getPreviousWord($keyword, $news_items)
+    {
         $tmp = [];
 
         foreach($news_items as $news_item) {
@@ -376,7 +378,8 @@ class RSSCrawlerController extends Controller
         return $tmp;
     }
 
-    function getNextWord($keyword, $news_items) {
+    function getNextWord($keyword, $news_items)
+    {
         $tmp = [];
 
         foreach($news_items as $news_item) {
@@ -419,7 +422,8 @@ class RSSCrawlerController extends Controller
         return $tmp;
     }
 
-    function stripKeywordIfOneOccurrence($array) {
+    function stripKeywordIfOneOccurrence($array)
+    {
         foreach($array as $key => $item) {
             if ($item['occurrences'] == 1 or $item['occurrences'] == 99) {
                 unset($array[$key]);
@@ -429,7 +433,8 @@ class RSSCrawlerController extends Controller
         return $array;
     }
 
-    function stripIfEmptyArray($array) {
+    function stripIfEmptyArray($array)
+    {
         foreach($array as $key => $value){
             if(empty($value)) {
                 unset($array[$key]);
@@ -441,7 +446,8 @@ class RSSCrawlerController extends Controller
         return $array;
     }
 
-    function getSingleKeywordsFromRSSFeeds($data) {
+    function getSingleKeywordsFromRSSFeeds($data)
+    {
 
         // Get all the keywords that we already have, so we remove it from here
         $wordlist = [];
@@ -515,7 +521,8 @@ class RSSCrawlerController extends Controller
      *
      * @return bool|string
      */
-    private function getHTMLPage($url) {
+    private function getHTMLPage($url)
+    {
         $opts = array(
             'http' => array (
                 'method' => 'GET',
@@ -547,7 +554,8 @@ class RSSCrawlerController extends Controller
      *
      * @return string
      */
-    private function decodeXML($string, $bool) {
+    private function decodeXML($string, $bool)
+    {
 
         $string = str_replace('ï¿½','é', $string);
 
@@ -558,7 +566,8 @@ class RSSCrawlerController extends Controller
         return $string;
     }
 
-    private function findGameidByNewsTitle($newstitle = '') {
+    private function findGameidByNewsTitle($newstitle = '')
+    {
 
         // get game list
         $game_titles = Game::all();
@@ -566,13 +575,8 @@ class RSSCrawlerController extends Controller
         foreach ($game_titles as $game) {
 
             // Remove some special characters
-            $game['title'] = str_replace(':', '', $game['title']);
-            $game['title'] = str_replace(';', '', $game['title']);
-            $game['title'] = str_replace('[', '', $game['title']);
-            $game['title'] = str_replace(']', '', $game['title']);
-            $game['title'] = str_replace('-', '', $game['title']);
-            $game['title'] = str_replace('  ', ' ', $game['title']);
-            $game['title'] = str_replace('   ', ' ', $game['title']);
+            $newstitle = $this->removeSpecialCharacters($newstitle);
+            $game['title'] = $this->removeSpecialCharacters($game['title']);
 
             if (strpos(strtolower($newstitle), strtolower($game['title'])) !== false) {
                 return $game['id'];
@@ -596,7 +600,8 @@ class RSSCrawlerController extends Controller
         return null;
     }
 
-    private function setGametitleToRSSFeed() {
+    private function setGametitleToRSSFeed()
+    {
 
         $rss_feed = RSSFeed::whereNull('game_id')->get();
 
@@ -610,5 +615,18 @@ class RSSCrawlerController extends Controller
         }
 
         return true;
+    }
+
+    private function removeSpecialCharacters($string)
+    {
+        $string = str_replace(':', '', $string);
+        $string = str_replace(';', '', $string);
+        $string = str_replace('[', '', $string);
+        $string = str_replace(']', '', $string);
+        $string = str_replace('-', '', $string);
+        $string = str_replace('  ', ' ', $string);
+        $string = str_replace('   ', ' ', $string);
+
+        return $string;
     }
 }
