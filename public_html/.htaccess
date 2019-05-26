@@ -7,7 +7,7 @@ RewriteCond %{HTTP_HOST} !^www\.
 RewriteRule ^ https://www.gamescomevent.com%{REQUEST_URI} [R=301,L]
 
 RewriteCond %{HTTP_HOST} ^gamescomevent\.com [NC,OR]
-RewriteCond %{HTTP_HOST} ^gwww\.amescomevent\.com [NC]
+RewriteCond %{HTTP_HOST} ^www\.gamescomevent\.com [NC]
 RewriteCond %{HTTPS} off
 RewriteRule ^ https://www.gamescomevent.com%{REQUEST_URI} [R=301,L]
 
