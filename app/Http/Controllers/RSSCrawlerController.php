@@ -469,6 +469,15 @@ class RSSCrawlerController extends Controller
         // Now show me some magic. Run trough each word and count!
         foreach ($data as $row) {
 
+            // Remove some special characters
+            $row['title'] = str_replace(':', '', $row['title']);
+            $row['title'] = str_replace(';', '', $row['title']);
+            $row['title'] = str_replace('[', '', $row['title']);
+            $row['title'] = str_replace(']', '', $row['title']);
+            $row['title'] = str_replace('-', '', $row['title']);
+            $row['title'] = str_replace('  ', ' ', $row['title']);
+            $row['title'] = str_replace('   ', ' ', $row['title']);
+
             // get each word out of the title
             $title_as_array = explode(' ', $row['title']);
 
@@ -555,6 +564,15 @@ class RSSCrawlerController extends Controller
         $game_titles = Game::all();
 
         foreach ($game_titles as $game) {
+
+            // Remove some special characters
+            $game['title'] = str_replace(':', '', $game['title']);
+            $game['title'] = str_replace(';', '', $game['title']);
+            $game['title'] = str_replace('[', '', $game['title']);
+            $game['title'] = str_replace(']', '', $game['title']);
+            $game['title'] = str_replace('-', '', $game['title']);
+            $game['title'] = str_replace('  ', ' ', $game['title']);
+            $game['title'] = str_replace('   ', ' ', $game['title']);
 
             if (strpos(strtolower($newstitle), strtolower($game['title'])) !== false) {
                 return $game['id'];
