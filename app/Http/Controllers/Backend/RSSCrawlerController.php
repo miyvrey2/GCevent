@@ -30,7 +30,7 @@ class RSSCrawlerController extends Controller
         //
         ini_set("default_charset", 'utf-8');
 
-        $feed_items = RSSFeed::where('published_at', '>=', Carbon::yesterday())->orderBy('published_at','desc')->get();
+        $feed_items = RSSFeed::where('published_at', '>=', Carbon::now()->subHours(48))->orderBy('published_at','desc')->get();
 
         return view('backend.feed.index', compact('feed_items'));
     }

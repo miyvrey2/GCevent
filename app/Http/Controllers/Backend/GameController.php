@@ -208,7 +208,7 @@ class GameController extends Controller
     public function recentlyInRSS()
     {
         $games = Game::with(['RSSFeeds' => function($query) {
-                         $query->where([['published_at', '>=', Carbon::yesterday()], ['game_id', '!=', null]]);
+                         $query->where([['published_at', '>=', Carbon::now()->subHours(48)], ['game_id', '!=', null]]);
                      }])
                      ->get()
                      ->sortByDesc(function($games) {
@@ -221,7 +221,7 @@ class GameController extends Controller
     public function recentlyInRSSCoupling()
     {
         $games = Game::with(['RSSFeeds' => function($query) {
-            $query->where([['published_at', '>=', Carbon::yesterday()], ['game_id', '!=', null]]);
+            $query->where([['published_at', '>=', Carbon::now()->subHours(48)], ['game_id', '!=', null]]);
         }])
                      ->get()
                      ->sortByDesc(function($games) {

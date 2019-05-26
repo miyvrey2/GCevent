@@ -26,6 +26,8 @@ class DashboardController extends Controller
      */
     public function index()
     {
+        $last_48_hours = Carbon::now()->subHours(48);
+
         // Get top 5 rss website feeds
         $rss_websites = DB::table('rss_websites')
                  ->join('rss_feeds', 'rss_websites.id', '=', 'rss_feeds.rss_website_id')
@@ -38,23 +40,23 @@ class DashboardController extends Controller
         // Get count of all rss_articles with a game_id
         $count_rss_articles_with_game_id = DB::table('rss_feeds')
                  ->select(DB::raw("count(*) as count"))
-                 ->where([['game_id', '!=', null],['published_at', '>=', Carbon::yesterday()]])
+                 ->where([['game_id', '!=', null],['published_at', '>=', $last_48_hours]])
                  ->get();
 
         // Get count of all rss_articles without a game_id
         $count_rss_articles_without_game_id = DB::table('rss_feeds')
                  ->select(DB::raw("count(rss_feeds.id) as count"))
-                 ->where([['game_id', '=', null],['published_at', '>=', Carbon::yesterday()]])
+                 ->where([['game_id', '=', null],['published_at', '>=', $last_48_hours]])
                  ->get();
 
         $count_rss_articles_with_film_in_title = DB::table('rss_feeds')
                 ->select(DB::raw("count(rss_feeds.id) as count"))
                 ->whereRaw('lower(rss_feeds.title) like (?)',["%film%"])
-                ->where([['game_id', '=', null],['published_at', '>=', Carbon::yesterday()]])
+                ->where([['game_id', '=', null],['published_at', '>=', $last_48_hours]])
                 ->get();
 
         $rss_top_5_games = Game::with(['RSSFeeds' => function($query) {
-                        $query->where([['published_at', '>=', Carbon::yesterday()], ['game_id', '!=', null]]);
+                        $query->where([['published_at', '>=', Carbon::now()->subHours(48)], ['game_id', '!=', null]]);
                      }])
                      ->get()
                      ->sortByDesc(function($games) {
