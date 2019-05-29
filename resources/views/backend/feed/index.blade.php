@@ -25,52 +25,6 @@
                 <a class="button button-primary" href="{{ url('admin/articles/create')}}">Create an article</a>&nbsp;
                 <a class="button button-primary" href="{{ url('crawler/crawl')}}" target="_blank"><i class="fa fa-refresh"></i></a><br><br>
 
-                <style>
-                    #example_filter input[type="search"] {
-                        height: 30px;
-                        width: 100%;
-                        margin: 5px 0 10px;
-                    }
-
-                    #example thead{
-                        text-align: left;
-                        background-color: #EEEEEE;
-                    }
-
-                    #example thead th,
-                    #example tr td {
-                        padding: 6px 0;
-                        vertical-align: middle;
-                        border-bottom: 1px solid #CCCCCC;
-                        height: 20px;
-                        overflow:hidden;
-                        word-wrap:break-word;
-                    }
-
-                    #example thead th {
-                        border-top: 1px solid #CCCCCC;
-                    }
-
-                    #example tr td span.tags {
-                        font-style: italic;
-                        font-size: 12px;
-                    }
-
-                    #example tr td span.status {
-                        color: #888888;
-                    }
-
-                    #example tr th input[type="checkbox"],
-                    #example tr td input[type="checkbox"] {
-                        margin: 0;
-                    }
-
-                    #example tr td:last-of-type,
-                    #example tr th:last-of-type {
-                        padding-right: 10px;
-                    }
-                </style>
-
                 <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.12.3.min.js"></script>
                 <script type="text/javascript" language="javascript" src="{{asset('js/dataTables.js')}}"></script>
                 <script type="text/javascript" language="javascript" class="init">
