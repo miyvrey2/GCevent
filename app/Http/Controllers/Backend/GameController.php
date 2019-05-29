@@ -453,12 +453,15 @@ class GameController extends Controller
 
     private function googleKnowledgeSearch($term)
     {
+        // https://developers.google.com/knowledge-graph/#knowledge_graph_entities
+        // https://kgsearch.googleapis.com/v1/entities:search?query=death+stranding&key=env('GOOGLE_KNOWLEDGE_SEARCH_KEY')&limit=1
+
         $service_url = 'https://kgsearch.googleapis.com/v1/entities:search';
         $params = array(
             'query' => $term,
             'limit' => 1,
             'indent' => TRUE,
-            'key' => 'AIzaSyCQpxUhsrTd0cougyvPQQhAbd6JeQ8Vx5E');
+            'key' => env('GOOGLE_KNOWLEDGE_SEARCH_KEY'));
         $url = $service_url . '?' . http_build_query($params);
 
         $opts = array(
