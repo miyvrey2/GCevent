@@ -38,11 +38,15 @@ class DeveloperController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($title = null)
     {
 
         // Initiate a new platform with some defined values
         $developer = new Developer();
+
+        if($title != null) {
+            $developer->title = $title;
+        }
 
         return view('backend.developer.create', compact('developer'));
     }

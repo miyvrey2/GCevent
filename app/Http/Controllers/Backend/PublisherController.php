@@ -38,11 +38,15 @@ class PublisherController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($title = null)
     {
 
         // Initiate a new platform with some defined values
         $publisher = new Publisher();
+
+        if($title != null) {
+            $publisher->title = $title;
+        }
 
         return view('backend.publisher.create', compact('publisher'));
     }

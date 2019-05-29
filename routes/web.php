@@ -32,6 +32,9 @@ Route::group(['prefix' => 'admin'], function() {
     ]);
     Route::get('games/recently-in-rss', 'Backend\GameController@recentlyInRSS');
     Route::get('games/recently-in-rss/coupling', 'Backend\GameController@recentlyInRSSCoupling');
+    Route::get('games/find-publisher/{game}', 'Backend\GameController@tryToGetThePublisher');
+    Route::get('games/find-developer/{game}', 'Backend\GameController@findDeveloper');
+    Route::get('publishers/create/{title}', 'Backend\PublisherController@create');
     // Crawled news
     Route::get('/news/incoming', 'Backend\RSSCrawlerController@index');
     Route::get('/feed/{rssfeed}/edit', 'Backend\RSSCrawlerController@edit');

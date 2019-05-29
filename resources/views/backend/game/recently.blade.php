@@ -141,7 +141,8 @@
                                         <li>{{ $item->title }}</li>
                                     @endforeach
                                 </ul>
-
+                                <a href="{{ url('/admin/games/find-publisher/' . urlencode($game->slug) ) }}">Fetch publisher</a>
+                                <a href="{{ url('/admin/games/find-developer/' . urlencode($game->slug) ) }}">Fetch developer</a>
                             </td>
                             <td class="align-right game-attributes not-on-mobile">
                                 <a @if($game->released != "") class="filled-attribute" @endif title="{{$game->released}}"><i class="fa fa-calendar"></i></a>&nbsp;

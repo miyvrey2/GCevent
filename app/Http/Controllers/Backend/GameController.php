@@ -205,6 +205,132 @@ class GameController extends Controller
         return Redirect::to('/admin/games');
     }
 
+    public function tryToGetThePublisher(Game $game)
+    {
+        // Get from google the knowledge search
+        $json = $this->googleKnowledgeSearch($game->title);
+        $json_decode = json_decode($json);
+
+        // Get the title and description
+        $title = $json_decode->itemListElement[0]->result->name;
+        if(!isset($json_decode->itemListElement[0]->result->detailedDescription)) {
+            return "No Knowledge found.";
+        }
+        $detailedDescription = $json_decode->itemListElement[0]->result->detailedDescription->articleBody;
+
+        // If the title is not the same, return false
+        if($game->title != $title) {
+            return false;
+        }
+
+        // empty publisher
+        $new_publisher = null;
+
+        // Get all the publishers
+        $publishers = Publisher::all();
+        $publishers_array = [];
+        $publishers_name = "";
+
+        if(strpos($detailedDescription, 'published') > strpos($detailedDescription, 'developed')) {
+            $description = explode("published", $detailedDescription, 2)[1];
+        } else {
+            $description = explode("published", $detailedDescription, 2)[0];
+        }
+
+        foreach($publishers as $publisher) {
+            if (strpos(strtolower($description), strtolower($publisher->title)) !== false) {
+
+                // Combine the old array and the newly information
+                $publishers_array[] = $publisher->id;
+                $publishers_name .= $publisher->title . ", ";
+            }
+        }
+
+        // If we found publishers, sync them
+        if($publishers_array != []) {
+
+            $publishers_array = array_merge($game->publishers->pluck('id')->toArray(), $publishers_array);
+
+            // Sync the game and it's publishers
+            $game->publishers()->sync($publishers_array);
+
+            return "synced " . $publishers_name . " to the array.";
+
+        } else {
+            if (strpos($detailedDescription, 'published by') !== false) {
+                $first = explode("published by", $detailedDescription, 2)[1];
+                $middle = explode(". ", $first, 2)[0];
+                $middle = explode("for", $middle, 2)[0];
+                $new_publisher = $middle;
+            }
+
+            return "No existing publisher found. Add <a href='" . url('/admin/publishers/create/'.$new_publisher) . "'>" . $new_publisher . "</a>. The full string was: " . $detailedDescription;
+        }
+    }
+
+    public function findDeveloper(Game $game)
+    {
+        // Get from google the knowledge search
+        $json = $this->googleKnowledgeSearch($game->title);
+        $json_decode = json_decode($json);
+
+        // Get the title and description
+        $title = $json_decode->itemListElement[0]->result->name;
+        if(!isset($json_decode->itemListElement[0]->result->detailedDescription)) {
+            return "No Knowledge found.";
+        }
+        $detailedDescription = $json_decode->itemListElement[0]->result->detailedDescription->articleBody;
+
+        // If the title is not the same, return false
+        if($game->title != $title) {
+            return false;
+        }
+
+        // empty developer
+        $new_developer = null;
+
+        // Get all the developers
+        $developers = Developer::all();
+        $developers_array = [];
+        $developers_name = "";
+
+        if(strpos($detailedDescription, 'developed') > strpos($detailedDescription, 'developed')) {
+            $description = explode("developed", $detailedDescription, 2)[1];
+        } else {
+            $description = explode("developed", $detailedDescription, 2)[0];
+        }
+
+        foreach($developers as $developer) {
+            if (strpos(strtolower($description), strtolower($developer->title)) !== false) {
+
+                // Combine the old array and the newly information
+                $developers_array[] = $developer->id;
+                $developers_name .= $developer->title . ", ";
+            }
+        }
+
+        // If we found developers, sync them
+        if($developers_array != []) {
+
+            $developers_array = array_merge($game->developers->pluck('id')->toArray(), $developers_array);
+
+            // Sync the game and it's developers
+            $game->developers()->sync($developers_array);
+
+            return "synced " . $developers_name . " to the array.";
+
+        } else {
+            if (strpos($detailedDescription, 'developed by') !== false) {
+                $first = explode("developed by", $detailedDescription, 2)[1];
+                $middle = explode(". ", $first, 2)[0];
+                $middle = explode("for", $middle, 2)[0];
+                $new_developer = $middle;
+            }
+
+            return "No existing developer found. Add <a href='" . url('/admin/developers/'.$new_developer) . "'>" . $new_developer . "</a>. The full string was: " . $detailedDescription;
+        }
+    }
+
     public function recentlyInRSS()
     {
         $games = Game::with(['RSSFeeds' => function($query) {
@@ -323,5 +449,35 @@ class GameController extends Controller
         }
 
         return $array;
+    }
+
+    private function googleKnowledgeSearch($term)
+    {
+        $service_url = 'https://kgsearch.googleapis.com/v1/entities:search';
+        $params = array(
+            'query' => $term,
+            'limit' => 1,
+            'indent' => TRUE,
+            'key' => 'AIzaSyCQpxUhsrTd0cougyvPQQhAbd6JeQ8Vx5E');
+        $url = $service_url . '?' . http_build_query($params);
+
+        $opts = array(
+            'http' => array (
+                'method' => 'GET',
+                'header' => "
+                    User-Agent: Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/67.0.3396.99 Safari/537.36; \r\n
+			        "
+            ),
+            "ssl" => array(
+                "verify_peer" => false,
+                "verify_peer_name" => false,
+            ),
+        );
+
+        // Open the stream
+        $context = stream_context_create($opts);
+
+        // Return the page
+        return file_get_contents($url, false, $context);
     }
 }
