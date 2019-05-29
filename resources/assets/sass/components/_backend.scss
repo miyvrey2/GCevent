@@ -47,6 +47,10 @@
     display: none;
 }
 
+.show-on-mobile {
+    display: inline;
+}
+
 #example tr td:first-child,
 #example thead th:first-child {
     padding: 6px 3px;
@@ -55,6 +59,10 @@
 @media screen and (min-width:768px) {
     .not-on-mobile {
         display: table-cell;
+    }
+
+    .show-on-mobile {
+        display: none;
     }
 
     #example tr td:last-child,

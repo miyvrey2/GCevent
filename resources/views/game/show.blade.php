@@ -24,7 +24,7 @@
 
             </div>
             <div class="col-md-9">
-                <p><strong>{!! $game->excerpt !!}</strong></p>
+                <p><strong>{!! $game->introduction() !!}{!! $game->excerpt !!}</strong></p>
                 <br />
                 <p>
                     {!! $game->body_html !!}

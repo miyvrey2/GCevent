@@ -37,7 +37,16 @@
                             "ordering":     true,
                             "info":         false,
                             "searching":    true
+                        });
 
+                        $(".game-attributes-tab a").click(function() {
+
+                            if($(this).find(".display-on-click").css("display") == "block") {
+                                $('.display-on-click').css('display','none');
+                            } else {
+                                $('.display-on-click').css('display','none');
+                                $(this).find(".display-on-click").css('display','block');
+                            }
                         });
                     } );
                 </script>
@@ -60,7 +69,16 @@
                             <td class="align-center-center">
                                 <input type="checkbox" title="id" value="{{$game->id}}"/>
                             </td>
-                            <td><a href="{{url('games/' . $game->slug)}}">{{$game->title}}</a><br><span class="tags"></span></td>
+                            <td>
+                                <a href="{{url('games/' . $game->slug)}}">{{$game->title}}</a><br><span class="tags"></span>
+                                <div class="game-attributes game-attributes-tab show-on-mobile">
+                                    <a @if($game->released != "") class="filled-attribute" @endif title="{{$game->released}}"><i class="fa fa-calendar"></i></a>&nbsp;
+                                    <a @if(!$game->genres->isEmpty()) class="filled-attribute" @endif title="Genres: @foreach($game->genres as $genreA) {{$genreA->title}}, @endforeach"><i class="fa fa-book"></i></a>&nbsp;
+                                    <a @if(!$game->platforms->isEmpty()) class="filled-attribute" @endif title="Platforms: @foreach($game->platforms as $platformA) {{$platformA->title}}, @endforeach"><i class="fa fa-microchip"></i></a>&nbsp;
+                                    <a @if(!$game->developers->isEmpty()) class="filled-attribute" @endif title="Developed by: @foreach($game->developers as $developerA) {{$developerA->title}}, @endforeach"><i class="fa fa-flask"></i></a>
+                                    <a @if(!$game->publishers->isEmpty()) class="filled-attribute" @endif title="Published by: @foreach($game->publishers as $publisherA) {{$publisherA->title}}, @endforeach"><i class="fa fa-upload"></i><span class="display-on-click">@foreach($game->publishers as $publisherA) {{$publisherA->title}}, @endforeach</span></a>
+                                </div>
+                            </td>
                             <td class="align-right game-attributes not-on-mobile">
                                 <a @if($game->released != "") class="filled-attribute" @endif title="{{$game->released}}"><i class="fa fa-calendar"></i></a>&nbsp;
                                 <a @if(!$game->genres->isEmpty()) class="filled-attribute" @endif title="Genres: @foreach($game->genres as $genreA) {{$genreA->title}}, @endforeach"><i class="fa fa-book"></i></a>&nbsp;

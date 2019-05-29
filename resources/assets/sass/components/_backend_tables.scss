@@ -62,5 +62,35 @@
 
 #example tr td:last-of-type,
 #example tr th:last-of-type {
+    width: 80px;
     padding-right: 10px;
+}
+
+.game-attributes-tab a {
+    position: relative;
+}
+
+.display-on-click {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: -5px;
+    width: 150px;
+    display: none;
+    padding: 5px 10px;
+    background: $primary-color;
+    border-radius: 4px;
+    color: white;
+    z-index: 10;
+
+    &:before {
+        content: "";
+        position: absolute;
+        top: -5px;
+        display: block;
+        width: 0;
+        height: 0;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 5px solid $primary-color;
+    }
 }

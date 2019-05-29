@@ -1058,6 +1058,10 @@ footer .social-footer i {
   display: none;
 }
 
+.show-on-mobile {
+  display: inline;
+}
+
 #example tr td:first-child,
 #example thead th:first-child {
   padding: 6px 3px;
@@ -1066,6 +1070,10 @@ footer .social-footer i {
 @media screen and (min-width: 768px) {
   .not-on-mobile {
     display: table-cell;
+  }
+
+  .show-on-mobile {
+    display: none;
   }
 
   #example tr td:last-child,
@@ -1138,7 +1146,37 @@ footer .social-footer i {
 
 #example tr td:last-of-type,
 #example tr th:last-of-type {
+  width: 80px;
   padding-right: 10px;
+}
+
+.game-attributes-tab a {
+  position: relative;
+}
+
+.display-on-click {
+  position: absolute;
+  top: calc(100% + 5px);
+  left: -5px;
+  width: 150px;
+  display: none;
+  padding: 5px 10px;
+  background: #3097D1;
+  border-radius: 4px;
+  color: white;
+  z-index: 10;
+}
+
+.display-on-click:before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  display: block;
+  width: 0;
+  height: 0;
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+  border-bottom: 5px solid #3097D1;
 }
 
 .dashboard-card {

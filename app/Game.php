@@ -125,4 +125,21 @@ class Game extends Model
     {
         return e($this->excerpt);
     }
+
+    public function introduction()
+    {
+        $string = "";
+
+        $string .= $this->title . " is a ";
+        foreach($this->genres as $key => $genre) {
+            $string .= $genre->title;
+            if ($key != count($this->genres) - 1) {
+                $string .= ', ';
+            }
+        }
+
+        $string .= "game.";
+
+        return $string;
+    }
 }
