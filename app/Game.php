@@ -159,6 +159,10 @@ class Game extends Model
 
     private function aOrAn($string)
     {
+        if($string == "") {
+            return "a";
+        }
+
         $klinker = ['a', 'e', 'i', 'o', 'u'];
 
         if(in_array($string[0], $klinker)) {
@@ -170,6 +174,11 @@ class Game extends Model
 
     private function santiziseListToString($array)
     {
+        // If the array is empty, return
+        if($array->isEmpty()){
+            return "";
+        }
+
         $string = "";
 
         foreach($array as $key => $value) {
