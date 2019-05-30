@@ -15,7 +15,7 @@
             <div class="col-md-4">
                 <h3>Quick links</h3>
                 <ul>
-                    <li><a href="{{url('gamescom-2019')}}">About gamescom 2018</a></li>
+                    <li><a href="{{url('gamescom-2019')}}">About gamescom 2019</a></li>
                     <li><a href="{{url('tickets')}}">Tickets</a></li>
                     <li><a href="{{url('sitemap')}}">Sitemap</a></li>
                     <li><a href="{{url('rss')}}">RSS feed</a></li>
