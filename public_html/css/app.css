@@ -1024,7 +1024,9 @@ footer .social-footer i {
 }
 
 .article-attributes a,
-.game-attributes a {
+.article-attributes span.a,
+.game-attributes a,
+.game-attributes span.a {
   position: relative;
   width: 20px;
   height: 20px;
@@ -1034,7 +1036,9 @@ footer .social-footer i {
 }
 
 .article-attributes a i,
-.game-attributes a i {
+.article-attributes span.a i,
+.game-attributes a i,
+.game-attributes span.a i {
   font-size: 12px;
   padding: 0;
   margin: 0;
@@ -1045,12 +1049,30 @@ footer .social-footer i {
 }
 
 .article-attributes a.filled-attribute,
-.game-attributes a.filled-attribute {
+.article-attributes span.a.filled-attribute,
+.game-attributes a.filled-attribute,
+.game-attributes span.a.filled-attribute {
   background-color: #3097D1;
 }
 
 .article-attributes a.filled-attribute i,
-.game-attributes a.filled-attribute i {
+.article-attributes span.a.filled-attribute i,
+.game-attributes a.filled-attribute i,
+.game-attributes span.a.filled-attribute i {
+  color: white;
+}
+
+.article-attributes a.filled-attribute,
+.article-attributes span.a.filled-attribute,
+.game-attributes a.filled-attribute,
+.game-attributes span.a.filled-attribute {
+  background-color: #3097D1;
+}
+
+.article-attributes a.filled-attribute i,
+.article-attributes span.a.filled-attribute i,
+.game-attributes a.filled-attribute i,
+.game-attributes span.a.filled-attribute i {
   color: white;
 }
 
@@ -1150,18 +1172,28 @@ footer .social-footer i {
   padding-right: 10px;
 }
 
-.game-attributes-tab.game-attributes a {
+.game-attributes-tab.game-attributes a,
+.game-attributes-tab.game-attributes span.a {
   width: 30px;
   height: 30px;
 }
 
-.game-attributes-tab.game-attributes a i {
+.game-attributes-tab.game-attributes a i,
+.game-attributes-tab.game-attributes span.a i {
   font-size: 20px;
   line-height: 30px;
 }
 
 .game-attributes-tab a {
   position: relative;
+}
+
+.game-attributes-tab.game-attributes .display-on-click a {
+  width: auto;
+  height: auto;
+  display: none;
+  background: none;
+  color: white;
 }
 
 .display-on-click {

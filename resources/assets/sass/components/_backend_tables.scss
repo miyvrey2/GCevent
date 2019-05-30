@@ -67,7 +67,8 @@
 }
 
 .game-attributes-tab {
-    &.game-attributes a {
+    &.game-attributes a,
+    &.game-attributes span.a {
         width: 30px;
         height: 30px;
 
@@ -81,6 +82,13 @@
     }
 }
 
+.game-attributes-tab.game-attributes .display-on-click a {
+    width: auto;
+    height: auto;
+    display: none;
+    background: none;
+    color: white;
+}
 .display-on-click {
     position: absolute;
     top: calc(100% + 5px);

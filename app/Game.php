@@ -172,7 +172,7 @@ class Game extends Model
         }
     }
 
-    private function santiziseListToString($array)
+    public function santiziseListToString($array)
     {
         // If the array is empty, return
         if($array->isEmpty()){
