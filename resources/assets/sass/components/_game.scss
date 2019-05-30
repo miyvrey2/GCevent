@@ -43,7 +43,7 @@
 
                 width: 100%;
                 display: inline-block;
-                padding-right: 50px;
+                padding-right: 0;
 
                 i {
                     width: 25px;
@@ -77,3 +77,11 @@
     }
 }
 
+@media screen and (min-width: 992px) {
+    .game-show,
+    .game-upcoming {
+        .col-md-3 ul.game-meta li {
+            padding-right: 50px;
+        }
+    }
+}

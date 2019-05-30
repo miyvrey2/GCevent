@@ -37,7 +37,8 @@ body {
         text-decoration: none;
         cursor: pointer;
 
-    &.button-primary {
+    &.button-primary,
+    &.primary-button{
         background-color: $primary-color;
         color: white;
     }

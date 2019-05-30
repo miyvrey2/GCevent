@@ -1,6 +1,5 @@
         <nav>
             <i id="navOpenButton" class="fa fa-bars" aria-hidden="true"></i>
-            <span id="navBackColor"></span>
             <ul itemscope itemtype="http://www.schema.org/SiteNavigationElement" id="navigation_menu">
                 <i id="navCloseButton" class="fa fa-times" aria-hidden="true"></i>
                 <li itemprop="name"><a itemprop="url" href="{{url('/')}}">Home</a></li>
@@ -41,6 +40,7 @@
                 @endguest
             </ul>
         </nav>
+        <div id="navBackColor"></div>
         <script>
             /*
              * Menu Script
@@ -55,7 +55,8 @@
 
             navOpenButton.onclick = function(){
                 if (open===0){
-                    navBackColor.style.backgroundColor = "rgba(0, 0, 0, 0.3)";
+                    navBackColor.style.backgroundColor = "rgba(0, 0, 0, 0.05)";
+                    navBackColor.style.display = "block";
                     menu.style.right = 0;
                     open++;
                 }
@@ -82,5 +83,6 @@
                 menu.style.right = '-50vh';
                 open=0;
                 navBackColor.style.backgroundColor = "rgba(0, 0, 0, 0)";
+                navBackColor.style.display = "none";
             }
         </script>

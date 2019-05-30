@@ -2,6 +2,7 @@ nav {
     position: absolute;
     top: 0;
     right: 0;
+    height: 100vh;
 
     #navOpenButton {
         margin: 0 25px;
@@ -27,15 +28,20 @@ nav {
         -webkit-transition: all 0.3s ease;
         -moz-transition: all 0.3s ease;
         transition: all 0.3s ease;
-        z-index: 2;
+        z-index: 3;
         line-height: 1;
-        padding-top: 60px;
+        overflow-y: auto;
+        padding-bottom: 50px;
 
         li {
             width: 90%;
             height: auto;
             display: inline-block;
             padding: 8px 16px;
+
+            &:first-of-type {
+                margin-top: 60px;
+            }
 
             &:hover ul {
                 display: block;
@@ -54,11 +60,17 @@ nav {
                 right: auto;
                 width: auto;
                 height: auto;
+                min-height: auto;
                 padding: 0;
                 margin: 10px -10px 0 10px;
                 background-color: transparent;
+                overflow: initial;
 
                 li {
+
+                    &:first-of-type {
+                        margin-top: 0;
+                    }
 
                     a {
                         line-height: 1;
@@ -74,8 +86,9 @@ nav ul li.active a {
 
 #navBackColor {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
+    display: none;
     top: 0;
     left: 0;
     background-color: rgba(0, 0, 0, 0);
@@ -114,12 +127,17 @@ nav ul li.active a {
             margin-top: 0;
             line-height: 60px;
             padding-top: 0;
+            overflow: initial;
 
             li {
                 position: relative;
                 float: left;
                 width: auto;
                 padding: 0 10px;
+
+                &:first-of-type {
+                    margin-top: 0;
+                }
 
                 #search-form {
                     position: relative;

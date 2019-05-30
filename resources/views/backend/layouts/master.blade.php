@@ -35,7 +35,7 @@
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 </head>
-<body>
+<body id="admin-panel">
 <header>
     <strong>
         <a href="{{url('/')}}">{{config('app.name')}}</a>
