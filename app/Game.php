@@ -128,17 +128,63 @@ class Game extends Model
 
     public function introduction()
     {
-        $string = "";
+        $genres = $this->santiziseListToString($this->genres);
+        $developers = $this->santiziseListToString($this->developers);
+        $publishers = $this->santiziseListToString($this->publishers);
 
-        $string .= $this->title . " is a ";
-        foreach($this->genres as $key => $genre) {
-            $string .= $genre->title;
-            if ($key != count($this->genres) - 1) {
-                $string .= ', ';
+        $string = $this->title . " is " . $this->aOrAn($genres) . " " . $genres . " game. ";
+        if(!$this->developers->isEmpty() && !$this->publishers->isEmpty()) {
+            $string .= "The game is developed by " . $developers . " and published by " . $publishers . ". ";
+        }
+        if(!$this->developers->isEmpty() && $this->publishers->isEmpty()) {
+            $string .= "The game is developed by " . $developers . ". ";
+        }
+        if($this->developers->isEmpty() && !$this->publishers->isEmpty()) {
+            $string .= "The game is published by " . $publishers . ". ";
+        }
+        $string .= "The release date ";
+
+        if($this->getReleasedAttribute() == "T.B.A.") {
+            $string .= "has yet to be announced. ";
+        } else {
+            if (Carbon::now()->lt(Carbon::parse($this->getReleasedAttribute()))) {
+                $string .= "will be " . $this->getReleasedAttribute() . ". ";
+            } else {
+                $string .= "was on " . $this->getReleasedAttribute() . ". ";
             }
         }
 
-        $string .= "game.";
+        return $string;
+    }
+
+    private function aOrAn($string)
+    {
+        $klinker = ['a', 'e', 'i', 'o', 'u'];
+
+        if(in_array($string[0], $klinker)) {
+            return "an";
+        } else {
+            return "a";
+        }
+    }
+
+    private function santiziseListToString($array)
+    {
+        $string = "";
+
+        foreach($array as $key => $value) {
+            $string .= $value->title;
+
+            if (count($array) > 1) {
+                if ($key <= count($array) - 3) {
+                    $string .= ', ';
+                }
+
+                if ($key == count($array) - 2) {
+                    $string .= ' and ';
+                }
+            }
+        }
 
         return $string;
     }
