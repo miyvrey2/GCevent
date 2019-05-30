@@ -1150,6 +1150,16 @@ footer .social-footer i {
   padding-right: 10px;
 }
 
+.game-attributes-tab.game-attributes a {
+  width: 30px;
+  height: 30px;
+}
+
+.game-attributes-tab.game-attributes a i {
+  font-size: 20px;
+  line-height: 30px;
+}
+
 .game-attributes-tab a {
   position: relative;
 }

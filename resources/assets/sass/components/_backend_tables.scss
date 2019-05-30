@@ -66,8 +66,19 @@
     padding-right: 10px;
 }
 
-.game-attributes-tab a {
-    position: relative;
+.game-attributes-tab {
+    &.game-attributes a {
+        width: 30px;
+        height: 30px;
+
+        i {
+            font-size: 20px;
+            line-height: 30px;
+        }
+    }
+    a {
+        position: relative;
+    }
 }
 
 .display-on-click {
