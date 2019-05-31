@@ -658,6 +658,8 @@ class RSSCrawlerController extends Controller
         $string = str_replace('[', '', $string);
         $string = str_replace(']', '', $string);
         $string = str_replace('-', '', $string);
+        $string = str_replace('!', '', $string);
+        $string = str_replace('?', '', $string);
         $string = str_replace('  ', ' ', $string);
         $string = str_replace('   ', ' ', $string);
 
