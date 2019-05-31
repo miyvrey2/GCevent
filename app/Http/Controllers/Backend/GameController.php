@@ -260,13 +260,13 @@ class GameController extends Controller
             if (strpos($detailedDescription, 'published by') !== false) {
                 $first = explode("published by", $detailedDescription, 2)[1];
                 $middle = explode(". ", $first, 2)[0];
-                $middle = explode(" for", $middle, 2)[0];
-                $new_publisher = $middle;
+                $middle = explode("for", $middle, 2)[0];
+                $new_publisher = trim($middle);
             } elseif (strpos($detailedDescription, 'developed and published by') !== false) {
                 $first = explode("developed and published by", $detailedDescription, 2)[1];
                 $middle = explode(". ", $first, 2)[0];
-                $middle = explode(" for", $middle, 2)[0];
-                $new_publisher = $middle;
+                $middle = explode("for", $middle, 2)[0];
+                $new_publisher = trim($middle);
             }
 
             return "No existing publisher found. Add <a href='" . url('/admin/publishers/create/'.$new_publisher) . "'>" . $new_publisher . "</a>. The full string was: " . $detailedDescription;
@@ -328,13 +328,13 @@ class GameController extends Controller
             if (strpos($detailedDescription, 'developed by') !== false) {
                 $first = explode("developed by", $detailedDescription, 2)[1];
                 $middle = explode(". ", $first, 2)[0];
-                $middle = explode(" for", $middle, 2)[0];
-                $new_developer = $middle;
+                $middle = explode("for", $middle, 2)[0];
+                $new_developer = trim($middle);
             } elseif (strpos($detailedDescription, 'developed and published by') !== false) {
                 $first = explode("developed and published by", $detailedDescription, 2)[1];
                 $middle = explode(". ", $first, 2)[0];
-                $middle = explode(" for", $middle, 2)[0];
-                $new_developer = $middle;
+                $middle = explode("for", $middle, 2)[0];
+                $new_developer = trim($middle);
             }
 
             return "No existing developer found. Add <a href='" . url('/admin/developers/'.$new_developer) . "'>" . $new_developer . "</a>. The full string was: " . $detailedDescription;
