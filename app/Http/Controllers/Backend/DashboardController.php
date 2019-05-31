@@ -56,6 +56,18 @@ class DashboardController extends Controller
                 ->where([['game_id', '=', null],['published_at', '>=', $last_48_hours]])
                 ->get();
 
+        $count_rss_articles_with_e3_in_title = DB::table('rss_feeds')
+                ->select(DB::raw("count(rss_feeds.id) as count"))
+                ->whereRaw('lower(rss_feeds.title) like (?)',["%e3%"])
+                ->where([['game_id', '=', null],['published_at', '>=', $last_48_hours]])
+                ->get();
+
+        $count_rss_articles_with_gamescom_in_title = DB::table('rss_feeds')
+                 ->select(DB::raw("count(rss_feeds.id) as count"))
+                 ->whereRaw('lower(rss_feeds.title) like (?)',["%gamescom%"])
+                 ->where([['game_id', '=', null],['published_at', '>=', $last_48_hours]])
+                 ->get();
+
         $rss_top_5_games = Game::with(['RSSFeeds' => function($query) {
                         $query->where([['published_at', '>=', Carbon::now()->subHours(48)], ['game_id', '!=', null]]);
                      }])
@@ -68,6 +80,6 @@ class DashboardController extends Controller
         $rss_top_5_games = $rss_top_5_games->values();
 
 
-        return view('backend.dashboard', compact('rss_websites', 'count_rss_articles_with_game_id', 'count_rss_articles_without_game_id', 'rss_top_5_games', 'count_rss_articles_with_film_in_title'));
+        return view('backend.dashboard', compact('rss_websites', 'count_rss_articles_with_game_id', 'count_rss_articles_without_game_id', 'rss_top_5_games', 'count_rss_articles_with_film_in_title', 'count_rss_articles_with_e3_in_title', 'count_rss_articles_with_gamescom_in_title'));
     }
 }

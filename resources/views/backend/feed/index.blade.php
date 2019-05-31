@@ -7,6 +7,13 @@
 
 @section('content')
 
+    <style>
+        #example tr td:last-of-type,
+        #example tr th:last-of-type {
+            width: 120px;
+        }
+    </style>
+
     <section id="featured_line_section">
         <div class="featured_line greenblue"></div>
     </section>

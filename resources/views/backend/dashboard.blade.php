@@ -42,7 +42,9 @@
                     <div class="content">
                         Articles with game: <span class="detail">{{ $count_rss_articles_with_game_id[0]->count }} <i class="fa fa-gamepad"></i></span> <br>
                         Articles without game: <span class="detail">{{ $count_rss_articles_without_game_id[0]->count }} <i class="fa fa-gamepad"></i></span><br>
-                        Articles with "film" in the title: <span class="detail">{{ $count_rss_articles_with_film_in_title[0]->count }} <i class="fa fa-gamepad"></i></span><br>
+                        - Whom with "film" in the title: <span class="detail">{{ $count_rss_articles_with_film_in_title[0]->count }} <i class="fa fa-gamepad"></i></span><br>
+                        - Whom with "e3" in the title: <span class="detail">{{ $count_rss_articles_with_e3_in_title[0]->count }} <i class="fa fa-gamepad"></i></span><br>
+                        - Whom with "gamescom": <span class="detail">{{ $count_rss_articles_with_gamescom_in_title[0]->count }} <i class="fa fa-gamepad"></i></span><br>
                         <a href="{{ url('admin/news/incoming') }}" class="read-more">See all RSS articles</a>
                     </div>
                 </div>
