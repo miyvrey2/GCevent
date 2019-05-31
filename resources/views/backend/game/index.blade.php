@@ -39,7 +39,7 @@
                             "searching":    true
                         });
 
-                        $(".game-attributes-tab .a").click(function() {
+                        $("body").on('click', ".game-attributes-tab .a", function () {
 
                             if($(this).find(".display-on-click").css("display") == "block") {
                                 $('.display-on-click').css('display','none');
@@ -77,7 +77,15 @@
                                     <a @if($game->released != "") class="filled-attribute" @endif title="{{$game->released}}"><i class="fa fa-calendar"></i></a>&nbsp;
                                     <a @if(!$game->genres->isEmpty()) class="filled-attribute" @endif title="Genres: @foreach($game->genres as $genreA) {{$genreA->title}}, @endforeach"><i class="fa fa-book"></i></a>&nbsp;
                                     <a @if(!$game->platforms->isEmpty()) class="filled-attribute" @endif title="Platforms: @foreach($game->platforms as $platformA) {{$platformA->title}}, @endforeach"><i class="fa fa-microchip"></i></a>&nbsp;
-                                    <a @if(!$game->developers->isEmpty()) class="filled-attribute" @endif title="Developed by: @foreach($game->developers as $developerA) {{$developerA->title}}, @endforeach"><i class="fa fa-flask"></i></a>
+                                    <span @if(!$game->developers->isEmpty()) class="a filled-attribute" @else class="a" @endif title="Developed by: @foreach($game->developers as $developerA) {{$developerA->title}}, @endforeach"><i class="fa fa-flask"></i>
+                                    <span class="display-on-click">
+                                            @if(!$game->developers->isEmpty())
+                                            {{ $game->santiziseListToString($game->developers) }}
+                                        @else
+                                            <a href="{{ url('/admin/games/find-developer/' . urlencode($game->slug) ) }}">Fetch developers</a>
+                                        @endif
+                                        </span>
+                                    </span>
                                     <span @if(!$game->publishers->isEmpty()) class="a filled-attribute" @else class="a" @endif title="Published by: @foreach($game->publishers as $publisherA) {{$publisherA->title}}, @endforeach"><i class="fa fa-upload"></i>
                                         <span class="display-on-click">
                                             @if(!$game->publishers->isEmpty())
