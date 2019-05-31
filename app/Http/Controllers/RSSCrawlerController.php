@@ -476,13 +476,7 @@ class RSSCrawlerController extends Controller
         foreach ($data as $row) {
 
             // Remove some special characters
-            $row['title'] = str_replace(':', '', $row['title']);
-            $row['title'] = str_replace(';', '', $row['title']);
-            $row['title'] = str_replace('[', '', $row['title']);
-            $row['title'] = str_replace(']', '', $row['title']);
-            $row['title'] = str_replace('-', '', $row['title']);
-            $row['title'] = str_replace('  ', ' ', $row['title']);
-            $row['title'] = str_replace('   ', ' ', $row['title']);
+            $row['title'] = $this->removeSpecialCharacters($row['title']);
 
             // get each word out of the title
             $title_as_array = explode(' ', $row['title']);
@@ -600,6 +594,43 @@ class RSSCrawlerController extends Controller
         return null;
     }
 
+    public function suggestGameTitle()
+    {
+        $rss_feed = RSSFeed::whereNull('game_id')->get();
+
+        // Get the keywords
+        $file = 'data/RSSitems/keywords.json';
+        if (Storage::disk('local')->exists($file)) {
+            $file_items = json_decode(Storage::disk('local')->get($file), true);
+        }
+
+        // Loop trough the feed_items
+        foreach($rss_feed as $item){
+
+            // get each word out of the title
+            $title_as_array = explode(' ', $this->removeSpecialCharacters($item->title));
+
+            // loop trough each word
+            foreach ($title_as_array as $key => $word) {
+
+                $word = strtolower($word);
+
+                if ($word === "") {
+                    continue;
+                }
+
+                if(array_key_exists($word, $file_items['items'])) {
+                    if ($file_items['items'][ $word ]['in_game'] == 0 && $file_items['items'][ $word ]['other'] > 0) {
+                        unset($title_as_array[ $key ]);
+                    }
+                }
+            }
+
+            dump($title_as_array);
+
+        }
+    }
+
     private function setGametitleToRSSFeed()
     {
 
@@ -619,6 +650,7 @@ class RSSCrawlerController extends Controller
 
     private function removeSpecialCharacters($string)
     {
+        $string = preg_replace("/&#?[a-z0-9]{2,8};/i","",$string);
         $string = str_replace(':', '', $string);
         $string = str_replace(';', '', $string);
         $string = str_replace('[', '', $string);
