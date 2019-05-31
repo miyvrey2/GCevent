@@ -30,7 +30,9 @@
                 @endcomponent
 
                 <a class="button button-primary" href="{{ url('admin/articles/create')}}">Create an article</a>&nbsp;
-                <a class="button button-primary" href="{{ url('crawler/crawl')}}" target="_blank"><i class="fa fa-refresh"></i></a><br><br>
+                <a class="button button-primary" href="{{ url('crawler/crawl')}}" target="_blank"><i class="fa fa-refresh"></i></a>
+                <a class="button button-primary" href="{{ url('admin/rssitems/find-keywords')}}" target="_blank">Find keywords</a>
+                <a class="button button-primary" href="{{ url('admin/rssitems/suggest-game-title')}}" target="_blank">Suggest game title</a><br><br>
 
                 <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.12.3.min.js"></script>
                 <script type="text/javascript" language="javascript" src="{{asset('js/dataTables.js')}}"></script>
