@@ -626,7 +626,9 @@ class RSSCrawlerController extends Controller
                 }
             }
 
-            dump($title_as_array);
+            if($title_as_array != [0 => ""]) {
+                dump($title_as_array);
+            }
 
         }
     }
