@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\Stringdate;
+use App\Rules\Stringdatetime;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -31,7 +31,7 @@ class StoreOrUpdateDeveloper extends FormRequest
             'excerpt'       => 'nullable|string',
             'body'          => 'nullable|string',
             'image'         => 'nullable|string',
-            'found'         => ['nullable', new Stringdate],
+            'found'         => ['nullable', new Stringdatetime],
             'url'           => 'nullable|string',
         ];
     }

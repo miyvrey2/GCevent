@@ -13,7 +13,7 @@ class Developer extends Model
     // Select which columns from the database contain dates (and can be used by Carbon)
     public function getDates()
     {
-        return ['created_at', 'updated_at'];
+        return ['created_at', 'updated_at', 'found'];
     }
 
     public function getRouteKeyName()
