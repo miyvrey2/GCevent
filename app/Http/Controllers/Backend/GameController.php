@@ -262,6 +262,11 @@ class GameController extends Controller
                 $middle = explode(". ", $first, 2)[0];
                 $middle = explode("for", $middle, 2)[0];
                 $new_publisher = $middle;
+            } elseif (strpos($detailedDescription, 'developed and published by') !== false) {
+                $first = explode("developed and published by", $detailedDescription, 2)[1];
+                $middle = explode(". ", $first, 2)[0];
+                $middle = explode("for", $middle, 2)[0];
+                $new_publisher = $middle;
             }
 
             return "No existing publisher found. Add <a href='" . url('/admin/publishers/create/'.$new_publisher) . "'>" . $new_publisher . "</a>. The full string was: " . $detailedDescription;
@@ -322,6 +327,11 @@ class GameController extends Controller
         } else {
             if (strpos($detailedDescription, 'developed by') !== false) {
                 $first = explode("developed by", $detailedDescription, 2)[1];
+                $middle = explode(". ", $first, 2)[0];
+                $middle = explode("for", $middle, 2)[0];
+                $new_developer = $middle;
+            } elseif (strpos($detailedDescription, 'developed and published by') !== false) {
+                $first = explode("developed and published by", $detailedDescription, 2)[1];
                 $middle = explode(". ", $first, 2)[0];
                 $middle = explode("for", $middle, 2)[0];
                 $new_developer = $middle;
