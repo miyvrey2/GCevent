@@ -30,12 +30,13 @@ body {
 }
 
 .button {
-        position: relative;
-        border: 0;
-        padding: 10px 20px;
-        font-weight: bold;
-        text-decoration: none;
-        cursor: pointer;
+    position: relative;
+    border: 0;
+    padding: 10px 20px;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+    display: inline-block;
 
     &.button-primary,
     &.primary-button{

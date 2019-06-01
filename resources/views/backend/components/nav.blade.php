@@ -8,6 +8,8 @@
                 <li itemprop="name"><a itemprop="url" href="{{url('/admin/news')}}">News articles</a></li>
                 <li itemprop="name"><a itemprop="url" href="{{url('/admin/rsswebsites')}}">RSS websites</a></li>
                 <li itemprop="name"><a itemprop="url" href="{{url('/admin/news/incoming')}}">RSS crawled articles</a></li>
+                <li itemprop="name"><a itemprop="url" href="{{url('/admin/rssitems/find-keywords')}}">Find keywords</a></li>
+                <li itemprop="name"><a itemprop="url" href="{{url('/admin/rssitems/suggest-game-title')}}">Suggest Game title</a></li>
             </ul>
         </li>
         <li itemprop="name"><a itemprop="url" href="{{url('/admin/games')}}">Games</a>

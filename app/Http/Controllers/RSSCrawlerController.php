@@ -45,7 +45,7 @@ class RSSCrawlerController extends Controller
             // Process the crawled XML data to CSV
             foreach($xml->channel->item as $item) {
 
-                $title 		= htmlspecialchars($this->decodeXML($item->title->__toString(), $site->title));
+                $title 		= htmlspecialchars_decode($this->decodeXML($item->title->__toString(), $site->title));
                 if($site->article_format == "guid") {
                     $url 	= htmlspecialchars(utf8_decode($item->guid->__toString()));
                 } else {

@@ -15,7 +15,7 @@ class CreateGamesTable extends Migration
     {
         Schema::create('games', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('publisher_id')->unsigned();
+            $table->integer('publisher_id')->nullable()->unsigned();
             $table->foreign('publisher_id')->references('id')->on('publishers')->onDelete('restrict');
             $table->integer('developer_id')->nullable()->unsigned();
             $table->foreign('developer_id')->references('id')->on('developers')->onDelete('restrict');
