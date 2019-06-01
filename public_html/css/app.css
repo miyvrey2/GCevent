@@ -1255,6 +1255,31 @@ footer .social-footer i {
   border-bottom: 5px solid #3097D1;
 }
 
+input[type="checkbox"].suggest {
+  display: none;
+}
+
+input[type="checkbox"].suggest + label .suggestion {
+  display: inline-block;
+  padding: 3px 6px;
+  background: #3097D1;
+  color: white;
+  user-select: none;
+  /* supported by Chrome and Opera */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+}
+
+input[type="checkbox"].suggest:checked + label .suggestion {
+  background: #2579a9;
+}
+
 .dashboard-card {
   margin: 0 0 15px 0;
   border-radius: 5px;

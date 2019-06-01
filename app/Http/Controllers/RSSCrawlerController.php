@@ -596,13 +596,18 @@ class RSSCrawlerController extends Controller
 
     public function suggestGameTitle()
     {
-        $rss_feed = RSSFeed::whereNull('game_id')->get();
+        $rss_feed = RSSFeed::where([
+            ['published_at', '>=', Carbon::now()->subHours(48)],
+            ['game_id', '=', null]
+        ])->get();
 
         // Get the keywords
         $file = 'data/RSSitems/keywords.json';
         if (Storage::disk('local')->exists($file)) {
             $file_items = json_decode(Storage::disk('local')->get($file), true);
         }
+
+        $suggestions = [];
 
         // Loop trough the feed_items
         foreach($rss_feed as $item){
@@ -627,10 +632,12 @@ class RSSCrawlerController extends Controller
             }
 
             if($title_as_array != [0 => ""]) {
-                dump($title_as_array);
+                $suggestions[$item->id]["title"] = $item->title;
+                $suggestions[$item->id]["words"] = $title_as_array;
             }
-
         }
+
+        return view('backend.feed.suggest', compact('suggestions'));
     }
 
     private function setGametitleToRSSFeed()

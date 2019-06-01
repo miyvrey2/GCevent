@@ -34,6 +34,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('games/recently-in-rss/coupling', 'Backend\GameController@recentlyInRSSCoupling');
     Route::get('games/find-publisher/{game}', 'Backend\GameController@tryToGetThePublisher');
     Route::get('games/find-developer/{game}', 'Backend\GameController@findDeveloper');
+    Route::get('games/create/{title}', 'Backend\GameController@create');
     Route::get('publishers/create/{title}', 'Backend\PublisherController@create');
     Route::get('rssitems/find-keywords', 'Backend\RSSCrawlerController@findKeywords');
     Route::get('rssitems/suggest-game-title', 'RSSCrawlerController@suggestGameTitle');

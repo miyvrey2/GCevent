@@ -44,7 +44,7 @@ class GameController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($title = null)
     {
 
         // Get the developers, games, publishers, platforms and genres
@@ -58,6 +58,9 @@ class GameController extends Controller
         $game = new Game();
         $game->released_at = date("Y") . "-00-00";
         $game->aliases = null;
+        if($title != null){
+            $game->title = $title;
+        }
 
         return view('backend.game.create', compact('developers', 'games','publishers', 'game', 'platforms', 'genres'));
     }

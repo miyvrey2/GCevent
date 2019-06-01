@@ -151,6 +151,14 @@
         });
 
         // Set slug
+        $( document ).ready( function() {
+            var sluggie = slug($('#title').val());
+
+            $('#slug').val(sluggie);
+
+        });
+
+        // Set slug
         $('#title').change( function() {
             var sluggie = slug($('#title').val());
 
