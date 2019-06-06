@@ -17,6 +17,6 @@ class RSSWebsite extends Model
     protected $fillable = ['title', 'url', 'rss_url', 'article_format', 'date_format', 'decode_utf8_title', 'date_reformat', 'active'];
 
     public function RSSFeeds() {
-        return $this->hasMany(RSSFeed::class, 'rss_website_id');
+        return $this->hasMany(RSSItem::class, 'rss_website_id');
     }
 }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Game;
-use App\RSSFeed;
+use App\RSSItem;
 use App\RSSWebsite;
 use Carbon\Carbon;
 use Illuminate\Http\Request;

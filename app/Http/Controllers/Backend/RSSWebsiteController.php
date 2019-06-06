@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
-use App\RSSFeed;
+use App\RSSItem;
 use App\RSSWebsite;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -73,7 +73,7 @@ class RSSWebsiteController extends Controller
      */
     public function show(RSSWebsite $rss_website)
     {
-        $rss_articles = RSSFeed::where('rss_website_id', '=', $rss_website->id)->get();
+        $rss_articles = RSSItem::where('rss_website_id', '=', $rss_website->id)->get();
 
         return view('backend.rsswebsite.show', compact('rss_website', 'rss_articles'));
     }

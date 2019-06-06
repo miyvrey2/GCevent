@@ -2,19 +2,15 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Platform;
-use App\GamePlatform;
-use App\Developer;
 use App\Http\Controllers\Controller;
 use App\Game;
-use App\Publisher;
-use App\RSSFeed;
+use App\RSSItem;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 
-class RSSCrawlerController extends Controller
+class RSSItemController extends Controller
 {
 
     public function __construct()
@@ -32,7 +28,7 @@ class RSSCrawlerController extends Controller
         //
         ini_set("default_charset", 'utf-8');
 
-        $feed_items = RSSFeed::where('published_at', '>=', Carbon::now()->subHours(48))
+        $feed_items = RSSItem::where('published_at', '>=', Carbon::now()->subHours(48))
                              ->orderBy('published_at', 'desc')
                              ->get();
 
@@ -42,11 +38,11 @@ class RSSCrawlerController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  RSSFeed $feed
+     * @param  RSSItem $feed
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(RSSFeed $feed)
+    public function edit(RSSItem $feed)
     {
         // Get all the games
         $games = Game::all(); // Doesn't have to be ordered since it is for auto-completion
@@ -60,11 +56,11 @@ class RSSCrawlerController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  Game $game
+     * @param  RSSItem $feed
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RSSFeed $feed)
+    public function update(Request $request, RSSItem $feed)
     {
         // Validate
         $this->validate($request, [
@@ -83,11 +79,12 @@ class RSSCrawlerController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Game $game
+     * @param  RSSItem $feed
      *
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
-    public function destroy(RSSFeed $feed)
+    public function destroy(RSSItem $feed)
     {
         // Delete the game
         $feed->delete();
@@ -108,11 +105,11 @@ class RSSCrawlerController extends Controller
             $last_item = $file_items['last_item'];
 
             // Get the rss items that are new
-            $rss_items = RSSFeed::where([
+            $rss_items = RSSItem::where([
                 ['id', '>', $last_item],
                 ['game_id', '!=', null]
             ])->orderBy('id')
-              ->get();
+                                ->get();
 
             if(!$rss_items->isEmpty()) {
 

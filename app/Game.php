@@ -99,7 +99,7 @@ class Game extends Model
     }
 
     public function RSSFeeds() {
-        return $this->hasMany(RSSFeed::class);
+        return $this->hasMany(RSSItem::class);
     }
 
     public function articles() {

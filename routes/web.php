@@ -36,13 +36,14 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('games/find-developer/{game}', 'Backend\GameController@findDeveloper');
     Route::get('games/create/{title}', 'Backend\GameController@create');
     Route::get('publishers/create/{title}', 'Backend\PublisherController@create');
-    Route::get('rssitems/find-keywords', 'Backend\RSSCrawlerController@findKeywords');
-    Route::get('rssitems/suggest-game-title', 'RSSCrawlerController@suggestGameTitle');
+    Route::get('rssitems/find-keywords', 'Backend\RSSItemController@findKeywords');
+    Route::get('rssitems/suggest-game-title', 'RSSItemController@suggestGameTitle');
+
     // Crawled news
-    Route::get('/news/incoming', 'Backend\RSSCrawlerController@index');
-    Route::get('/feed/{rssfeed}/edit', 'Backend\RSSCrawlerController@edit');
-    Route::patch('/feed/{rssfeed}', 'Backend\RSSCrawlerController@update');
-    Route::delete('/feed/{rssfeed}', 'Backend\RSSCrawlerController@destroy');
+    Route::get('/news/incoming', 'Backend\RSSItemController@index');
+    Route::get('/feed/{rssfeed}/edit', 'Backend\RSSItemController@edit');
+    Route::patch('/feed/{rssfeed}', 'Backend\RSSItemController@update');
+    Route::delete('/feed/{rssfeed}', 'Backend\RSSItemController@destroy');
 
 });
 
@@ -72,12 +73,7 @@ Route::get('/platforms', 'PlatformController@index');
 Route::get('/platforms/{platform}', 'PlatformController@show');
 
 // Crawler
-//Route::get('/crawler', 'RSSCrawlerController@index');
-Route::get('/crawler/removeDuplicates', 'RSSCrawlerController@removeDuplicates');
-Route::get('/crawler/removeOldNews', 'RSSCrawlerController@removeOldNews');
 Route::get('/crawler/crawl', 'RSSCrawlerController@crawl');
-Route::get('/crawler/gametitles', 'RSSCrawlerController@getGameTitles');
-Route::post('crawler/delete/{id}', 'RSSCrawlerController@remove_from_index');
 
 // Games
 Route::get('/games/list', 'GameController@listed');
@@ -87,8 +83,9 @@ Route::resource('/games', 'GameController');
 // Authentication
 Auth::routes();
 Route::get('/validate', 'Auth\ActivateController@index');
+
 // Other pages
 Route::get('/', 'PageController@home');
-Route::get('/pages', 'PageController@index');
+
 // Very last route for catching all pages
 Route::get('/{page}', 'PageController@show');

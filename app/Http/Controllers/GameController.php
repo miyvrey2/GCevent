@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Game;
 use App\Publisher;
-use App\RSSFeed;
+use App\RSSItem;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -100,7 +100,7 @@ class GameController extends Controller
     public function show(Game $game)
     {
 
-        $game->rssFeeds = RSSFeed::where('game_id', '=', $game['id'])->get();
+        $game->rssFeeds = RSSItem::where('game_id', '=', $game['id'])->get();
 
         return view('game.show', compact('game'));
     }

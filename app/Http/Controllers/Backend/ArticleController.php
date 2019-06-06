@@ -8,7 +8,6 @@ use App\Http\Controllers\Controller;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 
 class ArticleController extends Controller
@@ -123,7 +122,7 @@ class ArticleController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Game  $game
+     * @param  Article $article
      * @return \Illuminate\Http\Response
      */
     public function edit(Article $article)
@@ -189,7 +188,9 @@ class ArticleController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  Article $article
+     *
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Article $article)
     {

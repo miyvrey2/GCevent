@@ -8,7 +8,7 @@ use App\Page;
 use App\Article;
 use App\Platform;
 use App\Publisher;
-use App\RSSFeed;
+use App\RSSItem;
 use App\RSSWebsite;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -60,7 +60,7 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         Route::bind('rssfeed', function($id) {
-            return RSSFeed::where('id', $id)->first();
+            return RSSItem::where('id', $id)->first();
         });
 
         Route::bind('rsswebsite', function($id) {

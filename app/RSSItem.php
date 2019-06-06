@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class RSSFeed extends Model
+class RSSItem extends Model
 {
     // Use soft deletes
     use SoftDeletes;
