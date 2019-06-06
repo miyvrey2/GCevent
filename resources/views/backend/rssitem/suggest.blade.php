@@ -1,7 +1,7 @@
 @extends('backend.layouts.master')
 
 @section('seo')
-    @component("components.seo", ["title" => "Crawled news", "url" => url('admin/news/incoming'), "description" => "Overview of all the crawled news items from the world wide web."] )
+    @component("components.seo", ["title" => "Suggest game title from RSS Items", "url" => url('admin/rssitems/suggest-game-title'), "description" => "Overview of all the crawled news items from the world wide web."] )
     @endcomponent
 @endsection
 
@@ -10,7 +10,10 @@
     <style>
         #example tr td:last-of-type,
         #example tr th:last-of-type {
-            width: 120px;
+            width: 200px;
+            padding-top: 20px;
+            text-align: right;
+            padding-right: 0;
         }
     </style>
 
@@ -23,10 +26,10 @@
             <div class="col-md-12">
 
                 {{-- Title --}}
-                <h1>Crawled feeds</h1>
+                <h1>Suggest game title from RSS Items</h1>
 
                 {{--Breadcrumbs--}}
-                @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/news/incoming' => 'Crawled feeds']])
+                @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/rssitems/suggest-game-title' => 'Suggest game title from RSS Items']])
                 @endcomponent
 
                 <a class="button button-primary" href="{{ url('admin/articles/create')}}">Create an article</a>&nbsp;
@@ -62,40 +65,43 @@
                 <table id="example" class="display" cellspacing="0" width="100%">
                     <thead>
                     <tr>
-                        <th class="align-center-center">
-                            <input type="checkbox" title="selectAll" id="selectAll">
-                        </th>
-                        <th>Crawled news items</th>
-                        <th class="align-right not-on-mobile">Bron</th>
-                        <th class="align-right not-on-mobile"></th>
-                        <th class="align-right">Tools</th>
+                        <th>Crawled RSS Items</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
 
-                        @foreach($feed_items as $feed_item)
+                    @foreach($suggestions as $sug_id => $suggestion)
                         <tr>
-                            <td class="align-center-center"><input type="checkbox" title="id" value="{{$feed_item->id}}"/></td>
                             <td>
-                                <a href="{{$feed_item->url}}" title="{{$feed_item->title}}" target="_blank">{{substr($feed_item->title, 0, 80)}}@if(strlen($feed_item->title) >= 80)...@endif</a>
+                                <form id="{{ $sug_id }}">
+                                {{ $suggestion['title'] }} <br>
+                                @foreach($suggestion['words'] as $key => $word)
+                                    <input id="{{ $sug_id . $key }}" class="suggest" type="checkbox" value="{{ $word }}"><label for="{{ $sug_id . $key }}"><span class="suggestion">{{ $word }}</span></label>
+                                @endforeach
+                                </form>
                             </td>
-                            <td class="align-right article-attributes not-on-mobile">
-                                <span class="status">@if(isset($feed_item->website->title)){{$feed_item->website->title}} @endif</span>
-                            </td>
-                            <td class="align-right article-attributes not-on-mobile">
-                                &nbsp;<a @if($feed_item->game_id != "") class="filled-attribute" title="{{$feed_item->game->title}}"@endif><i class="fa fa-gamepad"></i></a>&nbsp;
-                            </td>
-                            <td class="align-right">
-                                <a href="{{url('/admin/articles/create')}}"><i class="fa fa-newspaper-o"></i></a> &nbsp;
-                                <a href="{{$feed_item->url}}"><i class="fa fa-window-maximize"></i></a> &nbsp;
-                                <a href="{{url('/admin/feed/'.$feed_item->id . '/edit')}}"><i class="fa fa-pencil"></i></a> &nbsp;
-                                {{ Form::open(array('url' => url('/admin/feed/' . $feed_item->id), "class" => 'delete-row' )) }}
-                                {{ Form::hidden('_method', 'DELETE') }}
-                                <button type='submit' value="delete"><i class="fa fa-trash"></i></button>
-                                {{ Form::close() }}
+                            <td>
+                                <a id="url-{{ $sug_id }}" class="button primary-button" href="{{ url("admin/games/create/") }}">Create game</a>
                             </td>
                         </tr>
-                        @endforeach
+                        <script>
+                            $("form#{{ $sug_id }} :input").change(function() {
+
+                                var base_url = "{{ url("admin/games/create") }}/";
+                                var add_on = "";
+
+                                $('form#{{ $sug_id }} input:checkbox:checked').each(function () {
+                                    if(add_on !== "") {
+                                        add_on += "%20";
+                                    }
+                                    add_on += (this.checked ? $(this).val() : "");
+                                });
+
+                                $("#url-{{ $sug_id }}").attr("href", base_url + add_on)
+                            });
+                        </script>
+                    @endforeach
 
                     </tbody>
                 </table>

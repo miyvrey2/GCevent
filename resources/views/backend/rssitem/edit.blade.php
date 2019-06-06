@@ -11,20 +11,20 @@
             <div class="col-md-12">
 
                 {{-- Title --}}
-                <h1>Edit "{{$feed->title}}"</h1>
+                <h1>Edit "{{$rss_item->title}}"</h1>
 
                 {{--Breadcrumbs--}}
-                @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/news/incoming' => 'Crawled feeds', 'admin/feed/' . $feed->id. '/edit' => 'Edit "' . $feed->title . '"']])
+                @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/rssitems' => 'RSS Items', 'admin/rssitems/' . $rss_item->id. '/edit' => 'Edit "' . $rss_item->title . '"']])
                 @endcomponent
             </div>
 
-            <form method="POST" action="{{url('/admin/feed/' . $feed->id)}}">
+            <form method="POST" action="{{url('/admin/rssitems/' . $rss_item->id)}}">
 
                 {{--Set the post method to patch--}}
                 {{ method_field('PATCH') }}
 
                 {{--Load the form--}}
-                @component('backend.feed.form', compact('feed', 'games'))
+                @component('backend.rssitem.form', compact('rss_item', 'games'))
                 @endcomponent
 
             </form>

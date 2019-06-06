@@ -3,11 +3,12 @@
     <ul itemscope itemtype="http://www.schema.org/SiteNavigationElement" id="navigation_menu">
         <i id="navCloseButton" class="fa fa-times" aria-hidden="true"></i>
         <li itemprop="name"><a itemprop="url" href="{{url('/admin/dashboard')}}">Dashboard</a></li>
-        <li itemprop="name"><a itemprop="url" href="{{url('/admin/news')}}">News</a>
+        <li itemprop="name"><a itemprop="url" href="{{url('/admin/news')}}">News</a></li>
+        <li itemprop="name"><a itemprop="url" href="{{url('/admin/rssitems')}}">Crawler</a>
             <ul>
-                <li itemprop="name"><a itemprop="url" href="{{url('/admin/news')}}">News articles</a></li>
+                <li itemprop="name"><a itemprop="url" href="{{url('/crawler/crawl')}}">Direct crawl</a></li>
                 <li itemprop="name"><a itemprop="url" href="{{url('/admin/rsswebsites')}}">RSS websites</a></li>
-                <li itemprop="name"><a itemprop="url" href="{{url('/admin/news/incoming')}}">RSS crawled articles</a></li>
+                <li itemprop="name"><a itemprop="url" href="{{url('/admin/rssitems')}}">RSS Items</a></li>
                 <li itemprop="name"><a itemprop="url" href="{{url('/admin/rssitems/find-keywords')}}">Find keywords</a></li>
                 <li itemprop="name"><a itemprop="url" href="{{url('/admin/rssitems/suggest-game-title')}}">Suggest Game title</a></li>
             </ul>

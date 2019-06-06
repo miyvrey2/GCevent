@@ -8,17 +8,17 @@
 
     <div class="form-group">
         <label for="title">Title *</label><br>
-        <input type="text" class="form-control" id="title" name="title" required autocomplete="off" value="{{$feed->title}}">
+        <input type="text" class="form-control" id="title" name="title" required autocomplete="off" value="{{$rss_item->title}}">
     </div>
 
     <div class="form-group">
         <label for="url">url  *</label><br>
-        <input type="text" class="form-control" id="url" name="url" required  autocomplete="off" value="{{$feed->url}}">
+        <input type="text" class="form-control" id="url" name="url" required  autocomplete="off" value="{{$rss_item->url}}">
     </div>
 
     <div class="form-group">
         <label for="site">site  *</label><br>
-        <input type="text" class="form-control" id="site" name="site" required  autocomplete="off" value="{{$feed->site}}">
+        <input type="text" class="form-control" id="site" name="site" required  autocomplete="off" value="{{$rss_item->site}}">
     </div>
 </div>
 
@@ -27,7 +27,7 @@
         <label for="game_id">Game</label><br>
         <select id="game_id" name="game_id">
             @foreach($games as $game)
-                @if($game->id == $feed->game_id)
+                @if($game->id == $rss_item->game_id)
                     <option value="{{$game->id}}" selected>{{$game->title}}</option>
                 @else
                     <option value="{{$game->id}}">{{$game->title}}</option>

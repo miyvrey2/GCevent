@@ -18,33 +18,28 @@ Route::group(['prefix' => 'admin'], function() {
 
     Route::get('/dashboard', 'Backend\DashboardController@index')->name('home');
 
-    Route::get('/news', 'Backend\ArticleController@index');
     Route::resource('/articles', 'Backend\ArticleController');
     Route::resource('/developers', 'Backend\DeveloperController', $exceptShow);
     Route::resource('/games', 'Backend\GameController', $exceptShow);
     Route::resource('/genres', 'Backend\GenreController', $exceptShow);
     Route::resource('/platforms', 'Backend\PlatformController', $exceptShow);
     Route::resource('/publishers', 'Backend\PublisherController', $exceptShow);
-    Route::resource('/rsswebsites', 'Backend\RSSWebsiteController');
-    Route::resource('/users', 'Backend\UserController');
+    Route::resource('/rssitems', 'Backend\RSSItemController', $exceptShow);
+    Route::resource('/rsswebsites', 'Backend\RSSWebsiteController', $exceptShow);
+    Route::resource('/users', 'Backend\UserController', $exceptShow);
     Route::resource('/pages', 'Backend\PageController')->parameters([
         'pages' => 'admin_pages'
     ]);
+
     Route::get('games/recently-in-rss', 'Backend\GameController@recentlyInRSS');
     Route::get('games/recently-in-rss/coupling', 'Backend\GameController@recentlyInRSSCoupling');
     Route::get('games/find-publisher/{game}', 'Backend\GameController@tryToGetThePublisher');
     Route::get('games/find-developer/{game}', 'Backend\GameController@findDeveloper');
     Route::get('games/create/{title}', 'Backend\GameController@create');
+    Route::get('/news', 'Backend\ArticleController@index');
     Route::get('publishers/create/{title}', 'Backend\PublisherController@create');
     Route::get('rssitems/find-keywords', 'Backend\RSSItemController@findKeywords');
-    Route::get('rssitems/suggest-game-title', 'RSSItemController@suggestGameTitle');
-
-    // Crawled news
-    Route::get('/news/incoming', 'Backend\RSSItemController@index');
-    Route::get('/feed/{rssfeed}/edit', 'Backend\RSSItemController@edit');
-    Route::patch('/feed/{rssfeed}', 'Backend\RSSItemController@update');
-    Route::delete('/feed/{rssfeed}', 'Backend\RSSItemController@destroy');
-
+    Route::get('rssitems/suggest-game-title', 'RSSCrawlerController@suggestGameTitle');
 });
 
 // Sitemap

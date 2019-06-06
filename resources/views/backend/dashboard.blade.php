@@ -45,7 +45,7 @@
                         - Whom with "film" in the title: <span class="detail">{{ $count_rss_articles_with_film_in_title[0]->count }} <i class="fa fa-gamepad"></i></span><br>
                         - Whom with "e3" in the title: <span class="detail">{{ $count_rss_articles_with_e3_in_title[0]->count }} <i class="fa fa-gamepad"></i></span><br>
                         - Whom with "gamescom": <span class="detail">{{ $count_rss_articles_with_gamescom_in_title[0]->count }} <i class="fa fa-gamepad"></i></span><br>
-                        <a href="{{ url('admin/news/incoming') }}" class="read-more">See all RSS articles</a>
+                        <a href="{{ url('admin/rssitems') }}" class="read-more">See all RSS articles</a>
                     </div>
                 </div>
             </div>

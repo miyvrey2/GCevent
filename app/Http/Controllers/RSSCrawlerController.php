@@ -114,9 +114,9 @@ class RSSCrawlerController extends Controller
         $removeOldNews = $this->removeOldNews();
 
         return [
-            'fetchFeedItems' => true,
-            'saveFeedItems' => true,
-            'setGameTitlesToRSSFeedItems' => $setGameTitlesToRRSFeed,
+            'fetchRSSItems' => true,
+            'saveRSSItems' => true,
+            'setGameTitlesToRSSItems' => $setGameTitlesToRRSFeed,
             'removeDuplicates' => $removeDuplicates,
             'removeOldNews' => $removeOldNews,
         ];
@@ -125,15 +125,15 @@ class RSSCrawlerController extends Controller
     private function setGametitleToRSSFeed()
     {
 
-        $rss_feed = RSSItem::whereNull('game_id')->get();
+        $rss_items = RSSItem::whereNull('game_id')->get();
 
-        foreach($rss_feed as $item) {
+        foreach($rss_items as $rss_item) {
 
-            // Find the game title by the RSSFeed news_item
-            $item['game_id'] = $this->findGameidByNewsTitle($item['title']);
+            // Find the game title by the RSSItem news_item
+            $rss_item['game_id'] = $this->findGameidByNewsTitle($rss_item['title']);
 
             // Update the item
-            $item->update(array('game_id' => $item['game_id']));
+            $rss_item->update(array('game_id' => $rss_item['game_id']));
         }
 
         return true;
@@ -141,7 +141,7 @@ class RSSCrawlerController extends Controller
 
     private function removeDuplicates($view = true)
     {
-        $feed_items = RSSItem::select('*')
+        $rss_items = RSSItem::select('*')
                              ->selectRaw(' COUNT(`title`) as `occurrences`')
                              ->from('rss_feeds')
                              ->where([
@@ -151,7 +151,7 @@ class RSSCrawlerController extends Controller
                              ->having('occurrences', '>', '1')
                              ->get();
 
-        foreach($feed_items as $record) {
+        foreach($rss_items as $record) {
             $record->forceDelete();
         }
 
@@ -165,11 +165,11 @@ class RSSCrawlerController extends Controller
 
         $file = 'data/' .Carbon::now()->format("Y-m") . '.json';
 
-        // Get all the old feed_items
+        // Get all the old rss_items
         $db_items = RSSItem::where('published_at', '<', Carbon::now()->subDay($this->expire_in_days))->get();
 
         if(Storage::disk('local')->exists($file)) {
-            // get the current feed_items in the json file
+            // get the current rss_items in the json file
             $file_items = json_decode(Storage::disk('local')->get($file));
 
             // foreach item still in the DB
@@ -304,7 +304,7 @@ class RSSCrawlerController extends Controller
 
     public function suggestGameTitle()
     {
-        $rss_feed = RSSItem::where([
+        $rss_items = RSSItem::where([
             ['published_at', '>=', Carbon::now()->subHours(48)],
             ['game_id', '=', null]
         ])->get();
@@ -317,8 +317,8 @@ class RSSCrawlerController extends Controller
 
         $suggestions = [];
 
-        // Loop trough the feed_items
-        foreach($rss_feed as $item){
+        // Loop trough the rss_items
+        foreach($rss_items as $item){
 
             // get each word out of the title
             $title_as_array = explode(' ', $this->removeSpecialCharacters($item->title));
@@ -345,7 +345,7 @@ class RSSCrawlerController extends Controller
             }
         }
 
-        return view('backend.feed.suggest', compact('suggestions'));
+        return view('backend.rssitem.suggest', compact('suggestions'));
     }
 
     private function removeSpecialCharacters($string)

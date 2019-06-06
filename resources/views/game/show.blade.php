@@ -93,7 +93,7 @@
                 </ul>
 
                 @if(Auth::check())
-                <h2>Recent RSS feeds</h2>
+                <h2>Recent RSS Items</h2>
                 <ul>
                     @foreach($game->rssFeeds as $rssfeed)
                         <li><a target="_blank" href="{{ $rssfeed->url }}">{{ $rssfeed->title }}</a></li>

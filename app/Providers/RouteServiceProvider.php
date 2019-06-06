@@ -59,7 +59,7 @@ class RouteServiceProvider extends ServiceProvider
             return Developer::where('slug', $slug)->first();
         });
 
-        Route::bind('rssfeed', function($id) {
+        Route::bind('rssitem', function($id) {
             return RSSItem::where('id', $id)->first();
         });
 

@@ -28,39 +28,39 @@ class RSSItemController extends Controller
         //
         ini_set("default_charset", 'utf-8');
 
-        $feed_items = RSSItem::where('published_at', '>=', Carbon::now()->subHours(48))
+        $rss_items = RSSItem::where('published_at', '>=', Carbon::now()->subHours(48))
                              ->orderBy('published_at', 'desc')
                              ->get();
 
-        return view('backend.feed.index', compact('feed_items'));
+        return view('backend.rssitem.index', compact('rss_items'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  RSSItem $feed
+     * @param  RSSItem $rss_item
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(RSSItem $feed)
+    public function edit(RSSItem $rss_item)
     {
         // Get all the games
         $games = Game::all(); // Doesn't have to be ordered since it is for auto-completion
         $games->push(new Game());
         $games = $games->sortBy("title");
 
-        return view('backend.feed.edit', compact('feed', 'games'));
+        return view('backend.rssitem.edit', compact('rss_item', 'games'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  RSSItem $feed
+     * @param  RSSItem $rss_item
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, RSSItem $feed)
+    public function update(Request $request, RSSItem $rss_item)
     {
         // Validate
         $this->validate($request, [
@@ -71,25 +71,30 @@ class RSSItemController extends Controller
         ]);
 
         // Save the updates
-        $feed->update($request->all());
+        $rss_item->update($request->all());
 
-        return Redirect::to('/admin/news/incoming');
+        return Redirect::to('/admin/rssitems');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  RSSItem $feed
+     * @param  RSSItem $rss_item
      *
      * @return \Illuminate\Http\Response
      * @throws \Exception
      */
-    public function destroy(RSSItem $feed)
+    public function destroy(RSSItem $rss_item)
     {
         // Delete the game
-        $feed->delete();
+        $rss_item->delete();
 
-        return Redirect::to('/admin/news/incoming');
+        return Redirect::to('/admin/rssitems');
+
+    }
+
+    public function import()
+    {
 
     }
 

@@ -28,7 +28,7 @@ class DashboardController extends Controller
     {
         $last_48_hours = Carbon::now()->subHours(48);
 
-        // Get top 5 rss website feeds
+        // Get top 5 RSS Websites
         $rss_websites = DB::table('rss_websites')
                  ->join('rss_feeds', 'rss_websites.id', '=', 'rss_feeds.rss_website_id')
                  ->select('rss_websites.title as title', DB::raw("count(rss_feeds.id) as count"))
