@@ -77,7 +77,22 @@
                         <tr>
                             <td class="align-center-center"><input type="checkbox" title="id" value="{{$rss_item->id}}"/></td>
                             <td>
-                                <a href="{{$rss_item->url}}" title="{{$rss_item->title}}" target="_blank">{{substr($rss_item->title, 0, 80)}}@if(strlen($rss_item->title) >= 80)...@endif</a>
+                                @if(isset($rss_item['suggestions']))
+
+                                    <form id="{{ $rss_item->id }}">
+                                        <a href="{{$rss_item->url}}" title="{{$rss_item->title}}" target="_blank">{{substr($rss_item->title, 0, 80)}}@if(strlen($rss_item->title) >= 80)...@endif</a>
+
+                                        <br>
+
+                                        @foreach($rss_item['suggestions'] as $key => $word)
+                                            <input id="{{ $rss_item->id . $key }}" class="suggest" type="checkbox" value="{{ $word }}"><label for="{{ $rss_item->id . $key }}"><span class="suggestion">{{ $word }}</span></label>
+                                        @endforeach
+                                    </form>
+                                    <a id="url-{{ $rss_item->id }}" class="button primary-button" href="{{ url("admin/games/create/") }}">Create game</a>
+                                @else
+                                    <a href="{{$rss_item->url}}" title="{{$rss_item->title}}" target="_blank">{{substr($rss_item->title, 0, 80)}}@if(strlen($rss_item->title) >= 80)...@endif</a>
+                                @endif
+
                             </td>
                             <td class="align-right article-attributes not-on-mobile">
                                 <span class="status">@if(isset($rss_item->website->title)){{$rss_item->website->title}} @endif</span>
@@ -94,6 +109,23 @@
                                 <button type='submit' value="delete"><i class="fa fa-trash"></i></button>
                                 {{ Form::close() }}
                             </td>
+
+                            <script>
+                                $("form#{{ $rss_item->id }} :input").change(function() {
+
+                                    var base_url = "{{ url("admin/games/create") }}/";
+                                    var add_on = "";
+
+                                    $('form#{{ $rss_item->id }} input:checkbox:checked').each(function () {
+                                        if(add_on !== "") {
+                                            add_on += "%20";
+                                        }
+                                        add_on += (this.checked ? $(this).val() : "");
+                                    });
+
+                                    $("#url-{{ $rss_item->id }}").attr("href", base_url + add_on)
+                                });
+                            </script>
                         </tr>
                         @endforeach
 

@@ -40,6 +40,8 @@ Route::group(['prefix' => 'admin'], function() {
     Route::get('publishers/create/{title}', 'Backend\PublisherController@create');
     Route::get('rssitems/find-keywords', 'Backend\RSSItemController@findKeywords');
     Route::get('rssitems/suggest-game-title', 'RSSCrawlerController@suggestGameTitle');
+    Route::get('rssitems/import', 'Backend\RSSItemController@import');
+    Route::get('rssitems/archive/{dateFrom}/{dateTo?}', 'Backend\RSSItemController@archive');
 });
 
 // Sitemap

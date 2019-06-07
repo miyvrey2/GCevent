@@ -96,6 +96,100 @@ class RSSItemController extends Controller
     public function import()
     {
 
+        // Get the file
+        $file = 'data/2019-05.json';
+
+        if (Storage::disk('local')->exists($file)) {
+
+            $file_items = json_decode(Storage::disk('local')->get($file), true);
+
+//            foreach($file_items as $key => $file_item) {
+//
+//                if($key <= 100) {
+//
+//                    RSSItem::updateOrCreate(
+//                        [
+//                            'title' => $file_item['title'],
+//                            'url'   => $file_item['url'],
+//                        ],
+//                        [
+//                            'site'  => $file_item['site'],
+//                            'published_at' => $file_item['published_at'],
+//                            'categories' => $file_item['categories'],
+//                            'game_id' => $file_item['game_id']
+//                        ]
+//                    );
+//                }
+//            }
+
+            return $file_items;
+        }
+    }
+
+    /**
+     * Display a listing of the archived resource.
+     *
+     * @param $dateFrom
+     * @param null $dateTo
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function archive($dateFrom, $dateTo = null)
+    {
+        //
+        ini_set("default_charset", 'utf-8');
+
+        if($dateTo != null) {
+            $rss_items = RSSItem::where([
+                ['published_at', '>=', Carbon::parse($dateFrom)->format('Y-m-d H:i:s')],
+                ['published_at', '<=', Carbon::parse($dateTo)->format('Y-m-d H:i:s')]
+            ])
+            ->withTrashed()
+            ->orderBy('published_at', 'desc')
+            ->get();
+        } else {
+            $rss_items = RSSItem::where([
+                ['published_at', '>=', Carbon::parse($dateFrom)],
+                ['published_at', '<=', Carbon::parse($dateFrom)->addMonth()]
+            ])
+            ->withTrashed()
+            ->orderBy('published_at', 'desc')
+            ->get();
+        }
+
+        // Get the keywords
+        $file = 'data/RSSitems/keywords.json';
+        if (Storage::disk('local')->exists($file)) {
+            $file_items = json_decode(Storage::disk('local')->get($file), true);
+        }
+
+        foreach($rss_items as $rss_item) {
+
+            // get each word out of the title
+            $title_as_array = explode(' ', $this->removeSpecialCharacters($rss_item->title));
+
+            // loop trough each word
+            foreach ($title_as_array as $key => $word) {
+
+                $word = strtolower($word);
+
+                if ($word === "") {
+                    continue;
+                }
+
+                if(array_key_exists($word, $file_items['items'])) {
+                    if ($file_items['items'][ $word ]['in_game'] == 0 && $file_items['items'][ $word ]['other'] > 0) {
+                        unset($title_as_array[ $key ]);
+                    }
+                }
+            }
+
+            if($title_as_array != [0 => ""]) {
+                $rss_item['suggestions'] = $title_as_array;
+            }
+        }
+
+        return view('backend.rssitem.index', compact('rss_items'));
     }
 
     public function findKeywords()
