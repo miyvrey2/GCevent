@@ -24,6 +24,8 @@ class RSSWebsiteController extends Controller
      */
     public function index()
     {
+        $all_rss_websites = RSSWebsite::all();
+
         $last_48_hours = Carbon::now()->subHours(48);
 
         // Get top 5 RSS Websites
@@ -34,6 +36,10 @@ class RSSWebsiteController extends Controller
                           ->groupBy('rss_feeds.rss_website_id')
                           ->orderBy('count', 'DESC')
                           ->get();
+
+        foreach($rss_websites as $key => $rss_website) {
+            $rss_website->all = count($all_rss_websites->get($key)->RSSFeeds()->withTrashed()->get());
+        }
 
         return view('backend.rsswebsite.index', compact('rss_websites'));
     }

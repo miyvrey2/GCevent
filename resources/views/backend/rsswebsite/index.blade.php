@@ -46,7 +46,7 @@
                             <input type="checkbox" title="selectAll">
                         </th>
                         <th>RSS website names</th>
-                        <th class="align-right not-on-mobile"></th>
+                        <th class="align-right"></th>
                         <th class="align-right">Tools</th>
                     </tr>
                     </thead>
@@ -58,8 +58,8 @@
                                 <input type="checkbox" title="id" value="{{$rss_website->id}}"/>
                             </td>
                             <td><a href="{{url('/admin/rsswebsites/' . $rss_website->id)}}">{{$rss_website->title}}</a></td>
-                            <td class="align-right rsswebsite-attributes not-on-mobile">
-                                <a title="Amount of articles last 2 days">{{ $rss_website->count }} <i class="fa fa-newspaper-o"></i></a>&nbsp;
+                            <td class="align-right rsswebsite-attributes">
+                                <a title="Amount of articles last 2 days">{{ $rss_website->count }} / {{ $rss_website->all }} <i class="fa fa-newspaper-o"></i></a>&nbsp;
                             </td>
                             <td class="align-right">
                                 <a href="{{url('/admin/rsswebsites/' . $rss_website->id . '/edit')}}"><i class="fa fa-pencil"></i></a> &nbsp;
