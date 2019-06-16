@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\RSSItem;
 use App\RSSWebsite;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 
 class RSSWebsiteController extends Controller
@@ -22,7 +24,16 @@ class RSSWebsiteController extends Controller
      */
     public function index()
     {
-        $rss_websites = RSSWebsite::get();
+        $last_48_hours = Carbon::now()->subHours(48);
+
+        // Get top 5 RSS Websites
+        $rss_websites = DB::table('rss_websites')
+                          ->join('rss_feeds', 'rss_websites.id', '=', 'rss_feeds.rss_website_id')
+                          ->select('rss_websites.*', DB::raw("count(rss_feeds.id) as count"))
+                          ->where([['rss_feeds.published_at', '>=', $last_48_hours]])
+                          ->groupBy('rss_feeds.rss_website_id')
+                          ->orderBy('count', 'DESC')
+                          ->get();
 
         return view('backend.rsswebsite.index', compact('rss_websites'));
     }

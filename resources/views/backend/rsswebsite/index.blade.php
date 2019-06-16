@@ -59,8 +59,7 @@
                             </td>
                             <td><a href="{{url('/admin/rsswebsites/' . $rss_website->id)}}">{{$rss_website->title}}</a></td>
                             <td class="align-right rsswebsite-attributes not-on-mobile">
-                                <span class="status">{{$rss_website->status}}</span>
-                                <a title="Amount of articles last 2 days">{{count($rss_website->RSSFeeds)}} <i class="fa fa-newspaper-o"></i></a>&nbsp;
+                                <a title="Amount of articles last 2 days">{{ $rss_website->count }} <i class="fa fa-newspaper-o"></i></a>&nbsp;
                             </td>
                             <td class="align-right">
                                 <a href="{{url('/admin/rsswebsites/' . $rss_website->id . '/edit')}}"><i class="fa fa-pencil"></i></a> &nbsp;
