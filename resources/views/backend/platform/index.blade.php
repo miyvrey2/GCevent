@@ -1,7 +1,7 @@
 @extends('backend.layouts.master')
 
 @section('seo')
-    @component("components.seo", ["title" => "platforms overview", "url" => url('admin/platforms'), "description" => "Overview of all the platforms on Enzow.org"] )
+    @component("components.seo", ["title" => "Platforms overview", "url" => url('admin/platforms'), "description" => "Overview of all the platforms on Enzow.org"] )
     @endcomponent
 @endsection
 
@@ -16,10 +16,10 @@
             <div class="col-md-12">
 
                 {{-- Title --}}
-                <h1>platforms</h1>
+                <h1>Platforms</h1>
 
                 {{--Breadcrumbs--}}
-                @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/platforms' => 'platforms']])
+                @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/platforms' => 'Platforms']])
                 @endcomponent
 
                 <a class="button button-primary" href="{{ url('admin/platforms/create')}}">Add a platform</a><br><br>

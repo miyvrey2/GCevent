@@ -1,7 +1,7 @@
 @extends('backend.layouts.master')
 
 @section('seo')
-    @component("components.seo", ["title" => "publishers overview", "url" => url('admin/publishers'), "description" => "Overview of all the publishers on Enzow.org"] )
+    @component("components.seo", ["title" => "Publishers overview", "url" => url('admin/publishers'), "description" => "Overview of all the publishers on Enzow.org"] )
     @endcomponent
 @endsection
 
@@ -19,7 +19,7 @@
                 <h1>Publishers</h1>
 
                 {{--Breadcrumbs--}}
-                @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/publishers' => 'publishers']])
+                @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/publishers' => 'Publishers']])
                 @endcomponent
 
                 <a class="button button-primary" href="{{ url('admin/publishers/create')}}">Add a publisher</a><br><br>

@@ -78,10 +78,15 @@
 
 </div>
 
-{{--jQuery--}}
-<script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.12.3.min.js"></script>
+{{-- jQuery --}}
+<script type="text/javascript" src="//code.jquery.com/jquery-1.12.3.min.js"></script>
+
+{{-- jQuery UI --}}
+<script type="text/javascript" src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 {{--Select 2--}}
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+
 <script>
     $(document).ready(function() {
         $('.js-example-basic-multiple').select2({
@@ -89,9 +94,3 @@
         });
     });
 </script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-
-{{--jQuery ui--}}
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">

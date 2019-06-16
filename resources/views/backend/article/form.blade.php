@@ -26,16 +26,6 @@
         <textarea type="text" class="form-control" id="body" name="body" autocomplete="off">{{$article->body}}</textarea>
     </div>
 
-    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
-    <script>
-        tinymce.init({
-            selector:'textarea',
-            menubar: false,
-            plugins: "link",
-            statusbar: false
-        });
-    </script>
-
     <div class="form-group">
         <label for="source">Source URL</label><br>
         <input type="text" class="form-control" id="source" name="source" autocomplete="off" value="{{$article->source}}">
@@ -80,37 +70,20 @@
 
 </div>
 
+{{-- TinyMCE --}}
+<script type="text/javascript" src="//cloud.tinymce.com/stable/tinymce.min.js"></script>
+
 {{--jQuery--}}
-<script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.12.3.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-1.12.3.min.js"></script>
+
+{{-- jQuery UI --}}
+<script type="text/javascript" src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 {{--Select 2--}}
-<script>
-    $(document).ready(function() {
-        $('.js-example-basic-multiple').select2({
-            tags: true
-        });
-    });
-</script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-
-{{--jQuery ui--}}
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
 <script>
     $( function() {
-
-        {{--var games = [--}}
-        {{--@foreach($games as $game)--}}
-        {{--"{{$game->title}}",--}}
-        {{--@endforeach--}}
-        {{--];--}}
-
-        {{--// Help by autocomplete to prevent doubles--}}
-        {{--$('#title').autocomplete({--}}
-        {{--source: games--}}
-        {{--});--}}
 
         // Set slug
         $('#title').change( function() {
@@ -139,4 +112,16 @@
         return str;
     };
 
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2({
+            tags: true
+        });
+
+        tinymce.init({
+            selector:'textarea',
+            menubar: false,
+            plugins: "link",
+            statusbar: false
+        });
+    });
 </script>

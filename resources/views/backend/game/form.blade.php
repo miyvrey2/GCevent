@@ -107,27 +107,17 @@
 
 </div>
 
-<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+{{-- TinyMCE --}}
+<script type="text/javascript" src="//cloud.tinymce.com/stable/tinymce.min.js"></script>
 
 {{-- jQuery --}}
-<script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+<script type="text/javascript" src="//code.jquery.com/jquery-1.12.3.min.js"></script>
 
-{{--Select 2--}}
-<script>
-    $(document).ready(function() {
-        $('.js-example-basic-multiple').select2({
-            tags: true
-        });
+{{-- jQuery UI --}}
+<script type="text/javascript" src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-        tinymce.init({
-            selector:'textarea',
-            menubar: false,
-            plugins: "link",
-            statusbar: false
-        });
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+{{-- Select 2 --}}
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
 <script>
     $( function() {
@@ -178,4 +168,16 @@
         return str;
     };
 
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2({
+            tags: true
+        });
+
+        tinymce.init({
+            selector:'textarea',
+            menubar: false,
+            plugins: "link",
+            statusbar: false
+        });
+    });
 </script>

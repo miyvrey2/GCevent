@@ -42,10 +42,14 @@
 
 </div>
 
-{{-- jQuery --}}
-<script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-3.4.1.slim.min.js"></script>
+{{-- TinyMCE --}}
+<script type="text/javascript" src="//cloud.tinymce.com/stable/tinymce.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+{{-- jQuery --}}
+<script type="text/javascript" src="//code.jquery.com/jquery-1.12.3.min.js"></script>
+
+{{--Select 2--}}
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
 
 <script>
     $( function() {
@@ -59,6 +63,12 @@
         // Help by autocomplete to prevent doubles
         $('#title').autocomplete({
             source: games
+        });
+    });
+
+    $(document).ready(function() {
+        $('.js-example-basic-multiple').select2({
+            tags: true
         });
     });
 

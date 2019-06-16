@@ -42,9 +42,8 @@
 
 </div>
 
-{{--jQuery--}}
-<script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.12.3.min.js"></script>
+{{-- jQuery --}}
+<script type="text/javascript" src="//code.jquery.com/jquery-1.12.3.min.js"></script>
 
-{{--jQuery ui--}}
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+{{-- jQuery UI --}}
+<script type="text/javascript" src="//code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
