@@ -125,7 +125,7 @@ class RSSCrawlerController extends Controller
     private function setGametitleToRSSFeed()
     {
 
-        $rss_items = RSSItem::whereNull('game_id')->get();
+        $rss_items = RSSItem::whereNull('game_id')->withTrashed()->get();
 
         foreach($rss_items as $rss_item) {
 
@@ -307,7 +307,9 @@ class RSSCrawlerController extends Controller
         $rss_items = RSSItem::where([
             ['published_at', '>=', Carbon::now()->subHours(48)],
             ['game_id', '=', null]
-        ])->get();
+        ])
+        ->orderBy('published_at', 'desc')
+        ->get();
 
         // Get the keywords
         $file = 'data/RSSitems/keywords.json';

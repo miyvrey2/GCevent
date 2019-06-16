@@ -65,6 +65,9 @@
                 <table id="example" class="display" cellspacing="0" width="100%">
                     <thead>
                     <tr>
+                        <th class="align-center-center">
+                            <input type="checkbox" title="selectAll" id="selectAll">
+                        </th>
                         <th>Crawled RSS Items</th>
                         <th></th>
                     </tr>
@@ -73,6 +76,7 @@
 
                     @foreach($suggestions as $sug_id => $suggestion)
                         <tr>
+                            <td class="align-center-center"><input type="checkbox" title="id" value="{{$sug_id}}"/></td>
                             <td>
                                 <form id="{{ $sug_id }}">
                                 {{ $suggestion['title'] }} <br>
