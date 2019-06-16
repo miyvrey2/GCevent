@@ -125,7 +125,7 @@ class RSSCrawlerController extends Controller
     private function setGametitleToRSSFeed()
     {
 
-        $rss_items = RSSItem::whereNull('game_id')->withTrashed()->get();
+        $rss_items = RSSItem::whereNull('game_id')->get();
 
         foreach($rss_items as $rss_item) {
 
