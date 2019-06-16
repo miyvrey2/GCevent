@@ -25,18 +25,19 @@
                 <a class="button button-primary" href="{{ url('admin/games/create')}}">Add a game</a>
                 <a class="button button-primary" href="{{ url('admin/games/recently-in-rss')}}">Recently in RSS</a><br><br>
 
-                <script type="text/javascript" language="javascript" src="{{asset('js/admin.js')}}"></script>
+                <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.12.3.min.js"></script>
+                <script type="text/javascript" language="javascript" src="{{asset('js/dataTables.js')}}"></script>
                 <script type="text/javascript" language="javascript" class="init">
                     $(document).ready(function() {
-                        $('#example').DataTable({
-
-                            "paging":       true,
-                            "pagingType":   "numbers",
-                            "lengthMenu":   [[100, 250, -1], [100, 250, "All"]],
-                            "ordering":     true,
-                            "info":         false,
-                            "searching":    true
-                        });
+                        // $('#example').DataTable({
+                        //
+                        //     "paging":       true,
+                        //     "pagingType":   "numbers",
+                        //     "lengthMenu":   [[100, 250, -1], [100, 250, "All"]],
+                        //     "ordering":     true,
+                        //     "info":         false,
+                        //     "searching":    true
+                        // });
 
                         $("body").on('click', ".game-attributes-tab .a", function () {
 
