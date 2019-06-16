@@ -24,7 +24,7 @@
 
                 <a class="button button-primary" href="{{ url('admin/publishers/create')}}">Add a publisher</a><br><br>
 
-                <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.12.3.min.js"></script>
+                <script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-3.4.1.slim.min.js"></script>
                 <script type="text/javascript" language="javascript" src="{{asset('js/dataTables.js')}}"></script>
                 <script type="text/javascript" language="javascript" class="init">
                     $(document).ready(function() {

@@ -25,17 +25,6 @@
         <label for="body">Body</label><br>
         <textarea type="text" class="form-control" id="body" name="body" autocomplete="off">{{$game->body}}</textarea>
     </div>
-
-    <script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
-    <script>
-        tinymce.init({
-            selector:'textarea',
-            menubar: false,
-            plugins: "link",
-            statusbar: false
-        });
-    </script>
-
 </div>
 
 <div class="col-md-3">
@@ -53,7 +42,7 @@
     </div>
 
     <div class="form-group">
-        <label for="developer_id">Developers</label><br>
+        <label for="developers[]">Developers</label><br>
         <select class="form-control js-example-basic-multiple form-control" id="developers[]" name="developers[]" multiple="multiple">
             @foreach($game->developers as $developer)
                 <option value="{{$developer->id}}" selected>{{$developer->title}}</option>
@@ -118,8 +107,10 @@
 
 </div>
 
-{{--jQuery--}}
-<script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-1.12.3.min.js"></script>
+<script src="https://cloud.tinymce.com/stable/tinymce.min.js"></script>
+
+{{-- jQuery --}}
+<script type="text/javascript" language="javascript" src="//code.jquery.com/jquery-3.4.1.slim.min.js"></script>
 
 {{--Select 2--}}
 <script>
@@ -127,14 +118,16 @@
         $('.js-example-basic-multiple').select2({
             tags: true
         });
+
+        tinymce.init({
+            selector:'textarea',
+            menubar: false,
+            plugins: "link",
+            statusbar: false
+        });
     });
 </script>
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
-
-{{--jQuery ui--}}
-<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
 <script>
     $( function() {
