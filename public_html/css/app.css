@@ -235,6 +235,26 @@ header strong a {
   text-decoration: none;
 }
 
+noscript {
+  position: fixed;
+  top: auto;
+  left: 15px;
+  bottom: 5px;
+  width: calc(100% - 30px);
+  display: block;
+  margin: 0;
+  padding: 10px 0;
+  z-index: 2;
+  text-align: center;
+  font-size: 16px;
+  background: #ffee9c;
+  border: 1px solid #d6ca8e;
+  border-radius: 4px;
+  -webkit-box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  color: #333;
+}
+
 nav {
   position: absolute;
   top: 0;

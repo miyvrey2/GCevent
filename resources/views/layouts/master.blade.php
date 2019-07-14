@@ -3,8 +3,6 @@
 <head>
     <meta charset="UTF-8">
 
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
     <!-- Viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
@@ -24,6 +22,12 @@
     <!-- Font awesome -->
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
 
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="{{ asset('/icon/gamescomevent_logo.png') }}"/>
+    <!--[if IE]>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/icon/gamescomevent_logo.ico') }}" />
+    <![endif]-->
+
     <!-- Javascripts -->
 
     <!--[if lt IE 9]>
@@ -31,6 +35,7 @@
     <![endif]-->
 </head>
 <body>
+    <noscript><div class="message global noscript"><div class="content"><p><strong>JavasScript seems to be turned off (or doesn't support it) in your browser!</strong> <span>for the best user experience, please make sure that JavaScript is enabled for your browser.</span></p></div></div></noscript>
     <header>
         <strong>
             <a href="{{url('/')}}">{{config('app.name')}}</a>
