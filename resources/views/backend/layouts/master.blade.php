@@ -29,6 +29,12 @@
     <!-- Font awesome -->
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
 
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="{{ asset('/icon/gamescomevent_logo.png') }}"/>
+    <!--[if IE]>
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/icon/gamescomevent_logo.ico') }}" />
+    <![endif]-->
+
     <!-- Javascripts -->
 
     <!--[if lt IE 9]>
