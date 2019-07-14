@@ -5,9 +5,9 @@
                 <li itemprop="name"><a itemprop="url" href="{{url('/')}}">Home</a></li>
                 <li itemprop="name"><a itemprop="url" href="{{url('/gamescom-2019')}}">Gamescom 2019</a>
                     <ul>
-                        <li itemprop="name"><a itemprop="url" href="{{url('/games/list')}}">Games</a></li>
-                        <li itemprop="name"><a itemprop="url" href="{{url('/publishers')}}">Exhibitors</a></li>
-                        <li itemprop="name"><a itemprop="url" href="{{url('events-2019')}}">Events</a></li>
+                        <li itemprop="name"><a itemprop="url" href="{{url('/gamescom-2019/lineup')}}">Lineup</a></li>
+                        <li itemprop="name"><a itemprop="url" href="{{url('/gamescom-2019/exhibitors')}}">Exhibitors</a></li>
+                        <li itemprop="name"><a itemprop="url" href="{{url('/events-2019')}}">Events</a></li>
                         <li itemprop="name"><a itemprop="url" href="{{url('/cosplay')}}">Cosplay</a></li>
                     </ul>
                 </li>

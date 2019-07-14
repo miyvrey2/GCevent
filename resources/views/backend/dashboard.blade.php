@@ -1,5 +1,10 @@
 @extends('backend.layouts.master')
 
+@section('seo')
+    @component("components.seo", ["title" => "Dashboard", "url" => url('admin/dashboard'), "description" => "Overview of all the users on ishetalvakantie.nl"] )
+    @endcomponent
+@endsection
+
 @section('content')
 
     <section id="featured_line_section">

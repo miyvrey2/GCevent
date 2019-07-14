@@ -4,7 +4,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    This website is not the official <a href="http://gamescom.global" title="The official gamescom website in english">gamescom website</a>. This is a fanpage to provide some more information regarding the convention.
+                    This website is not the official <a href="http://gamescom.global" title="The official gamescom website in english" target="_blank" rel="noopener noreferrer nofollow">gamescom website</a>. This is a fanpage to provide some more information regarding the convention.
                 </div>
             </div>
         </div>
@@ -51,8 +51,8 @@
 
                 <div class="social-footer">
                     {{--<a href="#"><i class="fa fa-facebook" title="Find gamescomevent.com on Facebook!"></i></a>--}}
-                    <a target="_blank" href="https://twitter.com/GCEredaction" title="Find gamescomevent.com on Twitter!"><i class="fa fa-twitter"></i></a>
-                    <a target="_blank" href="https://www.instagram.com/GCERedaction/" title="Find gamescomevent.com on Instagram!"><i class="fa fa-instagram"></i></a>
+                    <a target="_blank" rel="noopener noreferrer nofollow" href="https://twitter.com/GCEredaction" title="Find gamescomevent.com on Twitter!"><i class="fa fa-twitter"></i></a>
+                    <a target="_blank" rel="noopener noreferrer nofollow" href="https://www.instagram.com/GCERedaction/" title="Find gamescomevent.com on Instagram!"><i class="fa fa-instagram"></i></a>
                     {{--<a href="#"><i class="fa fa-linkedin" title="Find gamescomevent.com on Linkedin!"></i></a>--}}
                     {{--<a href="#"><i class="fa fa-google-plus" title="Find gamescomevent.com on Google Plus!"></i></a>--}}
                 </div>

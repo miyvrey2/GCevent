@@ -75,4 +75,15 @@ class Publisher extends Model
     {
         return $this->hasMany(Game::class, 'exhibitor_id', 'id');
     }
+
+    public function exhibitionGame()
+    {
+        return $this->belongsTo(ExhibitionGame::class, 'publisher_id', 'id');
+    }
+
+    public function exhibition_game()
+    {
+        return $this->belongsToMany(Game::class, 'exhibition_game',
+            'publisher_id', 'game_id');
+    }
 }

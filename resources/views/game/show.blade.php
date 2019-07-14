@@ -112,36 +112,30 @@
                 {{--"image": "{{ url($game->image) }}",--}}
                 "description": "{!! $game->excerpt !!}",
                 "inLanguage":["English"],
-
                 @if(!$game->publishers->isEmpty())
-                "publisher":[
-                @foreach($game->publishers as $publisher)
-                {
-                    "@type": "Organization",
-                    "name": "{{ $publisher->title }}",
-                    "url": "{{ url("publishers/" . $publisher->slug) }}",
-                    "logo": {
-                        "@type": "ImageObject",
-                        "name": "{{ $publisher->title }} logo",
-                        "url": "{{ $publisher->image }}"
-                    }
-                },
+
+                "publisher":[@foreach($game->publishers as $key => $publisher)
+
+                   {
+                        "@type": "Organization",
+                        "name": "{{ $publisher->title }}",
+                        "url": "{{ url("publishers/" . $publisher->slug) }}",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "name": "{{ $publisher->title }} logo",
+                            "url": "{{ $publisher->image }}"
+                        }
+                    } @if( $key < (count($game->publishers) - 1)),@endif
                 @endforeach
-                ]
-                @endif
 
-                @if(!$game->genres->isEmpty())
+                ],
+                @endif @if(!$game->genres->isEmpty())
                 "genre":[@foreach($game->genres as $genre)"{{$genre->title}}"@endforeach],
-                @endif
-
-                @if(!$game->platforms->isEmpty())
+                @endif @if(!$game->platforms->isEmpty())
 
                 "gamePlatform":[@foreach($game->platforms as $platform)"{{$platform->title}}"@endforeach],
                 @endif
                 {{--"operatingSystem":["Sonic", "Duo"],--}}
-                {{--"processorRequirements":"4 GHz",--}}
-                {{--"memoryRequirements":"8 Gb",--}}
-                {{--"storageRequirements":"64 Gb",--}}
                 "aggregateRating":{
                     "@type":"AggregateRating",
                     "ratingValue":"5",

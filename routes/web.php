@@ -20,6 +20,8 @@ Route::group(['prefix' => 'admin'], function() {
 
     Route::resource('/articles', 'Backend\ArticleController');
     Route::resource('/developers', 'Backend\DeveloperController', $exceptShow);
+    Route::resource('/exhibitions', 'Backend\ExhibitionController', $exceptShow);
+    Route::post('/exhibitions/game/add', 'Backend\ExhibitionController@save_exhibition_game');
     Route::resource('/games', 'Backend\GameController', $exceptShow);
     Route::resource('/genres', 'Backend\GenreController', $exceptShow);
     Route::resource('/platforms', 'Backend\PlatformController', $exceptShow);
@@ -84,5 +86,8 @@ Route::get('/validate', 'Auth\ActivateController@index');
 // Other pages
 Route::get('/', 'PageController@home');
 
-// Very last route for catching all pages
+// Very last routes for catching all pages
+Route::get('/{exhibition}', 'ExhibitionController@show');
+Route::get('/{exhibition}/lineup', 'ExhibitionController@lineup');
+Route::get('/{exhibition}/exhibitors', 'ExhibitionController@exhibitors');
 Route::get('/{page}', 'PageController@show');
