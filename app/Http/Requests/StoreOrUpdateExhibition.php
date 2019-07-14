@@ -29,6 +29,12 @@ class StoreOrUpdateExhibition extends FormRequest
             'slug'          => ['required', 'string', Rule::unique('genres')->ignore($this->segment(3), 'slug')],
             'excerpt'       => 'nullable|string',
             'body'          => 'nullable|string',
+            'starts_at'     => 'nullable|string',
+            'ends_at'       => 'nullable|string',
+            'longitude'     => 'nullable|string',
+            'latitude'      => 'nullable|string',
+            'address'       => 'nullable|string',
+            'country'       => 'nullable|string',
         ];
     }
 }

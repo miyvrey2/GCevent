@@ -41,6 +41,8 @@ class ExhibitionController extends Controller
 
         // Initiate a new platform with some defined values
         $exhibition = new Exhibition();
+        $exhibition->starts_at = Carbon::now();
+        $exhibition->ends_at = Carbon::now();
 
         return view('backend.exhibition.create', compact('exhibition'));
     }
@@ -58,6 +60,8 @@ class ExhibitionController extends Controller
         // make that slug readable
         $data['slug'] = str_replace(" ", "-", $data['slug']);
         $data['slug'] = preg_replace("/[^a-zA-Z0-9-]+/", "", $data['slug']);
+        $data['starts_at'] = Carbon::parse($data['starts_at']);
+        $data['ends_at'] = Carbon::parse($data['ends_at']);
 
         // Save into another databse
         //        DB::purge('mysql');
