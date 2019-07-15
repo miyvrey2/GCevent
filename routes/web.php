@@ -88,7 +88,20 @@ Route::get('/validate', 'Auth\ActivateController@index');
 Route::get('/', 'PageController@home');
 
 // Very last routes for catching all pages
-Route::get('/{exhibition}', 'ExhibitionController@show');
 Route::get('/{exhibition}/lineup', 'ExhibitionController@lineup');
 Route::get('/{exhibition}/exhibitors', 'ExhibitionController@exhibitors');
-Route::get('/{page}', 'PageController@show');
+
+Route::get('/{slug}', function($slug) {
+
+    $page = \App\Page::where('slug', '=', $slug)->first();
+    if($page != null) {
+        $controller = app()->make('\App\Http\Controllers\PageController');
+        return $controller->callAction('show', [$page]);
+    }
+
+    $exhibition = \App\Exhibition::where('slug', '=', $slug)->first();
+    if($exhibition != null) {
+        $controller = app()->make('\App\Http\Controllers\ExhibitionController');
+        return $controller->callAction('show', [$exhibition]);
+    }
+});
