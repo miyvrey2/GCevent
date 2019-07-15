@@ -93,6 +93,12 @@ class Publisher extends Model
             'publisher_id', 'game_id');
     }
 
+    public function exhibition_game()
+    {
+        return $this->belongsToMany(Game::class, 'exhibition_game',
+            'publisher_id', 'game_id');
+    }
+
     public function games_for_gamescom_2019()
     {
         return $this->belongsToMany(Game::class, 'exhibition_game',
