@@ -22,6 +22,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::resource('/developers', 'Backend\DeveloperController', $exceptShow);
     Route::resource('/exhibitions', 'Backend\ExhibitionController', $exceptShow);
     Route::post('/exhibitions/game/add', 'Backend\ExhibitionController@save_exhibition_game');
+    Route::post('/exhibitions/game/update', 'Backend\ExhibitionController@update_exhibition_game');
     Route::resource('/games', 'Backend\GameController', $exceptShow);
     Route::resource('/genres', 'Backend\GenreController', $exceptShow);
     Route::resource('/platforms', 'Backend\PlatformController', $exceptShow);

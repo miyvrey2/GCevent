@@ -38,7 +38,7 @@
 
             </div>
             <div id="tab-games" class="tabcontent">
-                @component('backend.exhibition.form-game', compact('exhibitions', 'exhibition', 'games'))@endcomponent
+                @component('backend.exhibition.form-game', compact('exhibitions', 'exhibition', 'games', 'developers', 'publishers'))@endcomponent
             </div>
 
             <script>

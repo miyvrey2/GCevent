@@ -28,4 +28,21 @@ class ExhibitionGame extends Model
     {
         return $this->hasMany(Developer::class, 'id', 'developer_id');
     }
+    public function publishers()
+    {
+        return $this->hasMany(Publisher::class, 'id', 'publisher_id');
+    }
+
+    public function game()
+    {
+        return $this->belongsTo(Game::class);
+    }
+    public function developer()
+    {
+        return $this->belongsTo(Developer::class);
+    }
+    public function publisher()
+    {
+        return $this->belongsTo(Publisher::class);
+    }
 }

@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
+use App\Developer;
 use App\ExhibitionGame;
 use App\Game;
 use App\Http\Requests\StoreOrUpdateExhibition;
 use App\Exhibition;
 use App\Http\Controllers\Controller;
+use App\Publisher;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -94,9 +96,11 @@ class ExhibitionController extends Controller
      */
     public function edit(Exhibition $exhibition)
     {
+        $developers = Developer::all();
         $games = Game::all();
+        $publishers = Publisher::all();
 
-        return view('backend.exhibition.edit', compact('exhibition', 'games'));
+        return view('backend.exhibition.edit', compact('exhibition', 'games', 'developers', 'publishers'));
     }
 
     /**
@@ -142,33 +146,35 @@ class ExhibitionController extends Controller
 
         $data = $request->except('_token');
 
-        $data['developer_id'] = $data['developer_id-' . $data['game_id']];
-        $data['publisher_id'] = $data['publisher_id-' . $data['game_id']];
+        $data['developer_id'] = ($data['developer_id'] == 'null') ? null : $data['developer_id'];
+        $data['publisher_id'] = ($data['publisher_id'] == 'null') ? null : $data['publisher_id'];
 
-        unset($data['developer_id-' . $data['game_id']]);
-        unset($data['publisher_id-' . $data['game_id']]);
-
-        if($data['developer_id']) {
-            foreach($data['developer_id'] as $developer) {
-                foreach($data['publisher_id'] as $publisher) {
-                    $data['developer_id'] = (is_numeric($developer) ? $developer : null);
-                    $data['publisher_id'] = (is_numeric($publisher) ? $publisher : null);
-
-                    ExhibitionGame::create($data->toArray());
-                }
-            }
-        } else {
-            foreach($data['publisher_id'] as $publisher) {
-                $data['developer_id'] = null;
-                $data['publisher_id'] = (is_numeric($publisher) ? $publisher : null);
-
-                ExhibitionGame::create($data);
-            }
-        }
+        ExhibitionGame::create($data);
 
         $exhibition = Exhibition::find($data['exhibition_id']);
 
+        return redirect('/admin/exhibitions/' . $exhibition->slug . '/edit');
+    }
 
+    public function update_exhibition_game(Request $request) {
+
+        $data = $request->except('_token');
+
+        $data['developer_id'] = $data['developer_id-' . $data['id']];
+        $data['publisher_id'] = $data['publisher_id-' . $data['id']];
+
+        unset($data['developer_id-' . $data['id']]);
+        unset($data['publisher_id-' . $data['id']]);
+
+        $data['developer_id'] = ($data['developer_id'] == 'null') ? null : $data['developer_id'];
+        $data['publisher_id'] = ($data['publisher_id'] == 'null') ? null : $data['publisher_id'];
+
+        // Update the exhibition_game
+        $exhibitionGame = ExhibitionGame::find($data['id']);
+        $exhibitionGame->update($data);
+
+        // Return to the exhibition
+        $exhibition = Exhibition::find($data['exhibition_id']);
         return redirect('/admin/exhibitions/' . $exhibition->slug . '/edit');
     }
 }
