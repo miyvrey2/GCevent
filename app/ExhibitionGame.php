@@ -45,4 +45,8 @@ class ExhibitionGame extends Model
     {
         return $this->belongsTo(Publisher::class);
     }
+    public function exhibition()
+    {
+        return $this->belongsTo(Exhibition::class);
+    }
 }

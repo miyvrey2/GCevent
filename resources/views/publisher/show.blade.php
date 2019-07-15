@@ -51,44 +51,51 @@
                         @if(count($publisher->games) > 1)<li><i class="fa fa-gamepad"></i><a href="#">{{count($publisher->games)}} Games</a> listed</li>@endif
                     @endif
                     {{--halls--}}
-                    @if($publisher->halls[0] != "unknown")
-                    <li><i class="fa fa-map-marker"></i><a href="#">Hall
-                            @foreach($publisher->halls as $hall)
-                                {{$hall}}@endforeach</a>
+                    {{--@if($publisher->halls[0] != "unknown")--}}
+                    {{--<li><i class="fa fa-map-marker"></i><a href="#">Hall--}}
+                            {{--@foreach($publisher->halls as $hall)--}}
+                                {{--{{$hall}}@endforeach</a>--}}
 
                         {{--stands--}}
-                        @if($publisher->stands[0]->stand != null)
-                                at stands:
-                            <div class="stand-box">
-                                @foreach($publisher->stands as $stand)
-                                    <span>{{$stand->stand}}</span>
-                                @endforeach
-                            </div>
-                        </li>
-                        @endif
-                    @endif
+                        {{--@if($publisher->stands[0]->stand != null)--}}
+                                {{--at stands:--}}
+                            {{--<div class="stand-box">--}}
+                                {{--@foreach($publisher->stands as $stand)--}}
+                                    {{--<span>{{$stand->stand}}</span>--}}
+                                {{--@endforeach--}}
+                            {{--</div>--}}
+                        {{--</li>--}}
+                        {{--@endif--}}
+                    {{--@endif--}}
 
+                    {{--New halls--}}
+                    @if( !$publisher->games_for_gamescom_2019->isEmpty() )
+
+                    @php($booths = [])
+                    @foreach($publisher->exhibition_booths->where('exhibition_id', 1) as $booth)
+                        @php($booths[$booth->hall][] = $booth->booth)
+                    @endforeach
+
+                    @foreach($booths as $key => $booth)<li><i class="fa fa-map-marker"></i>Hall {{ $key }} at stands:
+                        <div class="stand-box">
+                        @foreach($booth as $item)
+                            <span>{{ $item }}</span>
+                        @endforeach
+                        </div>
+                    @endforeach
+                    </li>
+                    {{--End new halls--}}
+                    @endif
                 </ul>
 
-                @if(!$publisher->lineup2018->isEmpty() || !$publisher->lineup2019->isEmpty())
+                @if( !$publisher->games_for_gamescom_2019->isEmpty() )
                 <div class="horizontal-line"></div>
-                @endif
 
-                @if(!$publisher->lineup2019->isEmpty())
                 <h2>GC Lineup 2019</h2>
                 <ul>
-                    @foreach($publisher->lineup2019 as $lineup)
+                    @foreach($publisher->games_for_gamescom_2019 as $lineup)
                         <li><a href="{{ url("games/" . $lineup->slug) }}">{{ $lineup->title }}</a></li>
                     @endforeach
-                </ul>
-                @endif
-
-                @if(!$publisher->lineup2018->isEmpty())
-                <h2>GC Lineup 2018</h2>
-                <ul>
-                @foreach($publisher->lineup2018 as $lineup)
-                    <li><a href="{{ url("games/" . $lineup->slug) }}">{{ $lineup->title }}</a></li>
-                @endforeach
                 </ul>
                 @endif
 

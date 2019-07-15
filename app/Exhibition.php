@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 class Exhibition extends Model
 {
     // Which items are fill-able in the database
-    protected $fillable = ['title', 'slug', 'excerpt', 'body', 'latitude', 'longitude', 'starts_at', 'ends_at', 'aliases', 'image'];
+    protected $fillable = ['title', 'slug', 'excerpt', 'body', 'latitude', 'longitude', 'starts_at', 'ends_at', 'address', 'country', 'aliases', 'image'];
 
     // Select which columns from the database contain dates (and can be used by Carbon)
     public function getDates()

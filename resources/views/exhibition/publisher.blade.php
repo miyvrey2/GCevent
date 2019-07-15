@@ -11,8 +11,9 @@
         <div class="featured_image pinkpurple" style="background-image:url('https://www.gamescomevent.com/img/gamescom_17_010_010.jpg')"></div>
     </section>
 
-    <div class="container publisher-show">
+    <div class="container exhibition-show">
         <div class="row">
+
             <div class="col-md-12">
 
                 {{-- Title --}}
@@ -24,11 +25,21 @@
 
                 <p><strong>A great number of contributors, exhibitors and publishers are represented at Gamescom. For as far is there each year an increasement in their numbers.</strong></p>
                 <br />
+            </div>
+            <div class="col-md-9">
 
                 @foreach($exhibition->publishers as $publisher)
                     <a href="{{url('publishers/' . $publisher->slug)}}">{{$publisher->title}}</a> <br />
                 @endforeach
 
+            </div>
+            <div class="col-md-3">
+                @component('exhibition.sidebar', compact('exhibition'))
+                @endcomponent
+
+                <div class="horizontal-line"></div>
+
+                <h2>Advertisement</h2>
             </div>
         </div>
     </div>
