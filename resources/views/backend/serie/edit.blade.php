@@ -11,18 +11,20 @@
             <div class="col-md-12">
 
                 {{-- Title --}}
-                <h1>Create a game</h1>
+                <h1>Edit "{{$serie->title}}"</h1>
 
                 {{--Breadcrumbs--}}
-                @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/games' => 'Games', 'admin/games/create' => 'Create a game']])
+                @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/series' => 'series', 'admin/series/' . $serie->slug . '/edit' => 'Edit "' . $serie->title . '"']])
                 @endcomponent
-
             </div>
 
-            <form method="POST" action="{{url('/admin/games')}}">
+            <form method="POST" action="{{url('/admin/series/' . $serie->slug)}}">
+
+                {{--Set the post method to patch--}}
+                {{ method_field('PATCH') }}
 
                 {{--Load the form--}}
-                @component('backend.game.form', compact('developers', 'games','publishers', 'game', 'platforms', 'genres', 'series'))
+                @component('backend.serie.form', compact('series', 'serie'))
                 @endcomponent
 
             </form>

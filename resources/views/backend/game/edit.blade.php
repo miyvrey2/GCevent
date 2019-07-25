@@ -29,7 +29,7 @@
                 {{ method_field('PATCH') }}
 
                 {{--Load the form--}}
-                @component('backend.game.form', compact('developers', 'games','publishers', 'game', 'platforms', 'genres'))
+                @component('backend.game.form', compact('developers', 'games','publishers', 'game', 'platforms', 'genres', 'series'))
                 @endcomponent
 
             </form>

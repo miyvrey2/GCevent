@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class GameGenre extends Migration
+class CreateGameSerieTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,12 @@ class GameGenre extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('game_genre', function (Blueprint $table) {
+        Schema::create('game_serie', function (Blueprint $table) {
             $table->integer('game_id')->nullable()->unsigned();
             $table->foreign('game_id')->references('id')->on('games')->onDelete('cascade');
-            $table->integer('genre_id')->nullable()->unsigned();
-            $table->foreign('genre_id')->references('id')->on('genres')->onDelete('cascade');
-            $table->unique(['game_id', 'genre_id']);
+            $table->integer('serie_id')->nullable()->unsigned();
+            $table->foreign('serie_id')->references('id')->on('series')->onDelete('cascade');
+            $table->timestamps();
         });
     }
 
@@ -30,7 +29,6 @@ class GameGenre extends Migration
      */
     public function down()
     {
-        //
-        Schema::dropIfExists('game_genre');
+        Schema::dropIfExists('game_serie');
     }
 }

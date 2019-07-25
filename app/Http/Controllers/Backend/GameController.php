@@ -13,6 +13,7 @@ use App\Http\Controllers\Controller;
 use App\Game;
 use App\Publisher;
 use App\RSSItem;
+use App\Serie;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -52,6 +53,7 @@ class GameController extends Controller
         $publishers = Publisher::orderBy('title')->get();
         $platforms = Platform::orderBy('released_at')->get();
         $genres = Genre::orderBy('title')->get();
+        $series = Serie::orderBy('title')->get();
         $games = Game::all(); // Doesn't have to be ordered since it is for auto-completion
 
         // Initiate a new game with some defined values
@@ -62,7 +64,7 @@ class GameController extends Controller
             $game->title = $title;
         }
 
-        return view('backend.game.create', compact('developers', 'games','publishers', 'game', 'platforms', 'genres'));
+        return view('backend.game.create', compact('developers', 'games','publishers', 'game', 'platforms', 'genres', 'series'));
     }
 
     /**
@@ -113,6 +115,9 @@ class GameController extends Controller
         // Sync the game and it's publishers
         $game->developers()->sync($request['developers']);
 
+        // Sync the game and it's publishers
+        $game->series()->sync($request['series']);
+
         return redirect('/admin/games');
     }
 
@@ -143,6 +148,7 @@ class GameController extends Controller
         $publishers = Publisher::orderBy('title')->get();
         $platforms = Platform::orderBy('released_at')->get();
         $genres = Genre::orderBy('title')->get();
+        $series = Serie::orderBy('title')->get();
         $games = Game::all(); // Doesn't have to be ordered since it is for auto-completion
 
         if($game['aliases'] != "") {
@@ -156,8 +162,9 @@ class GameController extends Controller
         $genres = $this->unset_arrayitem_from_array_all_if_already_used($game->genres, $genres);
         $publishers = $this->unset_arrayitem_from_array_all_if_already_used($game->publishers, $publishers);
         $developers = $this->unset_arrayitem_from_array_all_if_already_used($game->developers, $developers);
+        $series = $this->unset_arrayitem_from_array_all_if_already_used($game->series, $series);
 
-        return view('backend.game.edit', compact('developers', 'games','publishers', 'game', 'platforms', 'genres'));
+        return view('backend.game.edit', compact('developers', 'games','publishers', 'game', 'platforms', 'genres', 'series'));
     }
 
     /**
@@ -190,6 +197,9 @@ class GameController extends Controller
 
         // Sync the game and it's publishers
         $game->developers()->sync($request['developers']);
+
+        // Sync the game and it's publishers
+        $game->series()->sync($request['series']);
 
         return Redirect::to('/admin/games');
     }

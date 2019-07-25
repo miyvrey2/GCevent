@@ -8,6 +8,7 @@ use App\Page;
 use App\Article;
 use App\Platform;
 use App\Publisher;
+use App\Serie;
 use App\RSSItem;
 use App\RSSWebsite;
 use Illuminate\Support\Facades\Route;
@@ -39,8 +40,8 @@ class RouteServiceProvider extends ServiceProvider
             return Article::where('slug', $slug)->first();
         });
 
-        Route::bind('platform', function($slug) {
-            return Platform::where('slug', $slug)->first();
+        Route::bind('developer', function($slug) {
+            return Developer::where('slug', $slug)->first();
         });
 
         Route::bind('game', function($slug) {
@@ -51,12 +52,12 @@ class RouteServiceProvider extends ServiceProvider
             return Page::published()->where('slug', $slug)->first();
         });
 
-        Route::bind('publisher', function($slug) {
-            return Publisher::where('slug', $slug)->first();
+        Route::bind('platform', function($slug) {
+            return Platform::where('slug', $slug)->first();
         });
 
-        Route::bind('developer', function($slug) {
-            return Developer::where('slug', $slug)->first();
+        Route::bind('publisher', function($slug) {
+            return Publisher::where('slug', $slug)->first();
         });
 
         Route::bind('rssitem', function($id) {
@@ -65,6 +66,10 @@ class RouteServiceProvider extends ServiceProvider
 
         Route::bind('rsswebsite', function($id) {
             return RSSWebsite::where('id', $id)->first();
+        });
+
+        Route::bind('serie', function($id) {
+            return Serie::where('id', $id)->first();
         });
 
         // Admin

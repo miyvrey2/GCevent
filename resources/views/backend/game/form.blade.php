@@ -86,6 +86,22 @@
     </div>
 
     <div class="form-group">
+        <label for="series[]">Series</label><br>
+        <select class="form-control js-example-basic-multiple form-control" id="series[]" name="series[]" multiple="multiple">
+
+            @if($game->series != null)
+                @foreach($game->series as $serie)
+                    <option value="{{$serie->id}}" selected>{{$serie->title}}</option>
+                @endforeach
+            @endif
+
+            @foreach($series as $serie)
+                <option value="{{$serie->id}}">{{$serie->title}}</option>
+            @endforeach
+        </select>
+    </div>
+
+    <div class="form-group">
         <label for="genres[]">Genres</label><br>
         <select class="form-control js-example-basic-multiple form-control" id="genres[]" name="genres[]" multiple="multiple">
 

@@ -116,6 +116,11 @@ class Game extends Model
         return $this->belongsToMany(Genre::class);
     }
 
+    // Many to many (to connect pivot table in DB)
+    public function series() {
+        return $this->belongsToMany(Serie::class);
+    }
+
     public function getBodyHtmlAttribute()
     {
         return $this->body;

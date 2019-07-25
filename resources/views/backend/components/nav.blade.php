@@ -20,6 +20,7 @@
                 <li itemprop="name"><a itemprop="url" href="{{url('/admin/genres')}}">Genres</a></li>
                 <li itemprop="name"><a itemprop="url" href="{{url('/admin/developers')}}">Developers</a></li>
                 <li itemprop="name"><a itemprop="url" href="{{url('/admin/publishers')}}">Publishers</a></li>
+                <li itemprop="name"><a itemprop="url" href="{{url('/admin/series')}}">Series</a></li>
             </ul></li>
         <li itemprop="name"><a itemprop="url" href="{{url('/admin/exhibitions')}}">Exhibitions</a></li>
         <li itemprop="name"><a itemprop="url" href="{{url('/admin/pages')}}">Pages</a></li>

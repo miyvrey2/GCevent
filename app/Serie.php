@@ -2,10 +2,9 @@
 
 namespace App;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
-class Genre extends Model
+class Serie extends Model
 {
     // Which items are fill-able in the database
     protected $fillable = ['title', 'slug', 'excerpt', 'body'];
@@ -36,7 +35,7 @@ class Genre extends Model
         return e($this->excerpt);
     }
 
-    // A genre has many games
+    // A serie has many games
     // Many to many (to connect pivot table in DB)
     public function games() {
         return $this->belongsToMany(Game::class);
