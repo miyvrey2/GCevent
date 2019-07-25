@@ -65,7 +65,7 @@
 {{--    <script type='text/javascript' src='{{asset('js/slider.js')}}'></script>--}}
     <!--</section>-->
 
-    <div class="container publisher-show">
+    <div class="container show">
         <div class="row">
             <div class="col-md-12">
                 <h1>Gamescom {{env('GAMESCOM_YEAR')}} is coming!</h1>

@@ -12,7 +12,7 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3 footer-column">
                 <h3>Quick links</h3>
                 <ul>
                     <li><a href="{{url('gamescom-2019')}}">About gamescom 2019</a></li>
@@ -20,6 +20,7 @@
                     <li><a href="{{url('sitemap')}}">Sitemap</a></li>
                     <li><a href="{{url('rss')}}">RSS feed</a></li>
                     @if(Auth::check())
+                    <li><a href="{{url('admin/dashboard')}}">Dashboard</a></li>
                     <li>
                         <a href="{{ route('logout') }}"
                            onclick="event.preventDefault();
@@ -36,13 +37,13 @@
                     @endif
                 </ul>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-5 footer-column">
                 <h3>Recently added news</h3>
                 @foreach($recent_articles as $article)
                     <a href="{{ url( "article/" . $article['slug']) }}">{{$article['title']}}</a> <br>
                 @endforeach
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 footer-column">
                 <h3>Open at</h3>
                 <strong>Wed. 21 August: </strong><span>10:00 - 20:00</span><br>
                 <strong>Thu. 22 August: </strong><span>10:00 - 20:00</span><br>

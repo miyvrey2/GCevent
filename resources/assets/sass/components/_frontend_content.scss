@@ -1,0 +1,21 @@
+.show {
+
+    padding-top: 10px;
+
+    h1 {
+        margin: 10px 0 5px 0;
+        font-size: 30px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    .show {
+
+        padding-top: 50px;
+
+        h1 {
+            margin: 10px 0 10px 0;
+            font-size: 50px;
+        }
+    }
+}

@@ -11,7 +11,7 @@
         <div class="featured_image yellowpink" style="background-image:url('https://www.gamescomevent.com/img/gamescom_17_010_010.jpg')"></div>
     </section>
 
-    <div class="container game-show">
+    <div class="container show game-show">
         <div class="row">
             <div class="col-md-12">
 
@@ -31,9 +31,9 @@
                 </p>
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3 sidebar">
                 <h2>Overview</h2>
-                <ul class="game-meta">
+                <ul class="meta">
                     @if($game->released == "T.B.A.")
                         <li><i class="fa fa-calendar" title="Release date"></i>Planned for <a href="#" title="{{$game->released}}">{{$game->released}}</a></li>
                     @else

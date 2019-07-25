@@ -11,7 +11,7 @@
         <div class="featured_image deepblue" style="background-image:url('https://www.gamescomevent.com/img/gamescom_17_010_010.jpg')"></div>
     </section>
 
-    <div class="container article-show">
+    <div class="container show article-show">
         <div class="row">
             <div class="col-md-12">
 
@@ -46,10 +46,10 @@
                 {{--</div>--}}
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3 sidebar">
                 @if($article->game_id)
                     <h2>Game: <a href="{{ url('games/' . $article->game->slug) }}">{{$article->game->title}}</a></h2>
-                    <ul class="game-meta">
+                    <ul class="meta">
 
                         @if($article->game->released == "T.B.A.")
                             <li><i class="fa fa-calendar" title="Release date"></i>Planned for <a href="#" title="{{$article->game->released}}">{{$article->game->released}}</a></li>
@@ -91,6 +91,18 @@
                             </li>
                         @endif
 
+                        @if(!$article->game->developers->isEmpty())
+                            <li>
+                                <i class="fa fa-flask" title="{{__('breadcrumbs.developer')}}"></i>
+                                @php($i = 1)
+                                @foreach($article->game->developers as $developer)
+                                    <a title="{{__('breadcrumbs.developedBy')}} {{$developer->title}}" href="{{url('developers/'.$developer->slug)}}">{{$developer->title}}</a>
+
+                                    @php($i++)
+                                @endforeach
+                            </li>
+                        @endif
+
                         @if(!$article->game->publishers->isEmpty())
                             <li>
                                 <i class="fa fa-upload" title="{{__('breadcrumbs.publisher')}}"></i>
@@ -108,7 +120,7 @@
                 @endif
 
                 <h2>Summary</h2>
-                <ul class="article-meta">
+                <ul class="meta">
                     <li><i class="fa fa-comments"></i> 1 comment</li>
                 </ul>
             </div>

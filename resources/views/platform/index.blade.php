@@ -11,7 +11,7 @@
         <div class="featured_image pinkpurple" style="background-image:url('https://www.gamescomevent.com/img/gamescom_17_010_010.jpg')"></div>
     </section>
 
-    <div class="container platform-show">
+    <div class="container show platform-show">
         <div class="row">
             <div class="col-md-12">
 

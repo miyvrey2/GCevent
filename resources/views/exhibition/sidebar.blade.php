@@ -1,6 +1,6 @@
 <h2>Overview</h2>
 
-<ul class="exhibition-meta">
+<ul class="meta">
     <li><a href="{{ url($exhibition->slug) }}">{{ $exhibition->title }}</a></li>
     <li><i class="fa fa-calendar" title="Starts"></i>From <a href="#">{{ $exhibition->starts_at->format('d M @ H:i') }}</a></li>
     <li><i class="fa fa-calendar" title="Closes"></i>Untill <a href="#">{{ $exhibition->ends_at->format('d M @ H:i') }}</a></li>

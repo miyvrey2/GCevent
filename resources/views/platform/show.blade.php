@@ -11,7 +11,7 @@
         <div class="featured_image greenblue" style="background-image:url('https://www.gamescomevent.com/img/gamescom_17_010_010.jpg')"></div>
     </section>
 
-    <div class="container platform-show">
+    <div class="container show platform-show">
         <div class="row">
             <div class="col-md-12">
 
@@ -35,9 +35,9 @@
                 @endguest
             </div>
 
-            <div class="col-md-3">
+            <div class="col-md-3 sidebar">
                 <h2>Overview</h2>
-                <ul class="platform-meta">
+                <ul class="meta">
                     @if($platform->released == "T.B.A.")
                         <li><i class="fa fa-calendar" title="Release date"></i>Planned for <a href="#" title="{{$platform->released}}">{{$platform->released}}</a></li>
                     @else

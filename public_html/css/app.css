@@ -492,18 +492,18 @@ nav ul li.active a {
 }
 
 ul.breadcrumbs {
-  padding: 0;
+  display: block;
+  padding: 0 0 15px 0;
   font-size: 14px;
   list-style-type: none;
 }
 
 ul.breadcrumbs li {
-  display: inline-block;
-  padding: 5px 0 15px 0;
+  display: inline;
 }
 
 ul.breadcrumbs li a {
-  color: black;
+  color: #555;
   text-decoration: none;
   padding-bottom: 1px;
   border-bottom: 1px solid transparent;
@@ -525,6 +525,16 @@ ul.breadcrumbs li:not(:last-child):after {
   content: " > ";
   padding: 0 3px;
   font-size: 10px;
+}
+
+@media screen and (min-width: 992px) {
+  ul.breadcrumbs {
+    padding: 5px 0 15px 0;
+  }
+
+  ul.breadcrumbs li a {
+    color: black;
+  }
 }
 
 #featured_image_section,
@@ -874,7 +884,7 @@ footer {
   color: white;
 }
 
-footer .col-md-4 {
+footer .footer-column {
   padding-top: 20px;
   padding-bottom: 20px;
 }
@@ -1048,15 +1058,6 @@ footer .social-footer i {
   }
 }
 
-.article-show {
-  padding-top: 50px;
-}
-
-.article-show h1 {
-  margin: 10px 0 10px 0;
-  font-size: 50px;
-}
-
 .article-show .col-md-9 em {
   color: #666666;
   font-size: 14px;
@@ -1064,66 +1065,6 @@ footer .social-footer i {
 
 .article-show .col-md-9 img {
   max-width: 100%;
-}
-
-.article-show .col-md-3 ul {
-  padding: 5px 0 0 25px;
-}
-
-.article-show .col-md-3 ul.article-meta,
-.article-show .col-md-3 ul.game-meta {
-  list-style-type: none;
-}
-
-.article-show .col-md-3 ul.article-meta li,
-.article-show .col-md-3 ul.game-meta li {
-  display: inline-block;
-  padding-right: 50px;
-}
-
-.article-show .col-md-3 ul.article-meta li i,
-.article-show .col-md-3 ul.game-meta li i {
-  width: 25px;
-  color: #3097D1;
-  display: inline-block;
-  margin-left: -25px;
-}
-
-.article-show .col-md-3 ul.article-meta li a,
-.article-show .col-md-3 ul.game-meta li a {
-  color: #333333;
-}
-
-.article-show .col-md-3 ul.article-meta li .box,
-.article-show .col-md-3 ul.game-meta li .box {
-  position: relative;
-  margin-left: 25px;
-  display: block;
-}
-
-.article-show .col-md-3 ul.article-meta li .box span,
-.article-show .col-md-3 ul.game-meta li .box span {
-  position: relative;
-  height: 13px;
-  display: inline-block;
-  margin: 2px;
-  padding: 3px 5px;
-  font-size: 12px;
-  line-height: 12px;
-  background-color: #3097D1;
-  color: white;
-  border-radius: 13px;
-}
-
-.exhibition-show,
-.exhibition-upcoming {
-  padding-top: 50px;
-}
-
-.exhibition-show h1,
-.exhibition-upcoming h1 {
-  margin: 10px 0 10px 0;
-  font-size: 50px;
 }
 
 .exhibition-show form.exhibition-show-delete,
@@ -1141,119 +1082,8 @@ footer .social-footer i {
   cursor: pointer;
 }
 
-.exhibition-show .col-md-3 ul,
-.exhibition-upcoming .col-md-3 ul {
-  padding: 5px 0 0 25px;
-}
-
-.exhibition-show .col-md-3 ul.exhibition-meta,
-.exhibition-upcoming .col-md-3 ul.exhibition-meta {
-  padding: 5px 0 0 025px;
-  list-style-type: none;
-}
-
-.exhibition-show .col-md-3 ul.exhibition-meta li,
-.exhibition-upcoming .col-md-3 ul.exhibition-meta li {
-  width: 100%;
-  display: inline-block;
-  padding-right: 0;
-}
-
-.exhibition-show .col-md-3 ul.exhibition-meta li i,
-.exhibition-upcoming .col-md-3 ul.exhibition-meta li i {
-  width: 25px;
-  color: #3097D1;
-  display: inline-block;
-  margin-left: -25px;
-}
-
-.exhibition-show .col-md-3 ul.exhibition-meta li a,
-.exhibition-upcoming .col-md-3 ul.exhibition-meta li a {
-  color: #333333;
-}
-
-.exhibition-show .col-md-3 ul.exhibition-meta li span,
-.exhibition-upcoming .col-md-3 ul.exhibition-meta li span {
-  position: relative;
-  height: 13px;
-  display: inline-block;
-  margin: 2px;
-  padding: 3px 5px;
-  font-size: 12px;
-  line-height: 12px;
-  background-color: #3097D1;
-  color: white;
-  border-radius: 13px;
-}
-
-@media screen and (min-width: 992px) {
-  .exhibition-show .col-md-3 ul.exhibition-meta li,
-  .exhibition-upcoming .col-md-3 ul.exhibition-meta li {
-    padding-right: 50px;
-  }
-}
-
-.platform-show {
-  padding-top: 50px;
-}
-
-.platform-show h1 {
-  margin: 10px 0 10px 0;
-  font-size: 50px;
-}
-
-.platform-show .col-md-3 ul {
-  padding: 5px 0 0 25px;
-}
-
-.platform-show .col-md-3 ul.platform-meta {
-  padding: 5px 0 0 025px;
-  list-style-type: none;
-}
-
-.platform-show .col-md-3 ul.platform-meta li {
-  width: 100%;
-  display: inline-block;
-  padding-right: 50px;
-}
-
-.platform-show .col-md-3 ul.platform-meta li i {
-  width: 25px;
-  color: #3097D1;
-  display: inline-block;
-  margin-left: -25px;
-}
-
-.platform-show .col-md-3 ul.platform-meta li a {
-  color: #333333;
-}
-
-.platform-show .col-md-3 ul.platform-meta li span {
-  position: relative;
-  height: 13px;
-  display: inline-block;
-  margin: 2px;
-  padding: 3px 5px;
-  font-size: 12px;
-  line-height: 12px;
-  background-color: #3097D1;
-  color: white;
-  border-radius: 13px;
-}
-
 .game-upcoming .game-item strong {
   font-size: 24px;
-}
-
-.game-show,
-.game-upcoming {
-  padding-top: 50px;
-}
-
-.game-show h1,
-.game-upcoming h1 {
-  margin: 10px 0 10px 0;
-  font-size: 50px;
 }
 
 .game-show form.game-show-delete,
@@ -1271,39 +1101,57 @@ footer .social-footer i {
   cursor: pointer;
 }
 
-.game-show .col-md-3 ul,
-.game-upcoming .col-md-3 ul {
-  padding: 5px 0 0 25px;
+.show {
+  padding-top: 10px;
 }
 
-.game-show .col-md-3 ul.game-meta,
-.game-upcoming .col-md-3 ul.game-meta {
-  padding: 5px 0 0 025px;
+.show h1 {
+  margin: 10px 0 5px 0;
+  font-size: 30px;
+}
+
+@media screen and (min-width: 992px) {
+  .show {
+    padding-top: 50px;
+  }
+
+  .show h1 {
+    margin: 10px 0 10px 0;
+    font-size: 50px;
+  }
+}
+
+.sidebar ul {
+  padding: 5px 0 10px 25px;
+}
+
+.sidebar ul.meta {
   list-style-type: none;
 }
 
-.game-show .col-md-3 ul.game-meta li,
-.game-upcoming .col-md-3 ul.game-meta li {
+.sidebar ul.meta li {
   width: 100%;
   display: inline-block;
   padding-right: 0;
 }
 
-.game-show .col-md-3 ul.game-meta li i,
-.game-upcoming .col-md-3 ul.game-meta li i {
+.sidebar ul.meta li i {
   width: 25px;
   color: #3097D1;
   display: inline-block;
   margin-left: -25px;
 }
 
-.game-show .col-md-3 ul.game-meta li a,
-.game-upcoming .col-md-3 ul.game-meta li a {
+.sidebar ul.meta li a {
   color: #333333;
 }
 
-.game-show .col-md-3 ul.game-meta li span,
-.game-upcoming .col-md-3 ul.game-meta li span {
+.sidebar ul.meta li .stand-box {
+  position: relative;
+  display: block;
+}
+
+.sidebar ul.meta li .stand-box span {
   position: relative;
   height: 13px;
   display: inline-block;
@@ -1316,100 +1164,16 @@ footer .social-footer i {
   border-radius: 13px;
 }
 
+.sidebar .horizontal-line {
+  position: relative;
+  height: 1px;
+  margin: 20px 0 20px 0;
+  background-color: #CCCCCC;
+}
+
 @media screen and (min-width: 992px) {
-  .game-show .col-md-3 ul.game-meta li,
-  .game-upcoming .col-md-3 ul.game-meta li {
+  .sidebar ul.meta li {
     padding-right: 50px;
   }
-}
-
-.publisher-show {
-  padding-top: 50px;
-}
-
-.publisher-show h1 {
-  margin: 10px 0 10px 0;
-  font-size: 50px;
-}
-
-.publisher-show .col-md-3 ul {
-  padding: 5px 0 0 25px;
-}
-
-.publisher-show .col-md-3 ul.publisher-meta {
-  list-style-type: none;
-}
-
-.publisher-show .col-md-3 ul.publisher-meta li {
-  display: inline-block;
-  padding-right: 50px;
-}
-
-.publisher-show .col-md-3 ul.publisher-meta li i {
-  width: 25px;
-  color: #3097D1;
-  display: inline-block;
-  margin-left: -25px;
-}
-
-.publisher-show .col-md-3 ul.publisher-meta li a {
-  color: #333333;
-}
-
-.publisher-show .col-md-3 ul.publisher-meta li span {
-  position: relative;
-  height: 13px;
-  display: inline-block;
-  padding: 3px 5px;
-  font-size: 12px;
-  line-height: 12px;
-  background-color: #3097D1;
-  color: white;
-  border-radius: 13px;
-}
-
-.developer-show {
-  padding-top: 50px;
-}
-
-.developer-show h1 {
-  margin: 10px 0 10px 0;
-  font-size: 50px;
-}
-
-.developer-show .col-md-3 ul {
-  padding: 5px 0 0 25px;
-}
-
-.developer-show .col-md-3 ul.developer-meta {
-  list-style-type: none;
-}
-
-.developer-show .col-md-3 ul.developer-meta li {
-  display: inline-block;
-  padding-right: 50px;
-}
-
-.developer-show .col-md-3 ul.developer-meta li i {
-  width: 25px;
-  color: #3097D1;
-  display: inline-block;
-  margin-left: -25px;
-}
-
-.developer-show .col-md-3 ul.developer-meta li a {
-  color: #333333;
-}
-
-.developer-show .col-md-3 ul.developer-meta li span {
-  position: relative;
-  height: 13px;
-  display: inline-block;
-  padding: 3px 5px;
-  font-size: 12px;
-  line-height: 12px;
-  background-color: #3097D1;
-  color: white;
-  border-radius: 13px;
 }
 

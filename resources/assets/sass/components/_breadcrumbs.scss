@@ -1,15 +1,14 @@
-
 ul.breadcrumbs {
-    padding: 0;
+    display: block;
+    padding: 0 0 15px 0;
     font-size: 14px;
     list-style-type: none;
 
     li {
-        display: inline-block;
-        padding: 5px 0 15px 0;
+        display: inline;
 
         a {
-            color: black;
+            color: #555;
             text-decoration: none;
             padding-bottom: 1px;
             border-bottom: 1px solid transparent;
@@ -32,5 +31,19 @@ ul.breadcrumbs {
         content: " > ";
         padding: 0 3px;
         font-size: 10px;
+    }
+}
+
+@media screen and (min-width: 992px) {
+    ul.breadcrumbs {
+
+        padding: 5px 0 15px 0;
+
+        li {
+
+            a {
+                color: black;
+            }
+        }
     }
 }

@@ -95,7 +95,7 @@ RewriteRule ^consoles/(.*)$ /platforms/$1 [R=301,NC,L]
 Header edit Set-Cookie ^(.*)$ $1;HttpOnly;Secure
 
 # Execute only allowed scripts
-Header set Content-Security-Policy "script-src 'self' 'unsafe-inline' https://www.google.com http://pagead2.googlesyndication.com https://www.googletagmanager.com https://adservice.google.nl https://adservice.google.com https://www.googletagservices.com https://www.google-analytics.com http://code.jquery.com http://cloud.tinymce.com http://cdnjs.cloudflare.com"
+Header set Content-Security-Policy "script-src 'self' 'unsafe-inline' https://www.google.com http://pagead2.googlesyndication.com https://www.googletagmanager.com https://adservice.google.nl https://adservice.google.com https://www.googletagservices.com https://www.google-analytics.com http://code.jquery.com http://cloud.tinymce.com http://cdnjs.cloudflare.com https://pagead2.googlesyndication.com"
 
 # Prevent Clickjacking
 Header always set X-FRAME-OPTIONS "DENY"
