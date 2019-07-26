@@ -29,6 +29,10 @@
                 <p>
                     {!! $publisher->body_html !!}
                 </p>
+                @guest
+                @else
+                    <br><a href="{{ url("admin/publishers/" . $publisher->slug . "/edit") }}">Edit</a><br><br>
+                @endguest
             </div>
 
             <div class="col-md-3 sidebar">

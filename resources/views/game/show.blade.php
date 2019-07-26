@@ -29,6 +29,10 @@
                 <p>
                     {!! $game->body_html !!}
                 </p>
+                @guest
+                @else
+                    <br><a href="{{ url("admin/games/" . $game->slug . "/edit") }}">Edit</a><br><br>
+                @endguest
             </div>
 
             <div class="col-md-3 sidebar">
@@ -129,11 +133,12 @@
                 @endforeach
 
                 ],
-                @endif @if(!$game->genres->isEmpty())
-                "genre":[@foreach($game->genres as $genre)"{{$genre->title}}"@endforeach],
-                @endif @if(!$game->platforms->isEmpty())
+                @endif @if(!$game->genres->isEmpty())@php($i = 1)
 
-                "gamePlatform":[@foreach($game->platforms as $platform)"{{$platform->title}}"@endforeach],
+                "genre":[@foreach($game->genres as $genre)"{{$genre->title}}"@if($i < count($game->genres)),@php($i++)@endif @endforeach],
+                @endif @if(!$game->platforms->isEmpty())@php($i = 1)
+
+                "gamePlatform":[@foreach($game->platforms as $platform)"{{$platform->title}}"@if($i < count($game->platforms)),@php($i++)@endif @endforeach],
                 @endif
                 {{--"operatingSystem":["Sonic", "Duo"],--}}
                 "aggregateRating":{

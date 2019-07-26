@@ -29,6 +29,10 @@
                 <p>
                     {!! $developer->body_html !!}
                 </p>
+                @guest
+                @else
+                    <br><a href="{{ url("admin/developers/" . $developer->slug . "/edit") }}">Edit</a><br><br>
+                @endguest
             </div>
 
             <div class="col-md-3 sidebar">

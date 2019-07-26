@@ -32,7 +32,10 @@
                 <p>
                     {!! $article->body_html !!}
                 </p>
-                <br>
+                @guest
+                @else
+                    <br><a href="{{ url("admin/articles/" . $article->slug . "/edit") }}">Edit</a><br><br>
+                @endguest
 
                 {{--<div class="">--}}
                 {{--<h3>1 Comment</h3>--}}

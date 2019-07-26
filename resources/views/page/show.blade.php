@@ -28,7 +28,10 @@
                 <br />
                 <p>
                     {!! $page->body_html !!}
-                </p>
+                </p>@guest
+                @else
+                    <br><a href="{{ url("admin/pages/" . $page->slug . "/edit") }}">Edit</a><br><br>
+                @endguest
             </div>
 
             <div class="col-md-3 sidebar">
