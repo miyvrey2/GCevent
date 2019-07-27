@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Page;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
 {
@@ -22,6 +22,7 @@ class PageController extends Controller
      */
     public function index()
     {
+        //
         $pages = Page::published()->get();
 
 //        $pages = Page::with('author')
@@ -37,6 +38,10 @@ class PageController extends Controller
      */
     public function show(Page $page)
     {
-        return view('page.show', compact('page'));
+        if(($page->status == $page->enumStatuses['pu']) || ($page->status == $page->enumStatuses['dr'] && Auth::check())) {
+            return view('page.show', compact('page'));
+        } else {
+            abort(404);
+        }
     }
 }

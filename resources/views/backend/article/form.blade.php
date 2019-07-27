@@ -17,7 +17,7 @@
     </div>
 
     <div class="form-group">
-        <label for="excerpt">Exerpt</label><br>
+        <label for="excerpt">Excerpt</label><br>
         <textarea type="text" class="form-control" id="excerpt" name="excerpt" autocomplete="off">{{$article->excerpt}}</textarea>
     </div>
 
@@ -51,6 +51,11 @@
         <label for="published_at">publish date</label><br>
         <span class="note"><strong>note:</strong> any date before now is an concept</span>
         <input type="datetime-local" class="form-control" id="published_at" name="published_at" autocomplete="off" value="@if($article->published_at){{$article->published_at->format('Y-m-d\TH:i')}}@endif">
+    </div>
+
+    <div class="form-group">
+        <label for="offline_at">Offline date</label><br>
+        <input type="datetime-local" class="form-control" id="offline_at" name="offline_at" autocomplete="off" value="@if($article->offline_at){{$article->offline_at->format('Y-m-d\TH:i')}}@endif">
     </div>
 
     <div class="form-group">

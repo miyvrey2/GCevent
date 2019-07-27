@@ -59,7 +59,7 @@
                             </td>
                             <td><a href="{{url($page->slug)}}">{{$page->title}}</a></td>
                             <td class="align-right page-attributes not-on-mobile">
-                                <span class="status">{{$page->status}}</span>
+                                <span class="status">{{ $page->status }}</span>
                                 <a @if($page->published_at != "") class="filled-attribute" @endif title="{{$page->published_at}}"><i class="fa fa-calendar"></i></a>&nbsp;
                                 <a @if($page->game_id != "") class="filled-attribute" title="{{$page->game->title}}"@endif><i class="fa fa-gamepad"></i></a>&nbsp;
                                 <a @if($page->keywords != "") class="filled-attribute" @endif title="{{$page->keywords}}"><i class="fa fa-tags"></i></a>&nbsp;

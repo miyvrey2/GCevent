@@ -49,11 +49,11 @@ class SerieController extends Controller
      */
     public function store(StoreOrUpdateSerie $request)
     {
+        // Get the validated data from request validator
         $data = $request->validated();
 
-        // make that slug readable
-        $data['slug'] = str_replace(" ", "-", $data['slug']);
-        $data['slug'] = preg_replace("/[^a-zA-Z0-9-]+/", "", $data['slug']);
+        // Make slug readable
+        $data['slug'] = $this->slugify($data['slug']);
 
         // Save into another databse
         //        DB::purge('mysql');
@@ -99,12 +99,14 @@ class SerieController extends Controller
      */
     public function update(StoreOrUpdateSerie $request, Serie $serie)
     {
-        // make that slug readable
-        $request['slug'] = str_replace(" ", "-", $request['slug']);
-        $request['slug'] = preg_replace("/[^a-zA-Z0-9-]+/", "", $request['slug']);
+        // Get the validated data from request validator
+        $data = $request->validated();
+
+        // Make slug readable
+        $data['slug'] = $this->slugify($data['slug']);
 
         // Save the updates
-        $serie->update($request->all());
+        $serie->update($data);
 
         return Redirect::to('/admin/series');
     }

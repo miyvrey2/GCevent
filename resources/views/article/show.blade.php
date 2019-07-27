@@ -25,7 +25,7 @@
             </div>
             <div class="col-md-9">
                 {{--<img src="{{$article->game->image}}" title="{{$article->game->title}}" />--}}
-                <em><i class="fa fa-clock-o"></i> Last updated: {{$article->date}}</em> @if($article->source)&nbsp;&nbsp; <em><i class="fa fa-sign-out"></i><a target="_blank" href="{{$article->source}}">Source</a></em> @endif &nbsp;&nbsp; @if($article->author_id)<em><i class="fa fa-user"></i> By: <a target="_blank" href="{{$article->author_id}}">{{$article->author->username}}</a></em> @endif
+                <em class="about-the-article"><i class="fa fa-clock-o"></i> Last updated: {{$article->date}}</em> @if($article->source)&nbsp;&nbsp; <em class="about-the-article"><i class="fa fa-sign-out"></i><a target="_blank" href="{{$article->source}}">Source</a></em> @endif &nbsp;&nbsp; @if($article->author_id)<em class="about-the-article"><i class="fa fa-user"></i> By: <a target="_blank" href="{{$article->author_id}}">{{$article->author->username}}</a></em> @endif
 
                 <p><strong>{!! $article->excerpt !!}</strong></p>
                 <br />
@@ -122,10 +122,30 @@
                     <div class="horizontal-line"></div>
                 @endif
 
+                @if($article->sidebar_title != null)
+                    <h2>{!! $article->sidebar_title !!}</h2>
+                    <p>
+                        {!! $article->sidebar_body !!}
+                    </p>
+                    <div class="horizontal-line"></div>
+                @endif
+
                 <h2>Summary</h2>
                 <ul class="meta">
-                    <li><i class="fa fa-comments"></i> 1 comment</li>
+                    <li><i class="fa fa-comments"></i> 0 comments</li>
+                    <li><i class="fa fa-tags"></i> Tags:
+                    @foreach($article->keywords as $tag)
+
+                        <div class="stand-box">
+                            <span>{{ $tag }}</span>
+                        </div>
+                    @endforeach
+
+                    </li>
                 </ul>
+
+                <div class="horizontal-line"></div>
+                <h2>Advertisement</h2>
             </div>
 
             <script type="application/ld+json">
@@ -160,14 +180,30 @@
               }
             </script>
 
-            <div class="col-md-12">
+            <div class="col-md-9">
                 {{--<div class="horizontal-line"></div>--}}
 
-                <div class="related-content">
+                <div class="related-items">
                     <h3>Related news</h3>
-                    @foreach($article->related as $related)
-                        {{$related->updated_at->format('Y m d (H:i)')}} <a href="{{url('article/' . $related->slug)}}" title="{{$related->title}}">{{$related->title}}</a><br>
-                    @endforeach
+                    <div class="row">
+                        @foreach($article->related as $related)
+                        <div class="col-sm-6 article-item">
+                            <a href="{{url('article/' . $related->slug)}}">
+                                <picture class="img-box greenblue">
+                                    <source srcset="{{ asset('img/gamescom_impression_hall_entrance.webp') }}" type="image/webp">
+                                    <source srcset="{{ asset('img/gamescom_impression_hall_entrance.jpg') }}" type="image/jpeg">
+                                    <img src="{{ asset('img/gamescom_impression_hall_entrance.jpg') }}" alt="{{ $related->title }}">
+                                </picture>
+                            </a>
+                            <div class="article-item-details">
+                                <a href="{{ url('article/' . $related->slug) }}">{{ $related->title }}</a> <br />
+                                <span class="more">
+                                    <em><i class="fa fa-clock-o"></i> {{ $related->date }}</em>
+                                </span>
+                            </div>
+                        </div>
+                        @endforeach
+                    </div>
                 </div>
             </div>
 

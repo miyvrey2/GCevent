@@ -52,16 +52,16 @@ class ExhibitionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreOrUpdateExhibition  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreOrUpdateExhibition $request)
     {
         $data = $request->validated();
 
-        // make that slug readable
-        $data['slug'] = str_replace(" ", "-", $data['slug']);
-        $data['slug'] = preg_replace("/[^a-zA-Z0-9-]+/", "", $data['slug']);
+        // Make slug readable
+        $data['slug'] = $this->slugify($data['slug']);
+
         $data['starts_at'] = Carbon::parse($data['starts_at']);
         $data['ends_at'] = Carbon::parse($data['ends_at']);
 
@@ -106,21 +106,24 @@ class ExhibitionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreOrUpdateExhibition  $request
      * @param  Exhibition $exhibition
      *
      * @return \Illuminate\Http\Response
      */
     public function update(StoreOrUpdateExhibition $request, Exhibition $exhibition)
     {
-        // make that slug readable
-        $request['slug'] = str_replace(" ", "-", $request['slug']);
-        $request['slug'] = preg_replace("/[^a-zA-Z0-9-]+/", "", $request['slug']);
-        $request['starts_at'] = Carbon::parse($request['starts_at']);
-        $request['ends_at'] = Carbon::parse($request['ends_at']);
+        // Get the validated data from request validator
+        $data = $request->validated();
+
+        // Make slug readable
+        $data['slug'] = $this->slugify($data['slug']);
+
+        $data['starts_at'] = Carbon::parse($data['starts_at']);
+        $data['ends_at'] = Carbon::parse($data['ends_at']);
 
         // Save the updates
-        $exhibition->update($request->all());
+        $exhibition->update($data);
 
         return Redirect::to('/admin/exhibitions');
     }

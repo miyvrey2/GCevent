@@ -8,22 +8,22 @@
 
     <div class="form-group">
         <label for="title">Title *</label><br>
-        <input type="text" class="form-control" id="title" name="title" required autocomplete="off" value="{{$developer->title}}">
+        <input type="text" class="form-control" id="title" name="title" required autocomplete="off" value="{{ $developer->title }}">
     </div>
 
     <div class="form-group">
         <label for="slug">Slug *</label><br>
-        <input type="text" class="form-control" id="slug" name="slug" required  autocomplete="off" value="{{$developer->slug}}">
+        <input type="text" class="form-control" id="slug" name="slug" required  autocomplete="off" value="{{ $developer->slug }}">
     </div>
 
     <div class="form-group">
-        <label for="excerpt">Exerpt</label><br>
-        <textarea type="text" class="form-control" id="excerpt" name="excerpt" autocomplete="off">{{$developer->excerpt}}</textarea>
+        <label for="excerpt">Excerpt</label><br>
+        <textarea type="text" class="form-control" id="excerpt" name="excerpt" autocomplete="off">{{ $developer->excerpt }}</textarea>
     </div>
 
     <div class="form-group">
         <label for="body">Body</label><br>
-        <textarea type="text" class="form-control" id="body" name="body" autocomplete="off">{{$developer->body}}</textarea>
+        <textarea type="text" class="form-control" id="body" name="body" autocomplete="off">{{ $developer->body }}</textarea>
     </div>
 
 </div>
@@ -32,18 +32,18 @@
 
     <div class="form-group">
         <label for="image">Image</label><br>
-        <input type="text" class="form-control" id="image" name="image" autocomplete="off" value="{{$developer->image}}">
+        <input type="text" class="form-control" id="image" name="image" autocomplete="off" value="{{ $developer->image }}">
     </div>
 
     <div class="form-group">
         <label for="url">url</label><br>
-        <input type="text" class="form-control" id="url" name="url" autocomplete="off" value="{{$developer->url}}">
+        <input type="text" class="form-control" id="url" name="url" autocomplete="off" value="{{ $developer->url }}">
     </div>
 
     <div class="form-group">
         <label for="found">found</label><br>
         <span class="note"><strong>note:</strong> "2018-00-00" notes as "in 2018"</span>
-        <input type="text" class="form-control" id="found" name="found" autocomplete="off" value="{{$developer->found}}">
+        <input type="text" class="form-control" id="found" name="found" autocomplete="off" value="{{ $developer->found_ymd }}">
     </div>
 
     <div class="form-group">

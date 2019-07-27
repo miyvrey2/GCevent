@@ -17,7 +17,7 @@
     </div>
 
     <div class="form-group">
-        <label for="excerpt">Exerpt</label><br>
+        <label for="excerpt">Excerpt</label><br>
         <textarea type="text" class="form-control" id="excerpt" name="excerpt" autocomplete="off">{{$publisher->excerpt}}</textarea>
     </div>
 
@@ -43,7 +43,7 @@
     <div class="form-group">
         <label for="found">found</label><br>
         <span class="note"><strong>note:</strong> "2018-00-00" notes as "in 2018"</span>
-        <input type="text" class="form-control" id="found" name="found" autocomplete="off" value="{{$publisher->found}}">
+        <input type="text" class="form-control" id="found" name="found" autocomplete="off" value="{{$publisher->found_ymd}}">
     </div>
 
     <div class="form-group">

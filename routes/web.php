@@ -73,6 +73,9 @@ Route::get('/developers/{developer}', 'DeveloperController@show');
 Route::get('/platforms', 'PlatformController@index');
 Route::get('/platforms/{platform}', 'PlatformController@show');
 
+// Platforms
+Route::get('/users/{user}', 'UserController@show');
+
 // Crawler
 Route::get('/crawler/crawl', 'RSSCrawlerController@crawl');
 
@@ -104,5 +107,9 @@ Route::get('/{slug}', function($slug) {
     if($exhibition != null) {
         $controller = app()->make('\App\Http\Controllers\ExhibitionController');
         return $controller->callAction('show', [$exhibition]);
+    }
+
+    if($exhibition == null && $page == null) {
+        abort(404);
     }
 });

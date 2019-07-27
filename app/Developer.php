@@ -13,7 +13,7 @@ class Developer extends Model
     // Select which columns from the database contain dates (and can be used by Carbon)
     public function getDates()
     {
-        return ['created_at', 'updated_at', 'found'];
+        return ['created_at', 'updated_at'];
     }
 
     public function getRouteKeyName()
@@ -24,6 +24,11 @@ class Developer extends Model
     public function getDateAttribute()
     {
         return is_null($this->updated_at) ? '' : $this->updated_at->diffForHumans();
+    }
+
+    public function getFoundYmdAttribute()
+    {
+        return is_null($this->found) ? '' : str_replace(' 00:00:00', '', $this->found);
     }
 
     public function getFoundedAttribute()

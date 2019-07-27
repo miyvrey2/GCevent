@@ -22,18 +22,13 @@
     </div>
 
     <div class="form-group">
-        <label for="excerpt">Exerpt</label><br>
+        <label for="excerpt">Excerpt</label><br>
         <textarea type="text" class="form-control" id="excerpt" name="excerpt" autocomplete="off">{{$page->excerpt}}</textarea>
     </div>
 
     <div class="form-group">
         <label for="body">Body</label><br>
         <textarea type="text" class="form-control" id="body" name="body" autocomplete="off">{{$page->body}}</textarea>
-    </div>
-
-    <div class="form-group">
-        <label for="source">Source URL</label><br>
-        <input type="text" class="form-control" id="source" name="source" autocomplete="off" value="{{$page->source}}">
     </div>
 
 </div>
@@ -45,6 +40,12 @@
         <span class="note"><strong>note:</strong> any date before now is an concept</span>
         <input type="datetime-local" class="form-control" id="published_at" name="published_at" autocomplete="off" value="@if($page->published_at){{$page->published_at->format('Y-m-d\TH:i')}}@endif">
     </div>
+
+    <div class="form-group">
+        <label for="offline_at">Offline date</label><br>
+        <input type="datetime-local" class="form-control" id="offline_at" name="offline_at" autocomplete="off" value="@if($page->offline_at){{$page->offline_at->format('Y-m-d\TH:i')}}@endif">
+    </div>
+
 
     <div class="form-group">
         <label for="keywords[]">Tags</label><br>

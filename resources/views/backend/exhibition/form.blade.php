@@ -17,7 +17,7 @@
     </div>
 
     <div class="form-group">
-        <label for="excerpt">Exerpt</label><br>
+        <label for="excerpt">Excerpt</label><br>
         <textarea type="text" class="form-control" id="excerpt" name="excerpt" autocomplete="off">{{$exhibition->excerpt}}</textarea>
     </div>
 

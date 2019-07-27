@@ -68,9 +68,8 @@ class PlatformController extends Controller
             'released_at'   => 'nullable|string',
         ]);
 
-        // make that slug readable
-        $data['slug'] = str_replace(" ", "-", $data['slug']);
-        $data['slug'] = preg_replace("/[^a-zA-Z0-9-]+/", "", $data['slug']);
+        // make slug readable
+        $data['slug'] = $this->slugify($data['slug']);
 
         // Make from multiple aliases 1
         if(isset($data['aliases'])) {
@@ -84,7 +83,7 @@ class PlatformController extends Controller
         //        Config::set('database.connections.mysql.database', 'db_test');
 
         // Save
-        $platform = Platform::create($data);
+        Platform::create($data);
 
         return redirect('/admin/platforms');
     }
@@ -129,8 +128,7 @@ class PlatformController extends Controller
     public function update(Request $request, Platform $platform)
     {
         // make that slug readable
-        $request['slug'] = str_replace(" ", "-", $request['slug']);
-        $request['slug'] = preg_replace("/[^a-zA-Z0-9-]+/", "", $request['slug']);
+        $data['slug'] = $this->slugify($data['slug']);
 
         // Make from multiple aliases 1
         if($request['aliases'] != null) {

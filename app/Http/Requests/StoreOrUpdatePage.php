@@ -2,11 +2,11 @@
 
 namespace App\Http\Requests;
 
-use App\Rules\Stringdate;
+use App\Rules\Stringdatetime;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreOrUpdateDeveloper extends FormRequest
+class StoreOrUpdatePage extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,13 +26,16 @@ class StoreOrUpdateDeveloper extends FormRequest
     public function rules()
     {
         return [
-            'title'         => ['required', 'string', Rule::unique('developers')->ignore($this->segment(3), 'slug')],
-            'slug'          => ['required', 'string', Rule::unique('developers')->ignore($this->segment(3), 'slug')],
+            'title'         => 'required',
+            'subtitle'      => 'nullable|string',
+            'slug'          => 'required',
             'excerpt'       => 'nullable|string',
             'body'          => 'nullable|string',
+            'published_at'  => 'nullable|date_format:"Y-m-d\TH:i"',
+            'offline_at'    => 'nullable|date_format:"Y-m-d\TH:i"',
+            'keywords'      => 'nullable|array',
+            'source'        => 'nullable|string',
             'image'         => 'nullable|string',
-            'found'         => ['nullable', new Stringdate],
-            'url'           => 'nullable|string',
         ];
     }
 }

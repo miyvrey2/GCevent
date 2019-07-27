@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Article;
-use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
@@ -26,8 +25,20 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        $article->related = Article::where([['game_id', '=', $article->game_id], ['id', '!=', $article->id]])->published()->get();
 
-        return view('article.show', compact('article'));
+        if(($article->status == $article->enumStatuses['pu']) || ($article->status == $article->enumStatuses['dr'] && Auth::check())) {
+
+            $article->related = Article::where([['game_id', '=', $article->game_id], ['id', '!=', $article->id]])->published()->limit(2)->get();
+
+            if($article['keywords'] != "") {
+                $article['keywords'] = explode(',', $article['keywords']);
+            } else {
+                $article->keywords = null;
+            }
+
+            return view('article.show', compact('article'));
+        } else {
+            abort(404);
+        }
     }
 }

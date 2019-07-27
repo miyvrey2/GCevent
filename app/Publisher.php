@@ -26,6 +26,11 @@ class Publisher extends Model
         return is_null($this->updated_at) ? '' : $this->updated_at->diffForHumans();
     }
 
+    public function getFoundYmdAttribute()
+    {
+        return is_null($this->found) ? '' : str_replace(' 00:00:00', '', $this->found);
+    }
+
     public function getFoundedAttribute()
     {
         if(!is_null($this->found)) {

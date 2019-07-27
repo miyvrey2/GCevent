@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Requests\StoreOrUpdatePublisher;
 use App\Publisher;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 
@@ -36,6 +35,8 @@ class PublisherController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param null $title
+     *
      * @return \Illuminate\Http\Response
      */
     public function create($title = null)
@@ -54,16 +55,17 @@ class PublisherController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param StoreOrUpdatePublisher $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(StoreOrUpdatePublisher $request)
     {
+        // Get the validated data from request validator
         $data = $request->validated();
 
-        // make that slug readable
-        $data['slug'] = str_replace(" ", "-", $data['slug']);
-        $data['slug'] = preg_replace("/[^a-zA-Z0-9-]+/", "", $data['slug']);
+        // Make slug readable
+        $data['slug'] = $this->slugify($data['slug']);
 
         // Save into another databse
         //        DB::purge('mysql');
@@ -102,19 +104,21 @@ class PublisherController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param StoreOrUpdatePublisher $request
      * @param  Publisher $publisher
      *
      * @return \Illuminate\Http\Response
      */
     public function update(StoreOrUpdatePublisher $request, Publisher $publisher)
     {
-        // make that slug readable
-        $request['slug'] = str_replace(" ", "-", $request['slug']);
-        $request['slug'] = preg_replace("/[^a-zA-Z0-9-]+/", "", $request['slug']);
+        // Get the validated data from request validator
+        $data = $request->validated();
+
+        // Make slug readable
+        $data['slug'] = $this->slugify($data['slug']);
 
         // Save the updates
-        $publisher->update($request->all());
+        $publisher->update($data);
 
         return Redirect::to('/admin/publishers');
     }

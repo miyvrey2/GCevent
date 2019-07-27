@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Article;
 use App\Game;
-use App\Http\Controllers\Controller;
+use App\Article;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreOrUpdateArticle;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -28,12 +28,20 @@ class ArticleController extends Controller
         $articles = Article::orderBy('published_at', 'desc')->get();
 
         foreach($articles as $article) {
+
+            // If the offline date has not been set, make a fake one for in the future so we can loop
+            $article->offline_at = ($article->offline_at === null) ? Carbon::tomorrow() : $article->offline_at;
+
             if ($article->published_at == null) {
                 $article->status = "Concept";
             } else if ($article->published_at > Carbon::now()) {
                 $article->status = "Planned";
-            } else {
+            } else if ($article->published_at < Carbon::now() && $article->offline_at > Carbon::now()) {
                 $article->status = "Published";
+            } else if ($article->offline_at < Carbon::now()) {
+                $article->status = "Offline";
+            } else {
+                $article->status = "Status unkown";
             }
         }
 
@@ -63,47 +71,43 @@ class ArticleController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreOrUpdateArticle  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreOrUpdateArticle $request)
     {
-        // Change published_at date
-        if($request['published_at'] != "") {
-            $request['published_at'] = Carbon::parse($request['published_at'])->format("Y-m-d H:i:s");
-        }
-        // make that slug readable
-        $request['slug'] = str_replace(" ", "-", $request['slug']);
-        $request['slug'] = preg_replace("/[^a-zA-Z0-9-]+/", "", $request['slug']);
+        // Get the validated data from request validator
+        $data = $request->validated();
 
-        // Written by
-        $request['author_id'] = Auth::user()->id;
+        // Make slug readable
+        $data['slug'] = $this->slugify($data['slug']);
+
+        // Change published_at date
+        if($data['published_at'] != "") {
+            $data['published_at'] = Carbon::parse($data['published_at'])->format("Y-m-d H:i:s");
+        }
+
+        // Change published_at date
+        if($data['offline_at'] != "") {
+            $data['offline_at'] = Carbon::parse($data['offline_at'])->format("Y-m-d H:i:s");
+        }
+
+        // Set author
+        $data['author_id'] = Auth::user()->id;
 
         // Make from multiple keywords 1
-        if($request['keywords'] != null) {
-            $request['keywords'] = implode(",", $request['keywords']);
+        if(isset($data['keywords'])) {
+            $data['keywords'] = implode(",", $data['keywords']);
         } else {
-            $request['keywords'] = '';
+            $data['keywords'] = '';
         }
-
-        // Validate
-        $data = $this->validate($request, [
-            'title'         => 'required',
-            'slug'          => 'required',
-            'excerpt'       => 'nullable|string',
-            'body'          => 'nullable|string',
-            'published_at'  => 'nullable|date_format:"Y-m-d H:i:s"',
-            'game_id'       => 'nullable|integer',
-            'keywords'      => 'nullable|string',
-            'source'        => 'nullable|string',
-        ]);
 
         // Save into another databse
         //        DB::purge('mysql');
         //        Config::set('database.connections.mysql.database', 'db_test');
 
         // save
-        Article::create($request->all());
+        Article::create($data);
 
         return redirect('/admin/news');
     }
@@ -144,42 +148,37 @@ class ArticleController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreOrUpdateArticle  $request
      * @param  Article $article
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Article $article)
+    public function update(StoreOrUpdateArticle $request, Article $article)
     {
+        // Get the validated data from request validator
+        $data = $request->validated();
+
+        // Make slug readable
+        $data['slug'] = $this->slugify($data['slug']);
+
         // Change published_at date
-        if($request['published_at'] != "") {
-            $request['published_at'] = Carbon::parse($request['published_at'])->format("Y-m-d H:i:s");
+        if($data['published_at'] != "") {
+            $data['published_at'] = Carbon::parse($data['published_at'])->format("Y-m-d H:i:s");
         }
 
-        // make that slug readable
-        $request['slug'] = str_replace(" ", "-", $request['slug']);
-        $request['slug'] = preg_replace("/[^a-zA-Z0-9-]+/", "", $request['slug']);
+        // Change offline_at date
+        if($data['offline_at'] != "") {
+            $data['offline_at'] = Carbon::parse($data['offline_at'])->format("Y-m-d H:i:s");
+        }
 
         // Make from multiple keywors 1
-        if($request['keywords'] != null) {
-            $request['keywords'] = implode(",", $request['keywords']);
+        if(isset($data['keywords'])) {
+            $data['keywords'] = implode(",", $data['keywords']);
         } else {
-            $request['keywords'] = '';
+            $data['keywords'] = '';
         }
 
-        // Validate
-        $this->validate($request, [
-            'title'         => 'required',
-            'slug'          => 'required',
-            'excerpt'       => 'nullable|string',
-            'body'          => 'nullable|string',
-            'published_at'  => 'nullable|date_format:"Y-m-d H:i:s"',
-            'game_id'       => 'nullable|integer',
-            'keywords'      => 'nullable|string',
-            'source'        => 'nullable|string',
-        ]);
-
         // Save the updates
-        $article->update($request->all());
+        $article->update($data);
 
         return Redirect::to('/admin/news');
     }

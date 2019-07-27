@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Article;
-use App\Http\Controllers\Controller;
 use App\Page;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreOrUpdatePage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 
@@ -26,16 +25,6 @@ class PageController extends Controller
     {
         // Get all pages, ordered by the published date
         $pages = Page::orderBy('published_at', 'desc')->get();
-
-        foreach($pages as $page) {
-            if ($page->published_at == null) {
-                $page->status = "Concept";
-            } else if ($page->published_at > Carbon::now()) {
-                $page->status = "Planned";
-            } else {
-                $page->status = "Published";
-            }
-        }
 
         return view('backend.page.index', compact('pages'));
     }
@@ -58,43 +47,39 @@ class PageController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreOrUpdatePage $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreOrUpdatePage $request)
     {
-        // Change published_at date
-        if($request['published_at'] != "") {
-            $request['published_at'] = Carbon::parse($request['published_at'])->format("Y-m-d H:i:s");
-        }
-        // make that slug readable
-        $request['slug'] = str_replace(" ", "-", $request['slug']);
-        $request['slug'] = preg_replace("/[^a-zA-Z0-9-]+/", "", $request['slug']);
+        // Get the validated data from request validator
+        $data = $request->validated();
 
-        // Written by
-        $request['author_id'] = Auth::user()->id;
+        // Make slug readable
+        $data['slug'] = $this->slugify($data['slug']);
+
+        // Change published_at date
+        if($data['published_at'] != "") {
+            $data['published_at'] = Carbon::parse($data['published_at'])->format("Y-m-d H:i:s");
+        }
+
+        // Change published_at date
+        if($data['offline_at'] != "") {
+            $data['offline_at'] = Carbon::parse($data['offline_at'])->format("Y-m-d H:i:s");
+        }
+
+        // Set author
+        $data['author_id'] = Auth::user()->id;
 
         // Make from multiple keywords 1
-        if($request['keywords'] != null) {
-            $request['keywords'] = implode(",", $request['keywords']);
+        if(isset($data['keywords'])) {
+            $data['keywords'] = implode(",", $data['keywords']);
         } else {
-            $request['keywords'] = '';
+            $data['keywords'] = '';
         }
 
-        // Validate
-        $data = $this->validate($request, [
-            'title'         => 'required',
-            'subtitle'      => 'nullable|string',
-            'slug'          => 'required',
-            'excerpt'       => 'nullable|string',
-            'body'          => 'nullable|string',
-            'published_at'  => 'nullable|date_format:"Y-m-d H:i:s"',
-            'keywords'      => 'nullable|string',
-            'source'        => 'nullable|string',
-        ]);
-
         // save
-        Page::create($request->all());
+        Page::create($data);
 
         return redirect('/admin/pages');
     }
@@ -130,42 +115,37 @@ class PageController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  Article $article
+     * @param  StoreOrUpdatePage  $request
+     * @param  Page $page
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Page $page)
+    public function update(StoreOrUpdatePage $request, Page $page)
     {
+        // Get the validated data from request validator
+        $data = $request->validated();
+
+        // Make slug readable
+        $data['slug'] = $this->slugify($data['slug']);
+
         // Change published_at date
-        if($request['published_at'] != "") {
-            $request['published_at'] = Carbon::parse($request['published_at'])->format("Y-m-d H:i:s");
+        if($data['published_at'] != "") {
+            $data['published_at'] = Carbon::parse($data['published_at'])->format("Y-m-d H:i:s");
         }
 
-        // make that slug readable
-        $request['slug'] = str_replace(" ", "-", $request['slug']);
-        $request['slug'] = preg_replace("/[^a-zA-Z0-9-]+/", "", $request['slug']);
+        // Change offline_at date
+        if($data['offline_at'] != "") {
+            $data['offline_at'] = Carbon::parse($data['offline_at'])->format("Y-m-d H:i:s");
+        }
 
         // Make from multiple keywors 1
-        if($request['keywords'] != null) {
-            $request['keywords'] = implode(",", $request['keywords']);
+        if(isset($data['keywords'])) {
+            $data['keywords'] = implode(",", $data['keywords']);
         } else {
-            $request['keywords'] = '';
+            $data['keywords'] = '';
         }
 
-        // Validate
-        $this->validate($request, [
-            'title'         => 'required',
-            'subtitle'      => 'nullable|string',
-            'slug'          => 'required',
-            'excerpt'       => 'nullable|string',
-            'body'          => 'nullable|string',
-            'published_at'  => 'nullable|date_format:"Y-m-d H:i:s"',
-            'keywords'      => 'nullable|string',
-            'source'        => 'nullable|string',
-        ]);
-
         // Save the updates
-        $page->update($request->all());
+        $page->update($data);
 
         return Redirect::to('/admin/pages');
     }
@@ -174,11 +154,13 @@ class PageController extends Controller
      * Remove the specified resource from storage.
      *
      * @param  Page $page
+     *
      * @return \Illuminate\Http\Response
+     * @throws \Exception
      */
     public function destroy(Page $page)
     {
-        // Delete the article
+        // Delete the page
         $page->delete();
 
         return Redirect::to('/admin/pages');

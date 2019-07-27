@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Backend;
 
 use App\Http\Requests\StoreOrUpdateDeveloper;
 use App\Developer;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Redirect;
 
@@ -36,6 +35,8 @@ class DeveloperController extends Controller
     /**
      * Show the form for creating a new resource.
      *
+     * @param null $title
+     *
      * @return \Illuminate\Http\Response
      */
     public function create($title = null)
@@ -54,16 +55,16 @@ class DeveloperController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreOrUpdateDeveloper  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreOrUpdateDeveloper $request)
     {
+        // Get the validated data from request validator
         $data = $request->validated();
 
-        // make that slug readable
-        $data['slug'] = str_replace(" ", "-", $data['slug']);
-        $data['slug'] = preg_replace("/[^a-zA-Z0-9-]+/", "", $data['slug']);
+        // Make slug readable
+        $data['slug'] = $this->slugify($data['slug']);
 
         // Save into another databse
         //        DB::purge('mysql');
@@ -102,19 +103,21 @@ class DeveloperController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreOrUpdateDeveloper  $request
      * @param  Developer $developer
      *
      * @return \Illuminate\Http\Response
      */
     public function update(StoreOrUpdateDeveloper $request, Developer $developer)
     {
-        // make that slug readable
-        $request['slug'] = str_replace(" ", "-", $request['slug']);
-        $request['slug'] = preg_replace("/[^a-zA-Z0-9-]+/", "", $request['slug']);
+        // Get the validated data from request validator
+        $data = $request->validated();
+
+        // Make slug readable
+        $data['slug'] = $this->slugify($data['slug']);
 
         // Save the updates
-        $developer->update($request->all());
+        $developer->update($data);
 
         return Redirect::to('/admin/developers');
     }
