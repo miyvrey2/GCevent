@@ -68,8 +68,8 @@ class RouteServiceProvider extends ServiceProvider
             return RSSWebsite::where('id', $id)->first();
         });
 
-        Route::bind('serie', function($id) {
-            return Serie::where('id', $id)->first();
+        Route::bind('serie', function($slug) {
+            return Serie::where('slug', $slug)->first();
         });
 
         // Admin

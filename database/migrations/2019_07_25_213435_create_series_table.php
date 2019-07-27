@@ -19,6 +19,7 @@ class CreateSeriesTable extends Migration
             $table->string('slug')->unique();
             $table->text('excerpt')->nullable();
             $table->text('body')->nullable();
+            $table->text('keywords')->nullable();
             $table->timestamps();
         });
     }

@@ -25,11 +25,11 @@ Route::group(['prefix' => 'admin'], function() {
     Route::post('/exhibitions/game/update', 'Backend\ExhibitionController@update_exhibition_game');
     Route::resource('/games', 'Backend\GameController', $exceptShow);
     Route::resource('/genres', 'Backend\GenreController', $exceptShow);
-    Route::resource('/series', 'Backend\SerieController', $exceptShow);
     Route::resource('/platforms', 'Backend\PlatformController', $exceptShow);
     Route::resource('/publishers', 'Backend\PublisherController', $exceptShow);
     Route::resource('/rssitems', 'Backend\RSSItemController', $exceptShow);
     Route::resource('/rsswebsites', 'Backend\RSSWebsiteController', $exceptShow);
+    Route::resource('/series', 'Backend\SerieController', $exceptShow)->parameters(['series' => 'serie']);;
     Route::resource('/users', 'Backend\UserController', $exceptShow);
     Route::resource('/pages', 'Backend\PageController')->parameters([
         'pages' => 'admin_pages'

@@ -29,6 +29,7 @@ class StoreOrUpdateSerie extends FormRequest
             'slug'          => ['required', 'string', Rule::unique('series')->ignore($this->segment(3), 'slug')],
             'excerpt'       => 'nullable|string',
             'body'          => 'nullable|string',
+            'keywords'      => 'nullable|array',
         ];
     }
 }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Serie extends Model
 {
     // Which items are fill-able in the database
-    protected $fillable = ['title', 'slug', 'excerpt', 'body'];
+    protected $fillable = ['title', 'slug', 'excerpt', 'body', 'keywords'];
 
     // Select which columns from the database contain dates (and can be used by Carbon)
     public function getDates()

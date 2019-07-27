@@ -20,4 +20,15 @@ class Controller extends BaseController
 
         return $slug;
     }
+
+    public function implodeOrEmptyString($keywords)
+    {
+        if(!isset($keywords)) {
+            $keywords = '';
+        }
+
+        $keywords = implode(",", $keywords);
+
+        return $keywords;
+    }
 }

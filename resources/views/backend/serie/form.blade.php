@@ -31,6 +31,17 @@
 <div class="col-md-3">
 
     <div class="form-group">
+        <label for="keywords[]">Tags</label><br>
+        <select class="form-control js-example-basic-multiple form-control" id="keywords[]" name="keywords[]" multiple="multiple">
+            @if($serie->keywords != null)
+                @foreach($serie->keywords as $keyword)
+                    <option value="{{$keyword}}" selected>{{$keyword}}</option>
+                @endforeach
+            @endif
+        </select>
+    </div>
+
+    <div class="form-group">
         <button type="submit" class="btn btn-primary button-full">Save</button>
     </div>
 

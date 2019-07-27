@@ -55,6 +55,9 @@ class SerieController extends Controller
         // Make slug readable
         $data['slug'] = $this->slugify($data['slug']);
 
+        // Make from multiple keywords 1
+        $data['keywords'] = @$this->implodeOrEmptyString($data['keywords']);
+
         // Save into another databse
         //        DB::purge('mysql');
         //        Config::set('database.connections.mysql.database', 'db_test');
@@ -86,6 +89,12 @@ class SerieController extends Controller
      */
     public function edit(Serie $serie)
     {
+        if($serie['keywords'] != "") {
+            $serie['keywords'] = explode(',', $serie['keywords']);
+        } else {
+            $serie->keywords = null;
+        }
+
         return view('backend.serie.edit', compact('serie'));
     }
 
@@ -104,6 +113,9 @@ class SerieController extends Controller
 
         // Make slug readable
         $data['slug'] = $this->slugify($data['slug']);
+
+        // Make from multiple keywords 1
+        $data['keywords'] = @$this->implodeOrEmptyString($data['keywords']);
 
         // Save the updates
         $serie->update($data);
