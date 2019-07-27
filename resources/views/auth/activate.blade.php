@@ -6,7 +6,7 @@
         <div class="featured_line greenblue"></div>
     </section>
 
-    <div class="container publisher-show">
+    <div class="container show">
         <div class="row">
             <div class="col-md-12">
 
