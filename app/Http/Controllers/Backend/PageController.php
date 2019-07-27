@@ -72,11 +72,7 @@ class PageController extends Controller
         $data['author_id'] = Auth::user()->id;
 
         // Make from multiple keywords 1
-        if(isset($data['keywords'])) {
-            $data['keywords'] = implode(",", $data['keywords']);
-        } else {
-            $data['keywords'] = '';
-        }
+        $data['keywords'] = @$this->implodeOrEmptyString($data['keywords']);
 
         // save
         Page::create($data);
@@ -137,12 +133,8 @@ class PageController extends Controller
             $data['offline_at'] = Carbon::parse($data['offline_at'])->format("Y-m-d H:i:s");
         }
 
-        // Make from multiple keywors 1
-        if(isset($data['keywords'])) {
-            $data['keywords'] = implode(",", $data['keywords']);
-        } else {
-            $data['keywords'] = '';
-        }
+        // Make from multiple keywords 1
+        $data['keywords'] = @$this->implodeOrEmptyString($data['keywords']);
 
         // Save the updates
         $page->update($data);

@@ -71,12 +71,8 @@ class PlatformController extends Controller
         // make slug readable
         $data['slug'] = $this->slugify($data['slug']);
 
-        // Make from multiple aliases 1
-        if(isset($data['aliases'])) {
-            $data['aliases'] = implode(",", $data['aliases']);
-        } else {
-            $data['aliases'] = '';
-        }
+        // Make from multiple keywords 1
+        $data['aliases'] = @$this->implodeOrEmptyString($data['aliases']);
 
         // Save into another databse
         //        DB::purge('mysql');
@@ -128,14 +124,10 @@ class PlatformController extends Controller
     public function update(Request $request, Platform $platform)
     {
         // make that slug readable
-        $data['slug'] = $this->slugify($data['slug']);
+        $request['slug'] = $this->slugify($request['slug']);
 
-        // Make from multiple aliases 1
-        if($request['aliases'] != null) {
-            $request['aliases'] = implode(",", $request['aliases']);
-        } else {
-            $request['aliases'] = '';
-        }
+        // Make from multiple keywords 1
+        $request['aliases'] = @$this->implodeOrEmptyString($request['aliases']);
 
         // Save the updates
         $platform->update($request->all());

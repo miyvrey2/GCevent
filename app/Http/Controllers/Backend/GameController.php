@@ -89,12 +89,8 @@ class GameController extends Controller
         $data['slug'] = str_replace(" ", "-", $data['slug']);
         $data['slug'] = preg_replace("/[^a-zA-Z0-9-]+/", "", $data['slug']);
 
-        // Make from multiple aliases 1
-        if($request['aliases'] != null) {
-            $request['aliases'] = implode(",", $request['aliases']);
-        } else {
-            $request['aliases'] = '';
-        }
+        // Make from multiple keywords 1
+        $request['aliases'] = @$this->implodeOrEmptyString($request['aliases']);
 
         // Save into another databse
         //        DB::purge('mysql');
@@ -176,12 +172,8 @@ class GameController extends Controller
      */
     public function update(Request $request, Game $game)
     {
-        // Make from multiple aliases 1
-        if($request['aliases'] != null) {
-            $request['aliases'] = implode(",", $request['aliases']);
-        } else {
-            $request['aliases'] = '';
-        }
+        // Make from multiple keywords 1
+        $request['aliases'] = @$this->implodeOrEmptyString($request['aliases']);
 
         // Save the updates
         $game->update($request->all());
