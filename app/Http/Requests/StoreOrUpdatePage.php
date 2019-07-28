@@ -31,6 +31,8 @@ class StoreOrUpdatePage extends FormRequest
             'slug'          => 'required',
             'excerpt'       => 'nullable|string',
             'body'          => 'nullable|string',
+            'sidebar_title' => 'nullable|string',
+            'sidebar_body'  => 'nullable|string',
             'published_at'  => 'nullable|date_format:"Y-m-d\TH:i"',
             'offline_at'    => 'nullable|date_format:"Y-m-d\TH:i"',
             'keywords'      => 'nullable|array',

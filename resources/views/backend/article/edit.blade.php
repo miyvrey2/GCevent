@@ -1,5 +1,14 @@
 @extends('backend.layouts.master')
 
+@section('seo')
+    @component("components.seo", [
+    "title" => "Edit article: " . $article->title,
+    "url" => url('admin/articles/' . $article->slug . '/edit'),
+    "description" => "Edit article: " . $article->title
+    ] )
+    @endcomponent
+@endsection
+
 @section('content')
 
     <section id="featured_line_section">

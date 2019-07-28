@@ -1,7 +1,11 @@
 @extends('backend.layouts.master')
 
 @section('seo')
-    @component("components.seo", ["title" => "News", "url" => url('admin/news'), "description" => "Overview of all the article items on Enzow.org"] )
+    @component("components.seo", [
+    "title" => "News",
+    "url" => url('admin/news'),
+    "description" => "Overview of all the article items on " . env('APP_NAME')
+    ] )
     @endcomponent
 @endsection
 

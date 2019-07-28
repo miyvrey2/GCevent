@@ -114,7 +114,7 @@
         tinymce.init({
             selector:'textarea',
             menubar: false,
-            plugins: "link",
+            plugins: 'advlist autolink link image lists',
             statusbar: false
         });
     });
