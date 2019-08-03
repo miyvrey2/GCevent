@@ -48,6 +48,7 @@
                             <input type="checkbox" title="selectAll">
                         </th>
                         <th>Title</th>
+                        <th class="align-center not-on-mobile">Amount of games</th>
                         <th class="align-right">Tools</th>
                     </tr>
                     </thead>
@@ -59,8 +60,9 @@
                                 <input type="checkbox" title="id" value="{{$serie->id}}"/>
                             </td>
                             <td><a href="{{url('series/' . $serie->slug)}}">{{$serie->title}}</a><br><span class="tags"></span></td>
+                            <td class="align-center not-on-mobile">{{ $serie->games->count() }}</td>
                             <td class="align-right">
-                                <a href="{{url('/series/' . $serie->slug)}}"><i class="fa fa-window-maximize"></i></a> &nbsp;
+                                <a href="{{url('/admin/series/' . $serie->slug)}}"><i class="fa fa-window-maximize"></i></a> &nbsp;
                                 <a href="{{url('/admin/series/' . $serie->slug . '/edit')}}"><i class="fa fa-pencil"></i></a> &nbsp;
                                 {{ Form::open(array('url' => url('/admin/series/' . $serie->slug), "class" => 'delete-row' )) }}
                                 {{ Form::hidden('_method', 'DELETE') }}

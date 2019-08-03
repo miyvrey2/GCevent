@@ -29,7 +29,7 @@ Route::group(['prefix' => 'admin'], function() {
     Route::resource('/publishers', 'Backend\PublisherController', $exceptShow);
     Route::resource('/rssitems', 'Backend\RSSItemController', $exceptShow);
     Route::resource('/rsswebsites', 'Backend\RSSWebsiteController', $exceptShow);
-    Route::resource('/series', 'Backend\SerieController', $exceptShow)->parameters(['series' => 'serie']);;
+    Route::resource('/series', 'Backend\SerieController')->parameters(['series' => 'serie']);;
     Route::resource('/users', 'Backend\UserController', $exceptShow);
     Route::resource('/pages', 'Backend\PageController')->parameters([
         'pages' => 'admin_pages'

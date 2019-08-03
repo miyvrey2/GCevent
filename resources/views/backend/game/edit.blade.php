@@ -1,7 +1,11 @@
 @extends('backend.layouts.master')
 
 @section('seo')
-    @component("components.seo", ["title" => "Games overview", "url" => url('admin/games'), "description" => "Overview of all the games on Enzow.org"] )
+    @component("components.seo", [
+    "title" => "Edit game: " . $game->title,
+    "url" => url('admin/games'),
+     "description" => "Edit game: " . $game->title
+     ] )
     @endcomponent
 @endsection
 
@@ -16,7 +20,7 @@
             <div class="col-md-12">
 
                 {{-- Title --}}
-                <h1>Edit "{{$game->title}}"</h1>
+                <h1>Edit "{{ $game->title }}"</h1>
 
                 {{--Breadcrumbs--}}
                 @component('backend.components.breadcrumbs', ['breadcrumbs' => ['admin/games' => 'Games', 'admin/games/' . $game->slug . '/edit' => 'Edit "' . $game->title . '"']])

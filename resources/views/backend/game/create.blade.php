@@ -1,5 +1,14 @@
 @extends('backend.layouts.master')
 
+@section('seo')
+    @component("components.seo", [
+    "title" => "Create a game",
+    "url" => url('admin/games/create'),
+    "description" => "Create a new game for " . env('APP_NAME')
+    ] )
+    @endcomponent
+@endsection
+
 @section('content')
 
     <section id="featured_line_section">

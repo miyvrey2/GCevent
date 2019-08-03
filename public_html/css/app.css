@@ -298,6 +298,11 @@ header strong a {
   text-decoration: none;
 }
 
+header strong a:nth-of-type(2) {
+  font-size: 16px;
+  color: #333333;
+}
+
 noscript {
   position: fixed;
   top: auto;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Backend;
 
 use App\DeveloperGame;
 use App\GamePublisher;
+use App\Http\Requests\StoreOrUpdateGame;
 use App\Platform;
 use App\GamePlatform;
 use App\Developer;
@@ -73,24 +74,16 @@ class GameController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreOrUpdateGame $request)
     {
-        // Validate
-        $data = $this->validate($request, [
-            'title'         => 'required|string',
-            'slug'          => 'required|string',
-            'excerpt'       => 'nullable|string',
-            'body'          => 'nullable|string',
-            'aliases'       => 'nullable|string',
-            'released_at'   => 'nullable|string',
-        ]);
+        // Get the validated data from request validator
+        $data = $request->validated();
 
-        // make that slug readable
-        $data['slug'] = str_replace(" ", "-", $data['slug']);
-        $data['slug'] = preg_replace("/[^a-zA-Z0-9-]+/", "", $data['slug']);
+        // Make slug readable
+        $data['slug'] = $this->slugify($data['slug']);
 
         // Make from multiple keywords 1
-        $request['aliases'] = @$this->implodeOrEmptyString($request['aliases']);
+        $data['aliases'] = @$this->implodeOrEmptyString($data['aliases']);
 
         // Save into another databse
         //        DB::purge('mysql');
@@ -166,11 +159,11 @@ class GameController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  StoreOrUpdateGame $request
      * @param  Game  $game
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Game $game)
+    public function update(StoreOrUpdateGame $request, Game $game)
     {
         // Make from multiple keywords 1
         $request['aliases'] = @$this->implodeOrEmptyString($request['aliases']);

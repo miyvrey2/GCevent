@@ -44,7 +44,7 @@
 <body id="admin-panel">
 <header>
     <strong>
-        <a href="{{url('/')}}">{{config('app.name')}}</a>
+        <a href="{{ url('/') }}">{{config('app.name')}}</a> | <a href="{{url('/admin/dashboard')}}">Backend</a>
     </strong>
     @component("backend.components.nav")
     @endcomponent
