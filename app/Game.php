@@ -136,10 +136,21 @@ class Game extends Model
         $genres = $this->santiziseListToString($this->genres);
         $developers = $this->santiziseListToString($this->developers);
         $publishers = $this->santiziseListToString($this->publishers);
+        $series = $this->santiziseListToString($this->series);
 
         $string = $this->title . " is " . $this->aOrAn($genres) . " " . $genres . " game. ";
         if(!$this->developers->isEmpty() && !$this->publishers->isEmpty()) {
-            $string .= "The game is developed by " . $developers . " and published by " . $publishers . ". ";
+            if($developers === $publishers) {
+                $string .= "The game is developed and published by " . $developers;
+            } else {
+                $string .= "The game is developed by " . $developers . " and published by " . $publishers;
+            }
+
+            if(!$this->series->isEmpty()) {
+                $string .= " and is part of the " . $series . " series";
+            }
+
+            $string .= ". ";
         }
         if(!$this->developers->isEmpty() && $this->publishers->isEmpty()) {
             $string .= "The game is developed by " . $developers . ". ";
