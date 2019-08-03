@@ -18,7 +18,7 @@
                 @endcomponent
 
                 <ul style="padding-left: 20px;">
-                @foreach($serie->games as $game)
+                @foreach($serie->games->sortBy('released_at') as $game)
                     <li><a href="{{ url('/admin/games/' . $game->slug . '/edit') }}">{{ $game->title }}</a></li>
                 @endforeach
                 </ul>
