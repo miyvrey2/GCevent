@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Developer;
-use Illuminate\Http\Request;
 
 class DeveloperController extends Controller
 {
@@ -28,7 +27,8 @@ class DeveloperController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Developer $developer
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Developer $developer)

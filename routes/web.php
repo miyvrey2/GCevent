@@ -75,6 +75,7 @@ Route::get('/platforms/{platform}', 'PlatformController@show');
 
 // Platforms
 Route::get('/users/{user}', 'UserController@show');
+Route::get('/members/{user}', 'UserController@show');
 
 // Crawler
 Route::get('/crawler/crawl', 'RSSCrawlerController@crawl');

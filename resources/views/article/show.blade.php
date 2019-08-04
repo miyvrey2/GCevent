@@ -25,7 +25,7 @@
             </div>
             <div class="col-md-9">
                 {{--<img src="{{$article->game->image}}" title="{{$article->game->title}}" />--}}
-                <em class="about-the-article"><i class="fa fa-clock-o"></i> Last updated: {{$article->date}}</em> @if($article->source)&nbsp;&nbsp; <em class="about-the-article"><i class="fa fa-sign-out"></i><a target="_blank" href="{{$article->source}}">Source</a></em> @endif &nbsp;&nbsp; @if($article->author_id)<em class="about-the-article"><i class="fa fa-user"></i> By: <a target="_blank" href="{{$article->author_id}}">{{$article->author->username}}</a></em> @endif
+                <em class="about-the-article"><i class="fa fa-clock-o"></i> Last updated: {{$article->date}}</em> @if($article->source)&nbsp;&nbsp; <em class="about-the-article"><i class="fa fa-sign-out"></i><a target="_blank" href="{{$article->source}}">Source</a></em> @endif &nbsp;&nbsp; @if($article->author_id)<em class="about-the-article"><i class="fa fa-user"></i> By: <a target="_blank" href="{{ url('members/' . $article->author_id) }}">{{$article->author->username}}</a></em> @endif
 
                 <p><strong>{!! $article->excerpt !!}</strong></p>
                 <br />

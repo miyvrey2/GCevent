@@ -54,40 +54,24 @@
                         @if(count($publisher->games) == 1)<li><i class="fa fa-gamepad"></i><a href="#">{{count($publisher->games)}} Game</a> listed</li>@endif
                         @if(count($publisher->games) > 1)<li><i class="fa fa-gamepad"></i><a href="#">{{count($publisher->games)}} Games</a> listed</li>@endif
                     @endif
-                    {{--halls--}}
-                    {{--@if($publisher->halls[0] != "unknown")--}}
-                    {{--<li><i class="fa fa-map-marker"></i><a href="#">Hall--}}
-                            {{--@foreach($publisher->halls as $hall)--}}
-                                {{--{{$hall}}@endforeach</a>--}}
-
-                        {{--stands--}}
-                        {{--@if($publisher->stands[0]->stand != null)--}}
-                                {{--at stands:--}}
-                            {{--<div class="stand-box">--}}
-                                {{--@foreach($publisher->stands as $stand)--}}
-                                    {{--<span>{{$stand->stand}}</span>--}}
-                                {{--@endforeach--}}
-                            {{--</div>--}}
-                        {{--</li>--}}
-                        {{--@endif--}}
-                    {{--@endif--}}
 
                     {{--New halls--}}
                     @if( !$publisher->games_for_gamescom_2019->isEmpty() )
 
-                    @php($booths = [])
-                    @foreach($publisher->exhibition_booths->where('exhibition_id', 1) as $booth)
-                        @php($booths[$booth->hall][] = $booth->booth)
-                    @endforeach
-
-                    @foreach($booths as $key => $booth)<li><i class="fa fa-map-marker"></i>Hall {{ $key }} at stands:
-                        <div class="stand-box">
-                        @foreach($booth as $item)
-                            <span>{{ $item }}</span>
+                        @php($booths = [])
+                        @foreach($publisher->exhibition_booths->where('exhibition_id', 1) as $booth)
+                            @php($booths[$booth->hall][] = $booth->booth)
                         @endforeach
-                        </div>
-                    @endforeach
-                    </li>
+
+                        @foreach($booths as $key => $booth)<li><i class="fa fa-map-marker"></i>Hall {{ $key }} at stands:
+                            <div class="stand-box">
+                            @foreach($booth as $item)
+                                <span>{{ $item }}</span>
+                            @endforeach
+                            </div>
+                        @endforeach
+                        </li>
+
                     {{--End new halls--}}
                     @endif
                 </ul>

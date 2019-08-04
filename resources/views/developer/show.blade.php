@@ -38,15 +38,54 @@
             <div class="col-md-3 sidebar">
                 <h2>Summary</h2>
                 <ul class="meta">
-                    @if(isset($developer->found))
-                    <li><i class="fa fa-rocket"></i>Founded in <a href="#" title="{{$developer->found->format('l jS \\of F Y')}}">{{$developer->found->year}}</a></li>
+                    @if($developer->found != null)
+                        @if($developer->founded == "Unknown.")
+                            <li><i class="fa fa-rocket" title="Found"></i>Found: <a href="#" title="{{$developer->founded}}">{{$developer->founded}}</a></li>
+                        @else
+                            <li><i class="fa fa-rocket" title="Found"></i>Founded in <a href="#" title="{{$developer->founded}}">{!! $developer->founded !!}</a></li>
+                        @endif
                     @endif
+
+                    @if(isset($developer->url))
+                        <li><i class="fa fa-link" title="Homepage developer"></i><a href="{{$developer->url}}" target="_blank" title="website of {{$developer->title}}">Web: {{$developer->title}}</a></li>
+                    @endif
+
                     @if(count($developer->games) > 0)
                         @if(count($developer->games) == 1)<li><i class="fa fa-gamepad"></i><a href="#">{{count($developer->games)}} Game</a> listed</li>@endif
                         @if(count($developer->games) > 1)<li><i class="fa fa-gamepad"></i><a href="#">{{count($developer->games)}} Games</a> listed</li>@endif
                     @endif
 
+                    {{--New halls--}}
+                    @if( !$developer->games_for_gamescom_2019->isEmpty() )
+
+                        @php($booths = [])
+                        @foreach($developer->exhibition_booths->where('exhibition_id', 1) as $booth)
+                            @php($booths[$booth->hall][] = $booth->booth)
+                        @endforeach
+
+                        @foreach($booths as $key => $booth)<li><i class="fa fa-map-marker"></i>Hall {{ $key }} at stands:
+                            <div class="stand-box">
+                                @foreach($booth as $item)
+                                    <span>{{ $item }}</span>
+                                @endforeach
+                            </div>
+                            @endforeach
+                        </li>
+
+                    {{--End new halls--}}
+                    @endif
                 </ul>
+
+                @if( !$developer->games_for_gamescom_2019->isEmpty() )
+                <div class="horizontal-line"></div>
+
+                <h2>GC Lineup 2019</h2>
+                <ul>
+                    @foreach($developer->games_for_gamescom_2019 as $lineup)
+                        <li><a href="{{ url("games/" . $lineup->slug) }}">{{ $lineup->title }}</a></li>
+                    @endforeach
+                </ul>
+                @endif
 
                 <div class="horizontal-line"></div>
 

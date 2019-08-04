@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Game;
 use App\Publisher;
-use Illuminate\Http\Request;
 
 class PublisherController extends Controller
 {

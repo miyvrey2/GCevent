@@ -63,10 +63,43 @@ class Developer extends Model
         return e($this->excerpt);
     }
 
-    // A publisher has many games
+    // A developer has many games
     // Many to many (to connect pivot table in DB)
     public function games()
     {
         return $this->belongsToMany(Game::class);
+    }
+
+    public function exhibitor_games()
+    {
+        return $this->hasMany(Game::class, 'exhibitor_id', 'id');
+    }
+
+    public function exhibitionGame()
+    {
+        return $this->hasMany(ExhibitionGame::class, 'developer_id', 'id');
+    }
+
+    public function exhibition_booths()
+    {
+        return $this->hasMany(ExhibitionGame::class, 'developer_id', 'id');
+    }
+
+    public function exhibition_games()
+    {
+        return $this->belongsToMany(Game::class, 'exhibition_game',
+            'developer_id', 'game_id');
+    }
+
+    public function exhibition_game()
+    {
+        return $this->belongsToMany(Game::class, 'exhibition_game',
+            'developer_id', 'game_id');
+    }
+
+    public function games_for_gamescom_2019()
+    {
+        return $this->belongsToMany(Game::class, 'exhibition_game',
+            'developer_id', 'game_id')->where('exhibition_game.exhibition_id', '=', 1);
     }
 }
