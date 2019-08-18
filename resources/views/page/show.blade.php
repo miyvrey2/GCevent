@@ -43,6 +43,18 @@
                 <div class="horizontal-line"></div>
                 @endif
                 <h2>Advertisement</h2>
+
+                <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+                <!-- gamescomevent_com_exhibition_show -->
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-5113287686102695"
+                     data-ad-slot="7139224508"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true"></ins>
+                <script>
+                    (adsbygoogle = window.adsbygoogle || []).push({});
+                </script>
             </div>
         </div>
     </div>
