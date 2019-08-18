@@ -11,9 +11,11 @@
         <!-- Slide 1 -->
         <figure class='enzow_slide'>
             <picture>
-                <source srcset="{{ asset('img/gamescom_17_030_003.webp') }}" type="image/webp">
-                <source srcset="{{ asset('img/gamescom_17_030_003.jpg') }}" type="image/jpeg">
-                <img src="{{ asset('img/gamescom_17_030_003.jpg') }}" alt="The entrance hall" title="The entrance hall">
+                <source srcset="{{ asset('img/gamescom_17_030_003.webp') }} 2x,
+                                {{ asset('img/gamescom_17_030_003_small.webp') }} 1x" type="image/webp">
+                <source srcset="{{ asset('img/gamescom_17_030_003.jpg') }} 2x,
+                                {{ asset('img/gamescom_17_030_003_small.jpg') }} 1x" type="image/jpeg">
+                <img src="{{ asset('img/gamescom_17_030_003_small.jpg') }}" alt="The entrance hall" title="The entrance hall">
             </picture>
             <figcaption>
                 <div class="container">
