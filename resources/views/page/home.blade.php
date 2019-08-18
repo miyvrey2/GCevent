@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('seo')
-    @component("components.seo", ["title" => 'Gamescom 2019 is drawing near!', "url" => url(""), "description" => "the 10th annivesary of gamescom celebrates the annually convention for games and all gaming-related goods! Gamescom is being held at Cologne(K&ouml;hn). Last year there was around a 355,000 visitors to come and watch all the works that are being showed here by popular game-developers."] )
+    @component("components.seo", ["title" => 'Gamescom 2019 is drawing near!', "url" => url(""), "description" => "the 11th annivesary of gamescom celebrates the annually convention for games and all gaming-related goods! Gamescom is being held at Cologne(K&ouml;hn). Last year there was around a 355,000 visitors to come and watch all the works that are being showed here by popular game-developers."] )
     @endcomponent
 @endsection
 
@@ -10,7 +10,11 @@
 
         <!-- Slide 1 -->
         <figure class='enzow_slide'>
-            <img src="img/gamescom_17_030_003.jpg" alt="Traveling with escalators" title="The entrance hall" />
+            <picture>
+                <source srcset="{{ asset('img/gamescom_17_030_003.webp') }}" type="image/webp">
+                <source srcset="{{ asset('img/gamescom_17_030_003.jpg') }}" type="image/jpeg">
+                <img src="{{ asset('img/gamescom_17_030_003.jpg') }}" alt="The entrance hall" title="The entrance hall">
+            </picture>
             <figcaption>
                 <div class="container">
                     <div class="row">
@@ -26,7 +30,11 @@
 
         <!-- Slide 2 -->
         <figure class='enzow_slide'>
-            <img src="img/gamescom_17_030_008.jpg" alt="Green leaves in the wood" title="Green leaves in the wood" />
+            <picture>
+                <source srcset="{{ asset('img/gamescom_17_030_008.webp') }}" type="image/webp">
+                <source srcset="{{ asset('img/gamescom_17_030_008.jpg') }}" type="image/jpeg">
+                <img src="{{ asset('img/gamescom_17_030_008.jpg') }}" alt="Gamer at event" title="Gamer at event">
+            </picture>
             <figcaption>
                 <div class="container">
                     <div class="row">
@@ -42,7 +50,11 @@
 
         <!-- Slide 3 -->
         <figure class='enzow_slide'>
-            <img style="object-position: 50% 20%;" src="img/gamescom_17_020_050.jpg" alt="Green leaves in the wood" title="Green leaves in the wood" />
+            <picture>
+                <source srcset="{{ asset('img/gamescom_17_020_050.webp') }}" type="image/webp">
+                <source srcset="{{ asset('img/gamescom_17_020_050.jpg') }}" type="image/jpeg">
+                <img style="object-position: 50% 20%;" src="{{ asset('img/gamescom_17_020_050.jpg') }}" alt="Cosplayers at gamescom" title="Cosplayers at gamescom">
+            </picture>
             <figcaption>
                 <div class="container">
                     <div class="row">
