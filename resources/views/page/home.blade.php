@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('seo')
-    @component("components.seo", ["title" => 'Gamescom 2019 is drawing near!', "url" => url(""), "description" => "the 11th annivesary of gamescom celebrates the annually convention for games and all gaming-related goods! Gamescom is being held at Cologne(K&ouml;hn). Last year there was around a 355,000 visitors to come and watch all the works that are being showed here by popular game-developers."] )
+    @component("components.seo", ["title" => 'Gamescom ' . env('GAMESCOM_YEAR') . ' is drawing near!', "url" => url(""), "description" => "the 11th annivesary of gamescom celebrates the annually convention for games and all gaming-related goods! Gamescom is being held at Cologne(K&ouml;hn). Last year there was around a 355,000 visitors to come and watch all the works that are being showed here by popular game-developers."] )
     @endcomponent
 @endsection
 
@@ -21,7 +21,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-md-12">
-                            <h2>Only {{\Carbon\Carbon::parse("2019-08-21")->diffInDays()}} days left!</h2>
+                            <h2>Only {{\Carbon\Carbon::parse("2020-08-26")->diffInDays()}} days left!</h2>
                             <p>On the 21th of August will Gamescom open it's doors!</p>
                         </div>
                     </div>
@@ -82,7 +82,7 @@
     <div class="container show">
         <div class="row">
             <div class="col-md-12">
-                <h1>Gamescom {{env('GAMESCOM_YEAR')}} is coming!</h1>
+                <h1>Gamescom {{ env('GAMESCOM_YEAR') }} is coming!</h1>
                     Thanks for ariving on this page on the website. This is a fanpage for all the happenings on Gamescom. If you are a first-timer, be sure to read the <a href="{{url('gamescom-2019')}}">What is gamescom</a> page. If you are interested in all sorts of news and announcements made, please make your way to the "news" section.
                 <br>
                 <br>

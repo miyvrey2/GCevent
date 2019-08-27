@@ -45,10 +45,10 @@
             </div>
             <div class="col-md-4 footer-column">
                 <h3>Open at</h3>
-                <strong>Wed. 21 August: </strong><span>10:00 - 20:00</span><br>
-                <strong>Thu. 22 August: </strong><span>10:00 - 20:00</span><br>
-                <strong>Fri. 23 August: </strong><span>09:00 - 20:00</span><br>
-                <strong>Sat. 24 August: </strong><span>09:00 - 20:00</span><br>
+                <strong>Wed. 26 August: </strong><span>10:00 - 20:00</span><br>
+                <strong>Thu. 27 August: </strong><span>10:00 - 20:00</span><br>
+                <strong>Fri. 28 August: </strong><span>09:00 - 20:00</span><br>
+                <strong>Sat. 29 August: </strong><span>09:00 - 20:00</span><br>
 
                 <div class="social-footer">
                     {{--<a href="#"><i class="fa fa-facebook" title="Find gamescomevent.com on Facebook!"></i></a>--}}
