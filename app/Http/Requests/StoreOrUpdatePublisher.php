@@ -26,13 +26,16 @@ class StoreOrUpdatePublisher extends FormRequest
     public function rules()
     {
         return [
-            'title'         => ['required', 'string', Rule::unique('publishers')->ignore($this->segment(3), 'slug')],
-            'slug'          => ['required', 'string', Rule::unique('publishers')->ignore($this->segment(3), 'slug')],
-            'excerpt'       => 'nullable|string',
-            'body'          => 'nullable|string',
-            'image'         => 'nullable|string',
-            'found'         => ['nullable', new Stringdate],
-            'url'           => 'nullable|string',
+            'title'                 => ['required', 'string', Rule::unique('publishers')->ignore($this->segment(3), 'slug')],
+            'slug'                  => ['required', 'string', Rule::unique('publishers')->ignore($this->segment(3), 'slug')],
+            'excerpt'               => 'nullable|string',
+            'body'                  => 'nullable|string',
+            'image'                 => 'nullable|string',
+            'location_headquarters' => 'nullable|string',
+            'location_found'        => 'nullable|string',
+            'found'                 => ['nullable', new Stringdate],
+            'closed'                => ['nullable', new Stringdate],
+            'url'                   => 'nullable|string',
         ];
     }
 }

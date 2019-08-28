@@ -21,7 +21,10 @@ class CreatePublishersTable extends Migration
             $table->text('body')->nullable();
             $table->string('image')->nullable();
             $table->dateTime('found')->nullable();
+            $table->dateTime('closed')->nullable();
             $table->string('url')->nullable();
+            $table->string('location_headquarters')->nullable();
+            $table->string('location_found')->nullable();
             $table->timestamps();
         });
     }

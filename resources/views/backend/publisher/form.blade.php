@@ -41,9 +41,25 @@
     </div>
 
     <div class="form-group">
+        <label for="location_headquarters">Headquarters</label><br>
+        <input type="text" class="form-control" id="location_headquarters" name="location_headquarters" autocomplete="off" value="{{$publisher->location_headquarters}}">
+    </div>
+
+    <div class="form-group">
+        <label for="location_found">Location Found</label><br>
+        <input type="text" class="form-control" id="location_found" name="location_found" autocomplete="off" value="{{$publisher->location_found}}">
+    </div>
+
+    <div class="form-group">
         <label for="found">found</label><br>
         <span class="note"><strong>note:</strong> "2018-00-00" notes as "in 2018"</span>
         <input type="text" class="form-control" id="found" name="found" autocomplete="off" value="{{$publisher->found_ymd}}">
+    </div>
+
+    <div class="form-group">
+        <label for="closed">closed</label><br>
+        <span class="note"><strong>note:</strong> "2018-00-00" notes as "in 2018"</span>
+        <input type="text" class="form-control" id="closed" name="closed" autocomplete="off" value="{{$publisher->closed_ymd}}">
     </div>
 
     <div class="form-group">

@@ -24,7 +24,7 @@
 
             </div>
             <div class="col-md-9">
-                <p><strong>{!! $publisher->excerpt !!}</strong></p>
+                <p><strong>{!! $publisher->introduction() !!}{!! $publisher->excerpt !!}</strong></p>
                 <br />
                 <p>
                     {!! $publisher->body_html !!}
