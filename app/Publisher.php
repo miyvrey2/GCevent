@@ -169,6 +169,8 @@ class Publisher extends Model
         $string .= ($this->closed_date != null)? " and closed on " . $this->closed_date : "";
         $string .= ". ";
 
+        $string .= ($this->location_headquarters == null)? "" : "The main headquarters is located in " . $this->location_headquarters . ". ";
+
         return $string;
     }
 }
