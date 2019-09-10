@@ -55,6 +55,17 @@ class Game extends Model
                    ->get();
     }
 
+    public function scopeSearch($query, $search_query)
+    {
+        $searchable = ['title', 'body'];
+
+        foreach($searchable as $column) {
+            $query->orWhere($column, 'like', '%' . $search_query . '%');
+        }
+
+        return $query;
+    }
+
     public function getReleasedAttribute()
     {
         if(!is_null($this->released_at)) {

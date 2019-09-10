@@ -38,6 +38,32 @@
                         </ul>
                     </li>
                 @endguest
+                <li>
+                    <div id="search-form">
+
+                        {!! Form::open(['method'=>'POST','url'=>'search','class'=>'navbar-form navbar-left','role'=>'search'])  !!}
+
+                        <input  id="search-input" type="search" class="form-control" name="search" placeholder="Search..." autocomplete="off">
+                        <button id="search-button" class="btn btn-default-sm" type="submit">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        {!! Form::close() !!}
+
+                    </div>
+                    <script type="application/ld+json">
+                    {
+                       "@context": "http://schema.org",
+                       "@type": "WebSite",
+                       "name" : "Gamescomevent.com",
+                       "url": "https://www.gamescomevent.com/",
+                       "potentialAction": {
+                         "@type": "SearchAction",
+                         "target": "https://www.gamescomevent.com/search/{search_term_string}",
+                         "query-input": "required name=search_term_string"
+                       }
+                    }
+                    </script>
+                </li>
             </ul>
         </nav>
         <div id="navBackColor"></div>

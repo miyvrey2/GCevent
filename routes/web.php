@@ -85,6 +85,11 @@ Route::get('/games/list', 'GameController@listed');
 Route::get('/games/upcoming', 'GameController@upcoming');
 Route::resource('/games', 'GameController');
 
+// Search
+Route::post('/search', 'SearchController@index');
+Route::get('/search/{search}', 'SearchController@results');
+
+
 // Authentication
 Auth::routes();
 Route::get('/validate', 'Auth\ActivateController@index');
