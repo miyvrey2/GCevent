@@ -16,11 +16,8 @@
     <!-- iOS Safari -->
     <meta name="apple-mobile-web-app-status-bar-style" content="#309dd8">
 
-    <!-- Stylesheets -->
+    <!-- Stylesheets (font awesome included) -->
     <link rel="stylesheet" href="{{mix('css/app.css')}}">
-
-    <!-- Font awesome -->
-    <link href="//netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="{{ asset('/icon/gamescomevent_logo.png') }}"/>
