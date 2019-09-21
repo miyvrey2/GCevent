@@ -13,7 +13,6 @@ function foldingSearch(e) {
         // show the search bar
         searchInput.style.width = "250px";
         searchInput.focus();
-        console.log('a');
 
         searchButton.classList.add('active');
     }

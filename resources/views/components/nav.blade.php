@@ -43,8 +43,8 @@
 
                         {!! Form::open(['method'=>'POST','url'=>'search','class'=>'navbar-form navbar-left','role'=>'search'])  !!}
 
-                        <input  id="search-input" type="search" class="form-control" name="search" placeholder="Search..." autocomplete="off">
-                        <button id="search-button" class="btn btn-default-sm" type="submit">
+                        <input  id="search-input" aria-label="Search input field" type="search" class="form-control" name="search" placeholder="Search..." autocomplete="off">
+                        <button id="search-button" class="btn btn-default-sm" aria-label="Submit search input" type="submit">
                             <i class="fa fa-search"></i>
                         </button>
                         {!! Form::close() !!}

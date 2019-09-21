@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
 
     <!-- Viewport -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 
 @yield('seo')
 
@@ -24,6 +24,8 @@
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="{{ asset('/icon/gamescomevent_logo.png') }}"/>
+    <!-- Favicon for Apple -->
+    <link rel="apple-touch-icon" href="{{ asset('/icon/gamescomevent_logo.png') }}"/>
     <!--[if IE]>
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('/icon/gamescomevent_logo.ico') }}" />
     <![endif]-->
