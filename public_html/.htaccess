@@ -89,10 +89,18 @@ RewriteRule ^consoles/(.*)$ /platforms/$1 [R=301,NC,L]
     Header set Cache-Control "max-age=2592000, public"
 </filesMatch>
 
+<filesMatch ".(jpg|jpeg|png|gif|webp)$">
+    Header set Cache-Control "max-age=2592000, public"
+</filesMatch>
+
+<filesMatch ".(css)$">
+    Header set Cache-Control "max-age=2592000, public"
+</filesMatch>
+
 <IfModule mod_headers.c>
 
 # Only for Apache > 2.2.4: allow https Only cookies
-#Header edit Set-Cookie ^(.*)$ $1;HttpOnly;Secure
+Header edit Set-Cookie ^(.*)$ $1;HttpOnly;Secure
 
 # Execute only allowed scripts
 Header set Content-Security-Policy "script-src 'self' 'unsafe-inline' https://www.google.com http://pagead2.googlesyndication.com https://www.googletagmanager.com https://adservice.google.nl https://adservice.google.com https://www.googletagservices.com https://www.google-analytics.com http://code.jquery.com http://cloud.tinymce.com http://cdnjs.cloudflare.com https://pagead2.googlesyndication.com"
@@ -107,5 +115,5 @@ Header always set X-XSS-Protection "1; mode=block"
 Header always set X-Content-Type-Options "nosniff"
 
 # Your server should be able to communicate with HTTP while it uses a HTTPS connection
-#Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains"
+Header always set Strict-Transport-Security "max-age=63072000; includeSubDomains"
 </IfModule>
