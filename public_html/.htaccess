@@ -86,15 +86,15 @@ RewriteRule ^consoles/(.*)$ /platforms/$1 [R=301,NC,L]
 # One month for most static assets
 # css|jpg|jpeg|png|gif|js|ico
 <filesMatch ".(js|ico)$">
-    Header set Cache-Control "max-age=2592000, public"
+    Header set Cache-Control "max-age=31557600, public"
 </filesMatch>
 
 <filesMatch ".(jpg|jpeg|png|gif|webp)$">
-    Header set Cache-Control "max-age=2592000, public"
+    Header set Cache-Control "max-age=31557600, public"
 </filesMatch>
 
 <filesMatch ".(css)$">
-    Header set Cache-Control "max-age=2592000, public"
+    Header set Cache-Control "max-age=31557600, public"
 </filesMatch>
 
 <IfModule mod_headers.c>
